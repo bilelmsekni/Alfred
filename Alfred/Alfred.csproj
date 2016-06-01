@@ -52,7 +52,6 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
     <Content Include="paket.references" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

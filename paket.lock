@@ -1,6 +1,9 @@
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
+    Microsoft.CodeDom.Providers.DotNetCompilerPlatform (1.0.1)
+      Microsoft.Net.Compilers (>= 1.0)
+    Microsoft.Net.Compilers (1.2.2)
     Microsoft.Owin (3.0.1)
       Owin (>= 1.0)
     Microsoft.Owin.Host.SystemWeb (3.0.1)
