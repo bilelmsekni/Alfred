@@ -1,5 +1,7 @@
 source https://nuget.org/api/v2
 
+nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform 1.0.0 framework: >= net452
+nuget Microsoft.Net.Compilers 1.0.0 framework: >= net452
 nuget Microsoft.Owin.Host.SystemWeb
 nuget Microsoft.Owin
 nuget Owin
