@@ -1,29 +1,9 @@
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
-    Microsoft.AspNet.WebApi (5.2.3)
-      Microsoft.AspNet.WebApi.WebHost (>= 5.2.3 < 5.3)
-    Microsoft.AspNet.WebApi.Client (5.2.3)
-      Microsoft.Net.Http (>= 2.2.22) - framework: portable-wp80+win+net45+wp81+wpa81
-      Newtonsoft.Json (>= 6.0.4) - framework: >= net45, portable-wp80+win+net45+wp81+wpa81
-    Microsoft.AspNet.WebApi.Core (5.2.3)
-      Microsoft.AspNet.WebApi.Client (>= 5.2.3)
-    Microsoft.AspNet.WebApi.Owin (5.2.3)
-      Microsoft.AspNet.WebApi.Core (>= 5.2.3 < 5.3)
-      Microsoft.Owin (>= 2.0.2)
-      Owin (>= 1.0)
-    Microsoft.AspNet.WebApi.WebHost (5.2.3)
-      Microsoft.AspNet.WebApi.Core (>= 5.2.3 < 5.3)
-    Microsoft.Bcl (1.1.10) - framework: portable-wp80+win+net45+wp81+wpa81
-      Microsoft.Bcl.Build (>= 1.0.14)
-    Microsoft.Bcl.Build (1.0.21) - import_targets: false, framework: portable-wp80+win+net45+wp81+wpa81
-    Microsoft.Net.Http (2.2.29) - framework: portable-wp80+win+net45+wp81+wpa81
-      Microsoft.Bcl (>= 1.1.10)
-      Microsoft.Bcl.Build (>= 1.0.14)
     Microsoft.Owin (3.0.1)
       Owin (>= 1.0)
     Microsoft.Owin.Host.SystemWeb (3.0.1)
       Microsoft.Owin (>= 3.0.1)
       Owin (>= 1.0)
-    Newtonsoft.Json (8.0.3) - framework: >= net45, portable-wp80+win+net45+wp81+wpa81
     Owin (1.0)
