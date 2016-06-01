@@ -22,5 +22,8 @@ NUGET
       Microsoft.Bcl.Build (>= 1.0.14)
     Microsoft.Owin (3.0.1)
       Owin (>= 1.0)
+    Microsoft.Owin.Host.SystemWeb (3.0.1)
+      Microsoft.Owin (>= 3.0.1)
+      Owin (>= 1.0)
     Newtonsoft.Json (8.0.3) - framework: >= net45, portable-wp80+win+net45+wp81+wpa81
     Owin (1.0)

@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
+﻿using Microsoft.Owin;
 using Owin;
+
+[assembly: OwinStartup(typeof(Alfred.Startup))]
 
 namespace Alfred
 {
     public class Startup
     {
-        public void Configuration(IAppBuilder app)
+        public void Configuration(IAppBuilder appBuilder)
         {
-            var config = new HttpConfiguration();
-
-            config.Routes.MapHttpRoute("DefaultAPI",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional });
-
-            app.UseWebApi(config);
+            appBuilder.Run(context =>
+            {
+                context.Response.ContentType = "text/plain";
+                return context.Response.WriteAsync("Hello, world.");
+            });
         }
     }
 }
