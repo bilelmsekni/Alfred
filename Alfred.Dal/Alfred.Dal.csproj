@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Alfred\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Entities\Artifact.cs" />
     <Compile Include="Entities\ArtifactStatus.cs" />
     <Compile Include="Entities\ArtifactType.cs" />
