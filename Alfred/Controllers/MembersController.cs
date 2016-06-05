@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Description;
+using Alfred.Dal.Entities;
 using Alfred.Dal.Interfaces;
 
 namespace Alfred.Controllers
@@ -13,8 +16,13 @@ namespace Alfred.Controllers
             _memberRepo = memeberRepo;
         }
 
+        /// <summary>
+        /// Get all members
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
+        [ResponseType(typeof(IEnumerable<Member>))]
         public IHttpActionResult GetMembers()
         {
             var members = _memberRepo.GetMembers();

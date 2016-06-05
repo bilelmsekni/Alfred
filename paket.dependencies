@@ -1,7 +1,8 @@
 source https://nuget.org/api/v2
-
+framework: net461
 nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform
 nuget Microsoft.Owin.Host.SystemWeb
 nuget Microsoft.AspNet.WebApi.Owin
 nuget AutoFixture
 nuget LightInject.WebApi
+nuget Swashbuckle.Core
