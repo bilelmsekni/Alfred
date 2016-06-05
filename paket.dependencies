@@ -4,3 +4,4 @@ nuget Microsoft.CodeDom.Providers.DotNetCompilerPlatform
 nuget Microsoft.Owin.Host.SystemWeb
 nuget Microsoft.AspNet.WebApi.Owin
 nuget AutoFixture
+nuget LightInject.WebApi
