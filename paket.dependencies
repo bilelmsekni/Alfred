@@ -5,3 +5,4 @@ nuget Microsoft.Net.Compilers
 nuget Microsoft.Owin.Host.SystemWeb
 nuget Microsoft.Owin
 nuget Owin
+nuget AutoFixture

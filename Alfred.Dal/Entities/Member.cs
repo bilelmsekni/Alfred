@@ -9,7 +9,7 @@ namespace Alfred.Dal.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public ComunityRole Role { get; set; }
-        public List<Artifact> Artifacts { get; set; }
-        public List<Community> Communities { get; set; }
+        public IEnumerable<Artifact> Artifacts { get; set; }
+        public IEnumerable<Community> Communities { get; set; }
     }
 }

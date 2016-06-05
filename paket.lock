@@ -1,6 +1,7 @@
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
+    AutoFixture (3.47.4)
     Microsoft.CodeDom.Providers.DotNetCompilerPlatform (1.0.1)
       Microsoft.Net.Compilers (>= 1.0)
     Microsoft.Net.Compilers (1.2.2)

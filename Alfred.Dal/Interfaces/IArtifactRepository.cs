@@ -5,7 +5,7 @@ namespace Alfred.Dal.Interfaces
 {
     public interface IArtifactRepository
     {
-        ICollection<Artifact> GetArtifacts();
+        IEnumerable<Artifact> GetArtifacts();
         Artifact GetArtifact(int id);
         void SaveArtifact(Artifact artifact);
         void DeleteArtifact(int id);
