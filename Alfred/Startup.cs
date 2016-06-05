@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Headers;
+using System.Reflection;
 using System.Web.Http;
 using Alfred.IoC;
 using LightInject;
@@ -18,24 +19,41 @@ namespace Alfred
         {
             var config = new HttpConfiguration();
 
-            //-1- IoC
-            var container = new ServiceContainer();
-            container.RegisterFrom<WebApiCompositionRoot>();
-            container.RegisterApiControllers();
-            container.EnableWebApi(config);
+            ConfigIoC(config);
+            ConfigSwagger(config);
+            ConfigWebApi(config);
+            appBuilder.UseWebApi(config);
+        }
 
-            //-2- Swagger            
-            config.EnableSwagger(c =>
-            {
-                c.SingleApiVersion("v1", "Alfred");
-                c.IncludeXmlComments(GetXmlCommentsPath());
-            }).EnableSwaggerUi();
-
+        private void ConfigWebApi(HttpConfiguration config)
+        {
             config.MapHttpAttributeRoutes();
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            appBuilder.UseWebApi(config);
+        }
+
+        private void ConfigSwagger(HttpConfiguration config)
+        {
+            config.EnableSwagger(c =>
+            {
+                c.SingleApiVersion("v1", GetAssemblyVersion());
+                c.IncludeXmlComments(GetXmlCommentsPath());
+                c.DescribeAllEnumsAsStrings();
+            }).EnableSwaggerUi();
+        }
+
+        private string GetAssemblyVersion()
+        {
+            return Assembly.GetAssembly(typeof(Startup)).GetName().Version.ToString();
+        }
+
+        private void ConfigIoC(HttpConfiguration config)
+        {
+            var container = new ServiceContainer();
+            container.RegisterFrom<WebApiCompositionRoot>();
+            container.RegisterApiControllers();
+            container.EnableWebApi(config);
         }
 
         private string GetXmlCommentsPath()

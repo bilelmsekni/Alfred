@@ -19,6 +19,9 @@ namespace Alfred.Controllers
         /// <summary>
         /// Get all members
         /// </summary>
+        /// <remarks>
+        /// Get all members
+        /// </remarks>
         /// <returns></returns>
         [HttpGet]
         [Route("")]
