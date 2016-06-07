@@ -34,6 +34,6 @@ namespace Alfred.Dal.FakeImplementation.Repositories
         public void DeleteMember(int id)
         {
             throw new NotImplementedException();
-        }
+        }        
     }
 }

@@ -1,8 +1,9 @@
-FRAMEWORK: NET461
+FRAMEWORK: NET45, NET461
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
     AutoFixture (3.47.4)
+    FluentAssertions (4.8)
     LightInject (4.0.9)
     LightInject.WebApi (1.0.0.4)
       LightInject (>= 3.0.2.7)
@@ -23,6 +24,8 @@ NUGET
       Microsoft.Owin (>= 3.0.1)
       Owin (>= 1.0)
     Newtonsoft.Json (8.0.3)
+    NSubstitute (1.10)
+    NUnit (3.2.1)
     Owin (1.0)
     Swashbuckle.Core (5.3.2)
       Microsoft.AspNet.WebApi.Core (>= 4.0.20710)

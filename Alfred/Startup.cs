@@ -51,6 +51,7 @@ namespace Alfred
         private void ConfigIoC(HttpConfiguration config)
         {
             var container = new ServiceContainer();
+            container.RegisterAssembly(Assembly.GetAssembly(typeof(Startup)));
             container.RegisterFrom<WebApiCompositionRoot>();
             container.RegisterApiControllers();
             container.EnableWebApi(config);
