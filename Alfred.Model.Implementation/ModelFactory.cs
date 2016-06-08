@@ -8,7 +8,7 @@ using Alfred.Model.Members;
 
 namespace Alfred.Model.Implementation
 {
-    public class ModelFactory:IModelFactory
+    public class ModelFactory : IModelFactory
     {
         public Member CreateModel(CreateMemberModel createMemberModel)
         {
