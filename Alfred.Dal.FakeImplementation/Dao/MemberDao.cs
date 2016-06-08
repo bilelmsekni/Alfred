@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Alfred.Dal.Entities.Member;
 using Ploeh.AutoFixture;
 
@@ -20,6 +21,11 @@ namespace Alfred.Dal.FakeImplementation.Dao
         public IEnumerable<Member> GetMembers()
         {
             return members;
+        }
+
+        public void SaveMember(Member member)
+        {
+            members.ToList().Add(member);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public void SaveMember(Member member)
         {
-            throw new NotImplementedException();
+            _memberDao.SaveMember(member);
         }
 
         public void DeleteMember(int id)

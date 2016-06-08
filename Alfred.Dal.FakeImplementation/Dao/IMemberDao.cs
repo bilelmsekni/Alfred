@@ -6,5 +6,6 @@ namespace Alfred.Dal.FakeImplementation.Dao
     public interface IMemberDao
     {
         IEnumerable<Member> GetMembers();
+        void SaveMember(Member member);
     }
 }

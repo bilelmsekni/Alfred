@@ -28,8 +28,10 @@ namespace Alfred.Services
 
         public MemberModel CreateMember(CreateMemberModel createMemberModel)
         {
-            var model = _modelFactory.CreateModel(createMemberModel);
-            return null;
+            var member = _modelFactory.CreateMember(createMemberModel);
+            if (member != null)
+                _memberRepository.SaveMember(member);
+            return _modelFactory.CreateMemberModel(member);
         }
     }
 }
