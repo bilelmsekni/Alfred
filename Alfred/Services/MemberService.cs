@@ -29,9 +29,14 @@ namespace Alfred.Services
         public MemberModel CreateMember(CreateMemberModel createMemberModel)
         {
             var member = _modelFactory.CreateMember(createMemberModel);
-            if (member != null)
+            if (member != null && IsEmailUsed(member.Email))
                 _memberRepository.SaveMember(member);
             return _modelFactory.CreateMemberModel(member);
+        }
+
+        private bool IsEmailUsed(string email)
+        {
+            return _memberRepository.GetMember(email) != null;
         }
     }
 }

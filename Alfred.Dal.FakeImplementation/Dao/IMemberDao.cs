@@ -7,5 +7,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
     {
         IEnumerable<Member> GetMembers();
         void SaveMember(Member member);
+        Member GetMember(string email);
+        Member GetMember(int id);
     }
 }

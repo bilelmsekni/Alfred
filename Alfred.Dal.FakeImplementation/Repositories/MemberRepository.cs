@@ -21,7 +21,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public Member GetMember(int id)
         {
-            throw new NotImplementedException();
+            return _memberDao.GetMember(id);
         }
 
         public void SaveMember(Member member)
@@ -32,6 +32,11 @@ namespace Alfred.Dal.FakeImplementation.Repositories
         public void DeleteMember(int id)
         {
             throw new NotImplementedException();
-        }        
+        }
+
+        public Member GetMember(string email)
+        {
+            return _memberDao.GetMember(email);
+        }
     }
 }

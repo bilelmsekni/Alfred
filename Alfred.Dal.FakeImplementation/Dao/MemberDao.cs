@@ -27,5 +27,15 @@ namespace Alfred.Dal.FakeImplementation.Dao
         {
             members.ToList().Add(member);
         }
+
+        public Member GetMember(string email)
+        {
+            return members.FirstOrDefault(x => x.Email == email);
+        }
+
+        public Member GetMember(int id)
+        {
+            return members.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
+using Alfred.Model.Members;
 using Alfred.Services;
 using FluentAssertions;
 using NSubstitute;
@@ -14,7 +17,7 @@ using NUnit.Framework;
 using Ploeh.AutoFixture;
 
 namespace Alfred.Tests.Services
-{    
+{
     [TestFixture]
     public class MemberServiceTests
     {
@@ -23,7 +26,7 @@ namespace Alfred.Tests.Services
         [SetUp]
         public void Initialize()
         {
-            _fixture = new Fixture();            
+            _fixture = new Fixture();
         }
 
         [Test]
@@ -47,7 +50,7 @@ namespace Alfred.Tests.Services
         [Test]
         public void Should_return_member_2_when_service_gets_member_with_id_2()
         {
-            var members = _fixture.Build<Member>()                
+            var members = _fixture.Build<Member>()
                 .Without(x => x.Communities)
                 .Without(x => x.Artifacts)
                 .CreateMany(4);
@@ -55,7 +58,7 @@ namespace Alfred.Tests.Services
             var memberToSearch = _fixture.Build<Member>()
                 .Without(x => x.Communities)
                 .Without(x => x.Artifacts)
-                .With(x=>x.Id, 2)
+                .With(x => x.Id, 2)
                 .Create();
             members.ToList().Add(memberToSearch);
 
@@ -71,14 +74,32 @@ namespace Alfred.Tests.Services
 
         [Test]
         public void Should_return_null_when_service_dont_find_member_with_id_2()
-        {            
+        {
             var fakeRepo = Substitute.For<IMemberRepository>();
             fakeRepo.GetMember(Arg.Is(2)).ReturnsNull();
 
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
-            var result = memberService.GetMember(2);            
+            var result = memberService.GetMember(2);
             result.Should().BeNull();
+        }
+
+        [Test]
+        public void Should_create_member_when_member_has_valid_data()
+        {
+            var fakeRepo = Substitute.For<IMemberRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var createMemberModel = _fixture.Build<CreateMemberModel>().Create();
+
+            fakeModelFactory.CreateMember(Arg.Any<CreateMemberModel>()).Returns(new Member());
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
+
+            var result = memberService.CreateMember(createMemberModel);
+            fakeModelFactory.Received(1).CreateMember(Arg.Is<CreateMemberModel>(x => x.Email == createMemberModel.Email));
+            fakeModelFactory.Received(1).CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == createMemberModel.Email));
+            fakeRepo.Received(1).SaveMember(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+
         }
     }
 }
