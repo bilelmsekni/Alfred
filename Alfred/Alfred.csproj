@@ -71,6 +71,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alfred.Dal.Entities\Alfred.Dal.Entities.csproj">
+      <Project>{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}</Project>
+      <Name>Alfred.Dal.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alfred.Dal\Alfred.Dal.csproj">
       <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
       <Name>Alfred.Dal</Name>
@@ -78,6 +82,10 @@
     <ProjectReference Include="..\Alfred.IoC\Alfred.IoC.csproj">
       <Project>{E2F7B035-DB0D-4FD0-8246-7B0B7ABBB99A}</Project>
       <Name>Alfred.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred.Model\Alfred.Model.csproj">
+      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
+      <Name>Alfred.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Alfred.Dal.Entities.Community;
 
-namespace Alfred.Dal.Entities
+namespace Alfred.Dal.Entities.Member
 {
     public class Member
     {
@@ -9,7 +10,7 @@ namespace Alfred.Dal.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public ComunityRole Role { get; set; }
-        public IEnumerable<Artifact> Artifacts { get; set; }
-        public IEnumerable<Community> Communities { get; set; }
+        public IEnumerable<Artifact.Artifact> Artifacts { get; set; }
+        public IEnumerable<Community.Community> Communities { get; set; }
     }
 }

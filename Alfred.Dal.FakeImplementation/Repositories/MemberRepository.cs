@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Alfred.Dal.Entities;
+using Alfred.Dal.Entities.Member;
 using Alfred.Dal.FakeImplementation.Dao;
 using Alfred.Dal.Interfaces;
 

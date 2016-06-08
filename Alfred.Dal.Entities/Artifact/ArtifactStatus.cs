@@ -1,4 +1,4 @@
-namespace Alfred.Dal.Entities
+namespace Alfred.Dal.Entities.Artifact
 {
     public enum ArtifactStatus
     {

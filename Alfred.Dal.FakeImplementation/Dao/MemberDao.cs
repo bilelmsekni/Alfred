@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Alfred.Dal.Entities;
+using Alfred.Dal.Entities.Member;
 using Ploeh.AutoFixture;
 
 namespace Alfred.Dal.FakeImplementation.Dao

@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Alfred.Dal.FakeImplementation")]
+[assembly: AssemblyTitle("Alfred.Dal.Entities")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alfred.Dal.FakeImplementation")]
+[assembly: AssemblyProduct("Alfred.Dal.Entities")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d4da6bd1-e5ea-437b-b5bd-eef6507ed9ad")]
+[assembly: Guid("78a37110-fea0-4ba2-849a-e1d60d3efb33")]
 
 // Version information for an assembly consists of the following four values:
 //

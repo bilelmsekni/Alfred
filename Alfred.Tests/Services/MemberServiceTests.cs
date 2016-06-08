@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Alfred.Dal.Entities;
+using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Interfaces;
+using Alfred.Model;
 using Alfred.Services;
 using FluentAssertions;
 using NSubstitute;
@@ -32,11 +33,12 @@ namespace Alfred.Tests.Services
                 .Without(x => x.Communities)
                 .Without(x => x.Artifacts)
                 .CreateMany(5).AsEnumerable();
-            
+
+            var fakeModelFactory = Substitute.For<IModelFactory>();
             var fakeRepo = Substitute.For<IMemberRepository>();
             fakeRepo.GetMembers().ReturnsForAnyArgs(members);
 
-            var memberService = new MemberService(fakeRepo);
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
             var result = memberService.GetMembers();
             //result.Should().BeOfType<IEnumerable<Member>>();
             result.Count().Should().Be(members.Count());
@@ -57,10 +59,11 @@ namespace Alfred.Tests.Services
                 .Create();
             members.ToList().Add(memberToSearch);
 
+            var fakeModelFactory = Substitute.For<IModelFactory>();
             var fakeRepo = Substitute.For<IMemberRepository>();
             fakeRepo.GetMember(Arg.Is(2)).Returns(memberToSearch);
 
-            var memberService = new MemberService(fakeRepo);
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
             var result = memberService.GetMember(2);
             result.Should().BeOfType<Member>();
             result.Id.Should().Be(2);
@@ -72,7 +75,8 @@ namespace Alfred.Tests.Services
             var fakeRepo = Substitute.For<IMemberRepository>();
             fakeRepo.GetMember(Arg.Is(2)).ReturnsNull();
 
-            var memberService = new MemberService(fakeRepo);
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
             var result = memberService.GetMember(2);            
             result.Should().BeNull();
         }

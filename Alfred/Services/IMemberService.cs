@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Alfred.Dal.Entities;
+using Alfred.Dal.Entities.Member;
+using Alfred.Model.Members;
 
 namespace Alfred.Services
 {
@@ -11,5 +8,6 @@ namespace Alfred.Services
     {
         IEnumerable<Member> GetMembers();
         Member GetMember(int id);
+        MemberModel CreateMember(CreateMemberModel createMemberModel);
     }
 }

@@ -41,6 +41,10 @@
     <Compile Include="Repositories\MemberRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alfred.Dal.Entities\Alfred.Dal.Entities.csproj">
+      <Project>{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}</Project>
+      <Name>Alfred.Dal.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alfred.Dal\Alfred.Dal.csproj">
       <Project>{adbccd95-4768-49c5-929f-9562aa586293}</Project>
       <Name>Alfred.Dal</Name>

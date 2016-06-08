@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Alfred.Dal.Entities;
+using Alfred.Dal.Entities.Artifact;
 
 namespace Alfred.Dal.Interfaces
 {
