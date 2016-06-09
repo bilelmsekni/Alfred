@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Alfred.Dal.Entities.Artifact;
-using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
@@ -120,16 +114,44 @@ namespace Alfred.Tests.Services
             fakeRepo.DidNotReceive().SaveMember(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
         }
 
+        [Test]
+        public void Should_delete_member_when_member_id_exist()
+        {
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var fakeRepo = Substitute.For<IMemberRepository>();
+            var member = _fixture.Build<Member>()
+                .Without(x => x.Artifacts)
+                .Without(x => x.Communities)
+                .With(x => x.Id, 2)
+                .Create();
+
+            fakeRepo.GetMember(Arg.Is<int>(x => x == 2)).Returns(member);
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
+
+            var result = memberService.DeleteMember(2);
+            fakeRepo.Received(1).DeleteMember(Arg.Is<int>(x => x == 2));
+            result.Should().BeTrue();
+        }
+
+        [Test]
+        public void Should_not_delete_member_when_member_id_does_not_exist()
+        {
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var fakeRepo = Substitute.For<IMemberRepository>();            
+
+            fakeRepo.GetMember(Arg.Is<int>(x => x == -1)).ReturnsNull();
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
+
+            var result = memberService.DeleteMember(-1);
+            fakeRepo.DidNotReceive().DeleteMember(Arg.Is<int>(x => x == -1));
+            result.Should().BeFalse();
+        }
+
         private Member GetMember(CreateMemberModel createMemberModel)
         {
             return new Member
             {
-                Email = createMemberModel.Email,
-                FirstName = createMemberModel.FirstName,
-                LastName = createMemberModel.LastName,
-                Role = createMemberModel.Role,
-                Communities = Enumerable.Empty<Community>(),
-                Artifacts = Enumerable.Empty<Artifact>()
+                Email = createMemberModel.Email
             };
         }
     }
