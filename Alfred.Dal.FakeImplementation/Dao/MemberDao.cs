@@ -37,5 +37,10 @@ namespace Alfred.Dal.FakeImplementation.Dao
         {
             return members.FirstOrDefault(x => x.Id == id);
         }
+
+        public void UpdateMember(Member member)
+        {
+                members.ToList().RemoveAt(members.ToList().FindIndex(x=>x.Id == member.Id));
+        }
     }
 }

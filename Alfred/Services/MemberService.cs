@@ -48,6 +48,17 @@ namespace Alfred.Services
             return false;
         }
 
+        public MemberModel UpdateMember(UpdateMemberModel updateMemberModel)
+        {
+            var member = _modelFactory.CreateMember(updateMemberModel);
+            if (member != null && IsEmailUsed(member.Email))
+            {
+                _memberRepository.UpdateMember(member);
+                return _modelFactory.CreateMemberModel(member);
+            }
+            return null;
+        }
+
         private bool IsEmailUsed(string email)
         {
             return _memberRepository.GetMember(email) != null;

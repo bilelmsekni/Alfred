@@ -7,5 +7,6 @@ namespace Alfred.Model
     {
         Member CreateMember(CreateMemberModel createMemberModel);
         MemberModel CreateMemberModel(Member member);
+        Member CreateMember(UpdateMemberModel updateMemberModel);
     }
 }

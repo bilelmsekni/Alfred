@@ -35,11 +35,12 @@ namespace Alfred.Controllers
         }
 
         /// <summary>
-        /// Get all members
+        /// Get a member
         /// </summary>
         /// <remarks>
-        /// Get all members
+        /// Get a member
         /// </remarks>
+        /// <param name="id">member id</param>
         /// <returns></returns>
         [HttpGet]
         [Route("{id:int?}")]
@@ -53,11 +54,12 @@ namespace Alfred.Controllers
         }
 
         /// <summary>
-        /// Get all members
+        /// Create member
         /// </summary>
         /// <remarks>
-        /// Get all members
+        /// Create member
         /// </remarks>
+        /// <param name="createMemberModel">member data</param>
         /// <returns></returns>
         [HttpPost]
         [ResponseType(typeof(Member))]
@@ -73,11 +75,33 @@ namespace Alfred.Controllers
         }
 
         /// <summary>
-        /// Get all members
+        /// Update member
         /// </summary>
         /// <remarks>
-        /// Get all members
+        /// Update member
         /// </remarks>
+        /// <param name="UpdateMemberModel">update member data</param>
+        /// <returns></returns>
+        [HttpPut]
+        [ResponseType(typeof(Member))]
+        public IHttpActionResult UpdateMember(UpdateMemberModel updateMemberModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var memberModel = _memberService.UpdateMember(updateMemberModel);
+                if (memberModel != null) return Ok(memberModel);
+                return BadRequest("Something went wrong !");
+            }
+            return BadRequest("Something went wrong !");
+        }
+
+        /// <summary>
+        /// Delete member
+        /// </summary>
+        /// <remarks>
+        /// Delete member
+        /// </remarks>
+        /// <param name="id">member id</param>
         /// <returns></returns>
         [HttpDelete]
         [ResponseType(typeof(Member))]

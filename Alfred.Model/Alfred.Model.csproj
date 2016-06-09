@@ -44,6 +44,7 @@
     <Compile Include="IModelFactory.cs" />
     <Compile Include="Members\CreateMemberModel.cs" />
     <Compile Include="Members\MemberModel.cs" />
+    <Compile Include="Members\UpdateMemberModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

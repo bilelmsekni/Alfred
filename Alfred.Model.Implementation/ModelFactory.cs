@@ -37,5 +37,18 @@ namespace Alfred.Model.Implementation
                 Artifacts = member.Artifacts
             };
         }
+
+        public Member CreateMember(UpdateMemberModel updateMemberModel)
+        {
+            return new Member
+            {
+                Email = updateMemberModel.Email,
+                FirstName = updateMemberModel.FirstName,
+                LastName = updateMemberModel.LastName,
+                Role = updateMemberModel.Role,
+                Communities = updateMemberModel.Communities,
+                Artifacts = updateMemberModel.Artifacts
+            };
+        }
     }
 }

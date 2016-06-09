@@ -38,5 +38,10 @@ namespace Alfred.Dal.FakeImplementation.Repositories
         {
             return _memberDao.GetMember(email);
         }
+
+        public void UpdateMember(Member member)
+        {
+            _memberDao.UpdateMember(member);
+        }
     }
 }

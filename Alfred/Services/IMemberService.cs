@@ -10,5 +10,6 @@ namespace Alfred.Services
         Member GetMember(int id);
         MemberModel CreateMember(CreateMemberModel createMemberModel);
         bool DeleteMember(int id);
+        MemberModel UpdateMember(UpdateMemberModel updateMemberModel);
     }
 }

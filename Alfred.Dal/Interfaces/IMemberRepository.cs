@@ -10,5 +10,6 @@ namespace Alfred.Dal.Interfaces
         void SaveMember(Member member);
         void DeleteMember(int id);
         Member GetMember(string email);
+        void UpdateMember(Member member);
     }
 }

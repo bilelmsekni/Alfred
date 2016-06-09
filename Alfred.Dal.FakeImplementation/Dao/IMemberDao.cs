@@ -9,5 +9,6 @@ namespace Alfred.Dal.FakeImplementation.Dao
         void SaveMember(Member member);
         Member GetMember(string email);
         Member GetMember(int id);
+        void UpdateMember(Member member);
     }
 }
