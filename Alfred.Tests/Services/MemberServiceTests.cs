@@ -90,16 +90,47 @@ namespace Alfred.Tests.Services
             var fakeRepo = Substitute.For<IMemberRepository>();
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var createMemberModel = _fixture.Build<CreateMemberModel>().Create();
-
-            fakeModelFactory.CreateMember(Arg.Any<CreateMemberModel>()).Returns(new Member());
+            var member = GetMember(createMemberModel);
+            fakeModelFactory.CreateMember(Arg.Any<CreateMemberModel>()).Returns(member);
+            fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).ReturnsNull();
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            var result = memberService.CreateMember(createMemberModel);
+            memberService.CreateMember(createMemberModel);
             fakeModelFactory.Received(1).CreateMember(Arg.Is<CreateMemberModel>(x => x.Email == createMemberModel.Email));
             fakeModelFactory.Received(1).CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
             fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == createMemberModel.Email));
             fakeRepo.Received(1).SaveMember(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+        }
 
+        [Test]
+        public void Should_not_create_member_when_member_email_already_used()
+        {
+            var fakeRepo = Substitute.For<IMemberRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var createMemberModel = _fixture.Build<CreateMemberModel>().Create();
+            var member = GetMember(createMemberModel);
+            fakeModelFactory.CreateMember(Arg.Any<CreateMemberModel>()).Returns(member);
+            fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).Returns(member);
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
+
+            memberService.CreateMember(createMemberModel);
+            fakeModelFactory.Received(1).CreateMember(Arg.Is<CreateMemberModel>(x => x.Email == createMemberModel.Email));
+            fakeModelFactory.DidNotReceive().CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == createMemberModel.Email));
+            fakeRepo.DidNotReceive().SaveMember(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+        }
+
+        private Member GetMember(CreateMemberModel createMemberModel)
+        {
+            return new Member
+            {
+                Email = createMemberModel.Email,
+                FirstName = createMemberModel.FirstName,
+                LastName = createMemberModel.LastName,
+                Role = createMemberModel.Role,
+                Communities = Enumerable.Empty<Community>(),
+                Artifacts = Enumerable.Empty<Artifact>()
+            };
         }
     }
 }

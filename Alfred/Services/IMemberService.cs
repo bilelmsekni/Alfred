@@ -9,5 +9,6 @@ namespace Alfred.Services
         IEnumerable<Member> GetMembers();
         Member GetMember(int id);
         MemberModel CreateMember(CreateMemberModel createMemberModel);
+        bool DeleteMember(int id);
     }
 }

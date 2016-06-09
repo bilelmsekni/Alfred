@@ -13,7 +13,7 @@ namespace Alfred.Controllers
     {
         private readonly IMemberService _memberService;
 
-        public MembersController(IMemberService memeberService, IModelFactory modelFactory)
+        public MembersController(IMemberService memeberService)
         {
             _memberService = memeberService;
         }
@@ -66,9 +66,25 @@ namespace Alfred.Controllers
             if (ModelState.IsValid)
             {
                 var memberModel = _memberService.CreateMember(createMemberModel);
-                return Created("", memberModel);
+                if (memberModel != null) return Created("", memberModel);
+                return BadRequest("Something went wrong !");
             }
-            return BadRequest();
+            return BadRequest("Something went wrong !");
+        }
+
+        /// <summary>
+        /// Get all members
+        /// </summary>
+        /// <remarks>
+        /// Get all members
+        /// </remarks>
+        /// <returns></returns>
+        [HttpDelete]
+        [ResponseType(typeof(Member))]
+        public IHttpActionResult DeleteMember(int id)
+        {
+            if (_memberService.DeleteMember(id)) return Ok();
+            return NotFound();
         }
     }
 }

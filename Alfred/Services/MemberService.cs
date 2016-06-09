@@ -17,7 +17,7 @@ namespace Alfred.Services
             _modelFactory = modelFactory;
         }
         public IEnumerable<Member> GetMembers()
-        {
+        {            
             return _memberRepository.GetMembers();
         }
 
@@ -29,9 +29,23 @@ namespace Alfred.Services
         public MemberModel CreateMember(CreateMemberModel createMemberModel)
         {
             var member = _modelFactory.CreateMember(createMemberModel);
-            if (member != null && IsEmailUsed(member.Email))
+            if (member != null && !IsEmailUsed(member.Email))
+            {
                 _memberRepository.SaveMember(member);
-            return _modelFactory.CreateMemberModel(member);
+                return _modelFactory.CreateMemberModel(member);
+            }
+            return null;
+        }
+
+        public bool DeleteMember(int id)
+        {
+            var member = _memberRepository.GetMember(id);
+            if (member != null)
+            {
+                _memberRepository.DeleteMember(id);
+                return true;
+            }
+            return false;
         }
 
         private bool IsEmailUsed(string email)
