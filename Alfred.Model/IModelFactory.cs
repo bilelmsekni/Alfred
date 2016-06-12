@@ -11,5 +11,6 @@ namespace Alfred.Model
         MemberModel CreateMemberModel(Member member);
         Member CreateMember(UpdateMemberModel updateMemberModel);
         CommunityModel CreateCommunityModel(Community community);
+        Community CreateCommunity(CreateCommunityModel createCommunityModel);
     }
 }

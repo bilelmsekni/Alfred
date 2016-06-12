@@ -99,8 +99,8 @@ namespace Alfred.Tests.Services
             memberService.CreateMember(createMemberModel);
             fakeModelFactory.Received(1).CreateMember(Arg.Is<CreateMemberModel>(x => x.Email == createMemberModel.Email));
             fakeModelFactory.Received(1).CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
-            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == createMemberModel.Email));
-            fakeRepo.Received(1).SaveMember(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == member.Email));
+            fakeRepo.Received(1).SaveMember(Arg.Is<Member>(x => x.Email == member.Email));
         }
 
         [Test]

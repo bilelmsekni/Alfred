@@ -59,5 +59,16 @@ namespace Alfred.Model.Implementation
                 Name = community.Name
             };
         }
+
+        public Community CreateCommunity(CreateCommunityModel createCommunityModel)
+        {
+            return new Community
+            {
+                Name = createCommunityModel.Name,
+                Email = createCommunityModel.Email,
+                Artifacts = Enumerable.Empty<Artifact>(),
+                Members = Enumerable.Empty<Member>()
+            };
+        }
     }
 }

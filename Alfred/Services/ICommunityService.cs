@@ -6,5 +6,7 @@ namespace Alfred.Services
     public interface ICommunityService
     {
         IEnumerable<CommunityModel> GetCommunities();
+        CommunityModel GetCommunity(int id);
+        CommunityModel CreateCommunity(CreateCommunityModel createMemberModel);
     }
 }

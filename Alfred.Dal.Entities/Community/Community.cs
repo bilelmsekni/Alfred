@@ -7,6 +7,7 @@ namespace Alfred.Dal.Entities.Community
         public int Id { get; set; }
         public IEnumerable<Artifact.Artifact> Artifacts { get; set; }
         public IEnumerable<Member.Member> Members { get; set; }
-        public string Name { get; set; }        
+        public string Name { get; set; }
+        public string Email { get; set; }
     }
 }
