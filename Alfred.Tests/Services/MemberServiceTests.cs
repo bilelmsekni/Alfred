@@ -30,7 +30,7 @@ namespace Alfred.Tests.Services
             var members = _fixture.Build<Member>()
                 .Without(x => x.Communities)
                 .Without(x => x.Artifacts)
-                .CreateMany(5).AsEnumerable();
+                .CreateMany(5);
 
             var fakeModelFactory = Substitute.For<IModelFactory>();
             fakeModelFactory.CreateMemberModel(Arg.Any<Member>()).Returns(GetMemberModel(members.FirstOrDefault()));
@@ -46,17 +46,11 @@ namespace Alfred.Tests.Services
         [Test]
         public void Should_return_member_2_when_service_gets_member_with_id_2()
         {
-            var members = _fixture.Build<Member>()
-                .Without(x => x.Communities)
-                .Without(x => x.Artifacts)
-                .CreateMany(4);
-
             var memberToSearch = _fixture.Build<Member>()
                 .With(x => x.Id, 2)
                 .Without(x => x.Communities)
                 .Without(x => x.Artifacts)
                 .Create();
-            members.ToList().Add(memberToSearch);
 
             var fakeModelFactory = Substitute.For<IModelFactory>();
             fakeModelFactory.CreateMemberModel(Arg.Is<Member>(x => x.Id == 2))

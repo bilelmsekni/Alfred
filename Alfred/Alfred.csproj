@@ -64,10 +64,13 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\ArtifactsController.cs" />
     <Compile Include="Controllers\CommunitiesController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ArtifactService.cs" />
     <Compile Include="Services\CommunityService.cs" />
+    <Compile Include="Services\IArtifactService.cs" />
     <Compile Include="Services\ICommunityService.cs" />
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Services\IMemberService.cs" />

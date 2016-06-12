@@ -1,5 +1,7 @@
+using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
+using Alfred.Model.Artifacts;
 using Alfred.Model.Communities;
 using Alfred.Model.Members;
 
@@ -13,5 +15,6 @@ namespace Alfred.Model
         CommunityModel CreateCommunityModel(Community community);
         Community CreateCommunity(CreateCommunityModel createCommunityModel);
         Community CreateCommunity(UpdateCommunityModel updateCommunityModel);
+        ArtifactModel CreateArtifactModel(Artifact any);
     }
 }
