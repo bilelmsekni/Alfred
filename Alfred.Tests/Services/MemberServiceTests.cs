@@ -52,9 +52,9 @@ namespace Alfred.Tests.Services
                 .CreateMany(4);
 
             var memberToSearch = _fixture.Build<Member>()
+                .With(x => x.Id, 2)
                 .Without(x => x.Communities)
                 .Without(x => x.Artifacts)
-                .With(x => x.Id, 2)
                 .Create();
             members.ToList().Add(memberToSearch);
 
@@ -127,8 +127,8 @@ namespace Alfred.Tests.Services
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var fakeRepo = Substitute.For<IMemberRepository>();
             var member = _fixture.Build<Member>()
-                .Without(x => x.Artifacts)
-                .Without(x => x.Communities)
+                .Without(x=>x.Communities)
+                .Without(x=>x.Artifacts)
                 .With(x => x.Id, 2)
                 .Create();
 

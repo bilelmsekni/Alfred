@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
-using Ploeh.AutoFixture;
 
 namespace Alfred.Dal.FakeImplementation.Dao
 {
@@ -18,9 +16,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
                 new Member
                 {
                     Email = "momo@uib.com",
-                    Id = 1,
-                    Communities = new List<Community>(),
-                    Artifacts = new List<Artifact>(),
+                    Id = 1,            
                     FirstName = "momo",
                     LastName = "omom",
                     Role = ComunityRole.Member
@@ -29,8 +25,6 @@ namespace Alfred.Dal.FakeImplementation.Dao
                 {
                     Email = "tata@uib.com",
                     Id = 2,
-                    Communities = new List<Community>(),
-                    Artifacts = new List<Artifact>(),
                     FirstName = "tata",
                     LastName = "atat",
                     Role = ComunityRole.Leader
@@ -39,8 +33,6 @@ namespace Alfred.Dal.FakeImplementation.Dao
                 {
                     Email = "koko@uib.com",
                     Id = 1,
-                    Communities = new List<Community>(),
-                    Artifacts = new List<Artifact>(),
                     FirstName = "koko",
                     LastName = "okok",
                     Role = ComunityRole.Manager

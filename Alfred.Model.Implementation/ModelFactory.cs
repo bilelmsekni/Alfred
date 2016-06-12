@@ -2,6 +2,8 @@
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
+using Alfred.Model.Artifacts;
+using Alfred.Model.Communities;
 using Alfred.Model.Members;
 
 namespace Alfred.Model.Implementation
@@ -29,9 +31,14 @@ namespace Alfred.Model.Implementation
                 FirstName = member.FirstName,
                 LastName = member.LastName,
                 Role = member.Role,
-                Communities = member.Communities,
-                Artifacts = member.Artifacts
+                Communities = member.Communities.Select(CreateCommunityModel),
+                Artifacts = member.Artifacts.Select(CreateArtifactModel)
             };
+        }
+
+        public ArtifactModel CreateArtifactModel(Artifact artifact)
+        {
+            return new ArtifactModel();
         }
 
         public Member CreateMember(UpdateMemberModel updateMemberModel)
@@ -42,6 +49,14 @@ namespace Alfred.Model.Implementation
                 FirstName = updateMemberModel.FirstName,
                 LastName = updateMemberModel.LastName,
                 Role = updateMemberModel.Role,
+            };
+        }
+
+        public CommunityModel CreateCommunityModel(Community community)
+        {
+            return new CommunityModel
+            {
+                Name = community.Name
             };
         }
     }
