@@ -10,5 +10,6 @@ namespace Alfred.Dal.FakeImplementation.Dao
         Member GetMember(string email);
         Member GetMember(int id);
         void UpdateMember(Member member);
+        void DeleteMember(int id);
     }
 }

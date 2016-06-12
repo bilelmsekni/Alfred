@@ -31,7 +31,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public void DeleteMember(int id)
         {
-            throw new NotImplementedException();
+            _memberDao.DeleteMember(id);
         }
 
         public Member GetMember(string email)

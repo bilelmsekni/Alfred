@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Alfred.Dal.Entities.Member;
-using Alfred.Model;
 using Alfred.Model.Members;
 using Alfred.Services;
 
@@ -63,7 +62,8 @@ namespace Alfred.Controllers
         /// <returns></returns>
         [HttpPost]
         [ResponseType(typeof(Member))]
-        public IHttpActionResult CreateMember(CreateMemberModel createMemberModel)
+        [Route("")]
+        public IHttpActionResult CreateMember([FromBody]CreateMemberModel createMemberModel)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,8 @@ namespace Alfred.Controllers
         /// <returns></returns>
         [HttpPut]
         [ResponseType(typeof(Member))]
-        public IHttpActionResult UpdateMember(UpdateMemberModel updateMemberModel)
+        [Route("{id:int?}")]
+        public IHttpActionResult UpdateMember(int id, [FromBody]UpdateMemberModel updateMemberModel)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +105,7 @@ namespace Alfred.Controllers
         /// <param name="id">member id</param>
         /// <returns></returns>
         [HttpDelete]
-        [ResponseType(typeof(Member))]
+        [Route("{id:int?}")]
         public IHttpActionResult DeleteMember(int id)
         {
             if (_memberService.DeleteMember(id)) return Ok();
