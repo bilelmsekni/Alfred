@@ -51,12 +51,12 @@ namespace Alfred.Controllers
         }
 
         /// <summary>
-        /// Create member
+        /// Create community
         /// </summary>
         /// <remarks>
-        /// Create member
+        /// Create community
         /// </remarks>
-        /// <param name="createCommunityModel">member data</param>
+        /// <param name="createCommunityModel">community data</param>
         /// <returns></returns>
         [HttpPost]
         [ResponseType(typeof(CommunityModel))]
@@ -70,6 +70,45 @@ namespace Alfred.Controllers
                 return BadRequest("Something went wrong !");
             }
             return BadRequest("Something went wrong !");
+        }
+
+        /// <summary>
+        /// Update community
+        /// </summary>
+        /// <remarks>
+        /// Update community
+        /// </remarks>
+        /// <param name="createCommunityModel">community data</param>
+        /// <returns></returns>
+        [HttpPut]
+        [ResponseType(typeof(CommunityModel))]
+        [Route("{id:int?}")]
+        public IHttpActionResult UpdateCommunity(int id, [FromBody]UpdateCommunityModel createCommunityModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var community = _communityService.UpdateCommunity(createCommunityModel);
+                if (community != null) return Ok(community);
+                return BadRequest("Something went wrong !");
+            }
+            return BadRequest("Something went wrong !");
+        }
+
+        /// <summary>
+        /// Update community
+        /// </summary>
+        /// <remarks>
+        /// Update community
+        /// </remarks>
+        /// <param name="createCommunityModel">community data</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [ResponseType(typeof(CommunityModel))]
+        [Route("{id:int?}")]
+        public IHttpActionResult DeleteCommunity(int id)
+        {
+            if (_communityService.DeleteCommunity(id)) return Ok();            
+            return NotFound();
         }
     }
 }

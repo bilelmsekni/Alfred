@@ -70,5 +70,45 @@ namespace Alfred.Model.Implementation
                 Members = Enumerable.Empty<Member>()
             };
         }
+
+        public Community CreateCommunity(UpdateCommunityModel updateCommunityModel)
+        {
+            return new Community
+            {
+                Name = updateCommunityModel.Name,
+                Email = updateCommunityModel.Email,
+                Artifacts = updateCommunityModel.Artifacts.Select(CreateArtifact),
+                Members = updateCommunityModel.Members.Select(CreateMember)
+            };
+        }
+
+        private Artifact CreateArtifact(ArtifactModel artifactModel)
+        {
+            return new Artifact();
+        }
+
+        public Member CreateMember(MemberModel memberModel)
+        {
+            return new Member
+            {
+                Email = memberModel.Email,
+                FirstName = memberModel.FirstName,
+                LastName = memberModel.LastName,
+                Role = memberModel.Role,
+                Communities = memberModel.Communities.Select(CreateCommunity),
+                Artifacts = memberModel.Artifacts.Select(CreateArtifact)
+            };
+        }
+
+        public Community CreateCommunity(CommunityModel communityModel)
+        {
+            return new Community
+            {
+                Name = communityModel.Name,
+                Email = communityModel.Email,
+                Artifacts = Enumerable.Empty<Artifact>(),
+                Members = Enumerable.Empty<Member>()
+            };
+        }
     }
 }

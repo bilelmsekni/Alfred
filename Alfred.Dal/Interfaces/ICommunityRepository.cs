@@ -10,5 +10,6 @@ namespace Alfred.Dal.Interfaces
         void SaveCommunity(Community community);
         void DeleteCommunity(int id);
         Community GetCommunity(string email);
+        void UpdateCommunity(Community community);
     }
 }

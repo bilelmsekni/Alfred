@@ -47,6 +47,7 @@
     <Compile Include="Artifacts\ArtifactModel.cs" />
     <Compile Include="Communities\CommunityModel.cs" />
     <Compile Include="Communities\CreateCommunityModel.cs" />
+    <Compile Include="Communities\UpdateCommunityModel.cs" />
     <Compile Include="IModelFactory.cs" />
     <Compile Include="Members\CreateMemberModel.cs" />
     <Compile Include="Members\MemberModel.cs" />

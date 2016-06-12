@@ -122,6 +122,42 @@ namespace Alfred.Tests.Services
         }
 
         [Test]
+        public void Should_update_member_when_member_has_valid_data()
+        {
+            var fakeRepo = Substitute.For<IMemberRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var createMemberModel = _fixture.Build<UpdateMemberModel>().Create();
+            var member = GetMember(createMemberModel);
+            fakeModelFactory.CreateMember(Arg.Any<UpdateMemberModel>()).Returns(member);
+            fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).Returns(member);
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
+
+            memberService.UpdateMember(createMemberModel);
+            fakeModelFactory.Received(1).CreateMember(Arg.Is<UpdateMemberModel>(x => x.Email == createMemberModel.Email));
+            fakeModelFactory.Received(1).CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == member.Email));
+            fakeRepo.Received(1).UpdateMember(Arg.Is<Member>(x => x.Email == member.Email));
+        }
+
+        [Test]
+        public void Should_not_update_member_when_member_email_does_not_exist()
+        {
+            var fakeRepo = Substitute.For<IMemberRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var createMemberModel = _fixture.Build<UpdateMemberModel>().Create();
+            var member = GetMember(createMemberModel);
+            fakeModelFactory.CreateMember(Arg.Any<UpdateMemberModel>()).Returns(member);
+            fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).ReturnsNull();
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
+
+            memberService.UpdateMember(createMemberModel);
+            fakeModelFactory.Received(1).CreateMember(Arg.Is<UpdateMemberModel>(x => x.Email == createMemberModel.Email));
+            fakeModelFactory.DidNotReceive().CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == member.Email));
+            fakeRepo.DidNotReceive().UpdateMember(Arg.Is<Member>(x => x.Email == member.Email));
+        }
+
+        [Test]
         public void Should_delete_member_when_member_id_exist()
         {
             var fakeModelFactory = Substitute.For<IModelFactory>();
@@ -155,6 +191,14 @@ namespace Alfred.Tests.Services
         }
 
         private Member GetMember(CreateMemberModel createMemberModel)
+        {
+            return new Member
+            {
+                Email = createMemberModel.Email
+            };
+        }
+
+        private Member GetMember(UpdateMemberModel createMemberModel)
         {
             return new Member
             {

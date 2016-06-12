@@ -42,7 +42,28 @@ namespace Alfred.Services
                 return _modelFactory.CreateCommunityModel(community);
             }
             return null;
+        }
 
+        public CommunityModel UpdateCommunity(UpdateCommunityModel updateCommunityModel)
+        {
+            var community = _modelFactory.CreateCommunity(updateCommunityModel);
+            if (community != null && IsEmailUsed(community.Email))
+            {
+                _communityRepo.UpdateCommunity(community);
+                return _modelFactory.CreateCommunityModel(community);
+            }
+            return null;
+        }
+
+        public bool DeleteCommunity(int id)
+        {
+            var community = _communityRepo.GetCommunity(id);
+            if (community != null)
+            {
+                _communityRepo.DeleteCommunity(id);
+                return true;
+            }
+            return false;
         }
 
         private bool IsEmailUsed(string email)

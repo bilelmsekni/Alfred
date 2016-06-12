@@ -102,6 +102,101 @@ namespace Alfred.Tests.Services
             fakeRepo.Received(1).SaveCommunity(Arg.Is<Community>(x => x.Email == community.Email));
         }
 
+        [Test]
+        public void Should_not_create_community_when_community_email_already_used()
+        {
+            var fakeRepo = Substitute.For<ICommunityRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var createCommunityModel = _fixture.Build<CreateCommunityModel>().Create();
+
+            var community = GetCommunity(createCommunityModel);
+            fakeModelFactory.CreateCommunity(Arg.Any<CreateCommunityModel>()).Returns(community);
+            fakeRepo.GetCommunity(Arg.Is<string>(x => x == community.Email)).Returns(community);
+            var communityService = new CommunityService(fakeRepo, fakeModelFactory);
+
+            var result = communityService.CreateCommunity(createCommunityModel);
+            fakeModelFactory.Received(1).CreateCommunity(Arg.Is<CreateCommunityModel>(x => x.Email == createCommunityModel.Email));
+            fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
+            fakeRepo.DidNotReceive().SaveCommunity(Arg.Is<Community>(x => x.Email == community.Email));
+            result.Should().BeNull();
+        }
+
+        [Test]
+        public void Should_update_community_when_community_has_valid_data()
+        {
+            var fakeRepo = Substitute.For<ICommunityRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
+                .Without(x=>x.Members)
+                .Without(x=>x.Artifacts)
+                .Create();
+
+            var community = GetCommunity(updateCommunityModel);
+            fakeModelFactory.CreateCommunity(Arg.Any<UpdateCommunityModel>()).Returns(community);
+            fakeRepo.GetCommunity(Arg.Is<string>(x => x == community.Email)).Returns(community);
+            var communityService = new CommunityService(fakeRepo, fakeModelFactory);
+
+            communityService.UpdateCommunity(updateCommunityModel);
+            fakeModelFactory.Received(1).CreateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email));
+            fakeModelFactory.Received(1).CreateCommunityModel(Arg.Is<Community>(x => x.Email == updateCommunityModel.Email));
+            fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
+            fakeRepo.Received(1).UpdateCommunity(Arg.Is<Community>(x => x.Email == community.Email));
+        }
+
+        [Test]
+        public void Should_not_update_community_when_community_has_a_non_existant_email()
+        {
+            var fakeRepo = Substitute.For<ICommunityRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+            var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
+                .Without(x => x.Members)
+                .Without(x => x.Artifacts)
+                .Create();
+
+            var community = GetCommunity(updateCommunityModel);
+            fakeModelFactory.CreateCommunity(Arg.Any<UpdateCommunityModel>()).Returns(community);
+            fakeRepo.GetCommunity(Arg.Is<string>(x => x == community.Email)).ReturnsNull();
+            var communityService = new CommunityService(fakeRepo, fakeModelFactory);
+
+            communityService.UpdateCommunity(updateCommunityModel);
+            fakeModelFactory.Received(1).CreateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email));
+            fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
+            fakeRepo.DidNotReceive().UpdateCommunity(Arg.Is<Community>(x => x.Email == community.Email));
+        }
+
+        [Test]
+        public void Should_delete_community_when_community_id_exists()
+        {
+            var community = _fixture.Build<Community>()
+                .Without(x => x.Members)
+                .Without(x => x.Artifacts)
+                .With(x => x.Id, 2)
+                .Create();
+
+
+            var fakeRepo = Substitute.For<ICommunityRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+
+            fakeRepo.GetCommunity(Arg.Is(2)).Returns(community);
+            var communityService = new CommunityService(fakeRepo, fakeModelFactory);
+
+            communityService.DeleteCommunity(2);
+            fakeRepo.Received(1).DeleteCommunity(Arg.Is(2));
+        }
+
+        [Test]
+        public void Should_not_delete_community_when_community_id_does_not_exists()
+        {
+            var fakeRepo = Substitute.For<ICommunityRepository>();
+            var fakeModelFactory = Substitute.For<IModelFactory>();
+
+            fakeRepo.GetCommunity(Arg.Is(2)).ReturnsNull();
+            var communityService = new CommunityService(fakeRepo, fakeModelFactory);
+
+            communityService.DeleteCommunity(2);
+            fakeRepo.DidNotReceive().DeleteCommunity(Arg.Is(2));
+        }
+
         private Community GetCommunity(CreateCommunityModel createCommunityModel)
         {
             return new Community
@@ -110,6 +205,15 @@ namespace Alfred.Tests.Services
                 Name = createCommunityModel.Name
             };
         }
+        private Community GetCommunity(UpdateCommunityModel createCommunityModel)
+        {
+            return new Community
+            {
+                Email = createCommunityModel.Email,
+                Name = createCommunityModel.Name
+            };
+        }
+
 
         private CommunityModel GetCommunityModel(Community community)
         {
