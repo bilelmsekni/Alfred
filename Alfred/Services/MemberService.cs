@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
 using Alfred.Model.Members;

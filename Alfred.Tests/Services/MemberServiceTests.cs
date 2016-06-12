@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Interfaces;
@@ -32,12 +33,13 @@ namespace Alfred.Tests.Services
                 .CreateMany(5).AsEnumerable();
 
             var fakeModelFactory = Substitute.For<IModelFactory>();
+            fakeModelFactory.CreateMemberModel(Arg.Any<Member>()).Returns(GetMemberModel(members.FirstOrDefault()));
             var fakeRepo = Substitute.For<IMemberRepository>();
             fakeRepo.GetMembers().ReturnsForAnyArgs(members);
 
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
             var result = memberService.GetMembers();
-            //result.Should().BeOfType<IEnumerable<Member>>();
+            result.FirstOrDefault().Should().BeOfType<MemberModel>();
             result.Count().Should().Be(members.Count());
         }
 

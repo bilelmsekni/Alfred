@@ -40,7 +40,6 @@
     </Compile>
     <Compile Include="Interfaces\IArtifactRepository.cs" />
     <Compile Include="Interfaces\ICommunityRepository.cs" />
-    <Compile Include="Interfaces\ICommunityService.cs" />
     <Compile Include="Interfaces\IMemberRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
