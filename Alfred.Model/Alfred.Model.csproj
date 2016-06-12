@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="IModelFactory.cs" />
     <Compile Include="Members\CreateMemberModel.cs" />
     <Compile Include="Members\MemberModel.cs" />

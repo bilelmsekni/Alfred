@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
