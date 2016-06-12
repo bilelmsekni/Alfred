@@ -15,8 +15,5 @@ namespace Alfred.Model.Members
         public string LastName { get; set; }
         [Required]
         public ComunityRole Role { get; set; }
-
-        public IEnumerable<Community> Communities { get; set; }
-        public IEnumerable<Artifact> Artifacts { get; set; }
     }
 }

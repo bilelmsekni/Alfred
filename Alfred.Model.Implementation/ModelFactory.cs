@@ -42,8 +42,6 @@ namespace Alfred.Model.Implementation
                 FirstName = updateMemberModel.FirstName,
                 LastName = updateMemberModel.LastName,
                 Role = updateMemberModel.Role,
-                Communities = updateMemberModel.Communities,
-                Artifacts = updateMemberModel.Artifacts
             };
         }
     }
