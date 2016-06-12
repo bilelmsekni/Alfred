@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Alfred.Dal.Entities.Member;
 using Alfred.Model.Members;
 using Alfred.Services;
 
@@ -12,9 +11,9 @@ namespace Alfred.Controllers
     {
         private readonly IMemberService _memberService;
 
-        public MembersController(IMemberService memeberService)
+        public MembersController(IMemberService memberService)
         {
-            _memberService = memeberService;
+            _memberService = memberService;
         }
 
         /// <summary>
@@ -26,11 +25,10 @@ namespace Alfred.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IEnumerable<Member>))]
+        [ResponseType(typeof(IEnumerable<MemberModel>))]
         public IHttpActionResult GetMembers()
         {
-            var members = _memberService.GetMembers();
-            return Ok(members);
+            return Ok(_memberService.GetMembers());            
         }
 
         /// <summary>
@@ -43,7 +41,7 @@ namespace Alfred.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id:int?}")]
-        [ResponseType(typeof(Member))]
+        [ResponseType(typeof(MemberModel))]
         public IHttpActionResult GetMember(int id)
         {
             var member = _memberService.GetMember(id);
@@ -61,7 +59,7 @@ namespace Alfred.Controllers
         /// <param name="createMemberModel">member data</param>
         /// <returns></returns>
         [HttpPost]
-        [ResponseType(typeof(Member))]
+        [ResponseType(typeof(MemberModel))]
         [Route("")]
         public IHttpActionResult CreateMember([FromBody]CreateMemberModel createMemberModel)
         {
@@ -83,7 +81,7 @@ namespace Alfred.Controllers
         /// <param name="UpdateMemberModel">update member data</param>
         /// <returns></returns>
         [HttpPut]
-        [ResponseType(typeof(Member))]
+        [ResponseType(typeof(MemberModel))]
         [Route("{id:int?}")]
         public IHttpActionResult UpdateMember(int id, [FromBody]UpdateMemberModel updateMemberModel)
         {

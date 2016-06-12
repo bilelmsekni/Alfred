@@ -57,13 +57,18 @@ namespace Alfred.Tests.Services
             members.ToList().Add(memberToSearch);
 
             var fakeModelFactory = Substitute.For<IModelFactory>();
+            fakeModelFactory.CreateMemberModel(Arg.Is<Member>(x => x.Id == 2))
+                .Returns(GetMemberModel(memberToSearch));
             var fakeRepo = Substitute.For<IMemberRepository>();
             fakeRepo.GetMember(Arg.Is(2)).Returns(memberToSearch);
 
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
+
             var result = memberService.GetMember(2);
-            result.Should().BeOfType<Member>();
-            result.Id.Should().Be(2);
+            result.Should().BeOfType<MemberModel>();
+            result.Email.Should().Be(memberToSearch.Email);
+            result.FirstName.Should().Be(memberToSearch.FirstName);
+            result.LastName.Should().Be(memberToSearch.LastName);
         }
 
         [Test]
@@ -152,6 +157,16 @@ namespace Alfred.Tests.Services
             return new Member
             {
                 Email = createMemberModel.Email
+            };
+        }
+
+        private MemberModel GetMemberModel(Member memberToSearch)
+        {
+            return new MemberModel
+            {
+                Email = memberToSearch.Email,
+                FirstName = memberToSearch.FirstName,
+                LastName = memberToSearch.LastName
             };
         }
     }

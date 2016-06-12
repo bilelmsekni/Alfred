@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Interfaces\IArtifactRepository.cs" />
     <Compile Include="Interfaces\ICommunityRepository.cs" />
+    <Compile Include="Interfaces\ICommunityService.cs" />
     <Compile Include="Interfaces\IMemberRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -47,6 +48,10 @@
     <ProjectReference Include="..\Alfred.Dal.Entities\Alfred.Dal.Entities.csproj">
       <Project>{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}</Project>
       <Name>Alfred.Dal.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred.Model\Alfred.Model.csproj">
+      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
+      <Name>Alfred.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

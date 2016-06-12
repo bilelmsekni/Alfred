@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
@@ -16,14 +17,16 @@ namespace Alfred.Services
             _memberRepository = memberRepository;
             _modelFactory = modelFactory;
         }
-        public IEnumerable<Member> GetMembers()
-        {            
-            return _memberRepository.GetMembers();
+        public IEnumerable<MemberModel> GetMembers()
+        {
+            var memberEntities = _memberRepository.GetMembers();
+            return memberEntities.Select(x => _modelFactory.CreateMemberModel(x));
         }
 
-        public Member GetMember(int id)
+        public MemberModel GetMember(int id)
         {
-            return _memberRepository.GetMember(id);
+            var memberEntity = _memberRepository.GetMember(id);
+            return _modelFactory.CreateMemberModel(memberEntity);
         }
 
         public MemberModel CreateMember(CreateMemberModel createMemberModel)
