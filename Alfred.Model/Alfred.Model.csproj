@@ -45,6 +45,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Artifacts\ArtifactModel.cs" />
+    <Compile Include="Artifacts\CreateArtifactModel.cs" />
     <Compile Include="Communities\CommunityModel.cs" />
     <Compile Include="Communities\CreateCommunityModel.cs" />
     <Compile Include="Communities\UpdateCommunityModel.cs" />

@@ -30,5 +30,21 @@ namespace Alfred.Services
                 return _modelFactory.CreateArtifactModel(artifactEntity);
             return null;
         }
+
+        public ArtifactModel CreateArtifact(CreateArtifactModel createArtifactModel)
+        {
+            var artifact = _modelFactory.CreateArtifact(createArtifactModel);
+            if (artifact != null && !IsTitleUsed(artifact.Title))
+            {
+                _artifactRepo.SaveArtifact(artifact);
+                return _modelFactory.CreateArtifactModel(artifact);
+            }
+            return null;
+        }
+
+        private bool IsTitleUsed(string title)
+        {
+            return _artifactRepo.GetArtifact(title) != null;
+        }
     }
 }

@@ -75,6 +75,52 @@ namespace Alfred.Tests.Services
             result.Should().BeNull();
         }
 
+        [Test]
+        public void Should_create_artifact_when_artifact_data_is_valid()
+        {
+            var createArtifactModel = _fixture.Build<CreateArtifactModel>()                
+                .Create();
+            var artifact = GetArtifact(createArtifactModel);
+            _modelFactory.CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title))
+                .Returns(artifact);
+            _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).ReturnsNull();
+
+            _artifactService.CreateArtifact(createArtifactModel);
+
+            _modelFactory.Received(1)
+                .CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title));
+            _modelFactory.Received(1).CreateArtifactModel(Arg.Is<Artifact>(x => x.Title ==artifact.Title));
+            _artifactRepo.Received(1).SaveArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
+            _artifactRepo.Received(1).GetArtifact(Arg.Is(createArtifactModel.Title));
+        }
+
+        [Test]
+        public void Should_not_create_artifact_when_artifact_title_is_already_used()
+        {
+            var createArtifactModel = _fixture.Build<CreateArtifactModel>()
+                .Create();
+            var artifact = GetArtifact(createArtifactModel);
+            _modelFactory.CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title))
+                .Returns(artifact);
+            _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).Returns(artifact);
+
+            _artifactService.CreateArtifact(createArtifactModel);
+
+            _modelFactory.Received(1)
+                .CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title));
+            _modelFactory.DidNotReceive().CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
+            _artifactRepo.DidNotReceive().SaveArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
+            _artifactRepo.Received(1).GetArtifact(Arg.Is(createArtifactModel.Title));
+        }
+
+        private Artifact GetArtifact(CreateArtifactModel createArtifactModel)
+        {
+            return new Artifact
+            {
+                Title = createArtifactModel.Title
+            };
+        }
+
         private ArtifactModel GetArtifactModel(Artifact artifact)
         {
             return new ArtifactModel

@@ -53,5 +53,27 @@ namespace Alfred.Controllers
                 return Ok(artifact);
             return NotFound();
         }
+
+        /// <summary>
+        /// Create artifact
+        /// </summary>
+        /// <remarks>
+        /// Create artifact
+        /// </remarks>
+        /// <param name="createArtifactModel">artifact data</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ResponseType(typeof(ArtifactModel))]
+        [Route("")]
+        public IHttpActionResult CreateArtifact([FromBody]CreateArtifactModel createArtifactModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var artifact = _artifactService.CreateArtifact(createArtifactModel);
+                if (artifact != null) return Created("", artifact);
+                return BadRequest("Something went wrong !");
+            }
+            return BadRequest("Something went wrong !");
+        }
     }
 }

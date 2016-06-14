@@ -41,6 +41,18 @@ namespace Alfred.Model.Implementation
             return new ArtifactModel();
         }
 
+        public Artifact CreateArtifact(CreateArtifactModel createArtifactModel)
+        {
+            return new Artifact
+            {
+                Title = createArtifactModel.Title,
+                Status = ArtifactStatus.ToDo,
+                Type = createArtifactModel.Type,
+                Reward = createArtifactModel.Reward,
+                Bonus = createArtifactModel.Bonus
+            };
+        }
+
         public Member CreateMember(UpdateMemberModel updateMemberModel)
         {
             return new Member
