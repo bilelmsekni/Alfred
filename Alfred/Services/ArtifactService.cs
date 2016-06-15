@@ -42,6 +42,28 @@ namespace Alfred.Services
             return null;
         }
 
+        public ArtifactModel UpdateArtifact(UpdateArtifactModel updateArtifactModel)
+        {
+            var artifact = _modelFactory.CreateArtifact(updateArtifactModel);
+            if (artifact != null && IsTitleUsed(artifact.Title))
+            {
+                _artifactRepo.UpdateArtifact(artifact);
+                return _modelFactory.CreateArtifactModel(artifact);
+            }
+            return null;
+        }
+
+        public bool DeleteArtifact(int id)
+        {
+            var artifact = _artifactRepo.GetArtifact(id);
+            if (artifact != null)
+            {
+                _artifactRepo.DeleteArtifact(id);
+                return true;
+            }
+            return false;
+        }
+
         private bool IsTitleUsed(string title)
         {
             return _artifactRepo.GetArtifact(title) != null;

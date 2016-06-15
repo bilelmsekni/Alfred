@@ -75,5 +75,48 @@ namespace Alfred.Controllers
             }
             return BadRequest("Something went wrong !");
         }
+
+
+        /// <summary>
+        /// Update artifact
+        /// </summary>
+        /// <remarks>
+        /// Update artifact
+        /// </remarks>
+        /// <param name="id">artifact id</param>
+        /// <param name="updatertifactModel">artifact data</param>
+        /// <returns></returns>
+        [HttpPut]
+        [ResponseType(typeof(ArtifactModel))]
+        [Route("{id:int?}")]
+        public IHttpActionResult UpdateArtifact(int id, [FromBody]UpdateArtifactModel updateArtifactModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var artifact = _artifactService.UpdateArtifact(updateArtifactModel);
+                if (artifact != null) return Ok(artifact);
+                return BadRequest("Something went wrong !");
+            }
+            return BadRequest("Something went wrong !");
+        }
+
+        /// <summary>
+        /// Delete artifact
+        /// </summary>
+        /// <remarks>
+        /// Delete artifact
+        /// </remarks>
+        /// <param name="id">artifact id</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [ResponseType(typeof(ArtifactModel))]
+        [Route("{id:int?}")]
+        public IHttpActionResult DeleteArtifact(int id)
+        {
+            if (_artifactService.DeleteArtifact(id))
+                return Ok();
+
+            return NotFound();
+        }
     }
 }

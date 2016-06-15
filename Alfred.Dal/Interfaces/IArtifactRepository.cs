@@ -10,5 +10,6 @@ namespace Alfred.Dal.Interfaces
         void SaveArtifact(Artifact artifact);
         void DeleteArtifact(int id);
         Artifact GetArtifact(string title);
+        void UpdateArtifact(Artifact artifact);
     }
 }

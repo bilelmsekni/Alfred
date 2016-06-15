@@ -12,5 +12,7 @@ namespace Alfred.Services
         IEnumerable<ArtifactModel> GetArtifacts();
         ArtifactModel GetArtifact(int id);
         ArtifactModel CreateArtifact(CreateArtifactModel createArtifactModel);
+        ArtifactModel UpdateArtifact(UpdateArtifactModel updateArtifactModel);
+        bool DeleteArtifact(int id);
     }
 }

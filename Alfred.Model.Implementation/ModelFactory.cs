@@ -53,6 +53,20 @@ namespace Alfred.Model.Implementation
             };
         }
 
+        public Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel)
+        {
+            return new Artifact
+            {
+                Title = updateArtifactModel.Title,
+                Member = updateArtifactModel.Member,
+                Bonus = updateArtifactModel.Bonus,
+                Community = updateArtifactModel.Community,
+                Reward = updateArtifactModel.Reward,
+                Status = updateArtifactModel.Status,
+                Type = updateArtifactModel.Type
+            };
+        }
+
         public Member CreateMember(UpdateMemberModel updateMemberModel)
         {
             return new Member

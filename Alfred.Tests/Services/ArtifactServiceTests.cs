@@ -113,6 +113,84 @@ namespace Alfred.Tests.Services
             _artifactRepo.Received(1).GetArtifact(Arg.Is(createArtifactModel.Title));
         }
 
+        [Test]
+        public void Should_update_artifact_when_artifact_data_is_valid()
+        {
+            var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
+                .Without(x=>x.Member)
+                .Without(x=>x.Community)
+                .Create();
+            var artifact = GetArtifact(updateArtifactModel);
+            _modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title))
+                .Returns(artifact);
+            _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).Returns(artifact);
+
+            _artifactService.UpdateArtifact(updateArtifactModel);
+
+            _modelFactory.Received(1)
+                .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title));
+            _modelFactory.Received(1).CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
+            _artifactRepo.Received(1).UpdateArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
+            _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Title));
+        }
+
+
+        [Test]
+        public void Should_not_update_artifact_when_artifact_to_update_is_not_found()
+        {
+            var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
+                .Without(x => x.Member)
+                .Without(x => x.Community)
+                .Create();
+            var artifact = GetArtifact(updateArtifactModel);
+            _modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title))
+                .Returns(artifact);
+            _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).ReturnsNull();
+
+            _artifactService.UpdateArtifact(updateArtifactModel);
+
+            _modelFactory.Received(1)
+                .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title));
+            _modelFactory.DidNotReceive().CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
+            _artifactRepo.DidNotReceive().UpdateArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
+            _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Title));
+        }
+
+        [Test]
+        public void Should_delete_artifact_when_artifact_to_delete_is_found()
+        {
+            var artifact = _fixture.Build<Artifact>()
+                .Without(x => x.Member)
+                .Without(x => x.Community)
+                .With(x=>x.Id, 2)
+                .Create();
+            _artifactRepo.GetArtifact(Arg.Is(2)).Returns(artifact);
+
+            _artifactService.DeleteArtifact(2);
+
+            _artifactRepo.Received(1).GetArtifact(Arg.Is(2));
+            _artifactRepo.Received(1).DeleteArtifact(Arg.Is(2));
+        }
+
+        [Test]
+        public void Should_not_delete_artifact_when_artifact_to_delete_is_not_found()
+        {
+            _artifactRepo.GetArtifact(Arg.Is(2)).ReturnsNull();
+
+            _artifactService.DeleteArtifact(2);
+
+            _artifactRepo.Received(1).GetArtifact(Arg.Is(2));
+            _artifactRepo.DidNotReceive().DeleteArtifact(Arg.Is(2));
+        }
+
+        private Artifact GetArtifact(UpdateArtifactModel updateArtifactModel)
+        {
+            return new Artifact
+            {
+                Title = updateArtifactModel.Title
+            };
+        }
+
         private Artifact GetArtifact(CreateArtifactModel createArtifactModel)
         {
             return new Artifact

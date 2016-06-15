@@ -46,6 +46,7 @@
     </Compile>
     <Compile Include="Artifacts\ArtifactModel.cs" />
     <Compile Include="Artifacts\CreateArtifactModel.cs" />
+    <Compile Include="Artifacts\UpdateArtifactModel.cs" />
     <Compile Include="Communities\CommunityModel.cs" />
     <Compile Include="Communities\CreateCommunityModel.cs" />
     <Compile Include="Communities\UpdateCommunityModel.cs" />
