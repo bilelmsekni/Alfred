@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Alfred.Dal.Entities.Artifact;
+using Microsoft.Build.Framework;
 
 namespace Alfred.Model.Artifacts
 {
     public class ArtifactModel
     {
+        [Required]
         public string Title { get; set; }
+        [Required]
         public int Reward { get; set; }
-        public int Bonus { get; set; }
+        [Required]
         public ArtifactType Type { get; set; }
+        [Required]
         public ArtifactStatus Status { get; set; }
+        public int Bonus { get; set; }
     }
 }
