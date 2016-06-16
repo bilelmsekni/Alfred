@@ -37,8 +37,6 @@ namespace Alfred.Tests.Services
         public void Should_return_5_artifacts_when_repo_has_5_artifacts()
         {
             var artifacts = _fixture.Build<Artifact>()
-                .Without(x => x.Member)
-                .Without(x => x.Community)
                 .CreateMany(5);
             _artifactRepo.GetArtifacts().Returns(artifacts);
             _modelFactory.CreateArtifactModel(Arg.Any<Artifact>()).Returns(GetArtifactModel(artifacts.FirstOrDefault()));
@@ -51,9 +49,7 @@ namespace Alfred.Tests.Services
         [Test]
         public void Should_return_artifact_with_id_2_when_get_artifact_with_id_2()
         {
-            var artifactWithIdTwo = _fixture.Build<Artifact>()
-                .Without(x => x.Member)
-                .Without(x => x.Community)
+            var artifactWithIdTwo = _fixture.Build<Artifact>()                
                 .With(x => x.Id, 2)
                 .Create();
 
@@ -159,9 +155,7 @@ namespace Alfred.Tests.Services
         [Test]
         public void Should_delete_artifact_when_artifact_to_delete_is_found()
         {
-            var artifact = _fixture.Build<Artifact>()
-                .Without(x => x.Member)
-                .Without(x => x.Community)
+            var artifact = _fixture.Build<Artifact>()                
                 .With(x=>x.Id, 2)
                 .Create();
             _artifactRepo.GetArtifact(Arg.Is(2)).Returns(artifact);

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
+using Alfred.Model.Artifacts;
+using Alfred.Model.Communities;
 using Alfred.Model.Members;
 using FluentAssertions;
 using NUnit.Framework;
@@ -47,10 +50,8 @@ namespace Alfred.Model.Implementation.Tests
         [Test]
         public void Should_map_MemberEntity_to_MemberModel()
         {
-            var fakeCommunity = new List<Community>();
             var fakeArtifact = new List<Artifact>();
             var member = _fixture.Build<Member>()
-                .With(x => x.Communities, fakeCommunity)
                 .With(x => x.Artifacts, fakeArtifact)
                 .Create();
             var modelFactory = new ModelFactory();
@@ -59,8 +60,89 @@ namespace Alfred.Model.Implementation.Tests
             result.FirstName.Should().Be(member.FirstName);
             result.LastName.Should().Be(member.LastName);
             result.Role.Should().Be(member.Role);
-            //result.Communities.Should().BeSameAs(member.Communities);
             //result.Artifacts.Should().BeSameAs(member.Artifacts);
+        }
+
+        [Test]
+        public void Should_map_CreateCommunityModel_to_CommunityEntity()
+        {
+            var createCommunityModel = _fixture.Build<CreateCommunityModel>()                
+                .Create();
+            var modelFactory = new ModelFactory();
+            var result = modelFactory.CreateCommunity(createCommunityModel);
+            result.Email.Should().Be(createCommunityModel.Email);
+            result.Name.Should().Be(createCommunityModel.Name);
+            result.Artifacts.Should().BeEmpty();
+            result.Members.Should().BeEmpty();
+        }
+
+        [Test]
+        public void Should_map_UpdateCommunityModel_to_CommunityEntity()
+        {            
+            var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
+                .Create();
+
+            var modelFactory = new ModelFactory();
+            var result = modelFactory.CreateCommunity(updateCommunityModel);
+            result.Email.Should().Be(updateCommunityModel.Email);
+            result.Name.Should().Be(updateCommunityModel.Name);
+            result.Artifacts.Count().Should().Be(updateCommunityModel.Artifacts.Count());
+            result.Members.Count().Should().Be(updateCommunityModel.Members.Count());
+        }
+
+        [Test]
+        public void Should_map_Community_to_CommunityModel()
+        {
+            var community = _fixture.Build<Community>()
+                .Create();
+            var modelFactory = new ModelFactory();
+            var result = modelFactory.CreateCommunityModel(community);
+            result.Email.Should().Be(community.Email);
+            result.Name.Should().Be(community.Name);
+            result.Artifacts.Count().Should().Be(community.Artifacts.Count());
+            result.Members.Count().Should().Be(community.Members.Count());
+        }
+
+        [Test]
+        public void Should_map_CreateArtifactModel_to_ArtifactEntity()
+        {
+            var createArtifactModel = _fixture.Build<CreateArtifactModel>()
+                .Create();
+            var modelFactory = new ModelFactory();
+            var result = modelFactory.CreateArtifact(createArtifactModel);
+            result.Title.Should().Be(createArtifactModel.Title);
+            result.Reward.Should().Be(createArtifactModel.Reward);
+            result.Bonus.Should().Be(createArtifactModel.Bonus);
+            result.Status.Should().Be(ArtifactStatus.ToDo);
+            result.Type.Should().Be(createArtifactModel.Type);
+        }
+
+        [Test]
+        public void Should_map_UpdateArtifactModel_to_ArtifactEntity()
+        {
+            var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
+                .Create();
+            var modelFactory = new ModelFactory();
+            var result = modelFactory.CreateArtifact(updateArtifactModel);
+            result.Title.Should().Be(updateArtifactModel.Title);
+            result.Reward.Should().Be(updateArtifactModel.Reward);
+            result.Bonus.Should().Be(updateArtifactModel.Bonus);
+            result.Status.Should().Be(updateArtifactModel.Status);
+            result.Type.Should().Be(updateArtifactModel.Type);
+        }
+
+        [Test]
+        public void Should_map_Artifact_to_ArtifactModel()
+        {
+            var artifact = _fixture.Build<Artifact>()
+                .Create();
+            var modelFactory = new ModelFactory();
+            var result = modelFactory.CreateArtifactModel(artifact);
+            result.Title.Should().Be(artifact.Title);
+            result.Reward.Should().Be(artifact.Reward);
+            result.Bonus.Should().Be(artifact.Bonus);
+            result.Status.Should().Be(artifact.Status);
+            result.Type.Should().Be(artifact.Type);
         }
     }
 }

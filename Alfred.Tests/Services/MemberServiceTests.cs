@@ -28,7 +28,6 @@ namespace Alfred.Tests.Services
         public void Should_return_5_members_when_service_get_all_members()
         {
             var members = _fixture.Build<Member>()
-                .Without(x => x.Communities)
                 .Without(x => x.Artifacts)
                 .CreateMany(5);
 
@@ -48,7 +47,6 @@ namespace Alfred.Tests.Services
         {
             var memberToSearch = _fixture.Build<Member>()
                 .With(x => x.Id, 2)
-                .Without(x => x.Communities)
                 .Without(x => x.Artifacts)
                 .Create();
 
@@ -157,7 +155,6 @@ namespace Alfred.Tests.Services
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var fakeRepo = Substitute.For<IMemberRepository>();
             var member = _fixture.Build<Member>()
-                .Without(x=>x.Communities)
                 .Without(x=>x.Artifacts)
                 .With(x => x.Id, 2)
                 .Create();

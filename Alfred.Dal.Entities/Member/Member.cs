@@ -11,6 +11,5 @@ namespace Alfred.Dal.Entities.Member
         public string Email { get; set; }
         public ComunityRole Role { get; set; }
         public IEnumerable<Artifact.Artifact> Artifacts { get; set; }
-        public IEnumerable<Community.Community> Communities { get; set; }
     }
 }

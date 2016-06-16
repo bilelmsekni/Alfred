@@ -18,7 +18,6 @@ namespace Alfred.Model.Implementation
                 FirstName = createMemberModel.FirstName,
                 LastName = createMemberModel.LastName,
                 Role = createMemberModel.Role,
-                Communities = Enumerable.Empty<Community>(),
                 Artifacts = Enumerable.Empty<Artifact>()
             };
         }
@@ -31,14 +30,20 @@ namespace Alfred.Model.Implementation
                 FirstName = member.FirstName,
                 LastName = member.LastName,
                 Role = member.Role,
-                Communities = member.Communities.Select(CreateCommunityModel),
                 Artifacts = member.Artifacts.Select(CreateArtifactModel)
             };
         }
 
         public ArtifactModel CreateArtifactModel(Artifact artifact)
         {
-            return new ArtifactModel();
+            return new ArtifactModel
+            {
+                Bonus = artifact.Bonus,
+                Reward = artifact.Reward,
+                Status = artifact.Status,
+                Title = artifact.Title,
+                Type = artifact.Type
+            };
         }
 
         public Artifact CreateArtifact(CreateArtifactModel createArtifactModel)
@@ -58,9 +63,7 @@ namespace Alfred.Model.Implementation
             return new Artifact
             {
                 Title = updateArtifactModel.Title,
-                Member = updateArtifactModel.Member,
                 Bonus = updateArtifactModel.Bonus,
-                Community = updateArtifactModel.Community,
                 Reward = updateArtifactModel.Reward,
                 Status = updateArtifactModel.Status,
                 Type = updateArtifactModel.Type
@@ -82,7 +85,10 @@ namespace Alfred.Model.Implementation
         {
             return new CommunityModel
             {
-                Name = community.Name
+                Email = community.Email,
+                Name = community.Name,
+                Artifacts = community.Artifacts.Select(CreateArtifactModel),
+                Members = community.Members.Select(CreateMemberModel)
             };
         }
 
@@ -121,7 +127,6 @@ namespace Alfred.Model.Implementation
                 FirstName = memberModel.FirstName,
                 LastName = memberModel.LastName,
                 Role = memberModel.Role,
-                Communities = memberModel.Communities.Select(CreateCommunity),
                 Artifacts = memberModel.Artifacts.Select(CreateArtifact)
             };
         }
