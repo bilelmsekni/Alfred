@@ -1,37 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Alfred.Dal.FakeImplementation.Database;
 using Alfred.Dal.FakeImplementation.EntityDtos;
 
 namespace Alfred.Dal.FakeImplementation.Dao
 {
     public class CommunityDao : ICommunityDao
     {
-        private List<CommunityDto> _communities;
-
-        public CommunityDao()
-        {
-            _communities = new List<CommunityDto>
-            {
-                new CommunityDto
-                {
-                    Id = 1,
-                    Email = "StarTech@superheros.com",
-                    Name = "StarTech"
-                },
-                new CommunityDto
-                {
-                    Id = 2,
-                    Email = "StarOne@superheros.com",
-                    Name = "StarOne"
-                },
-                new CommunityDto
-                {
-                    Id = 3,
-                    Email = "ArgentDawn@superheros.com",
-                    Name = "ArgentDawn"
-                }
-            };
-        }
+        private List<CommunityDto> _communities = FakeDatabase.Communities;        
 
         public IEnumerable<CommunityDto> GetCommunities()
         {

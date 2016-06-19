@@ -25,15 +25,19 @@ namespace Alfred.Model.Implementation
 
         public MemberModel CreateMemberModel(Member member)
         {
-            return new MemberModel
+            if (member != null)
             {
-                Id = member.Id,
-                Email = member.Email,
-                FirstName = member.FirstName,
-                LastName = member.LastName,
-                Role = member.Role,
-                Artifacts = member.Artifacts.Select(CreateArtifactModel)
-            };
+                return new MemberModel
+                {
+                    Id = member.Id,
+                    Email = member.Email,
+                    FirstName = member.FirstName,
+                    LastName = member.LastName,
+                    Role = member.Role,
+                    Artifacts = member.Artifacts.Select(CreateArtifactModel)
+                };
+            }
+            return null;
         }
 
         public ArtifactModel CreateArtifactModel(Artifact artifact)

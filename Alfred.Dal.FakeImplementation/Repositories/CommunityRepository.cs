@@ -13,8 +13,8 @@ namespace Alfred.Dal.FakeImplementation.Repositories
     public class CommunityRepository : ICommunityRepository
     {
         private readonly ICommunityDao _communityDao;
-        private IArtifactRepository _artifactRepository;
-        private IMemberRepository _memberRepository;
+        private readonly IArtifactRepository _artifactRepository;
+        private readonly IMemberRepository _memberRepository;
 
         public CommunityRepository(ICommunityDao communityDao, IArtifactRepository artifactRepository, IMemberRepository memberRepository)
         {
@@ -30,14 +30,18 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         private Community TransformToCommunityEntity(CommunityDto communityDto)
         {
-            return new Community
+            if (communityDto != null)
             {
-                Id = communityDto.Id,
-                Email = communityDto.Email,
-                Name = communityDto.Name,
-                Artifacts = _artifactRepository.GetCommunityArtifacts(communityDto.Id),
-                Members = _memberRepository.GetCommunityMembers(communityDto.Id)
-            };
+                return new Community
+                {
+                    Id = communityDto.Id,
+                    Email = communityDto.Email,
+                    Name = communityDto.Name,
+                    Artifacts = _artifactRepository.GetCommunityArtifacts(communityDto.Id),
+                    Members = _memberRepository.GetCommunityMembers(communityDto.Id)
+                };
+            }
+            return null;
         }
 
         public Community GetCommunity(int id)
@@ -52,7 +56,16 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         private CommunityDto TransformToCommunityDto(Community community)
         {
-            throw new NotImplementedException();
+            if (community != null)
+            {
+                return new CommunityDto
+                {
+                    Id = community.Id,
+                    Email = community.Email,
+                    Name = community.Name                   
+                };
+            }
+            return null;
         }
 
         public void DeleteCommunity(int id)

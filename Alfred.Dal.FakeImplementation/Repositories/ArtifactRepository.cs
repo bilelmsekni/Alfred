@@ -53,17 +53,19 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         private ArtifactDto TransformToArtifactDto(Artifact artifact)
         {
-            if (artifact == null) return null;
-
-            return new ArtifactDto
+            if (artifact != null)
             {
-                Id = artifact.Id,
-                Title = artifact.Title,
-                Bonus = artifact.Bonus,
-                Reward = artifact.Reward,
-                Status = (int)artifact.Status,
-                Type = (int)artifact.Type
-            };
+                return new ArtifactDto
+                {
+                    Id = artifact.Id,
+                    Title = artifact.Title,
+                    Bonus = artifact.Bonus,
+                    Reward = artifact.Reward,
+                    Status = (int) artifact.Status,
+                    Type = (int) artifact.Type
+                };
+            }
+            return null;
         }
 
         public void DeleteArtifact(int id)

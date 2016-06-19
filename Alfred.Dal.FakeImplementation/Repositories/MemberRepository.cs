@@ -27,15 +27,19 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         private Member TransformToMemberEntity(MemberDto memberDto)
         {
-            return new Member
+            if (memberDto != null)
             {
-                Id = memberDto.Id,
-                Email = memberDto.Email,
-                FirstName = memberDto.FirstName,
-                LastName = memberDto.LastName,
-                Role = (CommunityRole) memberDto.Role,
-                Artifacts = _artifactRepository.GetMemberArtifacts(memberDto.Id)                
-            };
+                return new Member
+                {
+                    Id = memberDto.Id,
+                    Email = memberDto.Email,
+                    FirstName = memberDto.FirstName,
+                    LastName = memberDto.LastName,
+                    Role = (CommunityRole) memberDto.Role,
+                    Artifacts = _artifactRepository.GetMemberArtifacts(memberDto.Id)
+                };
+            }
+            return null;
         }
 
         public Member GetMember(int id)
