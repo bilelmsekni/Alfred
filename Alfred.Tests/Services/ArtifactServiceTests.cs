@@ -78,35 +78,30 @@ namespace Alfred.Tests.Services
                 .Create();
             var artifact = GetArtifact(createArtifactModel);
             _modelFactory.CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title))
-                .Returns(artifact);
-            _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).ReturnsNull();
+                .Returns(artifact);            
 
             _artifactService.CreateArtifact(createArtifactModel);
 
             _modelFactory.Received(1)
                 .CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title));
-            _modelFactory.Received(1).CreateArtifactModel(Arg.Is<Artifact>(x => x.Title ==artifact.Title));
             _artifactRepo.Received(1).SaveArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
-            _artifactRepo.Received(1).GetArtifact(Arg.Is(createArtifactModel.Title));
         }
 
         [Test]
-        public void Should_not_create_artifact_when_artifact_title_is_already_used()
+        public void Should_not_create_artifact_when_artifact_can_not_be_mapped_to_artifact()
         {
             var createArtifactModel = _fixture.Build<CreateArtifactModel>()
                 .Create();
             var artifact = GetArtifact(createArtifactModel);
             _modelFactory.CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title))
-                .Returns(artifact);
-            _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).Returns(artifact);
+                .ReturnsNull();            
 
             _artifactService.CreateArtifact(createArtifactModel);
 
             _modelFactory.Received(1)
                 .CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title));
             _modelFactory.DidNotReceive().CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
-            _artifactRepo.DidNotReceive().SaveArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
-            _artifactRepo.Received(1).GetArtifact(Arg.Is(createArtifactModel.Title));
+            _artifactRepo.DidNotReceive().SaveArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));            
         }
 
         [Test]
@@ -114,18 +109,18 @@ namespace Alfred.Tests.Services
         {
             var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
                 .Create();
-            var artifact = GetArtifact(updateArtifactModel);
-            //_modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title))
-            //    .Returns(artifact);
-            _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).Returns(artifact);
+            var oldArtifact = _fixture.Create<Artifact>();
+            _artifactRepo.GetArtifact(Arg.Is(updateArtifactModel.Id)).Returns(oldArtifact);
+            _modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Id == updateArtifactModel.Id), oldArtifact)
+                .Returns(GetArtifact(updateArtifactModel));
 
             _artifactService.UpdateArtifact(updateArtifactModel);
 
-            //_modelFactory.Received(1)
-            //    .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title));
-            _modelFactory.Received(1).CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
-            _artifactRepo.Received(1).UpdateArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
-            _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Title));
+            _modelFactory.Received(1)
+                .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Id == updateArtifactModel.Id), oldArtifact);
+            _modelFactory.Received(1).CreateArtifactModel(Arg.Is<Artifact>(x => x.Id == updateArtifactModel.Id));
+            _artifactRepo.Received(1).UpdateArtifact(Arg.Is<Artifact>(x => x.Id == updateArtifactModel.Id));
+            _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Id));
         }
 
 
@@ -135,17 +130,13 @@ namespace Alfred.Tests.Services
             var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
                 .Create();
             var artifact = GetArtifact(updateArtifactModel);
-            //_modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title))
-            //    .Returns(artifact);
-            _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).ReturnsNull();
+            _artifactRepo.GetArtifact(Arg.Is(artifact.Id)).ReturnsNull();
 
             _artifactService.UpdateArtifact(updateArtifactModel);
 
-            //_modelFactory.Received(1)
-            //    .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title));
-            _modelFactory.DidNotReceive().CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
-            _artifactRepo.DidNotReceive().UpdateArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
-            _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Title));
+            _modelFactory.DidNotReceive().CreateArtifactModel(Arg.Is<Artifact>(x => x.Id == artifact.Id));
+            _artifactRepo.DidNotReceive().UpdateArtifact(Arg.Is<Artifact>(x => x.Id == artifact.Id));
+            _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Id));
         }
 
         [Test]
@@ -177,7 +168,7 @@ namespace Alfred.Tests.Services
         {
             return new Artifact
             {
-                Title = updateArtifactModel.Title
+                Id = updateArtifactModel.Id
             };
         }
 

@@ -34,7 +34,7 @@ namespace Alfred.Services
         public int CreateArtifact(CreateArtifactModel createArtifactModel)
         {
             var artifact = _modelFactory.CreateArtifact(createArtifactModel);
-            if (artifact != null && !IsTitleUsed(artifact.Title))
+            if (artifact != null)
             {
                 return _artifactRepo.SaveArtifact(artifact);
             }
@@ -44,11 +44,14 @@ namespace Alfred.Services
         public ArtifactModel UpdateArtifact(UpdateArtifactModel updateArtifactModel)
         {
             var oldArtifact = _artifactRepo.GetArtifact(updateArtifactModel.Id);
-            var newArtifact = _modelFactory.CreateArtifact(updateArtifactModel, oldArtifact);
-            if (newArtifact != null)
+            if (oldArtifact != null)
             {
-                _artifactRepo.UpdateArtifact(newArtifact);
-                return _modelFactory.CreateArtifactModel(newArtifact);
+                var newArtifact = _modelFactory.CreateArtifact(updateArtifactModel, oldArtifact);
+                if (newArtifact != null)
+                {
+                    _artifactRepo.UpdateArtifact(newArtifact);
+                    return _modelFactory.CreateArtifactModel(newArtifact);
+                }
             }
             return null;
         }
@@ -62,11 +65,6 @@ namespace Alfred.Services
                 return true;
             }
             return false;
-        }
-
-        private bool IsTitleUsed(string title)
-        {
-            return _artifactRepo.GetArtifact(title) != null;
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
 using Alfred.Model.Artifacts;
 using Alfred.Model.Communities;
 using Alfred.Model.Members;
+using Newtonsoft.Json.Linq;
 
 namespace Alfred.Model.Implementation
 {
@@ -60,10 +62,9 @@ namespace Alfred.Model.Implementation
             };
         }
 
-        public Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel, Artifact oldArtifactModel)
+        public Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel, Artifact oldArtifact)
         {
-           // var diff = ObjectDiffPatch.GenerateDiff();
-            return new Artifact
+            var newArtifact = new Artifact
             {
                 Id = updateArtifactModel.Id,
                 Title = updateArtifactModel.Title,
@@ -72,6 +73,9 @@ namespace Alfred.Model.Implementation
                 Status = updateArtifactModel.Status,
                 Type = updateArtifactModel.Type
             };
+
+            var diffs = ObjectDiffPatch.GenerateDiff(oldArtifact, newArtifact);            
+            return ObjectDiffPatch.PatchObject(oldArtifact, diffs.NewValues);
         }
 
         public Member CreateMember(UpdateMemberModel updateMemberModel)
@@ -124,7 +128,7 @@ namespace Alfred.Model.Implementation
         private Artifact CreateArtifact(ArtifactModel artifactModel)
         {
             return new Artifact
-            {               
+            {
                 Title = artifactModel.Title,
                 Bonus = artifactModel.Bonus,
                 Reward = artifactModel.Reward,

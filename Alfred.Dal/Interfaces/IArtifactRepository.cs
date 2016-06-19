@@ -9,7 +9,6 @@ namespace Alfred.Dal.Interfaces
         Artifact GetArtifact(int id);
         int SaveArtifact(Artifact artifact);
         void DeleteArtifact(int id);
-        Artifact GetArtifact(string title);
         void UpdateArtifact(Artifact artifact);
         IEnumerable<Artifact> GetMemberArtifacts(int id);
         IEnumerable<Artifact> GetCommunityArtifacts(int id);

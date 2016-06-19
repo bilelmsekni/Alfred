@@ -71,11 +71,6 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             _artifactDao.DeleteArtifact(id);
         }
 
-        public Artifact GetArtifact(string title)
-        {
-            return TransformToArtifactEntity(_artifactDao.GetArtifact(title));
-        }
-
         public void UpdateArtifact(Artifact artifact)
         {
             var artifactDto = TransformToArtifactDto(artifact);

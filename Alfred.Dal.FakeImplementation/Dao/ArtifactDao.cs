@@ -31,11 +31,6 @@ namespace Alfred.Dal.FakeImplementation.Dao
             _artifacts.RemoveAt(_artifacts.FindIndex(x=>x.Id == id));
         }
 
-        public ArtifactDto GetArtifact(string title)
-        {
-            return _artifacts.FirstOrDefault(x => x.Title.ToLowerInvariant() == title.ToLowerInvariant());
-        }
-
         public void UpdateArtifact(ArtifactDto artifact)
         {
             _artifacts.RemoveAt(_artifacts.FindIndex(x => x.Id == artifact.Id));            

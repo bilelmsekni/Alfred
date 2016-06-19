@@ -68,7 +68,7 @@ namespace Alfred.Model.Implementation.Tests
         [Test]
         public void Should_map_CreateCommunityModel_to_CommunityEntity()
         {
-            var createCommunityModel = _fixture.Build<CreateCommunityModel>()                
+            var createCommunityModel = _fixture.Build<CreateCommunityModel>()
                 .Create();
             var modelFactory = new ModelFactory();
             var result = modelFactory.CreateCommunity(createCommunityModel);
@@ -80,7 +80,7 @@ namespace Alfred.Model.Implementation.Tests
 
         [Test]
         public void Should_map_UpdateCommunityModel_to_CommunityEntity()
-        {            
+        {
             var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
                 .Create();
 
@@ -122,12 +122,14 @@ namespace Alfred.Model.Implementation.Tests
         }
 
         [Test]
-        public void Should_map_UpdateArtifactModel_to_ArtifactEntity()
+        public void Should_fully_map_UpdateArtifactModel_to_ArtifactEntity()
         {
             var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
                 .Create();
+            var artifact = _fixture.Build<Artifact>()
+                .Create();
             var modelFactory = new ModelFactory();
-            var result = modelFactory.CreateArtifact(updateArtifactModel, null);
+            var result = modelFactory.CreateArtifact(updateArtifactModel, artifact);
             result.Title.Should().Be(updateArtifactModel.Title);
             result.Reward.Should().Be(updateArtifactModel.Reward);
             result.Bonus.Should().Be(updateArtifactModel.Bonus);
