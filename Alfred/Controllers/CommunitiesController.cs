@@ -40,7 +40,7 @@ namespace Alfred.Controllers
         /// <param name="id">community id</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{int:int?}")]
+        [Route("{id:int?}")]
         [ResponseType(typeof(CommunityModel))]
         public IHttpActionResult GetCommunity(int id)
         {
