@@ -1,10 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 using Alfred.Dal.Entities.Community;
 
 namespace Alfred.Dal.Entities.Member
 {
     public class Member
     {
+        public Member()
+        {
+            Artifacts = Enumerable.Empty<Artifact.Artifact>();
+        }
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

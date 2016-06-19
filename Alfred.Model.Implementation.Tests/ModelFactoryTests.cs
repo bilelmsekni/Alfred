@@ -36,11 +36,14 @@ namespace Alfred.Model.Implementation.Tests
         }
 
         [Test]
-        public void Should_map_updateMemberModel_to_Member()
+        public void Should_fully_map_updateMemberModel_to_Member()
         {
             var updateMemberModel = _fixture.Create<UpdateMemberModel>();
+            var member = _fixture.Create<Member>();
+
             var modelFactory = new ModelFactory();
-            var result = modelFactory.CreateMember(updateMemberModel);
+            var result = modelFactory.CreateMember(updateMemberModel, member);
+
             result.Email.Should().Be(updateMemberModel.Email);
             result.FirstName.Should().Be(updateMemberModel.FirstName);
             result.LastName.Should().Be(updateMemberModel.LastName);

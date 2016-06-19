@@ -51,11 +51,15 @@ namespace Alfred.Services
 
         public MemberModel UpdateMember(UpdateMemberModel updateMemberModel)
         {
-            var member = _modelFactory.CreateMember(updateMemberModel);
-            if (member != null && IsEmailUsed(member.Email))
+            var originalMember = _memberRepository.GetMember(updateMemberModel.Id);
+            if (originalMember != null)
             {
-                _memberRepository.UpdateMember(member);
-                return _modelFactory.CreateMemberModel(member);
+                var member = _modelFactory.CreateMember(updateMemberModel, originalMember);
+                if (member != null)
+                {
+                    _memberRepository.UpdateMember(member);
+                    return _modelFactory.CreateMemberModel(member);
+                }
             }
             return null;
         }

@@ -117,17 +117,18 @@ namespace Alfred.Tests.Services
         {
             var fakeRepo = Substitute.For<IMemberRepository>();
             var fakeModelFactory = Substitute.For<IModelFactory>();
-            var createMemberModel = _fixture.Build<UpdateMemberModel>().Create();
-            var member = GetMember(createMemberModel);
-            fakeModelFactory.CreateMember(Arg.Any<UpdateMemberModel>()).Returns(member);
-            fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).Returns(member);
+            var updateMemberModel = _fixture.Build<UpdateMemberModel>().Create();
+            var member = _fixture.Create<Member>();
+            fakeRepo.GetMember(Arg.Is(updateMemberModel.Id)).Returns(member);
+
+            fakeModelFactory.CreateMember(Arg.Any<UpdateMemberModel>(), member).Returns(GetMember(updateMemberModel));
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            memberService.UpdateMember(createMemberModel);
-            fakeModelFactory.Received(1).CreateMember(Arg.Is<UpdateMemberModel>(x => x.Email == createMemberModel.Email));
-            fakeModelFactory.Received(1).CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
-            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == member.Email));
-            fakeRepo.Received(1).UpdateMember(Arg.Is<Member>(x => x.Email == member.Email));
+            memberService.UpdateMember(updateMemberModel);
+            fakeModelFactory.Received(1).CreateMember(Arg.Is<UpdateMemberModel>(x => x.Id == updateMemberModel.Id), member);
+            fakeModelFactory.Received(1).CreateMemberModel(Arg.Is<Member>(x => x.Id == updateMemberModel.Id));
+            fakeRepo.Received(1).GetMember(Arg.Is(updateMemberModel.Id));
+            fakeRepo.Received(1).UpdateMember(Arg.Is<Member>(x => x.Id == updateMemberModel.Id));
         }
 
         [Test]
@@ -135,17 +136,15 @@ namespace Alfred.Tests.Services
         {
             var fakeRepo = Substitute.For<IMemberRepository>();
             var fakeModelFactory = Substitute.For<IModelFactory>();
-            var createMemberModel = _fixture.Build<UpdateMemberModel>().Create();
-            var member = GetMember(createMemberModel);
-            fakeModelFactory.CreateMember(Arg.Any<UpdateMemberModel>()).Returns(member);
-            fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).ReturnsNull();
-            var memberService = new MemberService(fakeRepo, fakeModelFactory);
+            var updateMemberModel = _fixture.Build<UpdateMemberModel>().Create();
+            fakeRepo.GetMember(Arg.Is(updateMemberModel.Id)).ReturnsNull();
 
-            memberService.UpdateMember(createMemberModel);
-            fakeModelFactory.Received(1).CreateMember(Arg.Is<UpdateMemberModel>(x => x.Email == createMemberModel.Email));
-            fakeModelFactory.DidNotReceive().CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
-            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == member.Email));
-            fakeRepo.DidNotReceive().UpdateMember(Arg.Is<Member>(x => x.Email == member.Email));
+            var memberService = new MemberService(fakeRepo, fakeModelFactory);
+            memberService.UpdateMember(updateMemberModel);
+
+            fakeModelFactory.DidNotReceive().CreateMember(Arg.Is<UpdateMemberModel>(x => x.Email == updateMemberModel.Email), null);
+            fakeRepo.Received(1).GetMember(Arg.Is(updateMemberModel.Id));
+            fakeRepo.DidNotReceive().UpdateMember(Arg.Is<Member>(x => x.Email == updateMemberModel.Email));
         }
 
         [Test]
@@ -192,7 +191,7 @@ namespace Alfred.Tests.Services
         {
             return new Member
             {
-                Email = createMemberModel.Email
+                Id = createMemberModel.Id
             };
         }
 

@@ -19,8 +19,7 @@ namespace Alfred.Model.Implementation
                 Email = createMemberModel.Email,
                 FirstName = createMemberModel.FirstName,
                 LastName = createMemberModel.LastName,
-                Role = createMemberModel.Role,
-                Artifacts = Enumerable.Empty<Artifact>()
+                Role = createMemberModel.Role               
             };
         }
 
@@ -78,9 +77,9 @@ namespace Alfred.Model.Implementation
             return ObjectDiffPatch.PatchObject(oldArtifact, diffs.NewValues);
         }
 
-        public Member CreateMember(UpdateMemberModel updateMemberModel)
+        public Member CreateMember(UpdateMemberModel updateMemberModel, Member originalMember)
         {
-            return new Member
+            var newMember = new Member
             {
                 Id = updateMemberModel.Id,
                 Email = updateMemberModel.Email,
@@ -88,6 +87,8 @@ namespace Alfred.Model.Implementation
                 LastName = updateMemberModel.LastName,
                 Role = updateMemberModel.Role,
             };
+            var diffs = ObjectDiffPatch.GenerateDiff(originalMember, newMember);
+            return ObjectDiffPatch.PatchObject(originalMember, diffs.NewValues);
         }
 
         public CommunityModel CreateCommunityModel(Community community)
@@ -108,8 +109,6 @@ namespace Alfred.Model.Implementation
             {
                 Name = createCommunityModel.Name,
                 Email = createCommunityModel.Email,
-                Artifacts = Enumerable.Empty<Artifact>(),
-                Members = Enumerable.Empty<Member>()
             };
         }
 
