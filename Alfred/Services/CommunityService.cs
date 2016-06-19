@@ -45,11 +45,15 @@ namespace Alfred.Services
 
         public CommunityModel UpdateCommunity(UpdateCommunityModel updateCommunityModel)
         {
-            var community = _modelFactory.CreateCommunity(updateCommunityModel);
-            if (community != null && IsEmailUsed(community.Email))
+            var originalCommunity = _communityRepo.GetCommunity(updateCommunityModel.Id);
+            if (originalCommunity != null)
             {
-                _communityRepo.UpdateCommunity(community);
-                return _modelFactory.CreateCommunityModel(community);
+                var community = _modelFactory.CreateCommunity(updateCommunityModel, originalCommunity);
+                if (community != null)
+                {
+                    _communityRepo.UpdateCommunity(community);
+                    return _modelFactory.CreateCommunityModel(community);
+                }
             }
             return null;
         }

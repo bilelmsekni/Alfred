@@ -126,20 +126,19 @@ namespace Alfred.Tests.Services
             var fakeRepo = Substitute.For<ICommunityRepository>();
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
-                .Without(x=>x.Members)
-                .Without(x=>x.Artifacts)
                 .Create();
+            var originalCommunity = _fixture.Create<Community>();
 
-            var community = GetCommunity(updateCommunityModel);
-            fakeModelFactory.CreateCommunity(Arg.Any<UpdateCommunityModel>()).Returns(community);
-            fakeRepo.GetCommunity(Arg.Is<string>(x => x == community.Email)).Returns(community);
+            
+            fakeModelFactory.CreateCommunity(Arg.Any<UpdateCommunityModel>(), originalCommunity).Returns(GetCommunity(updateCommunityModel));
+            fakeRepo.GetCommunity(Arg.Is(updateCommunityModel.Id)).Returns(originalCommunity);
             var communityService = new CommunityService(fakeRepo, fakeModelFactory);
 
             communityService.UpdateCommunity(updateCommunityModel);
-            fakeModelFactory.Received(1).CreateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email));
+            fakeModelFactory.Received(1).CreateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email), originalCommunity);
             fakeModelFactory.Received(1).CreateCommunityModel(Arg.Is<Community>(x => x.Email == updateCommunityModel.Email));
-            fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
-            fakeRepo.Received(1).UpdateCommunity(Arg.Is<Community>(x => x.Email == community.Email));
+            fakeRepo.Received(1).GetCommunity(Arg.Is(updateCommunityModel.Id));
+            fakeRepo.Received(1).UpdateCommunity(Arg.Is<Community>(x => x.Id == updateCommunityModel.Id));
         }
 
         [Test]
@@ -148,19 +147,15 @@ namespace Alfred.Tests.Services
             var fakeRepo = Substitute.For<ICommunityRepository>();
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
-                .Without(x => x.Members)
-                .Without(x => x.Artifacts)
                 .Create();
-
-            var community = GetCommunity(updateCommunityModel);
-            fakeModelFactory.CreateCommunity(Arg.Any<UpdateCommunityModel>()).Returns(community);
-            fakeRepo.GetCommunity(Arg.Is<string>(x => x == community.Email)).ReturnsNull();
+            
+            fakeRepo.GetCommunity(Arg.Is(updateCommunityModel.Id)).ReturnsNull();
             var communityService = new CommunityService(fakeRepo, fakeModelFactory);
 
             communityService.UpdateCommunity(updateCommunityModel);
-            fakeModelFactory.Received(1).CreateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email));
-            fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
-            fakeRepo.DidNotReceive().UpdateCommunity(Arg.Is<Community>(x => x.Email == community.Email));
+            fakeModelFactory.DidNotReceive().CreateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email), null);
+            fakeRepo.Received(1).GetCommunity(Arg.Is(updateCommunityModel.Id));
+            fakeRepo.DidNotReceive().UpdateCommunity(Arg.Is<Community>(x => x.Email == updateCommunityModel.Email));
         }
 
         [Test]
@@ -209,7 +204,7 @@ namespace Alfred.Tests.Services
             return new Community
             {
                 Email = createCommunityModel.Email,
-                Name = createCommunityModel.Name
+                Id = createCommunityModel.Id
             };
         }
 

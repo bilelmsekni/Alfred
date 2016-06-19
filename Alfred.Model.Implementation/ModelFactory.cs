@@ -112,16 +112,17 @@ namespace Alfred.Model.Implementation
             };
         }
 
-        public Community CreateCommunity(UpdateCommunityModel updateCommunityModel)
+        public Community CreateCommunity(UpdateCommunityModel updateCommunityModel, Community originalCommunity)
         {
-            return new Community
+            var newCommunity = new Community
             {
                 Id = updateCommunityModel.Id,
                 Name = updateCommunityModel.Name,
-                Email = updateCommunityModel.Email,
-                Artifacts = updateCommunityModel.Artifacts.Select(CreateArtifact),
-                Members = updateCommunityModel.Members.Select(CreateMember)
+                Email = updateCommunityModel.Email
             };
+
+            var diffs = ObjectDiffPatch.GenerateDiff(originalCommunity, newCommunity);
+            return ObjectDiffPatch.PatchObject(originalCommunity, diffs.NewValues);
         }
 
         private Artifact CreateArtifact(ArtifactModel artifactModel)

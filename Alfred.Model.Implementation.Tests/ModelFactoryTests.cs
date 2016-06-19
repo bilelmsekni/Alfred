@@ -82,17 +82,15 @@ namespace Alfred.Model.Implementation.Tests
         }
 
         [Test]
-        public void Should_map_UpdateCommunityModel_to_CommunityEntity()
+        public void Should_fully_map_UpdateCommunityModel_to_CommunityEntity()
         {
             var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
                 .Create();
-
+            var originalCommunity = _fixture.Create<Community>();
             var modelFactory = new ModelFactory();
-            var result = modelFactory.CreateCommunity(updateCommunityModel);
+            var result = modelFactory.CreateCommunity(updateCommunityModel, originalCommunity);
             result.Email.Should().Be(updateCommunityModel.Email);
             result.Name.Should().Be(updateCommunityModel.Name);
-            result.Artifacts.Count().Should().Be(updateCommunityModel.Artifacts.Count());
-            result.Members.Count().Should().Be(updateCommunityModel.Members.Count());
             result.Id.Should().Be(updateCommunityModel.Id);
         }
 

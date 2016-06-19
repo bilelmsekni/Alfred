@@ -87,6 +87,7 @@ namespace Alfred.Controllers
         {
             if (ModelState.IsValid)
             {
+                updateMemberModel.Id = id;
                 var memberModel = _memberService.UpdateMember(updateMemberModel);
                 if (memberModel != null) return Ok(memberModel);
                 return BadRequest("Something went wrong !");

@@ -14,7 +14,7 @@ namespace Alfred.Model
         Member CreateMember(UpdateMemberModel updateMemberModel, Member originalMember);
         CommunityModel CreateCommunityModel(Community community);
         Community CreateCommunity(CreateCommunityModel createCommunityModel);
-        Community CreateCommunity(UpdateCommunityModel updateCommunityModel);
+        Community CreateCommunity(UpdateCommunityModel updateCommunityModel, Community originalCommunity);
         ArtifactModel CreateArtifactModel(Artifact artifact);
         Artifact CreateArtifact(CreateArtifactModel createArtifactModel);
         Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel, Artifact oldArtifactModel);

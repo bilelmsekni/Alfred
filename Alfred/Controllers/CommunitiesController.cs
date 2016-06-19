@@ -78,16 +78,17 @@ namespace Alfred.Controllers
         /// <remarks>
         /// Update community
         /// </remarks>
-        /// <param name="createCommunityModel">community data</param>
+        /// <param name="updateCommunityModel">community data</param>
         /// <returns></returns>
         [HttpPut]
         [ResponseType(typeof(CommunityModel))]
         [Route("{id:int?}")]
-        public IHttpActionResult UpdateCommunity(int id, [FromBody]UpdateCommunityModel createCommunityModel)
+        public IHttpActionResult UpdateCommunity(int id, [FromBody]UpdateCommunityModel updateCommunityModel)
         {
             if (ModelState.IsValid)
             {
-                var community = _communityService.UpdateCommunity(createCommunityModel);
+                updateCommunityModel.Id = id;
+                var community = _communityService.UpdateCommunity(updateCommunityModel);
                 if (community != null) return Ok(community);
                 return BadRequest("Something went wrong !");
             }
