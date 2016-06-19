@@ -1,4 +1,5 @@
-﻿using Alfred.Dal.FakeImplementation.Dao;
+﻿using System.Reflection;
+using Alfred.Dal.FakeImplementation.Dao;
 using Alfred.Dal.FakeImplementation.Repositories;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
@@ -11,8 +12,7 @@ namespace Alfred.IoC
     {
         public void Compose(IServiceRegistry serviceRegistry)
         {
-            serviceRegistry.Register<IMemberRepository, MemberRepository>();
-            serviceRegistry.Register<IMemberDao, MemberDao>();
+            serviceRegistry.RegisterAssembly(Assembly.GetAssembly(typeof(IMemberDao)));
             serviceRegistry.Register<IModelFactory, ModelFactory>();            
         }
     }

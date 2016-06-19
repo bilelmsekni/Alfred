@@ -7,7 +7,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
     {
         IEnumerable<ArtifactDto> GetArtifacts();
         ArtifactDto GetArtifact(int id);
-        void SaveArtifact(ArtifactDto artifact);
+        int SaveArtifact(ArtifactDto artifact);
         void DeleteArtifact(int id);
         ArtifactDto GetArtifact(string title);
         void UpdateArtifact(ArtifactDto artifact);

@@ -27,6 +27,8 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         private static Artifact TransformToArtifactEntity(ArtifactDto artifactDto)
         {
+            if (artifactDto == null) return null;
+
             return new Artifact
             {
                 Id = artifactDto.Id,
@@ -43,22 +45,24 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             return TransformToArtifactEntity(_artifactDao.GetArtifact(id));
         }
 
-        public void SaveArtifact(Artifact artifact)
+        public int SaveArtifact(Artifact artifact)
         {
             var artifactDto = TransformToArtifactDto(artifact);
-            _artifactDao.SaveArtifact(artifactDto);
+            return _artifactDao.SaveArtifact(artifactDto);
         }
 
         private ArtifactDto TransformToArtifactDto(Artifact artifact)
         {
+            if (artifact == null) return null;
+
             return new ArtifactDto
             {
                 Id = artifact.Id,
                 Title = artifact.Title,
                 Bonus = artifact.Bonus,
                 Reward = artifact.Reward,
-                Status = (int) artifact.Status,
-                Type = (int) artifact.Type
+                Status = (int)artifact.Status,
+                Type = (int)artifact.Type
             };
         }
 

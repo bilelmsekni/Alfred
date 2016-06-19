@@ -7,7 +7,7 @@ namespace Alfred.Dal.Interfaces
     {
         IEnumerable<Artifact> GetArtifacts();
         Artifact GetArtifact(int id);
-        void SaveArtifact(Artifact artifact);
+        int SaveArtifact(Artifact artifact);
         void DeleteArtifact(int id);
         Artifact GetArtifact(string title);
         void UpdateArtifact(Artifact artifact);

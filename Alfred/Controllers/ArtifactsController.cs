@@ -69,8 +69,12 @@ namespace Alfred.Controllers
         {
             if (ModelState.IsValid)
             {
-                var artifact = _artifactService.CreateArtifact(createArtifactModel);
-                if (artifact != null) return Created("", artifact);
+                var artifactId = _artifactService.CreateArtifact(createArtifactModel);
+
+                if (artifactId != -1)
+                {
+                    return Created("", $"{Request.RequestUri.AbsoluteUri}/{artifactId}");
+                }
                 return BadRequest("Something went wrong !");
             }
             return BadRequest("Something went wrong !");
@@ -90,9 +94,10 @@ namespace Alfred.Controllers
         [ResponseType(typeof(ArtifactModel))]
         [Route("{id:int?}")]
         public IHttpActionResult UpdateArtifact(int id, [FromBody]UpdateArtifactModel updateArtifactModel)
-        {
+        {            
             if (ModelState.IsValid)
             {
+                updateArtifactModel.Id = id;
                 var artifact = _artifactService.UpdateArtifact(updateArtifactModel);
                 if (artifact != null) return Ok(artifact);
                 return BadRequest("Something went wrong !");

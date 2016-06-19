@@ -127,7 +127,7 @@ namespace Alfred.Model.Implementation.Tests
             var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
                 .Create();
             var modelFactory = new ModelFactory();
-            var result = modelFactory.CreateArtifact(updateArtifactModel);
+            var result = modelFactory.CreateArtifact(updateArtifactModel, null);
             result.Title.Should().Be(updateArtifactModel.Title);
             result.Reward.Should().Be(updateArtifactModel.Reward);
             result.Bonus.Should().Be(updateArtifactModel.Bonus);

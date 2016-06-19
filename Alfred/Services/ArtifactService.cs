@@ -31,24 +31,24 @@ namespace Alfred.Services
             return null;
         }
 
-        public ArtifactModel CreateArtifact(CreateArtifactModel createArtifactModel)
+        public int CreateArtifact(CreateArtifactModel createArtifactModel)
         {
             var artifact = _modelFactory.CreateArtifact(createArtifactModel);
             if (artifact != null && !IsTitleUsed(artifact.Title))
             {
-                _artifactRepo.SaveArtifact(artifact);
-                return _modelFactory.CreateArtifactModel(artifact);
+                return _artifactRepo.SaveArtifact(artifact);
             }
-            return null;
+            return -1;
         }
 
         public ArtifactModel UpdateArtifact(UpdateArtifactModel updateArtifactModel)
         {
-            var artifact = _modelFactory.CreateArtifact(updateArtifactModel);
-            if (artifact != null && IsTitleUsed(artifact.Title))
+            var oldArtifact = _artifactRepo.GetArtifact(updateArtifactModel.Id);
+            var newArtifact = _modelFactory.CreateArtifact(updateArtifactModel, oldArtifact);
+            if (newArtifact != null)
             {
-                _artifactRepo.UpdateArtifact(artifact);
-                return _modelFactory.CreateArtifactModel(artifact);
+                _artifactRepo.UpdateArtifact(newArtifact);
+                return _modelFactory.CreateArtifactModel(newArtifact);
             }
             return null;
         }

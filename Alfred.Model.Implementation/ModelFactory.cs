@@ -60,8 +60,9 @@ namespace Alfred.Model.Implementation
             };
         }
 
-        public Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel)
+        public Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel, Artifact oldArtifactModel)
         {
+           // var diff = ObjectDiffPatch.GenerateDiff();
             return new Artifact
             {
                 Id = updateArtifactModel.Id,

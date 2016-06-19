@@ -113,18 +113,16 @@ namespace Alfred.Tests.Services
         public void Should_update_artifact_when_artifact_data_is_valid()
         {
             var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
-                .Without(x=>x.Member)
-                .Without(x=>x.Community)
                 .Create();
             var artifact = GetArtifact(updateArtifactModel);
-            _modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title))
-                .Returns(artifact);
+            //_modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title))
+            //    .Returns(artifact);
             _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).Returns(artifact);
 
             _artifactService.UpdateArtifact(updateArtifactModel);
 
-            _modelFactory.Received(1)
-                .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title));
+            //_modelFactory.Received(1)
+            //    .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title));
             _modelFactory.Received(1).CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
             _artifactRepo.Received(1).UpdateArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
             _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Title));
@@ -135,18 +133,16 @@ namespace Alfred.Tests.Services
         public void Should_not_update_artifact_when_artifact_to_update_is_not_found()
         {
             var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
-                .Without(x => x.Member)
-                .Without(x => x.Community)
                 .Create();
             var artifact = GetArtifact(updateArtifactModel);
-            _modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title))
-                .Returns(artifact);
+            //_modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title))
+            //    .Returns(artifact);
             _artifactRepo.GetArtifact(Arg.Is(artifact.Title)).ReturnsNull();
 
             _artifactService.UpdateArtifact(updateArtifactModel);
 
-            _modelFactory.Received(1)
-                .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title));
+            //_modelFactory.Received(1)
+            //    .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Title == updateArtifactModel.Title));
             _modelFactory.DidNotReceive().CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
             _artifactRepo.DidNotReceive().UpdateArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
             _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Title));

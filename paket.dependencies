@@ -5,6 +5,7 @@ nuget Microsoft.Owin.Host.SystemWeb
 nuget Microsoft.AspNet.WebApi.Owin
 nuget AutoFixture
 nuget LightInject.WebApi
+nuget SimpleHelpers.ObjectDiffPatch
 nuget Swashbuckle.Core
 nuget NUnit
 nuget NSubstitute

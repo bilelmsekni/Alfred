@@ -45,6 +45,7 @@
     <Compile Include="Dao\ICommunityDao.cs" />
     <Compile Include="Dao\IMemberDao.cs" />
     <Compile Include="Dao\MemberDao.cs" />
+    <Compile Include="Database\FakeDatabase.cs" />
     <Compile Include="EntityDtos\ArtifactDto.cs" />
     <Compile Include="EntityDtos\CommunityDto.cs" />
     <Compile Include="EntityDtos\MemberDto.cs" />
