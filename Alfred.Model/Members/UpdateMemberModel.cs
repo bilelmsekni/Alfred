@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Microsoft.Build.Framework;
 
@@ -7,6 +5,8 @@ namespace Alfred.Model.Members
 {
     public class UpdateMemberModel
     {
+        [Required]
+        public int Id { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]

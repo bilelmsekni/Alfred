@@ -45,6 +45,7 @@ namespace Alfred.Model.Implementation.Tests
             result.FirstName.Should().Be(updateMemberModel.FirstName);
             result.LastName.Should().Be(updateMemberModel.LastName);
             result.Role.Should().Be(updateMemberModel.Role);
+            result.Id.Should().Be(updateMemberModel.Id);
         }
 
         [Test]
@@ -60,6 +61,7 @@ namespace Alfred.Model.Implementation.Tests
             result.FirstName.Should().Be(member.FirstName);
             result.LastName.Should().Be(member.LastName);
             result.Role.Should().Be(member.Role);
+            result.Id.Should().Be(member.Id);
             //result.Artifacts.Should().BeSameAs(member.Artifacts);
         }
 
@@ -88,6 +90,7 @@ namespace Alfred.Model.Implementation.Tests
             result.Name.Should().Be(updateCommunityModel.Name);
             result.Artifacts.Count().Should().Be(updateCommunityModel.Artifacts.Count());
             result.Members.Count().Should().Be(updateCommunityModel.Members.Count());
+            result.Id.Should().Be(updateCommunityModel.Id);
         }
 
         [Test]
@@ -101,6 +104,7 @@ namespace Alfred.Model.Implementation.Tests
             result.Name.Should().Be(community.Name);
             result.Artifacts.Count().Should().Be(community.Artifacts.Count());
             result.Members.Count().Should().Be(community.Members.Count());
+            result.Id.Should().Be(community.Id);
         }
 
         [Test]
@@ -129,6 +133,7 @@ namespace Alfred.Model.Implementation.Tests
             result.Bonus.Should().Be(updateArtifactModel.Bonus);
             result.Status.Should().Be(updateArtifactModel.Status);
             result.Type.Should().Be(updateArtifactModel.Type);
+            result.Id.Should().Be(updateArtifactModel.Id);
         }
 
         [Test]
@@ -143,6 +148,7 @@ namespace Alfred.Model.Implementation.Tests
             result.Bonus.Should().Be(artifact.Bonus);
             result.Status.Should().Be(artifact.Status);
             result.Type.Should().Be(artifact.Type);
+            result.Id.Should().Be(artifact.Id);
         }
     }
 }

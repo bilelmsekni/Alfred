@@ -26,6 +26,7 @@ namespace Alfred.Model.Implementation
         {
             return new MemberModel
             {
+                Id = member.Id,
                 Email = member.Email,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
@@ -38,6 +39,7 @@ namespace Alfred.Model.Implementation
         {
             return new ArtifactModel
             {
+                Id = artifact.Id,
                 Bonus = artifact.Bonus,
                 Reward = artifact.Reward,
                 Status = artifact.Status,
@@ -62,6 +64,7 @@ namespace Alfred.Model.Implementation
         {
             return new Artifact
             {
+                Id = updateArtifactModel.Id,
                 Title = updateArtifactModel.Title,
                 Bonus = updateArtifactModel.Bonus,
                 Reward = updateArtifactModel.Reward,
@@ -74,6 +77,7 @@ namespace Alfred.Model.Implementation
         {
             return new Member
             {
+                Id = updateMemberModel.Id,
                 Email = updateMemberModel.Email,
                 FirstName = updateMemberModel.FirstName,
                 LastName = updateMemberModel.LastName,
@@ -85,6 +89,7 @@ namespace Alfred.Model.Implementation
         {
             return new CommunityModel
             {
+                Id = community.Id,
                 Email = community.Email,
                 Name = community.Name,
                 Artifacts = community.Artifacts.Select(CreateArtifactModel),
@@ -107,6 +112,7 @@ namespace Alfred.Model.Implementation
         {
             return new Community
             {
+                Id = updateCommunityModel.Id,
                 Name = updateCommunityModel.Name,
                 Email = updateCommunityModel.Email,
                 Artifacts = updateCommunityModel.Artifacts.Select(CreateArtifact),
@@ -116,29 +122,27 @@ namespace Alfred.Model.Implementation
 
         private Artifact CreateArtifact(ArtifactModel artifactModel)
         {
-            return new Artifact();
+            return new Artifact
+            {               
+                Title = artifactModel.Title,
+                Bonus = artifactModel.Bonus,
+                Reward = artifactModel.Reward,
+                Status = artifactModel.Status,
+                Type = artifactModel.Type,
+                Id = artifactModel.Id
+            };
         }
 
-        public Member CreateMember(MemberModel memberModel)
+        private Member CreateMember(MemberModel memberModel)
         {
             return new Member
             {
+                Id = memberModel.Id,
                 Email = memberModel.Email,
                 FirstName = memberModel.FirstName,
                 LastName = memberModel.LastName,
                 Role = memberModel.Role,
                 Artifacts = memberModel.Artifacts.Select(CreateArtifact)
-            };
-        }
-
-        public Community CreateCommunity(CommunityModel communityModel)
-        {
-            return new Community
-            {
-                Name = communityModel.Name,
-                Email = communityModel.Email,
-                Artifacts = Enumerable.Empty<Artifact>(),
-                Members = Enumerable.Empty<Member>()
             };
         }
     }

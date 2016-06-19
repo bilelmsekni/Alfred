@@ -8,6 +8,8 @@ namespace Alfred.Model.Artifacts
     public class UpdateArtifactModel
     {
         [Required]
+        public int Id { get; set; }
+        [Required]
         public string Title { get; set; }        
         public Member Member { get; set; }
         public int Bonus { get; set; }

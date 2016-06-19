@@ -8,10 +8,14 @@ namespace Alfred.Model.Communities
     public class UpdateCommunityModel
     {
         [Required]
+        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
         public IEnumerable<ArtifactModel> Artifacts { get; set; }
+        [Required]
         public IEnumerable<MemberModel> Members { get; set; }
     }
 }

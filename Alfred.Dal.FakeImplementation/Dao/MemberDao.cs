@@ -20,7 +20,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     FirstName = "Kick",
                     LastName = "Ass",
                     Role = 0,
-                    CommunityId = 0
+                    CommunityIds = new List<int> { 0}
                 },
                 new MemberDto
                 {
@@ -29,7 +29,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     FirstName = "Hit",
                     LastName = "Girl",
                     Role = 1,
-                    CommunityId = 1
+                    CommunityIds = new List<int> {1, 0 }
                 },
                 new MemberDto
                 {
@@ -38,7 +38,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     FirstName = "Super",
                     LastName = "Heros",
                     Role = 2,
-                    CommunityId = 1
+                    CommunityIds = new List<int> {1, 2 }
                 }
             };
         }
@@ -77,7 +77,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
 
         public IEnumerable<MemberDto> GetCommunityMembers(int id)
         {
-            return _members.Where(x => x.CommunityId == id);
+            return _members.Where(x => x.CommunityIds.Contains(id));
         }
     }
 }
