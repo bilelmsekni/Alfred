@@ -65,8 +65,8 @@ namespace Alfred.Controllers
         {
             if (ModelState.IsValid)
             {
-                var community = _communityService.CreateCommunity(createCommunityModel);
-                if (community != null) return Created("", community);
+                var communityId = _communityService.CreateCommunity(createCommunityModel);
+                if (communityId != -1) return Created("", $"{Request.RequestUri.AbsoluteUri}/{communityId}");
                 return BadRequest("Something went wrong !");
             }
             return BadRequest("Something went wrong !");
@@ -107,7 +107,7 @@ namespace Alfred.Controllers
         [Route("{id:int?}")]
         public IHttpActionResult DeleteCommunity(int id)
         {
-            if (_communityService.DeleteCommunity(id)) return Ok();            
+            if (_communityService.DeleteCommunity(id)) return Ok();
             return NotFound();
         }
     }

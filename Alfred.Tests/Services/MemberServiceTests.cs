@@ -105,11 +105,12 @@ namespace Alfred.Tests.Services
             fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).Returns(member);
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            memberService.CreateMember(createMemberModel);
+            var result = memberService.CreateMember(createMemberModel);
             fakeModelFactory.Received(1).CreateMember(Arg.Is<CreateMemberModel>(x => x.Email == createMemberModel.Email));
             fakeModelFactory.DidNotReceive().CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
             fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == createMemberModel.Email));
             fakeRepo.DidNotReceive().SaveMember(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
+            result.Should().Be(-1);
         }
 
         [Test]

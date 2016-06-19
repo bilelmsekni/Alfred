@@ -7,7 +7,7 @@ namespace Alfred.Dal.Interfaces
     {
         IEnumerable<Community> GetCommunities();
         Community GetCommunity(int id);
-        void SaveCommunity(Community community);
+        int SaveCommunity(Community community);
         void DeleteCommunity(int id);
         Community GetCommunity(string email);
         void UpdateCommunity(Community community);

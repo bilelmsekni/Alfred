@@ -33,15 +33,14 @@ namespace Alfred.Services
             return null;
         }
 
-        public CommunityModel CreateCommunity(CreateCommunityModel createCommunityModel)
+        public int CreateCommunity(CreateCommunityModel createCommunityModel)
         {
             var community = _modelFactory.CreateCommunity(createCommunityModel);
             if (community != null && !IsEmailUsed(community.Email))
             {
-                _communityRepo.SaveCommunity(community);
-                return _modelFactory.CreateCommunityModel(community);
+                return _communityRepo.SaveCommunity(community);
             }
-            return null;
+            return -1;
         }
 
         public CommunityModel UpdateCommunity(UpdateCommunityModel updateCommunityModel)

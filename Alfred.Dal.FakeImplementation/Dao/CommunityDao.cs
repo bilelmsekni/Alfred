@@ -43,10 +43,11 @@ namespace Alfred.Dal.FakeImplementation.Dao
             return _communities.FirstOrDefault(x => x.Id == id);
         }
 
-        public void SaveCommunity(CommunityDto communityDto)
+        public int SaveCommunity(CommunityDto communityDto)
         {
             communityDto.Id = _communities.Count + 1;
             _communities.Add(communityDto);
+            return communityDto.Id;
         }
 
         public void DeleteCommunity(int id)

@@ -7,7 +7,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
     {
         IEnumerable<CommunityDto> GetCommunities();
         CommunityDto GetCommunity(int id);
-        void SaveCommunity(CommunityDto communityDto);
+        int SaveCommunity(CommunityDto communityDto);
         void DeleteCommunity(int id);
         CommunityDto GetCommunity(string email);
         void UpdateCommunity(CommunityDto communityDto);

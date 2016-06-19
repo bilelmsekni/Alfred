@@ -96,12 +96,13 @@ namespace Alfred.Tests.Services
             _modelFactory.CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title))
                 .ReturnsNull();            
 
-            _artifactService.CreateArtifact(createArtifactModel);
+            var result = _artifactService.CreateArtifact(createArtifactModel);
 
             _modelFactory.Received(1)
                 .CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title));
             _modelFactory.DidNotReceive().CreateArtifactModel(Arg.Is<Artifact>(x => x.Title == artifact.Title));
-            _artifactRepo.DidNotReceive().SaveArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));            
+            _artifactRepo.DidNotReceive().SaveArtifact(Arg.Is<Artifact>(x => x.Title == artifact.Title));
+            result.Should().Be(-1);
         }
 
         [Test]

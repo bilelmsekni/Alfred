@@ -7,7 +7,7 @@ namespace Alfred.Services
     {
         IEnumerable<CommunityModel> GetCommunities();
         CommunityModel GetCommunity(int id);
-        CommunityModel CreateCommunity(CreateCommunityModel createMemberModel);
+        int CreateCommunity(CreateCommunityModel createMemberModel);
         CommunityModel UpdateCommunity(UpdateCommunityModel updateCommunityModel);
         bool DeleteCommunity(int id);
     }

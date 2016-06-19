@@ -45,9 +45,9 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             return TransformToCommunityEntity(_communityDao.GetCommunity(id));
         }
 
-        public void SaveCommunity(Community community)
+        public int SaveCommunity(Community community)
         {
-            _communityDao.SaveCommunity(TransformToCommunityDto(community));
+            return _communityDao.SaveCommunity(TransformToCommunityDto(community));
         }
 
         private CommunityDto TransformToCommunityDto(Community community)

@@ -97,7 +97,6 @@ namespace Alfred.Tests.Services
 
             communityService.CreateCommunity(createCommunityModel);
             fakeModelFactory.Received(1).CreateCommunity(Arg.Is<CreateCommunityModel>(x => x.Email == createCommunityModel.Email));
-            fakeModelFactory.Received(1).CreateCommunityModel(Arg.Is<Community>(x => x.Email == createCommunityModel.Email));
             fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
             fakeRepo.Received(1).SaveCommunity(Arg.Is<Community>(x => x.Email == community.Email));
         }
@@ -118,7 +117,7 @@ namespace Alfred.Tests.Services
             fakeModelFactory.Received(1).CreateCommunity(Arg.Is<CreateCommunityModel>(x => x.Email == createCommunityModel.Email));
             fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
             fakeRepo.DidNotReceive().SaveCommunity(Arg.Is<Community>(x => x.Email == community.Email));
-            result.Should().BeNull();
+            result.Should().Be(-1);
         }
 
         [Test]
