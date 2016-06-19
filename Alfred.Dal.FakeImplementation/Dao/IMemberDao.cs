@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using Alfred.Dal.Entities.Member;
+using Alfred.Dal.FakeImplementation.EntityDtos;
 
 namespace Alfred.Dal.FakeImplementation.Dao
 {
     public interface IMemberDao
     {
-        IEnumerable<Member> GetMembers();
-        void SaveMember(Member member);
-        Member GetMember(string email);
-        Member GetMember(int id);
-        void UpdateMember(Member member);
+        IEnumerable<MemberDto> GetMembers();
+        void SaveMember(MemberDto member);
+        MemberDto GetMember(string email);
+        MemberDto GetMember(int id);
+        void UpdateMember(MemberDto member);
         void DeleteMember(int id);
     }
 }

@@ -11,5 +11,6 @@ namespace Alfred.Dal.Interfaces
         void DeleteArtifact(int id);
         Artifact GetArtifact(string title);
         void UpdateArtifact(Artifact artifact);
+        IEnumerable<Artifact> GetMemberArtifacts(int id);
     }
 }
