@@ -1,15 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Alfred.Dal.FakeImplementation.EntityDtos;
 
 namespace Alfred.Dal.FakeImplementation.Dao
 {
     public class ArtifactDao : IArtifactDao
     {
-        private IEnumerable<ArtifactDto> _artifacts;
+        private readonly IEnumerable<ArtifactDto> _artifacts;
 
         public ArtifactDao()
         {
@@ -23,7 +20,8 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     Status = 1,
                     Type = 0,
                     Reward = 200,
-                    MemberId = 0
+                    MemberId = 0,
+                    CommunityId = 1
                 },
                 new ArtifactDto
                 {
@@ -33,7 +31,8 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     Status = 1,
                     Type = 2,
                     Reward = 100,
-                    MemberId = 1
+                    MemberId = 1,
+                    CommunityId = 0
                 
                 },
                 new ArtifactDto
@@ -44,7 +43,8 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     Status = 2,
                     Type = 0,
                     Reward = 370,
-                    MemberId = -1
+                    MemberId = -1,
+                    CommunityId = 0
                 },
                 new ArtifactDto
                 {
@@ -54,7 +54,8 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     Status = 2,
                     Type = 1,
                     Reward = 520,
-                    MemberId = 2
+                    MemberId = 2,
+                    CommunityId = 0
                 }
             };
         }
@@ -93,6 +94,11 @@ namespace Alfred.Dal.FakeImplementation.Dao
         public IEnumerable<ArtifactDto> GetMemberArtifacts(int id)
         {
             return _artifacts.Where(x => x.MemberId == id);
+        }
+
+        public IEnumerable<ArtifactDto> GetCommunityArtifacts(int id)
+        {
+            return _artifacts.Where(x => x.CommunityId == id);
         }
     }
 }

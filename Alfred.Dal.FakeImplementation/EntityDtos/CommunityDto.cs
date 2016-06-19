@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Alfred.Dal.FakeImplementation.EntityDtos
 {
-    public class MemberDto
+    public class CommunityDto
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
         public string Email { get; set; }
-        public int Role { get; set; }
-        public int CommunityId { get; set; }
     }
 }

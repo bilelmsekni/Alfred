@@ -11,5 +11,6 @@ namespace Alfred.Dal.Interfaces
         void DeleteMember(int id);
         Member GetMember(string email);
         void UpdateMember(Member member);
+        IEnumerable<Member> GetCommunityMembers(int id);
     }
 }

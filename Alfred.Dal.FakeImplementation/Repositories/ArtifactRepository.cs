@@ -83,5 +83,10 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             var artifactDtos = _artifactDao.GetMemberArtifacts(id);
             return artifactDtos.Select(TransformToArtifactEntity);
         }
+
+        public IEnumerable<Artifact> GetCommunityArtifacts(int id)
+        {
+            return _artifactDao.GetCommunityArtifacts(id).Select(TransformToArtifactEntity);
+        }
     }
 }

@@ -40,13 +40,17 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Dao\ArtifactDao.cs" />
+    <Compile Include="Dao\CommunityDao.cs" />
     <Compile Include="Dao\IArtifactDao.cs" />
+    <Compile Include="Dao\ICommunityDao.cs" />
     <Compile Include="Dao\IMemberDao.cs" />
     <Compile Include="Dao\MemberDao.cs" />
     <Compile Include="EntityDtos\ArtifactDto.cs" />
+    <Compile Include="EntityDtos\CommunityDto.cs" />
     <Compile Include="EntityDtos\MemberDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ArtifactRepository.cs" />
+    <Compile Include="Repositories\CommunityRepository.cs" />
     <Compile Include="Repositories\MemberRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -33,7 +33,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
                 Email = memberDto.Email,
                 FirstName = memberDto.FirstName,
                 LastName = memberDto.LastName,
-                Role = (ComunityRole) memberDto.Role,
+                Role = (CommunityRole) memberDto.Role,
                 Artifacts = _artifactRepository.GetMemberArtifacts(memberDto.Id)                
             };
         }
@@ -75,6 +75,11 @@ namespace Alfred.Dal.FakeImplementation.Repositories
         {
             var memberDto = TransformToMemberDto(member);
             _memberDao.UpdateMember(memberDto);
+        }
+
+        public IEnumerable<Member> GetCommunityMembers(int id)
+        {
+            return _memberDao.GetCommunityMembers(id).Select(TransformToMemberEntity);
         }
     }
 }

@@ -9,5 +9,6 @@ namespace Alfred.Dal.FakeImplementation.EntityDtos
         public int Bonus { get; set; }
         public int Reward { get; set; }
         public int MemberId { get; set; }
+        public int CommunityId { get; set; }
     }
 }

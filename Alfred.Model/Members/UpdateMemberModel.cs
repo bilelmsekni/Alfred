@@ -14,6 +14,6 @@ namespace Alfred.Model.Members
         [Required]
         public string LastName { get; set; }
         [Required]
-        public ComunityRole Role { get; set; }
+        public CommunityRole Role { get; set; }
     }
 }

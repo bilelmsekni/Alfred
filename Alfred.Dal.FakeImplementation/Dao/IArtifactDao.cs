@@ -12,5 +12,6 @@ namespace Alfred.Dal.FakeImplementation.Dao
         ArtifactDto GetArtifact(string title);
         void UpdateArtifact(ArtifactDto artifact);
         IEnumerable<ArtifactDto> GetMemberArtifacts(int id);
+        IEnumerable<ArtifactDto> GetCommunityArtifacts(int id);
     }
 }

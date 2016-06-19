@@ -1,6 +1,6 @@
 namespace Alfred.Dal.Entities.Community
 {
-    public enum ComunityRole
+    public enum CommunityRole
     {
         Member,
         Leader,

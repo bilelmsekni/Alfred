@@ -11,5 +11,6 @@ namespace Alfred.Dal.FakeImplementation.Dao
         MemberDto GetMember(int id);
         void UpdateMember(MemberDto member);
         void DeleteMember(int id);
+        IEnumerable<MemberDto> GetCommunityMembers(int id);
     }
 }

@@ -47,7 +47,7 @@
     <Compile Include="Artifact\ArtifactStatus.cs" />
     <Compile Include="Artifact\ArtifactType.cs" />
     <Compile Include="Community\Community.cs" />
-    <Compile Include="Community\ComunityRole.cs" />
+    <Compile Include="Community\CommunityRole.cs" />
     <Compile Include="Member\Member.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

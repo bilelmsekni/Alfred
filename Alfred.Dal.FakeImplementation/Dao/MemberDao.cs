@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Alfred.Dal.Entities.Community;
 using Alfred.Dal.FakeImplementation.EntityDtos;
 
 
@@ -20,7 +19,8 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     Id = 1,
                     FirstName = "Kick",
                     LastName = "Ass",
-                    Role = 0
+                    Role = 0,
+                    CommunityId = 0
                 },
                 new MemberDto
                 {
@@ -28,7 +28,8 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     Id = 2,
                     FirstName = "Hit",
                     LastName = "Girl",
-                    Role = 1
+                    Role = 1,
+                    CommunityId = 1
                 },
                 new MemberDto
                 {
@@ -36,7 +37,8 @@ namespace Alfred.Dal.FakeImplementation.Dao
                     Id = 3,
                     FirstName = "Super",
                     LastName = "Heros",
-                    Role = 2                    
+                    Role = 2,
+                    CommunityId = 1
                 }
             };
         }
@@ -71,6 +73,11 @@ namespace Alfred.Dal.FakeImplementation.Dao
         public void DeleteMember(int id)
         {
             _members.ToList().RemoveAt(_members.ToList().FindIndex(x => x.Id == id));
+        }
+
+        public IEnumerable<MemberDto> GetCommunityMembers(int id)
+        {
+            return _members.Where(x => x.CommunityId == id);
         }
     }
 }

@@ -12,5 +12,6 @@ namespace Alfred.Dal.Interfaces
         Artifact GetArtifact(string title);
         void UpdateArtifact(Artifact artifact);
         IEnumerable<Artifact> GetMemberArtifacts(int id);
+        IEnumerable<Artifact> GetCommunityArtifacts(int id);
     }
 }
