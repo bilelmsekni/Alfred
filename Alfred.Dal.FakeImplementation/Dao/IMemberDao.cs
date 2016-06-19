@@ -6,7 +6,7 @@ namespace Alfred.Dal.FakeImplementation.Dao
     public interface IMemberDao
     {
         IEnumerable<MemberDto> GetMembers();
-        void SaveMember(MemberDto member);
+        int SaveMember(MemberDto member);
         MemberDto GetMember(string email);
         MemberDto GetMember(int id);
         void UpdateMember(MemberDto member);

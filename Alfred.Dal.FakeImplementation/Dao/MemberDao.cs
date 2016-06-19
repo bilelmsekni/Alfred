@@ -48,10 +48,11 @@ namespace Alfred.Dal.FakeImplementation.Dao
             return _members;
         }
 
-        public void SaveMember(MemberDto member)
+        public int SaveMember(MemberDto member)
         {
             member.Id = _members.Count() + 1;
             _members.ToList().Add(member);
+            return member.Id;
         }
 
         public MemberDto GetMember(string email)

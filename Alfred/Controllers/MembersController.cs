@@ -65,8 +65,8 @@ namespace Alfred.Controllers
         {
             if (ModelState.IsValid)
             {
-                var memberModel = _memberService.CreateMember(createMemberModel);
-                if (memberModel != null) return Created("", memberModel);
+                var memberId = _memberService.CreateMember(createMemberModel);
+                if (memberId != null) return Created("", $"{Request.RequestUri.AbsoluteUri}/{memberId}");
                 return BadRequest("Something went wrong !");
             }
             return BadRequest("Something went wrong !");

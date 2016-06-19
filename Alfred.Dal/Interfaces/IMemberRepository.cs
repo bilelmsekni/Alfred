@@ -7,7 +7,7 @@ namespace Alfred.Dal.Interfaces
     {
         IEnumerable<Member> GetMembers();
         Member GetMember(int id);
-        void SaveMember(Member member);
+        int SaveMember(Member member);
         void DeleteMember(int id);
         Member GetMember(string email);
         void UpdateMember(Member member);

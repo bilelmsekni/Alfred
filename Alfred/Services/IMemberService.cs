@@ -7,7 +7,7 @@ namespace Alfred.Services
     {
         IEnumerable<MemberModel> GetMembers();
         MemberModel GetMember(int id);
-        MemberModel CreateMember(CreateMemberModel createMemberModel);
+        int CreateMember(CreateMemberModel createMemberModel);
         bool DeleteMember(int id);
         MemberModel UpdateMember(UpdateMemberModel updateMemberModel);
     }

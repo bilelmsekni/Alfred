@@ -43,10 +43,10 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             return TransformToMemberEntity(_memberDao.GetMember(id));
         }
 
-        public void SaveMember(Member member)
+        public int SaveMember(Member member)
         {
             var memberDto = TransformToMemberDto(member);
-            _memberDao.SaveMember(memberDto);
+            return _memberDao.SaveMember(memberDto);
         }
 
         private MemberDto TransformToMemberDto(Member member)

@@ -28,15 +28,14 @@ namespace Alfred.Services
             return _modelFactory.CreateMemberModel(memberEntity);
         }
 
-        public MemberModel CreateMember(CreateMemberModel createMemberModel)
+        public int CreateMember(CreateMemberModel createMemberModel)
         {
             var member = _modelFactory.CreateMember(createMemberModel);
             if (member != null && !IsEmailUsed(member.Email))
             {
-                _memberRepository.SaveMember(member);
-                return _modelFactory.CreateMemberModel(member);
+                return _memberRepository.SaveMember(member);
             }
-            return null;
+            return -1;
         }
 
         public bool DeleteMember(int id)
