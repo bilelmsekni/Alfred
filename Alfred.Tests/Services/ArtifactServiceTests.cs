@@ -10,6 +10,7 @@ using Alfred.Model.Artifacts;
 using Alfred.Services;
 using FluentAssertions;
 using NSubstitute;
+using NSubstitute.Exceptions;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
@@ -41,7 +42,7 @@ namespace Alfred.Tests.Services
             _artifactRepo.GetArtifacts().Returns(artifacts);
             _modelFactory.CreateArtifactModel(Arg.Any<Artifact>()).Returns(GetArtifactModel(artifacts.FirstOrDefault()));
 
-            var results = _artifactService.GetArtifacts();
+            var results = _artifactService.GetArtifacts().Result;
             results.FirstOrDefault().Should().BeOfType<ArtifactModel>();
             results.Count().Should().Be(artifacts.Count());
         }
@@ -49,14 +50,14 @@ namespace Alfred.Tests.Services
         [Test]
         public void Should_return_artifact_with_id_2_when_get_artifact_with_id_2()
         {
-            var artifactWithIdTwo = _fixture.Build<Artifact>()                
+            var artifactWithIdTwo = _fixture.Build<Artifact>()
                 .With(x => x.Id, 2)
                 .Create();
 
             _artifactRepo.GetArtifact(Arg.Is(2)).Returns(artifactWithIdTwo);
             _modelFactory.CreateArtifactModel(Arg.Is<Artifact>(x => x.Id == 2)).Returns(GetArtifactModel(artifactWithIdTwo));
 
-            var result = _artifactService.GetArtifact(2);
+            var result = _artifactService.GetArtifact(2).Result;
             result.Should().BeOfType<ArtifactModel>();
             result.Title.Should().Be(artifactWithIdTwo.Title);
             result.Status.Should().Be(artifactWithIdTwo.Status);
@@ -65,20 +66,20 @@ namespace Alfred.Tests.Services
         [Test]
         public void Should_return_null_when_no_artifact_with_id_2_exists()
         {
-            _artifactRepo.GetArtifact(Arg.Is(2)).ReturnsNull();
+            _artifactRepo.GetArtifact(Arg.Is(2)).Returns(null);
 
             var result = _artifactService.GetArtifact(2);
-            result.Should().BeNull();
+            result.Result.Should().BeNull();
         }
 
         [Test]
         public void Should_create_artifact_when_artifact_data_is_valid()
         {
-            var createArtifactModel = _fixture.Build<CreateArtifactModel>()                
+            var createArtifactModel = _fixture.Build<CreateArtifactModel>()
                 .Create();
             var artifact = GetArtifact(createArtifactModel);
             _modelFactory.CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title))
-                .Returns(artifact);            
+                .Returns(artifact);
 
             _artifactService.CreateArtifact(createArtifactModel);
 
@@ -94,9 +95,9 @@ namespace Alfred.Tests.Services
                 .Create();
             var artifact = GetArtifact(createArtifactModel);
             _modelFactory.CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title))
-                .ReturnsNull();            
+                .ReturnsNull();
 
-            var result = _artifactService.CreateArtifact(createArtifactModel);
+            var result = _artifactService.CreateArtifact(createArtifactModel).Result;
 
             _modelFactory.Received(1)
                 .CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title));
@@ -143,12 +144,12 @@ namespace Alfred.Tests.Services
         [Test]
         public void Should_delete_artifact_when_artifact_to_delete_is_found()
         {
-            var artifact = _fixture.Build<Artifact>()                
-                .With(x=>x.Id, 2)
+            var artifact = _fixture.Build<Artifact>()
+                .With(x => x.Id, 2)
                 .Create();
             _artifactRepo.GetArtifact(Arg.Is(2)).Returns(artifact);
 
-            _artifactService.DeleteArtifact(2);
+            _artifactService.DeleteArtifact(2).ConfigureAwait(false);
 
             _artifactRepo.Received(1).GetArtifact(Arg.Is(2));
             _artifactRepo.Received(1).DeleteArtifact(Arg.Is(2));

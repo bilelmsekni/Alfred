@@ -9,10 +9,10 @@ namespace Alfred.Services
 {
     public interface IArtifactService
     {
-        IEnumerable<ArtifactModel> GetArtifacts();
-        ArtifactModel GetArtifact(int id);
-        int CreateArtifact(CreateArtifactModel createArtifactModel);
-        ArtifactModel UpdateArtifact(UpdateArtifactModel updateArtifactModel);
-        bool DeleteArtifact(int id);
+        Task<IEnumerable<ArtifactModel>> GetArtifacts();
+        Task<ArtifactModel> GetArtifact(int id);
+        Task<int> CreateArtifact(CreateArtifactModel createArtifactModel);
+        Task<ArtifactModel> UpdateArtifact(UpdateArtifactModel updateArtifactModel);
+        Task<bool> DeleteArtifact(int id);
     }
 }

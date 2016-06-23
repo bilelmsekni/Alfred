@@ -19,9 +19,9 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             _artifactDao = artifactDao;
         }
 
-        public IEnumerable<Artifact> GetArtifacts()
+        public async Task<IEnumerable<Artifact>> GetArtifacts()
         {
-            var artifactDtos = _artifactDao.GetArtifacts();
+            var artifactDtos = await Task.FromResult(_artifactDao.GetArtifacts()).ConfigureAwait(false);
             return artifactDtos.Select(TransformToArtifactEntity);
         }
 
@@ -40,15 +40,15 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             };
         }
 
-        public Artifact GetArtifact(int id)
+        public async Task<Artifact> GetArtifact(int id)
         {
-            return TransformToArtifactEntity(_artifactDao.GetArtifact(id));
+            return TransformToArtifactEntity(await Task.FromResult(_artifactDao.GetArtifact(id)).ConfigureAwait(false));
         }
 
-        public int SaveArtifact(Artifact artifact)
+        public async Task<int> SaveArtifact(Artifact artifact)
         {
             var artifactDto = TransformToArtifactDto(artifact);
-            return _artifactDao.SaveArtifact(artifactDto);
+            return await Task.FromResult(_artifactDao.SaveArtifact(artifactDto));
         }
 
         private ArtifactDto TransformToArtifactDto(Artifact artifact)

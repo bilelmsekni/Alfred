@@ -30,9 +30,9 @@ namespace Alfred.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<ArtifactModel>))]
-        public IHttpActionResult GetArtifacts()
+        public async Task<IHttpActionResult> GetArtifacts()
         {
-            return Ok(_artifactService.GetArtifacts());
+            return Ok(await _artifactService.GetArtifacts());
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Alfred.Controllers
         [HttpGet]
         [Route("{id:int?}")]
         [ResponseType(typeof(ArtifactModel))]
-        public IHttpActionResult GetArtifact(int id)
+        public async Task<IHttpActionResult> GetArtifact(int id)
         {
-            var artifact = _artifactService.GetArtifact(id);
+            var artifact = await _artifactService.GetArtifact(id);
             if (artifact != null)
                 return Ok(artifact);
             return NotFound();
@@ -65,11 +65,11 @@ namespace Alfred.Controllers
         [HttpPost]
         [ResponseType(typeof(ArtifactModel))]
         [Route("")]
-        public IHttpActionResult CreateArtifact([FromBody]CreateArtifactModel createArtifactModel)
+        public async Task<IHttpActionResult> CreateArtifact([FromBody]CreateArtifactModel createArtifactModel)
         {
             if (ModelState.IsValid)
             {
-                var artifactId = _artifactService.CreateArtifact(createArtifactModel);
+                var artifactId = await _artifactService.CreateArtifact(createArtifactModel);
 
                 if (artifactId != -1)
                 {
@@ -116,9 +116,9 @@ namespace Alfred.Controllers
         [HttpDelete]
         [ResponseType(typeof(ArtifactModel))]
         [Route("{id:int?}")]
-        public IHttpActionResult DeleteArtifact(int id)
+        public async Task<IHttpActionResult> DeleteArtifact(int id)
         {
-            if (_artifactService.DeleteArtifact(id))
+            if (await _artifactService.DeleteArtifact(id))
                 return Ok();
 
             return NotFound();

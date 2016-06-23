@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
 using Alfred.Model.Artifacts;
@@ -17,33 +18,33 @@ namespace Alfred.Services
             _modelFactory = modelFactory;
         }
 
-        public IEnumerable<ArtifactModel> GetArtifacts()
+        public async Task<IEnumerable<ArtifactModel>> GetArtifacts()
         {
-            var artifactEntities = _artifactRepo.GetArtifacts();
+            var artifactEntities = await _artifactRepo.GetArtifacts().ConfigureAwait(false);
             return artifactEntities.Select(x => _modelFactory.CreateArtifactModel(x));
         }
 
-        public ArtifactModel GetArtifact(int id)
+        public async Task<ArtifactModel> GetArtifact(int id)
         {
-            var artifactEntity = _artifactRepo.GetArtifact(id);
+            var artifactEntity = await _artifactRepo.GetArtifact(id);
             if (artifactEntity != null)
                 return _modelFactory.CreateArtifactModel(artifactEntity);
             return null;
         }
 
-        public int CreateArtifact(CreateArtifactModel createArtifactModel)
+        public async Task<int> CreateArtifact(CreateArtifactModel createArtifactModel)
         {
             var artifact = _modelFactory.CreateArtifact(createArtifactModel);
             if (artifact != null)
             {
-                return _artifactRepo.SaveArtifact(artifact);
+                return await _artifactRepo.SaveArtifact(artifact);
             }
             return -1;
         }
 
-        public ArtifactModel UpdateArtifact(UpdateArtifactModel updateArtifactModel)
+        public async Task<ArtifactModel> UpdateArtifact(UpdateArtifactModel updateArtifactModel)
         {
-            var oldArtifact = _artifactRepo.GetArtifact(updateArtifactModel.Id);
+            var oldArtifact = await _artifactRepo.GetArtifact(updateArtifactModel.Id);
             if (oldArtifact != null)
             {
                 var newArtifact = _modelFactory.CreateArtifact(updateArtifactModel, oldArtifact);
@@ -56,12 +57,12 @@ namespace Alfred.Services
             return null;
         }
 
-        public bool DeleteArtifact(int id)
+        public async Task<bool> DeleteArtifact(int id)
         {
-            var artifact = _artifactRepo.GetArtifact(id);
+            var artifact = await _artifactRepo.GetArtifact(id);
             if (artifact != null)
             {
-                _artifactRepo.DeleteArtifact(id);
+                await Task.Run(() => _artifactRepo.DeleteArtifact(id));
                 return true;
             }
             return false;
