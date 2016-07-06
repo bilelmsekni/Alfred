@@ -38,7 +38,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
                     Email = communityDto.Email,
                     Name = communityDto.Name,
                     Artifacts = _artifactRepository.GetCommunityArtifacts(communityDto.Id),
-                    Members = _memberRepository.GetCommunityMembers(communityDto.Id)
+                    Members = _memberRepository.GetCommunityMembers(communityDto.Id).Result
                 };
             }
             return null;

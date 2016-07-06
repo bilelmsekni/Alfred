@@ -1,16 +1,17 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Alfred.Dal.Entities.Member;
 
 namespace Alfred.Dal.Interfaces
 {
     public interface IMemberRepository
     {
-        IEnumerable<Member> GetMembers();
-        Member GetMember(int id);
-        int SaveMember(Member member);
+        Task<IEnumerable<Member>> GetMembers();
+        Task<Member> GetMember(int id);
+        Task<int> SaveMember(Member member);
         void DeleteMember(int id);
-        Member GetMember(string email);
+        Task<Member> GetMember(string email);
         void UpdateMember(Member member);
-        IEnumerable<Member> GetCommunityMembers(int id);
+        Task<IEnumerable<Member>> GetCommunityMembers(int id);
     }
 }

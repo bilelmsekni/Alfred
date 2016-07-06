@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Alfred.Model.Members;
@@ -26,9 +27,9 @@ namespace Alfred.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<MemberModel>))]
-        public IHttpActionResult GetMembers()
+        public async Task<IHttpActionResult> GetMembers()
         {
-            return Ok(_memberService.GetMembers());            
+            return Ok(await _memberService.GetMembers());            
         }
 
         /// <summary>
@@ -42,9 +43,9 @@ namespace Alfred.Controllers
         [HttpGet]
         [Route("{id:int?}")]
         [ResponseType(typeof(MemberModel))]
-        public IHttpActionResult GetMember(int id)
+        public async Task<IHttpActionResult> GetMember(int id)
         {
-            var member = _memberService.GetMember(id);
+            var member = await _memberService.GetMember(id);
             if (member != null)
                 return Ok(member);
             return NotFound();
@@ -61,11 +62,11 @@ namespace Alfred.Controllers
         [HttpPost]
         [ResponseType(typeof(MemberModel))]
         [Route("")]
-        public IHttpActionResult CreateMember([FromBody]CreateMemberModel createMemberModel)
+        public async Task<IHttpActionResult> CreateMember([FromBody]CreateMemberModel createMemberModel)
         {
             if (ModelState.IsValid)
             {
-                var memberId = _memberService.CreateMember(createMemberModel);
+                var memberId = await _memberService.CreateMember(createMemberModel);
                 if (memberId != -1) return Created("", $"{Request.RequestUri.AbsoluteUri}/{memberId}");
                 return BadRequest("Something went wrong !");
             }
@@ -83,12 +84,12 @@ namespace Alfred.Controllers
         [HttpPut]
         [ResponseType(typeof(MemberModel))]
         [Route("{id:int?}")]
-        public IHttpActionResult UpdateMember(int id, [FromBody]UpdateMemberModel updateMemberModel)
+        public async Task<IHttpActionResult> UpdateMember(int id, [FromBody]UpdateMemberModel updateMemberModel)
         {
             if (ModelState.IsValid)
             {
                 updateMemberModel.Id = id;
-                var memberModel = _memberService.UpdateMember(updateMemberModel);
+                var memberModel = await _memberService.UpdateMember(updateMemberModel);
                 if (memberModel != null) return Ok(memberModel);
                 return BadRequest("Something went wrong !");
             }
@@ -105,9 +106,9 @@ namespace Alfred.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Route("{id:int?}")]
-        public IHttpActionResult DeleteMember(int id)
+        public async Task<IHttpActionResult> DeleteMember(int id)
         {
-            if (_memberService.DeleteMember(id)) return Ok();
+            if (await _memberService.DeleteMember(id)) return Ok();
             return NotFound();
         }
     }

@@ -50,7 +50,7 @@ namespace Alfred.Services
                 var newArtifact = _modelFactory.CreateArtifact(updateArtifactModel, oldArtifact);
                 if (newArtifact != null)
                 {
-                    _artifactRepo.UpdateArtifact(newArtifact);
+                    await Task.Run(() => _artifactRepo.UpdateArtifact(newArtifact));
                     return _modelFactory.CreateArtifactModel(newArtifact);
                 }
             }

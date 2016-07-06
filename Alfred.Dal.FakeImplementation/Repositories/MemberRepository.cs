@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.FakeImplementation.Dao;
@@ -20,9 +21,9 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             _memberDao = memberDao;
             _artifactRepository = artifactRepository;
         }
-        public IEnumerable<Member> GetMembers()
+        public async Task<IEnumerable<Member>> GetMembers()
         {
-            return _memberDao.GetMembers().Select(TransformToMemberEntity);
+            return await Task.Run(() => _memberDao.GetMembers().Select(TransformToMemberEntity));
         }
 
         private Member TransformToMemberEntity(MemberDto memberDto)
@@ -35,22 +36,22 @@ namespace Alfred.Dal.FakeImplementation.Repositories
                     Email = memberDto.Email,
                     FirstName = memberDto.FirstName,
                     LastName = memberDto.LastName,
-                    Role = (CommunityRole) memberDto.Role,
+                    Role = (CommunityRole)memberDto.Role,
                     Artifacts = _artifactRepository.GetMemberArtifacts(memberDto.Id)
                 };
             }
             return null;
         }
 
-        public Member GetMember(int id)
+        public async Task<Member> GetMember(int id)
         {
-            return TransformToMemberEntity(_memberDao.GetMember(id));
+            return TransformToMemberEntity(await Task.Run(() => _memberDao.GetMember(id)));
         }
 
-        public int SaveMember(Member member)
+        public async Task<int> SaveMember(Member member)
         {
             var memberDto = TransformToMemberDto(member);
-            return _memberDao.SaveMember(memberDto);
+            return await Task.Run(() => _memberDao.SaveMember(memberDto));
         }
 
         private MemberDto TransformToMemberDto(Member member)
@@ -61,7 +62,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
                 Email = member.Email,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
-                Role = (int) member.Role
+                Role = (int)member.Role
             };
         }
 
@@ -70,9 +71,9 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             _memberDao.DeleteMember(id);
         }
 
-        public Member GetMember(string email)
+        public async Task<Member> GetMember(string email)
         {
-            return TransformToMemberEntity(_memberDao.GetMember(email));
+            return TransformToMemberEntity(await Task.Run(() => _memberDao.GetMember(email)));
         }
 
         public void UpdateMember(Member member)
@@ -81,9 +82,9 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             _memberDao.UpdateMember(memberDto);
         }
 
-        public IEnumerable<Member> GetCommunityMembers(int id)
+        public async Task<IEnumerable<Member>> GetCommunityMembers(int id)
         {
-            return _memberDao.GetCommunityMembers(id).Select(TransformToMemberEntity);
+            return await Task.Run(() => _memberDao.GetCommunityMembers(id).Select(TransformToMemberEntity));
         }
     }
 }

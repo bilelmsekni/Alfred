@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
@@ -37,7 +38,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetMembers().ReturnsForAnyArgs(members);
 
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
-            var result = memberService.GetMembers();
+            var result = memberService.GetMembers().Result;
             result.FirstOrDefault().Should().BeOfType<MemberModel>();
             result.Count().Should().Be(members.Count());
         }
@@ -58,7 +59,7 @@ namespace Alfred.Tests.Services
 
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            var result = memberService.GetMember(2);
+            var result = memberService.GetMember(2).Result;
             result.Should().BeOfType<MemberModel>();
             result.Email.Should().Be(memberToSearch.Email);
             result.FirstName.Should().Be(memberToSearch.FirstName);
@@ -69,11 +70,11 @@ namespace Alfred.Tests.Services
         public void Should_return_null_when_service_dont_find_member_with_id_2()
         {
             var fakeRepo = Substitute.For<IMemberRepository>();
-            fakeRepo.GetMember(Arg.Is(2)).ReturnsNull();
+            fakeRepo.GetMember(Arg.Is(2)).Returns(Task.FromResult<Member>(null));
 
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
-            var result = memberService.GetMember(2);
+            var result = memberService.GetMember(2).Result;
             result.Should().BeNull();
         }
 
@@ -88,7 +89,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).ReturnsNull();
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            memberService.CreateMember(createMemberModel);
+            memberService.CreateMember(createMemberModel).ConfigureAwait(false);
             fakeModelFactory.Received(1).CreateMember(Arg.Is<CreateMemberModel>(x => x.Email == createMemberModel.Email));
             fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == member.Email));
             fakeRepo.Received(1).SaveMember(Arg.Is<Member>(x => x.Email == member.Email));
@@ -105,7 +106,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).Returns(member);
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            var result = memberService.CreateMember(createMemberModel);
+            var result = memberService.CreateMember(createMemberModel).Result;
             fakeModelFactory.Received(1).CreateMember(Arg.Is<CreateMemberModel>(x => x.Email == createMemberModel.Email));
             fakeModelFactory.DidNotReceive().CreateMemberModel(Arg.Is<Member>(x => x.Email == createMemberModel.Email));
             fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == createMemberModel.Email));
@@ -125,7 +126,7 @@ namespace Alfred.Tests.Services
             fakeModelFactory.CreateMember(Arg.Any<UpdateMemberModel>(), member).Returns(GetMember(updateMemberModel));
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            memberService.UpdateMember(updateMemberModel);
+            memberService.UpdateMember(updateMemberModel).ConfigureAwait(false);
             fakeModelFactory.Received(1).CreateMember(Arg.Is<UpdateMemberModel>(x => x.Id == updateMemberModel.Id), member);
             fakeModelFactory.Received(1).CreateMemberModel(Arg.Is<Member>(x => x.Id == updateMemberModel.Id));
             fakeRepo.Received(1).GetMember(Arg.Is(updateMemberModel.Id));
@@ -141,7 +142,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetMember(Arg.Is(updateMemberModel.Id)).ReturnsNull();
 
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
-            memberService.UpdateMember(updateMemberModel);
+            memberService.UpdateMember(updateMemberModel).ConfigureAwait(false); ;
 
             fakeModelFactory.DidNotReceive().CreateMember(Arg.Is<UpdateMemberModel>(x => x.Email == updateMemberModel.Email), null);
             fakeRepo.Received(1).GetMember(Arg.Is(updateMemberModel.Id));
@@ -154,14 +155,14 @@ namespace Alfred.Tests.Services
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var fakeRepo = Substitute.For<IMemberRepository>();
             var member = _fixture.Build<Member>()
-                .Without(x=>x.Artifacts)
+                .Without(x => x.Artifacts)
                 .With(x => x.Id, 2)
                 .Create();
 
             fakeRepo.GetMember(Arg.Is<int>(x => x == 2)).Returns(member);
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            var result = memberService.DeleteMember(2);
+            var result = memberService.DeleteMember(2).Result;
             fakeRepo.Received(1).DeleteMember(Arg.Is<int>(x => x == 2));
             result.Should().BeTrue();
         }
@@ -170,12 +171,12 @@ namespace Alfred.Tests.Services
         public void Should_not_delete_member_when_member_id_does_not_exist()
         {
             var fakeModelFactory = Substitute.For<IModelFactory>();
-            var fakeRepo = Substitute.For<IMemberRepository>();            
+            var fakeRepo = Substitute.For<IMemberRepository>();
 
-            fakeRepo.GetMember(Arg.Is<int>(x => x == -1)).ReturnsNull();
+            fakeRepo.GetMember(Arg.Is<int>(x => x == -1)).Returns(Task.FromResult<Member>(null));
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
 
-            var result = memberService.DeleteMember(-1);
+            var result = memberService.DeleteMember(-1).Result;
             fakeRepo.DidNotReceive().DeleteMember(Arg.Is<int>(x => x == -1));
             result.Should().BeFalse();
         }

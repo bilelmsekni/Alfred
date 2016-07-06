@@ -116,7 +116,7 @@ namespace Alfred.Tests.Services
             _modelFactory.CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Id == updateArtifactModel.Id), oldArtifact)
                 .Returns(GetArtifact(updateArtifactModel));
 
-            _artifactService.UpdateArtifact(updateArtifactModel);
+            _artifactService.UpdateArtifact(updateArtifactModel).ConfigureAwait(false);
 
             _modelFactory.Received(1)
                 .CreateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Id == updateArtifactModel.Id), oldArtifact);
@@ -160,7 +160,7 @@ namespace Alfred.Tests.Services
         {
             _artifactRepo.GetArtifact(Arg.Is(2)).ReturnsNull();
 
-            _artifactService.DeleteArtifact(2);
+            _artifactService.DeleteArtifact(2).ConfigureAwait(false);
 
             _artifactRepo.Received(1).GetArtifact(Arg.Is(2));
             _artifactRepo.DidNotReceive().DeleteArtifact(Arg.Is(2));
