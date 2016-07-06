@@ -66,7 +66,7 @@ namespace Alfred.Tests.Services
         [Test]
         public void Should_return_null_when_no_artifact_with_id_2_exists()
         {
-            _artifactRepo.GetArtifact(Arg.Is(2)).Returns(null);
+            _artifactRepo.GetArtifact(Arg.Is(2)).Returns(Task.FromResult<Artifact>(null));
 
             var result = _artifactService.GetArtifact(2);
             result.Result.Should().BeNull();
@@ -81,7 +81,7 @@ namespace Alfred.Tests.Services
             _modelFactory.CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title))
                 .Returns(artifact);
 
-            _artifactService.CreateArtifact(createArtifactModel);
+            _artifactService.CreateArtifact(createArtifactModel).ConfigureAwait(false);
 
             _modelFactory.Received(1)
                 .CreateArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == createArtifactModel.Title));
