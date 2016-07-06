@@ -93,12 +93,12 @@ namespace Alfred.Controllers
         [HttpPut]
         [ResponseType(typeof(ArtifactModel))]
         [Route("{id:int?}")]
-        public IHttpActionResult UpdateArtifact(int id, [FromBody]UpdateArtifactModel updateArtifactModel)
+        public async Task<IHttpActionResult> UpdateArtifact(int id, [FromBody]UpdateArtifactModel updateArtifactModel)
         {            
             if (ModelState.IsValid)
             {
                 updateArtifactModel.Id = id;
-                var artifact = _artifactService.UpdateArtifact(updateArtifactModel);
+                var artifact = await _artifactService.UpdateArtifact(updateArtifactModel);
                 if (artifact != null) return Ok(artifact);
                 return BadRequest("Something went wrong !");
             }
