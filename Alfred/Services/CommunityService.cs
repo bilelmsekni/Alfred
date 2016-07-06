@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
 using Alfred.Model.Communities;
@@ -17,15 +18,15 @@ namespace Alfred.Services
             _modelFactory = modelFactory;
         }
 
-        public IEnumerable<CommunityModel> GetCommunities()
+        public async Task<IEnumerable<CommunityModel>> GetCommunities()
         {
-            var communityEntities = _communityRepo.GetCommunities();
+            var communityEntities = await _communityRepo.GetCommunities();
             return communityEntities.Select(x => _modelFactory.CreateCommunityModel(x));
         }
 
-        public CommunityModel GetCommunity(int id)
+        public async Task<CommunityModel> GetCommunity(int id)
         {
-            var communityEntity = _communityRepo.GetCommunity(id);
+            var communityEntity = await _communityRepo.GetCommunity(id);
             if (communityEntity != null)
             {
                 return _modelFactory.CreateCommunityModel(communityEntity);
@@ -33,37 +34,37 @@ namespace Alfred.Services
             return null;
         }
 
-        public int CreateCommunity(CreateCommunityModel createCommunityModel)
+        public async Task<int> CreateCommunity(CreateCommunityModel createCommunityModel)
         {
             var community = _modelFactory.CreateCommunity(createCommunityModel);
             if (community != null && !IsEmailUsed(community.Email))
             {
-                return _communityRepo.SaveCommunity(community);
+                return await _communityRepo.SaveCommunity(community);
             }
             return -1;
         }
 
-        public CommunityModel UpdateCommunity(UpdateCommunityModel updateCommunityModel)
+        public async Task<CommunityModel> UpdateCommunity(UpdateCommunityModel updateCommunityModel)
         {
-            var originalCommunity = _communityRepo.GetCommunity(updateCommunityModel.Id);
+            var originalCommunity = await _communityRepo.GetCommunity(updateCommunityModel.Id);
             if (originalCommunity != null)
             {
                 var community = _modelFactory.CreateCommunity(updateCommunityModel, originalCommunity);
                 if (community != null)
                 {
-                    _communityRepo.UpdateCommunity(community);
+                    await Task.Run(() => _communityRepo.UpdateCommunity(community));
                     return _modelFactory.CreateCommunityModel(community);
                 }
             }
             return null;
         }
 
-        public bool DeleteCommunity(int id)
+        public async Task<bool> DeleteCommunity(int id)
         {
-            var community = _communityRepo.GetCommunity(id);
+            var community = await _communityRepo.GetCommunity(id);
             if (community != null)
             {
-                _communityRepo.DeleteCommunity(id);
+                await Task.Run(() => _communityRepo.DeleteCommunity(id));
                 return true;
             }
             return false;

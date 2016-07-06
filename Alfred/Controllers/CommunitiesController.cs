@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Alfred.Model.Communities;
@@ -26,9 +27,9 @@ namespace Alfred.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<CommunityModel>))]
-        public IHttpActionResult GetCommunities()
+        public async Task<IHttpActionResult> GetCommunities()
         {
-            return Ok(_communityService.GetCommunities());
+            return Ok(await _communityService.GetCommunities());
         }
 
         /// <summary>
@@ -42,9 +43,9 @@ namespace Alfred.Controllers
         [HttpGet]
         [Route("{id:int?}")]
         [ResponseType(typeof(CommunityModel))]
-        public IHttpActionResult GetCommunity(int id)
+        public async Task<IHttpActionResult> GetCommunity(int id)
         {
-            var community = _communityService.GetCommunity(id);
+            var community = await _communityService.GetCommunity(id);
             if (community != null)
                 return Ok(community);
             return NotFound();
@@ -61,11 +62,11 @@ namespace Alfred.Controllers
         [HttpPost]
         [ResponseType(typeof(CommunityModel))]
         [Route("")]
-        public IHttpActionResult CreateCommunity([FromBody]CreateCommunityModel createCommunityModel)
+        public async Task<IHttpActionResult> CreateCommunity([FromBody]CreateCommunityModel createCommunityModel)
         {
             if (ModelState.IsValid)
             {
-                var communityId = _communityService.CreateCommunity(createCommunityModel);
+                var communityId = await _communityService.CreateCommunity(createCommunityModel);
                 if (communityId != -1) return Created("", $"{Request.RequestUri.AbsoluteUri}/{communityId}");
                 return BadRequest("Something went wrong !");
             }
@@ -83,12 +84,12 @@ namespace Alfred.Controllers
         [HttpPut]
         [ResponseType(typeof(CommunityModel))]
         [Route("{id:int?}")]
-        public IHttpActionResult UpdateCommunity(int id, [FromBody]UpdateCommunityModel updateCommunityModel)
+        public async Task<IHttpActionResult> UpdateCommunity(int id, [FromBody]UpdateCommunityModel updateCommunityModel)
         {
             if (ModelState.IsValid)
             {
                 updateCommunityModel.Id = id;
-                var community = _communityService.UpdateCommunity(updateCommunityModel);
+                var community = await _communityService.UpdateCommunity(updateCommunityModel);
                 if (community != null) return Ok(community);
                 return BadRequest("Something went wrong !");
             }
@@ -106,9 +107,9 @@ namespace Alfred.Controllers
         [HttpDelete]
         [ResponseType(typeof(CommunityModel))]
         [Route("{id:int?}")]
-        public IHttpActionResult DeleteCommunity(int id)
+        public async Task<IHttpActionResult> DeleteCommunity(int id)
         {
-            if (_communityService.DeleteCommunity(id)) return Ok();
+            if (await _communityService.DeleteCommunity(id)) return Ok();
             return NotFound();
         }
     }

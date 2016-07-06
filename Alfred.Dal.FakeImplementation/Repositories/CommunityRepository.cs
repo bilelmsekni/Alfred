@@ -23,9 +23,9 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             _memberRepository = memberRepository;
         }
 
-        public IEnumerable<Community> GetCommunities()
+        public async Task<IEnumerable<Community>> GetCommunities()
         {
-            return _communityDao.GetCommunities().Select(TransformToCommunityEntity);
+            return await Task.Run(() => _communityDao.GetCommunities().Select(TransformToCommunityEntity));
         }
 
         private Community TransformToCommunityEntity(CommunityDto communityDto)
@@ -44,14 +44,14 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             return null;
         }
 
-        public Community GetCommunity(int id)
+        public async Task<Community> GetCommunity(int id)
         {
-            return TransformToCommunityEntity(_communityDao.GetCommunity(id));
+            return TransformToCommunityEntity(await Task.Run(() => _communityDao.GetCommunity(id)));
         }
 
-        public int SaveCommunity(Community community)
+        public async Task<int> SaveCommunity(Community community)
         {
-            return _communityDao.SaveCommunity(TransformToCommunityDto(community));
+            return await Task.Run(() => _communityDao.SaveCommunity(TransformToCommunityDto(community)));
         }
 
         private CommunityDto TransformToCommunityDto(Community community)
@@ -62,7 +62,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
                 {
                     Id = community.Id,
                     Email = community.Email,
-                    Name = community.Name                   
+                    Name = community.Name
                 };
             }
             return null;
@@ -73,9 +73,9 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             _communityDao.DeleteCommunity(id);
         }
 
-        public Community GetCommunity(string email)
+        public async Task<Community> GetCommunity(string email)
         {
-            return TransformToCommunityEntity(_communityDao.GetCommunity(email));
+            return TransformToCommunityEntity(await Task.Run(() => _communityDao.GetCommunity(email)));
         }
 
         public void UpdateCommunity(Community community)

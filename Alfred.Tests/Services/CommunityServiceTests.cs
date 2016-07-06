@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Interfaces;
 using Alfred.Model;
@@ -35,7 +36,7 @@ namespace Alfred.Tests.Services
             communityRepo.GetCommunities().Returns(communities);
             fakeModelFactory.CreateCommunityModel(Arg.Any<Community>()).Returns(GetCommunityModel(communities.FirstOrDefault()));
             var communityService = new CommunityService(communityRepo, fakeModelFactory);
-            var results = communityService.GetCommunities();
+            var results = communityService.GetCommunities().Result;
             results.FirstOrDefault().Should().BeOfType<CommunityModel>();
             results.Count().Should().Be(communities.Count());
         }
@@ -61,7 +62,7 @@ namespace Alfred.Tests.Services
             communityRepo.GetCommunity(Arg.Is(2)).Returns(communityWithIdTwo);
             fakeModelFactory.CreateCommunityModel(Arg.Any<Community>()).Returns(GetCommunityModel(communityWithIdTwo));
             var communityService = new CommunityService(communityRepo, fakeModelFactory);
-            var result = communityService.GetCommunity(2);
+            var result = communityService.GetCommunity(2).Result;
             result.Should().BeOfType<CommunityModel>();
             result.Name.Should().Be(communityWithIdTwo.Name);
         }
@@ -70,11 +71,11 @@ namespace Alfred.Tests.Services
         public void Should_return_null_when_get_community_using_id_2_is_not_found()
         {
             var communityRepo = Substitute.For<ICommunityRepository>();
-            communityRepo.GetCommunity(Arg.Is(2)).ReturnsNull();
+            communityRepo.GetCommunity(Arg.Is(2)).Returns(Task.FromResult<Community>(null));
             var fakeModelFactory = Substitute.For<IModelFactory>();
 
             var communityService = new CommunityService(communityRepo, fakeModelFactory);
-            var result = communityService.GetCommunity(2);
+            var result = communityService.GetCommunity(2).Result;
             result.Should().BeNull();
         }
 
@@ -90,7 +91,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetCommunity(Arg.Is<string>(x => x == community.Email)).ReturnsNull();
             var communityService = new CommunityService(fakeRepo, fakeModelFactory);
 
-            communityService.CreateCommunity(createCommunityModel);
+            communityService.CreateCommunity(createCommunityModel).ConfigureAwait(false);
             fakeModelFactory.Received(1).CreateCommunity(Arg.Is<CreateCommunityModel>(x => x.Email == createCommunityModel.Email));
             fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
             fakeRepo.Received(1).SaveCommunity(Arg.Is<Community>(x => x.Email == community.Email));
@@ -108,7 +109,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetCommunity(Arg.Is<string>(x => x == community.Email)).Returns(community);
             var communityService = new CommunityService(fakeRepo, fakeModelFactory);
 
-            var result = communityService.CreateCommunity(createCommunityModel);
+            var result = communityService.CreateCommunity(createCommunityModel).Result;
             fakeModelFactory.Received(1).CreateCommunity(Arg.Is<CreateCommunityModel>(x => x.Email == createCommunityModel.Email));
             fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
             fakeRepo.DidNotReceive().SaveCommunity(Arg.Is<Community>(x => x.Email == community.Email));
@@ -129,7 +130,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetCommunity(Arg.Is(updateCommunityModel.Id)).Returns(originalCommunity);
             var communityService = new CommunityService(fakeRepo, fakeModelFactory);
 
-            communityService.UpdateCommunity(updateCommunityModel);
+            communityService.UpdateCommunity(updateCommunityModel).ConfigureAwait(false);
             fakeModelFactory.Received(1).CreateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email), originalCommunity);
             fakeModelFactory.Received(1).CreateCommunityModel(Arg.Is<Community>(x => x.Email == updateCommunityModel.Email));
             fakeRepo.Received(1).GetCommunity(Arg.Is(updateCommunityModel.Id));
@@ -147,7 +148,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetCommunity(Arg.Is(updateCommunityModel.Id)).ReturnsNull();
             var communityService = new CommunityService(fakeRepo, fakeModelFactory);
 
-            communityService.UpdateCommunity(updateCommunityModel);
+            communityService.UpdateCommunity(updateCommunityModel).ConfigureAwait(false);
             fakeModelFactory.DidNotReceive().CreateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email), null);
             fakeRepo.Received(1).GetCommunity(Arg.Is(updateCommunityModel.Id));
             fakeRepo.DidNotReceive().UpdateCommunity(Arg.Is<Community>(x => x.Email == updateCommunityModel.Email));
@@ -169,7 +170,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetCommunity(Arg.Is(2)).Returns(community);
             var communityService = new CommunityService(fakeRepo, fakeModelFactory);
 
-            communityService.DeleteCommunity(2);
+            communityService.DeleteCommunity(2).ConfigureAwait(false);
             fakeRepo.Received(1).DeleteCommunity(Arg.Is(2));
         }
 
@@ -182,7 +183,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetCommunity(Arg.Is(2)).ReturnsNull();
             var communityService = new CommunityService(fakeRepo, fakeModelFactory);
 
-            communityService.DeleteCommunity(2);
+            communityService.DeleteCommunity(2).ConfigureAwait(false);
             fakeRepo.DidNotReceive().DeleteCommunity(Arg.Is(2));
         }
 

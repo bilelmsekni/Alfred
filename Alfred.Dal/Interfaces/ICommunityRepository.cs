@@ -1,15 +1,16 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Alfred.Dal.Entities.Community;
 
 namespace Alfred.Dal.Interfaces
 {
     public interface ICommunityRepository
     {
-        IEnumerable<Community> GetCommunities();
-        Community GetCommunity(int id);
-        int SaveCommunity(Community community);
+        Task<IEnumerable<Community>> GetCommunities();
+        Task<Community> GetCommunity(int id);
+        Task<int> SaveCommunity(Community community);
         void DeleteCommunity(int id);
-        Community GetCommunity(string email);
+        Task<Community> GetCommunity(string email);
         void UpdateCommunity(Community community);
     }
 }

@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Alfred.Model.Communities;
 
 namespace Alfred.Services
 {
     public interface ICommunityService
     {
-        IEnumerable<CommunityModel> GetCommunities();
-        CommunityModel GetCommunity(int id);
-        int CreateCommunity(CreateCommunityModel createMemberModel);
-        CommunityModel UpdateCommunity(UpdateCommunityModel updateCommunityModel);
-        bool DeleteCommunity(int id);
+        Task<IEnumerable<CommunityModel>> GetCommunities();
+        Task<CommunityModel> GetCommunity(int id);
+        Task<int> CreateCommunity(CreateCommunityModel createMemberModel);
+        Task<CommunityModel> UpdateCommunity(UpdateCommunityModel updateCommunityModel);
+        Task<bool> DeleteCommunity(int id);
     }
 }
