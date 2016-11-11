@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
 using Alfred.Model.Artifacts;
 using Alfred.Model.Communities;
 using Alfred.Model.Members;
-using Newtonsoft.Json.Linq;
 
 namespace Alfred.Model.Implementation
 {
