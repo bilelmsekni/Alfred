@@ -19,13 +19,13 @@ namespace Alfred.Services
         }
         public async Task<IEnumerable<MemberModel>> GetMembers()
         {
-            var memberEntities = await _memberRepository.GetMembers();
+            var memberEntities = await _memberRepository.GetMembers().ConfigureAwait(false);
             return memberEntities.Select(x => _modelFactory.CreateMemberModel(x));
         }
 
         public async Task<MemberModel> GetMember(int id)
         {
-            var memberEntity = await _memberRepository.GetMember(id);
+            var memberEntity = await _memberRepository.GetMember(id).ConfigureAwait(false);
             return _modelFactory.CreateMemberModel(memberEntity);
         }
 
@@ -34,17 +34,17 @@ namespace Alfred.Services
             var member = _modelFactory.CreateMember(createMemberModel);
             if (member != null && !IsEmailUsed(member.Email))
             {
-                return await _memberRepository.SaveMember(member);
+                return await _memberRepository.SaveMember(member).ConfigureAwait(false);
             }
             return -1;
         }
 
         public async Task<bool> DeleteMember(int id)
         {
-            var member = await _memberRepository.GetMember(id);
+            var member = await _memberRepository.GetMember(id).ConfigureAwait(false);
             if (member != null)
             {
-                await Task.Run(() => _memberRepository.DeleteMember(id));
+                await _memberRepository.DeleteMember(id).ConfigureAwait(false);
                 return true;
             }
             return false;
@@ -52,13 +52,13 @@ namespace Alfred.Services
 
         public async Task<MemberModel> UpdateMember(UpdateMemberModel updateMemberModel)
         {
-            var originalMember = await _memberRepository.GetMember(updateMemberModel.Id);
+            var originalMember = await _memberRepository.GetMember(updateMemberModel.Id).ConfigureAwait(false);
             if (originalMember != null)
             {
                 var member = _modelFactory.CreateMember(updateMemberModel, originalMember);
                 if (member != null)
                 {
-                    await Task.Run(() => _memberRepository.UpdateMember(member));
+                    await _memberRepository.UpdateMember(member).ConfigureAwait(false);
                     return _modelFactory.CreateMemberModel(member);
                 }
             }

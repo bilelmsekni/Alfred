@@ -20,13 +20,13 @@ namespace Alfred.Services
 
         public async Task<IEnumerable<CommunityModel>> GetCommunities()
         {
-            var communityEntities = await _communityRepo.GetCommunities();
+            var communityEntities = await _communityRepo.GetCommunities().ConfigureAwait(false);
             return communityEntities.Select(x => _modelFactory.CreateCommunityModel(x));
         }
 
         public async Task<CommunityModel> GetCommunity(int id)
         {
-            var communityEntity = await _communityRepo.GetCommunity(id);
+            var communityEntity = await _communityRepo.GetCommunity(id).ConfigureAwait(false);
             if (communityEntity != null)
             {
                 return _modelFactory.CreateCommunityModel(communityEntity);
@@ -39,20 +39,20 @@ namespace Alfred.Services
             var community = _modelFactory.CreateCommunity(createCommunityModel);
             if (community != null && !IsEmailUsed(community.Email))
             {
-                return await _communityRepo.SaveCommunity(community);
+                return await _communityRepo.SaveCommunity(community).ConfigureAwait(false);
             }
             return -1;
         }
 
         public async Task<CommunityModel> UpdateCommunity(UpdateCommunityModel updateCommunityModel)
         {
-            var originalCommunity = await _communityRepo.GetCommunity(updateCommunityModel.Id);
+            var originalCommunity = await _communityRepo.GetCommunity(updateCommunityModel.Id).ConfigureAwait(false);
             if (originalCommunity != null)
             {
                 var community = _modelFactory.CreateCommunity(updateCommunityModel, originalCommunity);
                 if (community != null)
                 {
-                    await Task.Run(() => _communityRepo.UpdateCommunity(community));
+                    await _communityRepo.UpdateCommunity(community).ConfigureAwait(false);
                     return _modelFactory.CreateCommunityModel(community);
                 }
             }
@@ -61,10 +61,10 @@ namespace Alfred.Services
 
         public async Task<bool> DeleteCommunity(int id)
         {
-            var community = await _communityRepo.GetCommunity(id);
+            var community = await _communityRepo.GetCommunity(id).ConfigureAwait(false);
             if (community != null)
             {
-                await Task.Run(() => _communityRepo.DeleteCommunity(id));
+                await _communityRepo.DeleteCommunity(id).ConfigureAwait(false);
                 return true;
             }
             return false;

@@ -32,7 +32,7 @@ namespace Alfred.Controllers
         [ResponseType(typeof(IEnumerable<ArtifactModel>))]
         public async Task<IHttpActionResult> GetArtifacts()
         {
-            return Ok(await _artifactService.GetArtifacts());
+            return Ok(await _artifactService.GetArtifacts().ConfigureAwait(false));
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Alfred.Controllers
         [ResponseType(typeof(ArtifactModel))]
         public async Task<IHttpActionResult> GetArtifact(int id)
         {
-            var artifact = await _artifactService.GetArtifact(id);
+            var artifact = await _artifactService.GetArtifact(id).ConfigureAwait(false);
             if (artifact != null)
                 return Ok(artifact);
             return NotFound();
@@ -69,7 +69,7 @@ namespace Alfred.Controllers
         {
             if (ModelState.IsValid)
             {
-                var artifactId = await _artifactService.CreateArtifact(createArtifactModel);
+                var artifactId = await _artifactService.CreateArtifact(createArtifactModel).ConfigureAwait(false);
 
                 if (artifactId != -1)
                 {
@@ -98,7 +98,7 @@ namespace Alfred.Controllers
             if (ModelState.IsValid)
             {
                 updateArtifactModel.Id = id;
-                var artifact = await _artifactService.UpdateArtifact(updateArtifactModel);
+                var artifact = await _artifactService.UpdateArtifact(updateArtifactModel).ConfigureAwait(false);
                 if (artifact != null) return Ok(artifact);
                 return BadRequest("Something went wrong !");
             }
@@ -118,7 +118,7 @@ namespace Alfred.Controllers
         [Route("{id:int?}")]
         public async Task<IHttpActionResult> DeleteArtifact(int id)
         {
-            if (await _artifactService.DeleteArtifact(id))
+            if (await _artifactService.DeleteArtifact(id).ConfigureAwait(false))
                 return Ok();
 
             return NotFound();

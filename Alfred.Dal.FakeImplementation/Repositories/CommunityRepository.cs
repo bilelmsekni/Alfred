@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.FakeImplementation.Dao;
@@ -25,10 +23,12 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public async Task<IEnumerable<Community>> GetCommunities()
         {
-            return await Task.Run(() => _communityDao.GetCommunities().Select(TransformToCommunityEntity));
+            var communities = await _communityDao.GetCommunities().ConfigureAwait(false);
+            var communityTransfor = communities.Select(TransformToCommunityEntity).ToArray();
+            return await Task.WhenAll(communityTransfor).ConfigureAwait(false);
         }
 
-        private Community TransformToCommunityEntity(CommunityDto communityDto)
+        private async Task<Community> TransformToCommunityEntity(CommunityDto communityDto)
         {
             if (communityDto != null)
             {
@@ -37,8 +37,8 @@ namespace Alfred.Dal.FakeImplementation.Repositories
                     Id = communityDto.Id,
                     Email = communityDto.Email,
                     Name = communityDto.Name,
-                    Artifacts = _artifactRepository.GetCommunityArtifacts(communityDto.Id),
-                    Members = _memberRepository.GetCommunityMembers(communityDto.Id).Result
+                    Artifacts = await _artifactRepository.GetCommunityArtifacts(communityDto.Id).ConfigureAwait(false),
+                    Members = await _memberRepository.GetCommunityMembers(communityDto.Id).ConfigureAwait(false)
                 };
             }
             return null;
@@ -46,12 +46,12 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public async Task<Community> GetCommunity(int id)
         {
-            return TransformToCommunityEntity(await Task.Run(() => _communityDao.GetCommunity(id)));
+            return await TransformToCommunityEntity(await _communityDao.GetCommunity(id).ConfigureAwait(false)).ConfigureAwait(false);
         }
 
         public async Task<int> SaveCommunity(Community community)
         {
-            return await Task.Run(() => _communityDao.SaveCommunity(TransformToCommunityDto(community)));
+            return await _communityDao.SaveCommunity(TransformToCommunityDto(community)).ConfigureAwait(false);
         }
 
         private CommunityDto TransformToCommunityDto(Community community)
@@ -68,19 +68,19 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             return null;
         }
 
-        public void DeleteCommunity(int id)
+        public async Task DeleteCommunity(int id)
         {
-            _communityDao.DeleteCommunity(id);
+            await _communityDao.DeleteCommunity(id).ConfigureAwait(false);
         }
 
         public async Task<Community> GetCommunity(string email)
         {
-            return TransformToCommunityEntity(await Task.Run(() => _communityDao.GetCommunity(email)));
+            return await TransformToCommunityEntity(await _communityDao.GetCommunity(email).ConfigureAwait(false)).ConfigureAwait(false);
         }
 
-        public void UpdateCommunity(Community community)
+        public async Task UpdateCommunity(Community community)
         {
-            _communityDao.UpdateCommunity(TransformToCommunityDto(community));
+            await _communityDao.UpdateCommunity(TransformToCommunityDto(community)).ConfigureAwait(false);
         }
     }
 }

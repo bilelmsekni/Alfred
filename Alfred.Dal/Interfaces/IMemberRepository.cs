@@ -9,9 +9,9 @@ namespace Alfred.Dal.Interfaces
         Task<IEnumerable<Member>> GetMembers();
         Task<Member> GetMember(int id);
         Task<int> SaveMember(Member member);
-        void DeleteMember(int id);
+        Task DeleteMember(int id);
         Task<Member> GetMember(string email);
-        void UpdateMember(Member member);
+        Task UpdateMember(Member member);
         Task<IEnumerable<Member>> GetCommunityMembers(int id);
     }
 }

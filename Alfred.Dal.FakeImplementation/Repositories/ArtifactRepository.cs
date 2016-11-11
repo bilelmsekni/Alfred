@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.FakeImplementation.Dao;
@@ -21,7 +19,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public async Task<IEnumerable<Artifact>> GetArtifacts()
         {
-            var artifactDtos = await Task.FromResult(_artifactDao.GetArtifacts()).ConfigureAwait(false);
+            var artifactDtos = await _artifactDao.GetArtifacts().ConfigureAwait(false);
             return artifactDtos.Select(TransformToArtifactEntity);
         }
 
@@ -42,13 +40,13 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public async Task<Artifact> GetArtifact(int id)
         {
-            return TransformToArtifactEntity(await Task.FromResult(_artifactDao.GetArtifact(id)).ConfigureAwait(false));
+            return TransformToArtifactEntity(await _artifactDao.GetArtifact(id).ConfigureAwait(false));
         }
 
         public async Task<int> SaveArtifact(Artifact artifact)
         {
             var artifactDto = TransformToArtifactDto(artifact);
-            return await Task.FromResult(_artifactDao.SaveArtifact(artifactDto));
+            return await _artifactDao.SaveArtifact(artifactDto).ConfigureAwait(false);
         }
 
         private ArtifactDto TransformToArtifactDto(Artifact artifact)
@@ -68,26 +66,27 @@ namespace Alfred.Dal.FakeImplementation.Repositories
             return null;
         }
 
-        public void DeleteArtifact(int id)
+        public async Task DeleteArtifact(int id)
         {
-            _artifactDao.DeleteArtifact(id);
+            await _artifactDao.DeleteArtifact(id).ConfigureAwait(false);
         }
 
-        public void UpdateArtifact(Artifact artifact)
+        public async Task UpdateArtifact(Artifact artifact)
         {
             var artifactDto = TransformToArtifactDto(artifact);
-            _artifactDao.UpdateArtifact(artifactDto);
+            await _artifactDao.UpdateArtifact(artifactDto).ConfigureAwait(false);
         }
 
-        public IEnumerable<Artifact> GetMemberArtifacts(int id)
+        public async Task<IEnumerable<Artifact>> GetMemberArtifacts(int id)
         {
-            var artifactDtos = _artifactDao.GetMemberArtifacts(id);
+            var artifactDtos = await _artifactDao.GetMemberArtifacts(id).ConfigureAwait(false);
             return artifactDtos.Select(TransformToArtifactEntity);
         }
 
-        public IEnumerable<Artifact> GetCommunityArtifacts(int id)
+        public async Task<IEnumerable<Artifact>> GetCommunityArtifacts(int id)
         {
-            return _artifactDao.GetCommunityArtifacts(id).Select(TransformToArtifactEntity);
+            var communityArtifacts = await _artifactDao.GetCommunityArtifacts(id).ConfigureAwait(false);
+            return communityArtifacts.Select(TransformToArtifactEntity).ToArray();
         }
     }
 }

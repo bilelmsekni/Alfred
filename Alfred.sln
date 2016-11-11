@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{1758C3FD-0922-4146-9AE7-106E20EB9252}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Model.Implementation", "Alfred.Model.Implementation\Alfred.Model.Implementation.csproj", "{279B8AB3-B2A8-4431-8CC3-271148FD4068}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Model.Implementation.Tests", "Alfred.Model.Implementation.Tests\Alfred.Model.Implementation.Tests.csproj", "{C28CE18D-3F47-4434-A939-237E6E4AEDF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E32EDA1A-507E-47E5-9637-10B1815F4F73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,5 +80,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6CD448E8-F01B-4A71-B918-D748C0DE0333} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
+		{C28CE18D-3F47-4434-A939-237E6E4AEDF4} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
 	EndGlobalSection
 EndGlobal

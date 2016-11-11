@@ -9,43 +9,49 @@ namespace Alfred.Dal.FakeImplementation.Dao
     public class ArtifactDao : IArtifactDao
     {
         private readonly List<ArtifactDto> _artifacts = FakeDatabase.ArtifactData;
-        
-        public IEnumerable<ArtifactDto> GetArtifacts()
+
+        public async Task<IEnumerable<ArtifactDto>> GetArtifacts()
         {
-            return _artifacts;
+            return await Task.Run(() => _artifacts).ConfigureAwait(false);
         }
 
-        public ArtifactDto GetArtifact(int id)
+        public async Task<ArtifactDto> GetArtifact(int id)
         {
-            return _artifacts.FirstOrDefault(x => x.Id == id);
+            return await Task.Run(() => _artifacts.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false);
         }
 
-        public int SaveArtifact(ArtifactDto artifact)
+        public async Task<int> SaveArtifact(ArtifactDto artifact)
         {
-            artifact.Id = _artifacts.Count + 1;
-            _artifacts.Add(artifact);
-            return artifact.Id;
+            return await Task.Run(() =>
+            {
+                artifact.Id = _artifacts.Count + 1;
+                _artifacts.Add(artifact);
+                return artifact.Id;
+            }).ConfigureAwait(false);
         }
 
-        public void DeleteArtifact(int id)
+        public async Task DeleteArtifact(int id)
         {
-            _artifacts.RemoveAt(_artifacts.FindIndex(x=>x.Id == id));
+            await Task.Run(() => _artifacts.RemoveAt(_artifacts.FindIndex(x => x.Id == id))).ConfigureAwait(false);
         }
 
-        public void UpdateArtifact(ArtifactDto artifact)
+        public async Task UpdateArtifact(ArtifactDto artifact)
         {
-            _artifacts.RemoveAt(_artifacts.FindIndex(x => x.Id == artifact.Id));            
-            _artifacts.Add(artifact);
+            await Task.Run(() =>
+            {
+                _artifacts.RemoveAt(_artifacts.FindIndex(x => x.Id == artifact.Id));
+                _artifacts.Add(artifact);
+            }).ConfigureAwait(false);
         }
 
-        public IEnumerable<ArtifactDto> GetMemberArtifacts(int id)
+        public async Task<IEnumerable<ArtifactDto>> GetMemberArtifacts(int id)
         {
-            return _artifacts.Where(x => x.MemberId == id);
+            return await Task.Run(() => _artifacts.Where(x => x.MemberId == id)).ConfigureAwait(false);
         }
 
-        public IEnumerable<ArtifactDto> GetCommunityArtifacts(int id)
+        public async Task<IEnumerable<ArtifactDto>> GetCommunityArtifacts(int id)
         {
-            return _artifacts.Where(x => x.CommunityId == id);
+            return await Task.Run(() => _artifacts.Where(x => x.CommunityId == id)).ConfigureAwait(false);
         }
     }
 }

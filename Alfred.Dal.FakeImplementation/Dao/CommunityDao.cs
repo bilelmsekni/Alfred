@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Alfred.Dal.FakeImplementation.Database;
 using Alfred.Dal.FakeImplementation.EntityDtos;
 
@@ -7,39 +8,45 @@ namespace Alfred.Dal.FakeImplementation.Dao
 {
     public class CommunityDao : ICommunityDao
     {
-        private List<CommunityDto> _communities = FakeDatabase.Communities;        
+        private readonly List<CommunityDto> _communities = FakeDatabase.Communities;
 
-        public IEnumerable<CommunityDto> GetCommunities()
+        public async Task<IEnumerable<CommunityDto>> GetCommunities()
         {
-            return _communities;
+            return await Task.Run(() => _communities).ConfigureAwait(false);
         }
 
-        public CommunityDto GetCommunity(int id)
+        public async Task<CommunityDto> GetCommunity(int id)
         {
-            return _communities.FirstOrDefault(x => x.Id == id);
+            return await Task.Run(()=>_communities.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false);
         }
 
-        public int SaveCommunity(CommunityDto communityDto)
+        public async Task<int> SaveCommunity(CommunityDto communityDto)
         {
-            communityDto.Id = _communities.Count + 1;
-            _communities.Add(communityDto);
-            return communityDto.Id;
+            return await Task.Run(() =>
+            {
+                communityDto.Id = _communities.Count + 1;
+                _communities.Add(communityDto);
+                return communityDto.Id;
+            }).ConfigureAwait(false);
         }
 
-        public void DeleteCommunity(int id)
+        public async Task DeleteCommunity(int id)
         {
-            _communities.RemoveAt(_communities.FindIndex(x => x.Id == id));
+            await Task.Run(()=>_communities.RemoveAt(_communities.FindIndex(x => x.Id == id))).ConfigureAwait(false);
         }
 
-        public CommunityDto GetCommunity(string email)
+        public async Task<CommunityDto> GetCommunity(string email)
         {
-            return _communities.FirstOrDefault(x => x.Email.ToLowerInvariant() == email.ToLowerInvariant());
+            return await Task.Run(()=>_communities.FirstOrDefault(x => x.Email.ToLowerInvariant() == email.ToLowerInvariant())).ConfigureAwait(false);
         }
 
-        public void UpdateCommunity(CommunityDto communityDto)
+        public async Task UpdateCommunity(CommunityDto communityDto)
         {
-            _communities.RemoveAt(_communities.FindIndex(x => x.Id == communityDto.Id));
-            _communities.Add(communityDto);
+            await Task.Run(() =>
+            {
+                _communities.RemoveAt(_communities.FindIndex(x => x.Id == communityDto.Id));
+                _communities.Add(communityDto);
+            }).ConfigureAwait(false);
         }
     }
 }

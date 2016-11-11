@@ -29,7 +29,7 @@ namespace Alfred.Controllers
         [ResponseType(typeof(IEnumerable<CommunityModel>))]
         public async Task<IHttpActionResult> GetCommunities()
         {
-            return Ok(await _communityService.GetCommunities());
+            return Ok(await _communityService.GetCommunities().ConfigureAwait(false));
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Alfred.Controllers
         [ResponseType(typeof(CommunityModel))]
         public async Task<IHttpActionResult> GetCommunity(int id)
         {
-            var community = await _communityService.GetCommunity(id);
+            var community = await _communityService.GetCommunity(id).ConfigureAwait(false);
             if (community != null)
                 return Ok(community);
             return NotFound();
@@ -66,7 +66,7 @@ namespace Alfred.Controllers
         {
             if (ModelState.IsValid)
             {
-                var communityId = await _communityService.CreateCommunity(createCommunityModel);
+                var communityId = await _communityService.CreateCommunity(createCommunityModel).ConfigureAwait(false);
                 if (communityId != -1) return Created("", $"{Request.RequestUri.AbsoluteUri}/{communityId}");
                 return BadRequest("Something went wrong !");
             }
@@ -89,7 +89,7 @@ namespace Alfred.Controllers
             if (ModelState.IsValid)
             {
                 updateCommunityModel.Id = id;
-                var community = await _communityService.UpdateCommunity(updateCommunityModel);
+                var community = await _communityService.UpdateCommunity(updateCommunityModel).ConfigureAwait(false);
                 if (community != null) return Ok(community);
                 return BadRequest("Something went wrong !");
             }
@@ -109,7 +109,7 @@ namespace Alfred.Controllers
         [Route("{id:int?}")]
         public async Task<IHttpActionResult> DeleteCommunity(int id)
         {
-            if (await _communityService.DeleteCommunity(id)) return Ok();
+            if (await _communityService.DeleteCommunity(id).ConfigureAwait(false)) return Ok();
             return NotFound();
         }
     }

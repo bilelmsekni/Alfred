@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Alfred.Dal.FakeImplementation.Database;
 using Alfred.Dal.FakeImplementation.EntityDtos;
 
@@ -8,44 +9,51 @@ namespace Alfred.Dal.FakeImplementation.Dao
 {
     public class MemberDao : IMemberDao
     {
-        private readonly List<MemberDto> _members = FakeDatabase.Members;        
+        private readonly List<MemberDto> _members = FakeDatabase.Members;
 
-        public IEnumerable<MemberDto> GetMembers()
+        public async Task<IEnumerable<MemberDto>> GetMembers()
         {
-            return _members;
+            return await Task.Run(() => _members).ConfigureAwait(false);
         }
 
-        public int SaveMember(MemberDto member)
+        public async Task<int> SaveMember(MemberDto member)
         {
-            member.Id = _members.Count + 1;
-            _members.Add(member);
-            return member.Id;
+            return await Task.Run(() =>
+            {
+                member.Id = _members.Count + 1;
+                _members.Add(member);
+                return member.Id;
+            }).ConfigureAwait(false);
         }
 
-        public MemberDto GetMember(string email)
+        public async Task<MemberDto> GetMember(string email)
         {
-            return _members.FirstOrDefault(x => x.Email.ToLowerInvariant() == email.ToLowerInvariant());
+            return await Task.Run(() => _members.FirstOrDefault(x => x.Email.ToLowerInvariant() == email.ToLowerInvariant())).ConfigureAwait(false);
         }
 
-        public MemberDto GetMember(int id)
+        public async Task<MemberDto> GetMember(int id)
         {
-            return _members.FirstOrDefault(x => x.Id == id);
+            return await Task.Run(() => _members.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false);
         }
 
-        public void UpdateMember(MemberDto member)
+        public async Task UpdateMember(MemberDto member)
         {
-            _members.RemoveAt(_members.FindIndex(x => x.Id == member.Id));
-            _members.Add(member);
+            await Task.Run(() =>
+            {
+                _members.RemoveAt(_members.FindIndex(x => x.Id == member.Id));
+                _members.Add(member);
+
+            }).ConfigureAwait(false);
         }
 
-        public void DeleteMember(int id)
+        public async Task DeleteMember(int id)
         {
-            _members.RemoveAt(_members.FindIndex(x => x.Id == id));
+            await Task.Run(() => _members.RemoveAt(_members.FindIndex(x => x.Id == id))).ConfigureAwait(false);
         }
 
-        public IEnumerable<MemberDto> GetCommunityMembers(int id)
+        public async Task<IEnumerable<MemberDto>> GetCommunityMembers(int id)
         {
-            return _members.Where(x => x.CommunityIds.Contains(id));
+            return await Task.Run(() => _members.Where(x => x.CommunityIds.Contains(id))).ConfigureAwait(false);
         }
     }
 }

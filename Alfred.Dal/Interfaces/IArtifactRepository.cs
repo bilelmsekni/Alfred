@@ -9,9 +9,9 @@ namespace Alfred.Dal.Interfaces
         Task<IEnumerable<Artifact>> GetArtifacts();
         Task<Artifact> GetArtifact(int id);
         Task<int> SaveArtifact(Artifact artifact);
-        void DeleteArtifact(int id);
-        void UpdateArtifact(Artifact artifact);
-        IEnumerable<Artifact> GetMemberArtifacts(int id);
-        IEnumerable<Artifact> GetCommunityArtifacts(int id);
+        Task DeleteArtifact(int id);
+        Task UpdateArtifact(Artifact artifact);
+        Task<IEnumerable<Artifact>> GetMemberArtifacts(int id);
+        Task<IEnumerable<Artifact>> GetCommunityArtifacts(int id);
     }
 }

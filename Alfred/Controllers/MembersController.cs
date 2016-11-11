@@ -29,7 +29,7 @@ namespace Alfred.Controllers
         [ResponseType(typeof(IEnumerable<MemberModel>))]
         public async Task<IHttpActionResult> GetMembers()
         {
-            return Ok(await _memberService.GetMembers());            
+            return Ok(await _memberService.GetMembers().ConfigureAwait(false));            
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Alfred.Controllers
         [ResponseType(typeof(MemberModel))]
         public async Task<IHttpActionResult> GetMember(int id)
         {
-            var member = await _memberService.GetMember(id);
+            var member = await _memberService.GetMember(id).ConfigureAwait(false);
             if (member != null)
                 return Ok(member);
             return NotFound();
@@ -66,7 +66,7 @@ namespace Alfred.Controllers
         {
             if (ModelState.IsValid)
             {
-                var memberId = await _memberService.CreateMember(createMemberModel);
+                var memberId = await _memberService.CreateMember(createMemberModel).ConfigureAwait(false);
                 if (memberId != -1) return Created("", $"{Request.RequestUri.AbsoluteUri}/{memberId}");
                 return BadRequest("Something went wrong !");
             }
@@ -89,7 +89,7 @@ namespace Alfred.Controllers
             if (ModelState.IsValid)
             {
                 updateMemberModel.Id = id;
-                var memberModel = await _memberService.UpdateMember(updateMemberModel);
+                var memberModel = await _memberService.UpdateMember(updateMemberModel).ConfigureAwait(false);
                 if (memberModel != null) return Ok(memberModel);
                 return BadRequest("Something went wrong !");
             }
@@ -108,7 +108,7 @@ namespace Alfred.Controllers
         [Route("{id:int?}")]
         public async Task<IHttpActionResult> DeleteMember(int id)
         {
-            if (await _memberService.DeleteMember(id)) return Ok();
+            if (await _memberService.DeleteMember(id).ConfigureAwait(false)) return Ok();
             return NotFound();
         }
     }
