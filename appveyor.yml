@@ -9,6 +9,9 @@ assembly_info:
   assembly_version: '{version}'
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: 8FT9CQo21ngsgKlN3/RrjV4tvCRhFaYnBcz2pZkc9zmGcc1Cmq9QyXEHisxkOD0g
 install:
 - cmd: >-
     set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
@@ -21,7 +24,8 @@ build:
 after_build:
 - cmd: >-
     .paket\paket.exe pack output nupkgs
-
+after_test:
+- cmd: .\run_coverage.cmd
 artifacts:
 - path: nupkgs\*.nupkg
   name: nupkgs
