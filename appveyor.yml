@@ -26,6 +26,3 @@ after_build:
     .paket\paket.exe pack output nupkgs
 after_test:
 - cmd: .\run_coverage.cmd
-artifacts:
-- path: nupkgs\*.nupkg
-  name: nupkgs
