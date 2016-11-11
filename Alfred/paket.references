@@ -2,3 +2,5 @@ Microsoft.Owin.Host.SystemWeb
 Microsoft.AspNet.WebApi.Owin
 LightInject.WebApi
 Swashbuckle.Core
+Newtonsoft.Json redirects: on
+Microsoft.Owin redirects: on
