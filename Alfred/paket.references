@@ -1,5 +1,4 @@
 Microsoft.Owin.Host.SystemWeb
-Microsoft.CodeDom.Providers.DotNetCompilerPlatform
 Microsoft.AspNet.WebApi.Owin
 LightInject.WebApi
 Swashbuckle.Core
