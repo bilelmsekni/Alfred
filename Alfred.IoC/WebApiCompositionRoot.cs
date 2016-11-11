@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 using Alfred.Dal.FakeImplementation.Dao;
-using Alfred.Dal.FakeImplementation.Repositories;
-using Alfred.Dal.Interfaces;
 using Alfred.Model;
 using Alfred.Model.Implementation;
 using LightInject;
