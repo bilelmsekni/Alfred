@@ -12,6 +12,8 @@ assembly_info:
 environment:
   COVERALLS_REPO_TOKEN:
     secure: 8FT9CQo21ngsgKlN3/RrjV4tvCRhFaYnBcz2pZkc9zmGcc1Cmq9QyXEHisxkOD0g
+  SonarQube_Token:
+    secure: 4SAyRqYsx6khVu6ERCwz3arpWEuZ82ZEDGRdTbZSfKCk5vtx4zxLc3QWcquAsC0x
 install:
 - cmd: >-
     set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
@@ -26,3 +28,4 @@ after_build:
     .paket\paket.exe pack output nupkgs
 after_test:
 - cmd: .\run_coverage.cmd
+- cmd: .\run_quality.cmd
