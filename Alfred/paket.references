@@ -5,3 +5,4 @@ Swashbuckle.Core
 Newtonsoft.Json redirects: on
 Microsoft.Owin redirects: on
 Microsoft.Owin.Cors
+Microsoft.Extensions.Configuration
