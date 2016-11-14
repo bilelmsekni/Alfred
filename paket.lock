@@ -6,6 +6,7 @@ NUGET
     LightInject (4.0.11)
     LightInject.WebApi (1.0.0.4)
       LightInject (>= 3.0.2.7)
+    Microsoft.AspNet.Cors (5.2.3)
     Microsoft.AspNet.WebApi.Client (5.2.3)
       Newtonsoft.Json (>= 6.0.4)
     Microsoft.AspNet.WebApi.Core (5.2.3)
@@ -14,7 +15,34 @@ NUGET
       Microsoft.AspNet.WebApi.Core (>= 5.2.3 < 5.3)
       Microsoft.Owin (>= 2.0.2)
       Owin (>= 1.0)
+    Microsoft.Extensions.Configuration (1.0)
+      Microsoft.Extensions.Configuration.Abstractions (>= 1.0)
+      System.Collections (>= 4.0.11)
+      System.Diagnostics.Debug (>= 4.0.11)
+      System.IO (>= 4.1)
+      System.Resources.ResourceManager (>= 4.0.1)
+      System.Runtime.Extensions (>= 4.1)
+      System.Runtime.InteropServices (>= 4.1)
+      System.Threading (>= 4.0.11)
+    Microsoft.Extensions.Configuration.Abstractions (1.0)
+    Microsoft.Extensions.Configuration.FileExtensions (1.0) - framework: net461
+      Microsoft.Extensions.Configuration (>= 1.0) - framework: net461
+      Microsoft.Extensions.FileProviders.Physical (>= 1.0) - framework: net461
+    Microsoft.Extensions.Configuration.Json (1.0)
+      Microsoft.Extensions.Configuration (>= 1.0) - framework: net461
+      Microsoft.Extensions.Configuration.FileExtensions (>= 1.0) - framework: net461
+      Newtonsoft.Json (>= 9.0.1) - framework: net461
+    Microsoft.Extensions.FileProviders.Abstractions (1.0) - framework: net461
+    Microsoft.Extensions.FileProviders.Physical (1.0) - framework: net461
+      Microsoft.Extensions.FileProviders.Abstractions (>= 1.0) - framework: net461
+      Microsoft.Extensions.FileSystemGlobbing (>= 1.0) - framework: net461
+    Microsoft.Extensions.FileSystemGlobbing (1.0) - framework: net461
+    Microsoft.Extensions.Primitives (1.0)
     Microsoft.Owin (3.0.1)
+      Owin (>= 1.0)
+    Microsoft.Owin.Cors (3.0.1)
+      Microsoft.AspNet.Cors (>= 5.0)
+      Microsoft.Owin (>= 3.0.1)
       Owin (>= 1.0)
     Microsoft.Owin.Host.SystemWeb (3.0.1)
       Microsoft.Owin (>= 3.0.1)
@@ -27,3 +55,10 @@ NUGET
       Newtonsoft.Json (>= 6.0.1)
     Swashbuckle.Core (5.3.2)
       Microsoft.AspNet.WebApi.Core (>= 4.0.20710)
+    System.Collections (4.0.11)
+    System.Diagnostics.Debug (4.0.11)
+    System.IO (4.1)
+    System.Resources.ResourceManager (4.0.1)
+    System.Runtime.Extensions (4.1)
+    System.Runtime.InteropServices (4.1)
+    System.Threading (4.0.11)

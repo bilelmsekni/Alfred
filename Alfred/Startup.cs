@@ -4,6 +4,7 @@ using System.Web.Http;
 using Alfred.IoC;
 using LightInject;
 using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
@@ -22,7 +23,9 @@ namespace Alfred
             ConfigIoC(config);
             ConfigSwagger(config);
             ConfigWebApi(config);
-            appBuilder.UseWebApi(config);
+            appBuilder
+                .UseCors(CorsOptions.AllowAll)
+                .UseWebApi(config);
         }
 
         private void ConfigWebApi(HttpConfiguration config)

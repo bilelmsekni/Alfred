@@ -2,6 +2,7 @@ source https://nuget.org/api/v2
 framework: net45, net461
 nuget Microsoft.Owin.Host.SystemWeb
 nuget Microsoft.AspNet.WebApi.Owin
+nuget Microsoft.Owin.Cors
 nuget AutoFixture
 nuget LightInject.WebApi
 nuget SimpleHelpers.ObjectDiffPatch
@@ -9,3 +10,6 @@ nuget Swashbuckle.Core
 nuget NUnit
 nuget NSubstitute
 nuget FluentAssertions
+nuget Microsoft.Extensions.Configuration
+nuget Microsoft.Extensions.Configuration.Json
+nuget Microsoft.Extensions.Primitives

@@ -45,6 +45,10 @@
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alfred.Configuration.Json\Alfred.Configuration.Json.csproj">
+      <Project>{72A89197-AB57-4966-A23D-27575BBC5D13}</Project>
+      <Name>Alfred.Configuration.Json</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alfred.Dal.FakeImplementation\Alfred.Dal.FakeImplementation.csproj">
       <Project>{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}</Project>
       <Name>Alfred.Dal.FakeImplementation</Name>
@@ -95,6 +99,28 @@
       <ItemGroup>
         <Reference Include="LightInject.WebApi">
           <HintPath>..\packages\LightInject.WebApi\lib\net45\LightInject.WebApi.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.6.1')">
+      <ItemGroup>
+        <Reference Include="Microsoft.Extensions.Configuration">
+          <HintPath>..\packages\Microsoft.Extensions.Configuration\lib\netstandard1.1\Microsoft.Extensions.Configuration.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.6.1')">
+      <ItemGroup>
+        <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+          <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions\lib\netstandard1.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
