@@ -9,7 +9,7 @@ namespace Alfred.Dal.FakeImplementation.Database
             {
                 new ArtifactDto
                 {
-                    Title = "Clean Code Support",
+                    Title = "Clean Code Article",
                     Id = 1,
                     Bonus = 0,
                     Status = 1,
@@ -32,7 +32,7 @@ namespace Alfred.Dal.FakeImplementation.Database
                 },
                 new ArtifactDto
                 {
-                    Title = "Formation BDD",
+                    Title = "BDD Coaching",
                     Id = 3,
                     Bonus = 0,
                     Status = 2,
@@ -43,8 +43,8 @@ namespace Alfred.Dal.FakeImplementation.Database
                 },
                 new ArtifactDto
                 {
-                    Title = "Formation Agile",
-                    Id = 3,
+                    Title = "Agile Coaching",
+                    Id = 4,
                     Bonus = 0,
                     Status = 2,
                     Type = 1,
@@ -59,20 +59,20 @@ namespace Alfred.Dal.FakeImplementation.Database
                 new CommunityDto
                 {
                     Id = 1,
-                    Email = "StarTech@superheros.com",
-                    Name = "StarTech"
+                    Email = "DotNetCommunity@superheros.com",
+                    Name = "DotNetCommunity"
                 },
                 new CommunityDto
                 {
                     Id = 2,
-                    Email = "StarOne@superheros.com",
-                    Name = "StarOne"
+                    Email = "JavaCommunity@superheros.com",
+                    Name = "JavaCommunity"
                 },
                 new CommunityDto
                 {
                     Id = 3,
-                    Email = "ArgentDawn@superheros.com",
-                    Name = "ArgentDawn"
+                    Email = "AgileCommunity@superheros.com",
+                    Name = "AgileCommunity"
                 }
             };
 

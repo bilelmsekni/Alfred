@@ -5,6 +5,7 @@ namespace Alfred.Dal.Entities.Artifact
         ToDo,
         InProgress,
         Done,
+        Pending,
         Canceled
     }
 }
