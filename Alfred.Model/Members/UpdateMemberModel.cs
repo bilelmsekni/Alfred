@@ -1,4 +1,4 @@
-using Alfred.Dal.Entities.Community;
+using Alfred.Domain.Enums;
 using Newtonsoft.Json;
 
 namespace Alfred.Model.Members

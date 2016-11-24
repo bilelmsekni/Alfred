@@ -1,4 +1,4 @@
-namespace Alfred.Dal.Entities.Community
+namespace Alfred.Domain.Enums
 {
     public enum CommunityRole
     {

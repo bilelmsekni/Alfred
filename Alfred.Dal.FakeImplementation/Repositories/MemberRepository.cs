@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.FakeImplementation.Dao;
 using Alfred.Dal.FakeImplementation.EntityDtos;
 using Alfred.Dal.Interfaces;
+using Alfred.Domain.Enums;
 
 namespace Alfred.Dal.FakeImplementation.Repositories
 {

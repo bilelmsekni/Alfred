@@ -1,4 +1,4 @@
-using Alfred.Dal.Entities.Artifact;
+using Alfred.Domain.Enums;
 using Newtonsoft.Json;
 
 namespace Alfred.Model.Artifacts

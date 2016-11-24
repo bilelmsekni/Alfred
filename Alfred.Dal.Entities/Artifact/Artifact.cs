@@ -1,3 +1,5 @@
+using Alfred.Domain.Enums;
+
 namespace Alfred.Dal.Entities.Artifact
 {
     public class Artifact

@@ -27,7 +27,7 @@ namespace Alfred.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<ArtifactModel>))]
-        public async Task<IHttpActionResult> GetArtifacts()
+        public async Task<IHttpActionResult> GetArtifacts(string ids, string title)
         {
             return Ok(await _artifactService.GetArtifacts().ConfigureAwait(false));
         }
@@ -91,7 +91,7 @@ namespace Alfred.Controllers
         [ResponseType(typeof(ArtifactModel))]
         [Route("{id:int?}")]
         public async Task<IHttpActionResult> UpdateArtifact(int id, [FromBody]UpdateArtifactModel updateArtifactModel)
-        {            
+        {
             if (ModelState.IsValid)
             {
                 updateArtifactModel.Id = id;
@@ -120,5 +120,11 @@ namespace Alfred.Controllers
 
             return NotFound();
         }
+    }
+
+    public class ArtifactQueryParams
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Alfred.Dal.Entities.Community;
+using Alfred.Domain.Enums;
 using Alfred.Model.Artifacts;
 using Microsoft.Build.Framework;
 

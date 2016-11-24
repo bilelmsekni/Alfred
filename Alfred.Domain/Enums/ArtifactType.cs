@@ -1,4 +1,4 @@
-namespace Alfred.Dal.Entities.Artifact
+namespace Alfred.Domain.Enums
 {
     public enum ArtifactType
     {

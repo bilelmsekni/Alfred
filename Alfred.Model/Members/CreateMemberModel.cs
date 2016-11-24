@@ -1,4 +1,4 @@
-using Alfred.Dal.Entities.Community;
+using Alfred.Domain.Enums;
 using Microsoft.Build.Framework;
 
 namespace Alfred.Model.Members

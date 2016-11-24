@@ -5,6 +5,7 @@ using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.FakeImplementation.Dao;
 using Alfred.Dal.FakeImplementation.EntityDtos;
 using Alfred.Dal.Interfaces;
+using Alfred.Domain.Enums;
 
 namespace Alfred.Dal.FakeImplementation.Repositories
 {
