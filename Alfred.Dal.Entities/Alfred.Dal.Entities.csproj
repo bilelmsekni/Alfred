@@ -46,14 +46,11 @@
     </Compile>
     <Compile Include="Artifact\Artifact.cs" />
     <Compile Include="Community\Community.cs" />
+    <Compile Include="Enums\ArtifactStatus.cs" />
+    <Compile Include="Enums\ArtifactType.cs" />
+    <Compile Include="Enums\CommunityRole.cs" />
     <Compile Include="Member\Member.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
-      <Project>{412D4181-EE30-4334-B6CD-23A1E9F1041F}</Project>
-      <Name>Alfred.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

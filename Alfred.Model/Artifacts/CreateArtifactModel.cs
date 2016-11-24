@@ -1,4 +1,4 @@
-using Alfred.Domain.Enums;
+using Alfred.Dal.Entities.Enums;
 using Microsoft.Build.Framework;
 
 namespace Alfred.Model.Artifacts

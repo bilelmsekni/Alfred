@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
+using Alfred.Dal.Entities.Enums;
 using Alfred.Dal.Entities.Member;
-using Alfred.Domain.Enums;
 using Alfred.Model.Artifacts;
 using Alfred.Model.Communities;
 using Alfred.Model.Members;

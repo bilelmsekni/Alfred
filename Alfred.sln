@@ -42,8 +42,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E32EDA1A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Configuration.Json", "Alfred.Configuration.Json\Alfred.Configuration.Json.csproj", "{72A89197-AB57-4966-A23D-27575BBC5D13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Domain", "Alfred.Domain\Alfred.Domain.csproj", "{412D4181-EE30-4334-B6CD-23A1E9F1041F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,10 +88,6 @@ Global
 		{72A89197-AB57-4966-A23D-27575BBC5D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72A89197-AB57-4966-A23D-27575BBC5D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72A89197-AB57-4966-A23D-27575BBC5D13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{412D4181-EE30-4334-B6CD-23A1E9F1041F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{412D4181-EE30-4334-B6CD-23A1E9F1041F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{412D4181-EE30-4334-B6CD-23A1E9F1041F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{412D4181-EE30-4334-B6CD-23A1E9F1041F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

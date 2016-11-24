@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alfred.Dal.Entities.Community;
-using Alfred.Domain.Enums;
+using Alfred.Dal.Entities.Enums;
 
 namespace Alfred.Dal.Entities.Member
 {

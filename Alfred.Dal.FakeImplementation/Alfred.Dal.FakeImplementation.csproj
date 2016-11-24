@@ -63,10 +63,6 @@
       <Project>{adbccd95-4768-49c5-929f-9562aa586293}</Project>
       <Name>Alfred.Dal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
-      <Project>{412D4181-EE30-4334-B6CD-23A1E9F1041F}</Project>
-      <Name>Alfred.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />

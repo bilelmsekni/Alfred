@@ -48,10 +48,6 @@
       <Project>{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}</Project>
       <Name>Alfred.Dal.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alfred.Model\Alfred.Model.csproj">
-      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
-      <Name>Alfred.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

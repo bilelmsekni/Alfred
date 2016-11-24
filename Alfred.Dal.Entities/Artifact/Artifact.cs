@@ -1,4 +1,4 @@
-using Alfred.Domain.Enums;
+using Alfred.Dal.Entities.Enums;
 
 namespace Alfred.Dal.Entities.Artifact
 {
