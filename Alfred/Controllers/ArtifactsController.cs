@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Alfred.Dal.Entities.Enums;
 using Alfred.Model.Artifacts;
 using Alfred.Services;
 
@@ -27,7 +28,7 @@ namespace Alfred.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<ArtifactModel>))]
-        public async Task<IHttpActionResult> GetArtifacts(string ids, string title)
+        public async Task<IHttpActionResult> GetArtifacts(string ids = null, string title = null, ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null)
         {
             return Ok(await _artifactService.GetArtifacts().ConfigureAwait(false));
         }
