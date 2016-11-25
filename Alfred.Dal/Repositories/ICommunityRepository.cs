@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alfred.Dal.Entities.Community;
 
-namespace Alfred.Dal.Interfaces
+namespace Alfred.Dal.Repositories
 {
     public interface ICommunityRepository
     {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Implementation.Fake.Dao;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
-using Alfred.Dal.Interfaces;
+using Alfred.Dal.Repositories;
 
 namespace Alfred.Dal.Implementation.Fake.Repositories
 {

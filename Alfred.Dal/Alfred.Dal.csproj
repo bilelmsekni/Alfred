@@ -38,16 +38,16 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Interfaces\IArtifactRepository.cs" />
-    <Compile Include="Interfaces\ICommunityRepository.cs" />
-    <Compile Include="Interfaces\IMemberRepository.cs" />
+    <Compile Include="Entities\Artifact\Artifact.cs" />
+    <Compile Include="Entities\Community\Community.cs" />
+    <Compile Include="Entities\Enums\ArtifactStatus.cs" />
+    <Compile Include="Entities\Enums\ArtifactType.cs" />
+    <Compile Include="Entities\Enums\CommunityRole.cs" />
+    <Compile Include="Entities\Member\Member.cs" />
+    <Compile Include="Repositories\IArtifactRepository.cs" />
+    <Compile Include="Repositories\ICommunityRepository.cs" />
+    <Compile Include="Repositories\IMemberRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Alfred.Dal.Entities\Alfred.Dal.Entities.csproj">
-      <Project>{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}</Project>
-      <Name>Alfred.Dal.Entities</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -57,10 +57,6 @@
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alfred.Dal.Entities\Alfred.Dal.Entities.csproj">
-      <Project>{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}</Project>
-      <Name>Alfred.Dal.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alfred.Dal\Alfred.Dal.csproj">
       <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
       <Name>Alfred.Dal</Name>
