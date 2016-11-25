@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{412D4181-EE30-4334-B6CD-23A1E9F1041F}</ProjectGuid>
+    <ProjectGuid>{0AC77044-6602-4893-BE57-2755689AF958}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alfred.Domain</RootNamespace>
     <AssemblyName>Alfred.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +45,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Models\Artifacts\ArtifactModel.cs" />
+    <Compile Include="Models\Artifacts\CreateArtifactModel.cs" />
+    <Compile Include="Models\Artifacts\UpdateArtifactModel.cs" />
+    <Compile Include="Models\Communities\CommunityModel.cs" />
+    <Compile Include="Models\Communities\CreateCommunityModel.cs" />
+    <Compile Include="Models\Communities\UpdateCommunityModel.cs" />
+    <Compile Include="Mappers\IModelFactory.cs" />
+    <Compile Include="Models\Members\CreateMemberModel.cs" />
+    <Compile Include="Models\Members\MemberModel.cs" />
+    <Compile Include="Models\Members\UpdateMemberModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IArtifactService.cs" />
+    <Compile Include="Services\ICommunityService.cs" />
+    <Compile Include="Services\IMemberService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alfred.Dal.Entities\Alfred.Dal.Entities.csproj">
+      <Project>{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}</Project>
+      <Name>Alfred.Dal.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

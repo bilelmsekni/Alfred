@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6CD448E8-F01B-4A71-B918-D748C0DE0333}</ProjectGuid>
+    <ProjectGuid>{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alfred.Tests</RootNamespace>
-    <AssemblyName>Alfred.Tests</AssemblyName>
+    <RootNamespace>Alfred.Dal.Implementation.Fake</RootNamespace>
+    <AssemblyName>Alfred.Dal.Implementation.Fake</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,21 +34,25 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Dao\ArtifactDao.cs" />
+    <Compile Include="Dao\CommunityDao.cs" />
+    <Compile Include="Dao\IArtifactDao.cs" />
+    <Compile Include="Dao\ICommunityDao.cs" />
+    <Compile Include="Dao\IMemberDao.cs" />
+    <Compile Include="Dao\MemberDao.cs" />
+    <Compile Include="Database\FakeDatabase.cs" />
+    <Compile Include="EntityDtos\ArtifactDto.cs" />
+    <Compile Include="EntityDtos\CommunityDto.cs" />
+    <Compile Include="EntityDtos\MemberDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="paket.references" />
+    <Compile Include="Repositories\ArtifactRepository.cs" />
+    <Compile Include="Repositories\CommunityRepository.cs" />
+    <Compile Include="Repositories\MemberRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alfred.Dal.Entities\Alfred.Dal.Entities.csproj">
@@ -55,17 +60,12 @@
       <Name>Alfred.Dal.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alfred.Dal\Alfred.Dal.csproj">
-      <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
+      <Project>{adbccd95-4768-49c5-929f-9562aa586293}</Project>
       <Name>Alfred.Dal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alfred.Domain.Implementation\Alfred.Domain.Implementation.csproj">
-      <Project>{279B8AB3-B2A8-4431-8CC3-271148FD4068}</Project>
-      <Name>Alfred.Domain.Implementation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
-      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
-      <Name>Alfred.Domain</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -80,44 +80,6 @@
       <ItemGroup>
         <Reference Include="Ploeh.AutoFixture">
           <HintPath>..\packages\AutoFixture\lib\net40\Ploeh.AutoFixture.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.6.1')">
-      <ItemGroup>
-        <Reference Include="FluentAssertions.Core">
-          <HintPath>..\packages\FluentAssertions\lib\net45\FluentAssertions.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="FluentAssertions">
-          <HintPath>..\packages\FluentAssertions\lib\net45\FluentAssertions.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.6.1')">
-      <ItemGroup>
-        <Reference Include="NSubstitute">
-          <HintPath>..\packages\NSubstitute\lib\net45\NSubstitute.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.6.1')">
-      <ItemGroup>
-        <Reference Include="nunit.framework">
-          <HintPath>..\packages\NUnit\lib\net45\nunit.framework.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

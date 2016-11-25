@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{1758C3
 		paket.lock = paket.lock
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred", "Alfred\Alfred.csproj", "{71A0FFB9-8A85-47BA-A57E-690DF305676D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{753A3A95-2B2F-43DD-A32C-3299B820059C}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -24,23 +22,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal", "Alfred.Dal\Alfred.Dal.csproj", "{ADBCCD95-4768-49C5-929F-9562AA586293}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.FakeImplementation", "Alfred.Dal.FakeImplementation\Alfred.Dal.FakeImplementation.csproj", "{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.IoC", "Alfred.IoC\Alfred.IoC.csproj", "{E2F7B035-DB0D-4FD0-8246-7B0B7ABBB99A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Tests", "Alfred.Tests\Alfred.Tests.csproj", "{6CD448E8-F01B-4A71-B918-D748C0DE0333}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Model", "Alfred.Model\Alfred.Model.csproj", "{0AC77044-6602-4893-BE57-2755689AF958}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.Entities", "Alfred.Dal.Entities\Alfred.Dal.Entities.csproj", "{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Model.Implementation", "Alfred.Model.Implementation\Alfred.Model.Implementation.csproj", "{279B8AB3-B2A8-4431-8CC3-271148FD4068}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Model.Implementation.Tests", "Alfred.Model.Implementation.Tests\Alfred.Model.Implementation.Tests.csproj", "{C28CE18D-3F47-4434-A939-237E6E4AEDF4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E32EDA1A-507E-47E5-9637-10B1815F4F73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Configuration", "Alfred.Configuration\Alfred.Configuration.csproj", "{72A89197-AB57-4966-A23D-27575BBC5D13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.WebApi", "Alfred.WebApi\Alfred.WebApi.csproj", "{71A0FFB9-8A85-47BA-A57E-690DF305676D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Domain", "Alfred.Domain\Alfred.Domain.csproj", "{0AC77044-6602-4893-BE57-2755689AF958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Domain.Implementation", "Alfred.Domain.Implementation\Alfred.Domain.Implementation.csproj", "{279B8AB3-B2A8-4431-8CC3-271148FD4068}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Domain.Implementation.Tests", "Alfred.Domain.Implementation.Tests\Alfred.Domain.Implementation.Tests.csproj", "{C28CE18D-3F47-4434-A939-237E6E4AEDF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.Implementation.Fake", "Alfred.Dal.Implementation.Fake\Alfred.Dal.Implementation.Fake.csproj", "{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,34 +46,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{71A0FFB9-8A85-47BA-A57E-690DF305676D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71A0FFB9-8A85-47BA-A57E-690DF305676D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71A0FFB9-8A85-47BA-A57E-690DF305676D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71A0FFB9-8A85-47BA-A57E-690DF305676D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADBCCD95-4768-49C5-929F-9562AA586293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ADBCCD95-4768-49C5-929F-9562AA586293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADBCCD95-4768-49C5-929F-9562AA586293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADBCCD95-4768-49C5-929F-9562AA586293}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E2F7B035-DB0D-4FD0-8246-7B0B7ABBB99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E2F7B035-DB0D-4FD0-8246-7B0B7ABBB99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2F7B035-DB0D-4FD0-8246-7B0B7ABBB99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2F7B035-DB0D-4FD0-8246-7B0B7ABBB99A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CD448E8-F01B-4A71-B918-D748C0DE0333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CD448E8-F01B-4A71-B918-D748C0DE0333}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CD448E8-F01B-4A71-B918-D748C0DE0333}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CD448E8-F01B-4A71-B918-D748C0DE0333}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0AC77044-6602-4893-BE57-2755689AF958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AC77044-6602-4893-BE57-2755689AF958}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AC77044-6602-4893-BE57-2755689AF958}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AC77044-6602-4893-BE57-2755689AF958}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72A89197-AB57-4966-A23D-27575BBC5D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72A89197-AB57-4966-A23D-27575BBC5D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72A89197-AB57-4966-A23D-27575BBC5D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72A89197-AB57-4966-A23D-27575BBC5D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A0FFB9-8A85-47BA-A57E-690DF305676D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A0FFB9-8A85-47BA-A57E-690DF305676D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A0FFB9-8A85-47BA-A57E-690DF305676D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A0FFB9-8A85-47BA-A57E-690DF305676D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC77044-6602-4893-BE57-2755689AF958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC77044-6602-4893-BE57-2755689AF958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC77044-6602-4893-BE57-2755689AF958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC77044-6602-4893-BE57-2755689AF958}.Release|Any CPU.Build.0 = Release|Any CPU
 		{279B8AB3-B2A8-4431-8CC3-271148FD4068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{279B8AB3-B2A8-4431-8CC3-271148FD4068}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{279B8AB3-B2A8-4431-8CC3-271148FD4068}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,16 +78,15 @@ Global
 		{C28CE18D-3F47-4434-A939-237E6E4AEDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C28CE18D-3F47-4434-A939-237E6E4AEDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C28CE18D-3F47-4434-A939-237E6E4AEDF4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72A89197-AB57-4966-A23D-27575BBC5D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72A89197-AB57-4966-A23D-27575BBC5D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72A89197-AB57-4966-A23D-27575BBC5D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72A89197-AB57-4966-A23D-27575BBC5D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6CD448E8-F01B-4A71-B918-D748C0DE0333} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
 		{C28CE18D-3F47-4434-A939-237E6E4AEDF4} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
 	EndGlobalSection
 EndGlobal

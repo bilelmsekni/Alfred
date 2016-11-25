@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Alfred.Configuration;
-using Alfred.Dal.FakeImplementation.Dao;
-using Alfred.Model;
-using Alfred.Model.Implementation;
+using Alfred.Dal.Implementation.Fake.Dao;
+using Alfred.Domain.Implementation;
+using Alfred.Domain.Mappers;
 using LightInject;
 
 namespace Alfred.IoC
