@@ -45,9 +45,9 @@
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alfred.Configuration.Json\Alfred.Configuration.Json.csproj">
+    <ProjectReference Include="..\Alfred.Configuration\Alfred.Configuration.csproj">
       <Project>{72A89197-AB57-4966-A23D-27575BBC5D13}</Project>
-      <Name>Alfred.Configuration.Json</Name>
+      <Name>Alfred.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alfred.Dal.FakeImplementation\Alfred.Dal.FakeImplementation.csproj">
       <Project>{D4DA6BD1-E5EA-437B-B5BD-EEF6507ED9AD}</Project>

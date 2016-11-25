@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
-namespace Alfred.Configuration.Json
+namespace Alfred.Configuration
 {
     public static class AppSettingsProvider
     {

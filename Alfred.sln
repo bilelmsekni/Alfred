@@ -40,7 +40,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Model.Implementation
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E32EDA1A-507E-47E5-9637-10B1815F4F73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Configuration.Json", "Alfred.Configuration.Json\Alfred.Configuration.Json.csproj", "{72A89197-AB57-4966-A23D-27575BBC5D13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Configuration", "Alfred.Configuration\Alfred.Configuration.csproj", "{72A89197-AB57-4966-A23D-27575BBC5D13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

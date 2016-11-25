@@ -1,6 +1,5 @@
-﻿using System;
-using System.Reflection;
-using Alfred.Configuration.Json;
+﻿using System.Reflection;
+using Alfred.Configuration;
 using Alfred.Dal.FakeImplementation.Dao;
 using Alfred.Model;
 using Alfred.Model.Implementation;

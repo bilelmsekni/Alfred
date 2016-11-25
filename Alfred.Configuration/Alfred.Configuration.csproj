@@ -7,8 +7,8 @@
     <ProjectGuid>{72A89197-AB57-4966-A23D-27575BBC5D13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alfred.Configuration.Json</RootNamespace>
-    <AssemblyName>Alfred.Configuration.Json</AssemblyName>
+    <RootNamespace>Alfred.Configuration</RootNamespace>
+    <AssemblyName>Alfred.Configuration</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
