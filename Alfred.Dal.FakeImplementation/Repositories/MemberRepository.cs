@@ -12,21 +12,18 @@ namespace Alfred.Dal.FakeImplementation.Repositories
     public class MemberRepository : IMemberRepository
     {
         private readonly IMemberDao _memberDao;
-        private readonly IArtifactRepository _artifactRepository;
 
-        public MemberRepository(IMemberDao memberDao, IArtifactRepository artifactRepository)
+        public MemberRepository(IMemberDao memberDao)
         {
             _memberDao = memberDao;
-            _artifactRepository = artifactRepository;
         }
         public async Task<IEnumerable<Member>> GetMembers()
         {
             var members = await _memberDao.GetMembers().ConfigureAwait(false);
-            var memberTransfoTasks = members.Select(TransformToMemberEntity).ToArray();
-            return await Task.WhenAll(memberTransfoTasks).ConfigureAwait(false);
+            return members.Select(TransformToMemberEntity).ToArray();
         }
 
-        private async Task<Member> TransformToMemberEntity(MemberDto memberDto)
+        private Member TransformToMemberEntity(MemberDto memberDto)
         {
             if (memberDto != null)
             {
@@ -36,8 +33,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
                     Email = memberDto.Email,
                     FirstName = memberDto.FirstName,
                     LastName = memberDto.LastName,
-                    Role = (CommunityRole)memberDto.Role,
-                    Artifacts = await _artifactRepository.GetMemberArtifacts(memberDto.Id).ConfigureAwait(false)
+                    Role = (CommunityRole)memberDto.Role
                 };
             }
             return null;
@@ -45,7 +41,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public async Task<Member> GetMember(int id)
         {
-            return await TransformToMemberEntity(await _memberDao.GetMember(id).ConfigureAwait(false)).ConfigureAwait(false);
+            return TransformToMemberEntity(await _memberDao.GetMember(id).ConfigureAwait(false));
         }
 
         public async Task<int> SaveMember(Member member)
@@ -73,7 +69,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
 
         public async Task<Member> GetMember(string email)
         {
-            return await TransformToMemberEntity(await _memberDao.GetMember(email).ConfigureAwait(false)).ConfigureAwait(false);
+            return TransformToMemberEntity(await _memberDao.GetMember(email).ConfigureAwait(false));
         }
 
         public async Task UpdateMember(Member member)
@@ -85,8 +81,7 @@ namespace Alfred.Dal.FakeImplementation.Repositories
         public async Task<IEnumerable<Member>> GetCommunityMembers(int id)
         {
             var communityMembers = await _memberDao.GetCommunityMembers(id).ConfigureAwait(false);
-            var communityMembersTransforTasks =  communityMembers.Select(TransformToMemberEntity).ToArray();
-            return await Task.WhenAll(communityMembersTransforTasks).ConfigureAwait(false);
+            return communityMembers.Select(TransformToMemberEntity);
         }
     }
 }

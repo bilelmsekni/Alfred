@@ -15,6 +15,9 @@ namespace Alfred.Model.Artifacts
         public ArtifactType Type { get; set; }
         [Required]
         public ArtifactStatus Status { get; set; }
+        [Required]
+        public int CommunityId { get; set; }
+        public int MemberId { get; set; }
         public int Bonus { get; set; }
     }
 }

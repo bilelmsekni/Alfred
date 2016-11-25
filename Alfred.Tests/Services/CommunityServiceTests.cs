@@ -27,32 +27,27 @@ namespace Alfred.Tests.Services
         public void Should_return_5_communities_when_get_all_Communities()
         {
             var communities = _fixture.Build<Community>()
-                .Without(x => x.Artifacts)
-                .Without(x => x.Members)
-                .CreateMany(5);
+                .CreateMany(5)
+                .ToList();
             var communityRepo = Substitute.For<ICommunityRepository>();
             var fakeModelFactory = Substitute.For<IModelFactory>();
 
             communityRepo.GetCommunities().Returns(communities);
             fakeModelFactory.CreateCommunityModel(Arg.Any<Community>()).Returns(GetCommunityModel(communities.FirstOrDefault()));
             var communityService = new CommunityService(communityRepo, fakeModelFactory);
-            var results = communityService.GetCommunities().Result;
+            var results = communityService.GetCommunities().Result.ToList();
             results.FirstOrDefault().Should().BeOfType<CommunityModel>();
-            results.Count().Should().Be(communities.Count());
+            results.Count.Should().Be(communities.Count);
         }
 
         [Test]
         public void Should_return_community_with_id_2_when_get_community_using_id_2()
         {
             var communities = _fixture.Build<Community>()
-                .Without(x => x.Artifacts)
-                .Without(x => x.Members)
                 .CreateMany(5);
 
             var communityWithIdTwo = _fixture.Build<Community>()
                 .With(x => x.Id, 2)
-                .Without(x => x.Artifacts)
-                .Without(x => x.Members)
                 .Create();
 
             communities.ToList().Add(communityWithIdTwo);
@@ -158,8 +153,6 @@ namespace Alfred.Tests.Services
         public void Should_delete_community_when_community_id_exists()
         {
             var community = _fixture.Build<Community>()
-                .Without(x => x.Members)
-                .Without(x => x.Artifacts)
                 .With(x => x.Id, 2)
                 .Create();
 

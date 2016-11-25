@@ -10,7 +10,10 @@ namespace Alfred.Model.Artifacts
         [Required]
         public ArtifactType Type { get; set; }
         [Required]
-        public int Reward { get; set; }        
+        public int Reward { get; set; }
+        [Required]
+        public int CommunityId { get; set; }
         public int Bonus { get; set; }
+        public int MemberId { get; set; }
     }
 }

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
 namespace Alfred.Configuration.Json
 {
-    public class AppSettingsProvider
+    public static class AppSettingsProvider
     {
         public static IConfiguration Build()
         {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alfred.Dal.Entities.Artifact;
+﻿using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Enums;
 using Alfred.Dal.Entities.Member;
@@ -55,9 +53,7 @@ namespace Alfred.Model.Implementation.Tests
         [Test]
         public void Should_map_MemberEntity_to_MemberModel()
         {
-            var fakeArtifact = new List<Artifact>();
             var member = _fixture.Build<Member>()
-                .With(x => x.Artifacts, fakeArtifact)
                 .Create();
             var modelFactory = new ModelFactory();
             var result = modelFactory.CreateMemberModel(member);
@@ -66,7 +62,6 @@ namespace Alfred.Model.Implementation.Tests
             result.LastName.Should().Be(member.LastName);
             result.Role.Should().Be(member.Role);
             result.Id.Should().Be(member.Id);
-            //result.Artifacts.Should().BeSameAs(member.Artifacts);
         }
 
         [Test]
@@ -78,8 +73,6 @@ namespace Alfred.Model.Implementation.Tests
             var result = modelFactory.CreateCommunity(createCommunityModel);
             result.Email.Should().Be(createCommunityModel.Email);
             result.Name.Should().Be(createCommunityModel.Name);
-            result.Artifacts.Should().BeEmpty();
-            result.Members.Should().BeEmpty();
         }
 
         [Test]
@@ -104,8 +97,6 @@ namespace Alfred.Model.Implementation.Tests
             var result = modelFactory.CreateCommunityModel(community);
             result.Email.Should().Be(community.Email);
             result.Name.Should().Be(community.Name);
-            result.Artifacts.Count().Should().Be(community.Artifacts.Count());
-            result.Members.Count().Should().Be(community.Members.Count());
             result.Id.Should().Be(community.Id);
         }
 
@@ -121,6 +112,8 @@ namespace Alfred.Model.Implementation.Tests
             result.Bonus.Should().Be(createArtifactModel.Bonus);
             result.Status.Should().Be(ArtifactStatus.ToDo);
             result.Type.Should().Be(createArtifactModel.Type);
+            result.MemberId.Should().Be(createArtifactModel.MemberId);
+            result.CommunityId.Should().Be(createArtifactModel.CommunityId);
         }
 
         [Test]
@@ -138,6 +131,8 @@ namespace Alfred.Model.Implementation.Tests
             result.Status.Should().Be(updateArtifactModel.Status);
             result.Type.Should().Be(updateArtifactModel.Type);
             result.Id.Should().Be(updateArtifactModel.Id);
+            result.MemberId.Should().Be(updateArtifactModel.MemberId);
+            result.CommunityId.Should().Be(updateArtifactModel.CommunityId);
         }
 
         [Test]
@@ -153,6 +148,8 @@ namespace Alfred.Model.Implementation.Tests
             result.Status.Should().Be(artifact.Status);
             result.Type.Should().Be(artifact.Type);
             result.Id.Should().Be(artifact.Id);
+            result.MemberId.Should().Be(artifact.MemberId);
+            result.CommunityId.Should().Be(artifact.CommunityId);
         }
     }
 }

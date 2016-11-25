@@ -32,8 +32,7 @@ namespace Alfred.Model.Implementation
                     Email = member.Email,
                     FirstName = member.FirstName,
                     LastName = member.LastName,
-                    Role = member.Role,
-                    Artifacts = member.Artifacts.Select(CreateArtifactModel)
+                    Role = member.Role
                 };
             }
             return null;
@@ -48,7 +47,9 @@ namespace Alfred.Model.Implementation
                 Reward = artifact.Reward,
                 Status = artifact.Status,
                 Title = artifact.Title,
-                Type = artifact.Type
+                Type = artifact.Type,
+                MemberId = artifact.MemberId,
+                CommunityId = artifact.CommunityId
             };
         }
 
@@ -60,7 +61,9 @@ namespace Alfred.Model.Implementation
                 Status = ArtifactStatus.ToDo,
                 Type = createArtifactModel.Type,
                 Reward = createArtifactModel.Reward,
-                Bonus = createArtifactModel.Bonus
+                Bonus = createArtifactModel.Bonus,
+                MemberId = createArtifactModel.MemberId,
+                CommunityId = createArtifactModel.CommunityId
             };
         }
 
@@ -73,7 +76,9 @@ namespace Alfred.Model.Implementation
                 Bonus = updateArtifactModel.Bonus,
                 Reward = updateArtifactModel.Reward,
                 Status = updateArtifactModel.Status,
-                Type = updateArtifactModel.Type
+                Type = updateArtifactModel.Type,
+                MemberId = updateArtifactModel.MemberId,
+                CommunityId = updateArtifactModel.CommunityId
             };
 
             var diffs = ObjectDiffPatch.GenerateDiff(oldArtifact, newArtifact);            
@@ -101,8 +106,6 @@ namespace Alfred.Model.Implementation
                 Id = community.Id,
                 Email = community.Email,
                 Name = community.Name,
-                Artifacts = community.Artifacts.Select(CreateArtifactModel),
-                Members = community.Members.Select(CreateMemberModel)
             };
         }
 
@@ -126,32 +129,6 @@ namespace Alfred.Model.Implementation
 
             var diffs = ObjectDiffPatch.GenerateDiff(originalCommunity, newCommunity);
             return ObjectDiffPatch.PatchObject(originalCommunity, diffs.NewValues);
-        }
-
-        private Artifact CreateArtifact(ArtifactModel artifactModel)
-        {
-            return new Artifact
-            {
-                Title = artifactModel.Title,
-                Bonus = artifactModel.Bonus,
-                Reward = artifactModel.Reward,
-                Status = artifactModel.Status,
-                Type = artifactModel.Type,
-                Id = artifactModel.Id
-            };
-        }
-
-        private Member CreateMember(MemberModel memberModel)
-        {
-            return new Member
-            {
-                Id = memberModel.Id,
-                Email = memberModel.Email,
-                FirstName = memberModel.FirstName,
-                LastName = memberModel.LastName,
-                Role = memberModel.Role,
-                Artifacts = memberModel.Artifacts.Select(CreateArtifact)
-            };
         }
     }
 }

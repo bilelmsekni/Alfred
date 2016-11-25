@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Entities.Member;
@@ -29,8 +28,7 @@ namespace Alfred.Tests.Services
         public void Should_return_5_members_when_service_get_all_members()
         {
             var members = _fixture.Build<Member>()
-                .Without(x => x.Artifacts)
-                .CreateMany(5);
+                .CreateMany(5).ToList();
 
             var fakeModelFactory = Substitute.For<IModelFactory>();
             fakeModelFactory.CreateMemberModel(Arg.Any<Member>()).Returns(GetMemberModel(members.FirstOrDefault()));
@@ -38,7 +36,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetMembers().ReturnsForAnyArgs(members);
 
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
-            var result = memberService.GetMembers().Result;
+            var result = memberService.GetMembers().Result.ToList();
             result.FirstOrDefault().Should().BeOfType<MemberModel>();
             result.Count().Should().Be(members.Count());
         }
@@ -48,7 +46,6 @@ namespace Alfred.Tests.Services
         {
             var memberToSearch = _fixture.Build<Member>()
                 .With(x => x.Id, 2)
-                .Without(x => x.Artifacts)
                 .Create();
 
             var fakeModelFactory = Substitute.For<IModelFactory>();
@@ -142,7 +139,7 @@ namespace Alfred.Tests.Services
             fakeRepo.GetMember(Arg.Is(updateMemberModel.Id)).ReturnsNull();
 
             var memberService = new MemberService(fakeRepo, fakeModelFactory);
-            memberService.UpdateMember(updateMemberModel).ConfigureAwait(false); ;
+            memberService.UpdateMember(updateMemberModel).ConfigureAwait(false);
 
             fakeModelFactory.DidNotReceive().CreateMember(Arg.Is<UpdateMemberModel>(x => x.Email == updateMemberModel.Email), null);
             fakeRepo.Received(1).GetMember(Arg.Is(updateMemberModel.Id));
@@ -155,7 +152,6 @@ namespace Alfred.Tests.Services
             var fakeModelFactory = Substitute.For<IModelFactory>();
             var fakeRepo = Substitute.For<IMemberRepository>();
             var member = _fixture.Build<Member>()
-                .Without(x => x.Artifacts)
                 .With(x => x.Id, 2)
                 .Create();
 

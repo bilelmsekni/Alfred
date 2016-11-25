@@ -5,7 +5,7 @@ namespace Alfred.Dal.FakeImplementation.Database
 {
     public static class FakeDatabase
     {
-        public static List<ArtifactDto> ArtifactData = new List<ArtifactDto>
+        public static readonly List<ArtifactDto> ArtifactData = new List<ArtifactDto>
             {
                 new ArtifactDto
                 {
@@ -54,7 +54,7 @@ namespace Alfred.Dal.FakeImplementation.Database
                 }
             };
 
-        public static List<CommunityDto> Communities = new List<CommunityDto>
+        public static readonly List<CommunityDto> Communities = new List<CommunityDto>
             {
                 new CommunityDto
                 {
@@ -76,7 +76,7 @@ namespace Alfred.Dal.FakeImplementation.Database
                 }
             };
 
-        public static List<MemberDto> Members = new List<MemberDto>
+        public static readonly List<MemberDto> Members = new List<MemberDto>
             {
                 new MemberDto
                 {

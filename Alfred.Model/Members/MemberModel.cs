@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Alfred.Dal.Entities.Enums;
-using Alfred.Model.Artifacts;
 using Microsoft.Build.Framework;
 
 namespace Alfred.Model.Members
@@ -17,7 +16,5 @@ namespace Alfred.Model.Members
         public string LastName { get; set; }
         [Required]
         public CommunityRole Role { get; set; }
-        [Required]
-        public IEnumerable<ArtifactModel> Artifacts { get; set; }
     }
 }
