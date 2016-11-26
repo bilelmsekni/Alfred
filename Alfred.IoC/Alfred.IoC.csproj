@@ -54,16 +54,20 @@
       <Name>Alfred.Dal.Implementation.Fake</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alfred.Dal\Alfred.Dal.csproj">
-      <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
+      <Project>{2F8230EB-69BD-4024-B672-8947C340D34D}</Project>
       <Name>Alfred.Dal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alfred.Domain.Implementation\Alfred.Domain.Implementation.csproj">
-      <Project>{279B8AB3-B2A8-4431-8CC3-271148FD4068}</Project>
-      <Name>Alfred.Domain.Implementation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
-      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
+      <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
       <Name>Alfred.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred.Shared\Alfred.Shared.csproj">
+      <Project>{45FA6BD5-2EDD-4291-A85F-4077C49E03B2}</Project>
+      <Name>Alfred.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred\Alfred.csproj">
+      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
+      <Name>Alfred</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

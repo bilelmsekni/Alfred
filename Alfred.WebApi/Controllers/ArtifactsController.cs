@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Alfred.Dal.Entities.Enums;
-using Alfred.Domain.Models.Artifacts;
-using Alfred.Domain.Services;
+using Alfred.Models.Artifacts;
+using Alfred.Services;
+using Alfred.Shared.Enums;
 
 namespace Alfred.WebApi.Controllers
 {

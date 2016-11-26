@@ -1,8 +1,14 @@
-﻿using System.Reflection;
-using Alfred.Configuration;
+﻿using Alfred.Configuration;
+using Alfred.Dal.Daos;
 using Alfred.Dal.Implementation.Fake.Dao;
-using Alfred.Domain.Implementation;
+using Alfred.Dal.Implementation.Fake.Mappers;
+using Alfred.Dal.Mappers;
+using Alfred.Dal.Repositories;
 using Alfred.Domain.Mappers;
+using Alfred.Domain.Repositories;
+using Alfred.Domain.Services;
+using Alfred.Services;
+using Alfred.Shared.Features;
 using LightInject;
 
 namespace Alfred.IoC
@@ -11,9 +17,19 @@ namespace Alfred.IoC
     {
         public void Compose(IServiceRegistry serviceRegistry)
         {
-            serviceRegistry.RegisterAssembly(Assembly.GetAssembly(typeof(IMemberDao)));
+            serviceRegistry.Register<IArtifactService, ArtifactService>();
+            serviceRegistry.Register<IMemberService, MemberService>();
+            serviceRegistry.Register<ICommunityService, CommunityService>();
             serviceRegistry.Register<IModelFactory, ModelFactory>();
+            serviceRegistry.Register<IArtifactRepository, ArtifactRepository>();
+            serviceRegistry.Register<IMemberRepository, MemberRepository>();
+            serviceRegistry.Register<ICommunityRepository, CommunityRepository>();
+            serviceRegistry.Register<IArtifactDao, ArtifactDao>();
+            serviceRegistry.Register<IMemberDao, MemberDao>();
+            serviceRegistry.Register<ICommunityDao, CommunityDao>();
+            serviceRegistry.Register<IEntityFactory, EntityFactory>();
             serviceRegistry.RegisterInstance(AppSettingsProvider.Build());
+            serviceRegistry.RegisterInstance<ObjectDifferenceManager>(new ObjectDifferenceManager());
         }
     }
 }

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6CD448E8-F01B-4A71-B918-D748C0DE0333}</ProjectGuid>
+    <ProjectGuid>{C28CE18D-3F47-4434-A939-237E6E4AEDF4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alfred.Tests</RootNamespace>
@@ -45,26 +45,21 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ArtifactServiceTests.cs" />
+    <Compile Include="Services\CommunityServiceTests.cs" />
+    <Compile Include="Services\MemberServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alfred.Dal.Entities\Alfred.Dal.Entities.csproj">
-      <Project>{78A37110-FEA0-4BA2-849A-E1D60D3EFB33}</Project>
-      <Name>Alfred.Dal.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alfred.Dal\Alfred.Dal.csproj">
-      <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
-      <Name>Alfred.Dal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alfred.Domain.Implementation\Alfred.Domain.Implementation.csproj">
-      <Project>{279B8AB3-B2A8-4431-8CC3-271148FD4068}</Project>
-      <Name>Alfred.Domain.Implementation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
-      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
+      <Project>{adbccd95-4768-49c5-929f-9562aa586293}</Project>
       <Name>Alfred.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred\Alfred.csproj">
+      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
+      <Name>Alfred</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

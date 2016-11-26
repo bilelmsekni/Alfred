@@ -1,9 +1,9 @@
-using Alfred.Dal.Entities.Artifact;
-using Alfred.Dal.Entities.Community;
-using Alfred.Dal.Entities.Member;
-using Alfred.Domain.Models.Artifacts;
-using Alfred.Domain.Models.Communities;
-using Alfred.Domain.Models.Members;
+using Alfred.Domain.Entities.Artifact;
+using Alfred.Domain.Entities.Community;
+using Alfred.Domain.Entities.Member;
+using Alfred.Models.Artifacts;
+using Alfred.Models.Communities;
+using Alfred.Models.Members;
 
 namespace Alfred.Domain.Mappers
 {

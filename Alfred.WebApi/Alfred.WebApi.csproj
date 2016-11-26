@@ -85,20 +85,19 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alfred.Dal\Alfred.Dal.csproj">
-      <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
-      <Name>Alfred.Dal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
-      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
-      <Name>Alfred.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alfred.IoC\Alfred.IoC.csproj">
       <Project>{E2F7B035-DB0D-4FD0-8246-7B0B7ABBB99A}</Project>
       <Name>Alfred.IoC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alfred.Shared\Alfred.Shared.csproj">
+      <Project>{45FA6BD5-2EDD-4291-A85F-4077C49E03B2}</Project>
+      <Name>Alfred.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred\Alfred.csproj">
+      <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
+      <Name>Alfred</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

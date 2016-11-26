@@ -41,23 +41,27 @@
     </Compile>
     <Compile Include="Dao\ArtifactDao.cs" />
     <Compile Include="Dao\CommunityDao.cs" />
-    <Compile Include="Dao\IArtifactDao.cs" />
-    <Compile Include="Dao\ICommunityDao.cs" />
-    <Compile Include="Dao\IMemberDao.cs" />
     <Compile Include="Dao\MemberDao.cs" />
     <Compile Include="Database\FakeDatabase.cs" />
     <Compile Include="EntityDtos\ArtifactDto.cs" />
     <Compile Include="EntityDtos\CommunityDto.cs" />
     <Compile Include="EntityDtos\MemberDto.cs" />
+    <Compile Include="Mappers\EntityFactory.cs" />
+    <Compile Include="Mappers\IEntityFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ArtifactRepository.cs" />
-    <Compile Include="Repositories\CommunityRepository.cs" />
-    <Compile Include="Repositories\MemberRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alfred.Dal\Alfred.Dal.csproj">
-      <Project>{adbccd95-4768-49c5-929f-9562aa586293}</Project>
+      <Project>{2F8230EB-69BD-4024-B672-8947C340D34D}</Project>
       <Name>Alfred.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
+      <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
+      <Name>Alfred.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred.Shared\Alfred.Shared.csproj">
+      <Project>{45FA6BD5-2EDD-4291-A85F-4077C49E03B2}</Project>
+      <Name>Alfred.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

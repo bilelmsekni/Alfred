@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Alfred.Domain.Models.Members;
-using Alfred.Domain.Services;
+using Alfred.Models.Members;
+using Alfred.Services;
 
 namespace Alfred.WebApi.Controllers
 {
