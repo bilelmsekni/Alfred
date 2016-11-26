@@ -18,22 +18,15 @@ namespace Alfred.Domain.Services
         public async Task<IEnumerable<CommunityModel>> GetCommunities()
         {
             return await _communityRepo.GetCommunities().ConfigureAwait(false);
-            //return communityEntities.Select(x => _modelFactory.CreateCommunityModel(x));
         }
 
         public async Task<CommunityModel> GetCommunity(int id)
         {
             return await _communityRepo.GetCommunity(id).ConfigureAwait(false);
-            //if (communityEntity != null)
-            //{
-            //    return _modelFactory.CreateCommunityModel(communityEntity);
-            //}
-            //return null;
         }
 
         public async Task<int> CreateCommunity(CreateCommunityModel createCommunityModel)
         {
-            //var community = _modelFactory.CreateCommunity(createCommunityModel);
             if (createCommunityModel != null && !IsEmailUsed(createCommunityModel.Email))
             {
                 return await _communityRepo.SaveCommunity(createCommunityModel).ConfigureAwait(false);
@@ -45,19 +38,8 @@ namespace Alfred.Domain.Services
         {
             if (updateCommunityModel != null)
             {
-                    await _communityRepo.UpdateCommunity(updateCommunityModel).ConfigureAwait(false);
-
+                await _communityRepo.UpdateCommunity(updateCommunityModel).ConfigureAwait(false);
             }
-            //var originalCommunity = await _communityRepo.GetCommunity(updateCommunityModel.Id).ConfigureAwait(false);
-            //if (originalCommunity != null)
-            //{
-            //    var community = _modelFactory.CreateCommunity(updateCommunityModel, originalCommunity);
-            //    if (community != null)
-            //    {
-            //        await _communityRepo.UpdateCommunity(community).ConfigureAwait(false);
-            //        return _modelFactory.CreateCommunityModel(community);
-            //    }
-            //}
             return null;
         }
 

@@ -77,16 +77,11 @@ namespace Alfred.Tests.Services
         }
 
         [Test]
-        public void Should_not_create_artifact_when_artifact_can_not_be_mapped_to_artifact()
+        public void Should_not_create_artifact_when_artifact_is_null()
         {
-            var createArtifactModel = _fixture.Build<CreateArtifactModel>()
-                .Create();
-            var artifact = GetArtifact(createArtifactModel);
-   
+            var result = _artifactService.CreateArtifact(null).Result;
 
-            var result = _artifactService.CreateArtifact(createArtifactModel).Result;
-
-            _artifactRepo.DidNotReceive().SaveArtifact(Arg.Is<CreateArtifactModel>(x => x.Title == artifact.Title));
+            _artifactRepo.DidNotReceive().SaveArtifact(Arg.Any<CreateArtifactModel>());
             result.Should().Be(-1);
         }
 
@@ -102,22 +97,15 @@ namespace Alfred.Tests.Services
             _artifactService.UpdateArtifact(updateArtifactModel).ConfigureAwait(false);
 
             _artifactRepo.Received(1).UpdateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Id == updateArtifactModel.Id));
-            _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Id));
         }
 
 
         [Test]
-        public void Should_not_update_artifact_when_artifact_to_update_is_not_found()
+        public void Should_not_update_artifact_when_artifact_to_update_is_null()
         {
-            var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
-                .Create();
-            var artifact = GetArtifact(updateArtifactModel);
-            _artifactRepo.GetArtifact(Arg.Is(artifact.Id)).ReturnsNull();
-
-            var res = _artifactService.UpdateArtifact(updateArtifactModel).Result;
+            var res = _artifactService.UpdateArtifact(null).Result;
             res.Should().BeNull();
-            _artifactRepo.DidNotReceive().UpdateArtifact(Arg.Is<UpdateArtifactModel>(x => x.Id == artifact.Id));
-            _artifactRepo.Received(1).GetArtifact(Arg.Is(updateArtifactModel.Id));
+            _artifactRepo.DidNotReceive().UpdateArtifact(Arg.Any<UpdateArtifactModel>());            
         }
 
         [Test]

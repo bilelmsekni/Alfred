@@ -77,22 +77,18 @@ namespace Alfred.Tests.Services
             var memberService = new MemberService(fakeRepo);
 
             memberService.CreateMember(createMemberModel).ConfigureAwait(false);
-            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == member.Email));
             fakeRepo.Received(1).SaveMember(Arg.Is<CreateMemberModel>(x => x.Email == member.Email));
         }
 
         [Test]
-        public void Should_not_create_member_when_member_email_already_used()
+        public void Should_not_create_member_when_member_is_null()
         {
             var fakeRepo = Substitute.For<IMemberRepository>();
-            var createMemberModel = _fixture.Build<CreateMemberModel>().Create();
-            var member = GetMember(createMemberModel);
-            fakeRepo.GetMember(Arg.Is<string>(x => x == createMemberModel.Email)).Returns(member);
+            
             var memberService = new MemberService(fakeRepo);
 
-            var result = memberService.CreateMember(createMemberModel).Result;
-            fakeRepo.Received(1).GetMember(Arg.Is<string>(x => x == createMemberModel.Email));
-            fakeRepo.DidNotReceive().SaveMember(Arg.Is<CreateMemberModel>(x => x.Email == createMemberModel.Email));
+            var result = memberService.CreateMember(null).Result;
+            fakeRepo.DidNotReceive().SaveMember(Arg.Any<CreateMemberModel>());
             result.Should().Be(-1);
         }
 
@@ -101,28 +97,11 @@ namespace Alfred.Tests.Services
         {
             var fakeRepo = Substitute.For<IMemberRepository>();
             var updateMemberModel = _fixture.Build<UpdateMemberModel>().Create();
-            var member = _fixture.Create<MemberModel>();
-            fakeRepo.GetMember(Arg.Is(updateMemberModel.Id)).Returns(member);
 
             var memberService = new MemberService(fakeRepo);
 
             memberService.UpdateMember(updateMemberModel).ConfigureAwait(false);
-            fakeRepo.Received(1).GetMember(Arg.Is(updateMemberModel.Id));
             fakeRepo.Received(1).UpdateMember(Arg.Is<UpdateMemberModel>(x => x.Id == updateMemberModel.Id));
-        }
-
-        [Test]
-        public void Should_not_update_member_when_member_email_does_not_exist()
-        {
-            var fakeRepo = Substitute.For<IMemberRepository>();
-            var updateMemberModel = _fixture.Build<UpdateMemberModel>().Create();
-            fakeRepo.GetMember(Arg.Is(updateMemberModel.Id)).ReturnsNull();
-
-            var memberService = new MemberService(fakeRepo);
-            memberService.UpdateMember(updateMemberModel).ConfigureAwait(false);
-
-            fakeRepo.Received(1).GetMember(Arg.Is(updateMemberModel.Id));
-            fakeRepo.DidNotReceive().UpdateMember(Arg.Is<UpdateMemberModel>(x => x.Email == updateMemberModel.Email));
         }
 
         [Test]

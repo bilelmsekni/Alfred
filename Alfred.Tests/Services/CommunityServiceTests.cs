@@ -83,51 +83,26 @@ namespace Alfred.Tests.Services
         }
 
         [Test]
-        public void Should_not_create_community_when_community_email_already_used()
-        {
-            var fakeRepo = Substitute.For<ICommunityRepository>();
-            var createCommunityModel = _fixture.Build<CreateCommunityModel>().Create();
-
-            var community = GetCommunity(createCommunityModel);
-            fakeRepo.GetCommunity(Arg.Is<string>(x => x == community.Email)).Returns(community);
-            var communityService = new CommunityService(fakeRepo);
-
-            var result = communityService.CreateCommunity(createCommunityModel).Result;
-            fakeRepo.Received(1).GetCommunity(Arg.Is<string>(x => x == community.Email));
-            fakeRepo.DidNotReceive().SaveCommunity(Arg.Is<CreateCommunityModel>(x => x.Email == community.Email));
-            result.Should().Be(-1);
-        }
-
-        [Test]
         public void Should_update_community_when_community_has_valid_data()
         {
             var fakeRepo = Substitute.For<ICommunityRepository>();
             var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
                 .Create();
-            var originalCommunity = _fixture.Create<CommunityModel>();
-
-            
-            fakeRepo.GetCommunity(Arg.Is(updateCommunityModel.Id)).Returns(originalCommunity);
             var communityService = new CommunityService(fakeRepo);
 
             communityService.UpdateCommunity(updateCommunityModel).ConfigureAwait(false);
-            fakeRepo.Received(1).GetCommunity(Arg.Is(updateCommunityModel.Id));
             fakeRepo.Received(1).UpdateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Id == updateCommunityModel.Id));
         }
 
         [Test]
-        public void Should_not_update_community_when_community_has_a_non_existant_email()
+        public void Should_not_update_community_when_community_is_null()
         {
             var fakeRepo = Substitute.For<ICommunityRepository>();
-            var updateCommunityModel = _fixture.Build<UpdateCommunityModel>()
-                .Create();
             
-            fakeRepo.GetCommunity(Arg.Is(updateCommunityModel.Id)).ReturnsNull();
             var communityService = new CommunityService(fakeRepo);
 
-            communityService.UpdateCommunity(updateCommunityModel).ConfigureAwait(false);
-            fakeRepo.Received(1).GetCommunity(Arg.Is(updateCommunityModel.Id));
-            fakeRepo.DidNotReceive().UpdateCommunity(Arg.Is<UpdateCommunityModel>(x => x.Email == updateCommunityModel.Email));
+            var res = communityService.UpdateCommunity(null).Result;
+            res.Should().BeNull();
         }
 
         [Test]
