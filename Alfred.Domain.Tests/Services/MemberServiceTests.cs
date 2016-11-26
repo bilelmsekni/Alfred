@@ -9,7 +9,7 @@ using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
-namespace Alfred.Tests.Services
+namespace Alfred.Domain.Tests.Services
 {
     [TestFixture]
     public class MemberServiceTests

@@ -48,6 +48,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Models\ArtifactCriteriaModel.cs" />
     <Compile Include="Models\Artifacts\ArtifactModel.cs" />
     <Compile Include="Models\Artifacts\CreateArtifactModel.cs" />
     <Compile Include="Models\Artifacts\UpdateArtifactModel.cs" />

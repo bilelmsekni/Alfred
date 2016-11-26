@@ -1,4 +1,5 @@
 FluentAssertions
+FluentValidation
 NUnit
 NSubstitute
 AutoFixture

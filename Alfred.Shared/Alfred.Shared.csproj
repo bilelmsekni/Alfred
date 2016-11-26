@@ -43,6 +43,7 @@
     <Compile Include="Enums\ArtifactStatus.cs" />
     <Compile Include="Enums\ArtifactType.cs" />
     <Compile Include="Enums\CommunityRole.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Features\ObjectDiffPatch.cs" />
     <Compile Include="Features\ObjectDifferenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

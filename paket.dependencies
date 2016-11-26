@@ -13,3 +13,5 @@ nuget FluentAssertions
 nuget Microsoft.Extensions.Configuration
 nuget Microsoft.Extensions.Configuration.Json
 nuget Microsoft.Extensions.Primitives
+nuget FluentValidation.WebAPI
+nuget Hyprlinkr

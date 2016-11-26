@@ -2,9 +2,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Alfred.Models;
 using Alfred.Models.Artifacts;
 using Alfred.Services;
 using Alfred.Shared.Enums;
+using Alfred.Shared.Extensions;
+using FluentValidation;
+using FluentValidation.WebApi;
 
 namespace Alfred.WebApi.Controllers
 {
@@ -12,10 +16,13 @@ namespace Alfred.WebApi.Controllers
     public class ArtifactsController : ApiController
     {
         private readonly IArtifactService _artifactService;
+        private readonly AbstractValidator<ArtifactCriteriaModel> _criteriaValidator;
 
-        public ArtifactsController(IArtifactService artifactService)
+        public ArtifactsController(IArtifactService artifactService,
+            AbstractValidator<ArtifactCriteriaModel> criteriaValidator)
         {
             _artifactService = artifactService;
+            _criteriaValidator = criteriaValidator;
         }
 
         /// <summary>
@@ -28,9 +35,28 @@ namespace Alfred.WebApi.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<ArtifactModel>))]
-        public async Task<IHttpActionResult> GetArtifacts(string ids = null, string title = null, ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null)
+        public async Task<IHttpActionResult> GetArtifacts(string ids = null, string title = null, 
+            ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null, int page = 1, int pageSize = 20)
         {
-            return Ok(await _artifactService.GetArtifacts().ConfigureAwait(false));
+            var artifactQueryCriteriaModel = new ArtifactCriteriaModel
+            {
+                Ids = ids?.SafeSplit(),
+                Title = title,
+                Type = artifactType,
+                Status = artifactStatus,
+                Page = page,
+                PageSize = pageSize
+            };
+
+            var validationResults = _criteriaValidator.Validate(artifactQueryCriteriaModel);
+            if (validationResults.IsValid)
+            {
+                return Ok(await _artifactService.GetArtifacts().ConfigureAwait(false));
+            }
+
+            validationResults.AddToModelState(ModelState, null);
+
+            return BadRequest(ModelState);
         }
 
         /// <summary>
@@ -121,11 +147,5 @@ namespace Alfred.WebApi.Controllers
 
             return NotFound();
         }
-    }
-
-    public class ArtifactQueryParams
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }

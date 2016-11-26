@@ -46,7 +46,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal", "Alfred.Dal\Al
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.Tests", "Alfred.Dal.Tests\Alfred.Dal.Tests.csproj", "{5FC4560D-6D35-4098-84DC-29A49362C170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Tests", "Alfred.Tests\Alfred.Tests.csproj", "{C28CE18D-3F47-4434-A939-237E6E4AEDF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Domain.Tests", "Alfred.Domain.Tests\Alfred.Domain.Tests.csproj", "{C28CE18D-3F47-4434-A939-237E6E4AEDF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

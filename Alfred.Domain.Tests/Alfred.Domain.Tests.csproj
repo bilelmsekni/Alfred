@@ -7,8 +7,8 @@
     <ProjectGuid>{C28CE18D-3F47-4434-A939-237E6E4AEDF4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alfred.Tests</RootNamespace>
-    <AssemblyName>Alfred.Tests</AssemblyName>
+    <RootNamespace>Alfred.Domain.Tests</RootNamespace>
+    <AssemblyName>Alfred.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -48,6 +48,8 @@
     <Compile Include="Services\ArtifactServiceTests.cs" />
     <Compile Include="Services\CommunityServiceTests.cs" />
     <Compile Include="Services\MemberServiceTests.cs" />
+    <Compile Include="Validators\ArtifactCriteriaModelValidatorTests.cs" />
+    <Compile Include="Validators\IdsValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
@@ -56,6 +58,10 @@
     <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
       <Project>{adbccd95-4768-49c5-929f-9562aa586293}</Project>
       <Name>Alfred.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred.Shared\Alfred.Shared.csproj">
+      <Project>{45fa6bd5-2edd-4291-a85f-4077c49e03b2}</Project>
+      <Name>Alfred.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alfred\Alfred.csproj">
       <Project>{0AC77044-6602-4893-BE57-2755689AF958}</Project>
@@ -91,6 +97,17 @@
         </Reference>
         <Reference Include="FluentAssertions">
           <HintPath>..\packages\FluentAssertions\lib\net45\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.6.1')">
+      <ItemGroup>
+        <Reference Include="FluentValidation">
+          <HintPath>..\packages\FluentValidation\lib\Net45\FluentValidation.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

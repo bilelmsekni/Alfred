@@ -7,8 +7,11 @@ using Alfred.Dal.Repositories;
 using Alfred.Domain.Mappers;
 using Alfred.Domain.Repositories;
 using Alfred.Domain.Services;
+using Alfred.Domain.Validators;
+using Alfred.Models;
 using Alfred.Services;
 using Alfred.Shared.Features;
+using FluentValidation;
 using LightInject;
 
 namespace Alfred.IoC
@@ -30,6 +33,7 @@ namespace Alfred.IoC
             serviceRegistry.Register<IEntityFactory, EntityFactory>();
             serviceRegistry.RegisterInstance(AppSettingsProvider.Build());
             serviceRegistry.RegisterInstance<ObjectDifferenceManager>(new ObjectDifferenceManager());
+            serviceRegistry.RegisterInstance<AbstractValidator<ArtifactCriteriaModel>>(new ArtifactCriteriaModelValidator(new IdsValidator()));
         }
     }
 }
