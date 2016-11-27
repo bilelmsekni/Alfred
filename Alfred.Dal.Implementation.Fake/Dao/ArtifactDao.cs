@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
 using Alfred.Dal.Implementation.Fake.Database;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
+using Alfred.Dal.Implementation.Fake.Filters;
 using Alfred.Dal.Implementation.Fake.Mappers;
 using Alfred.Domain.Entities.Artifact;
+using Alfred.Domain.Entities.Criteria;
 
 namespace Alfred.Dal.Implementation.Fake.Dao
 {
@@ -18,10 +21,17 @@ namespace Alfred.Dal.Implementation.Fake.Dao
         {
             _entityFactory = entityFactory;
         }
-        public async Task<IEnumerable<Artifact>> GetArtifacts()
+        public async Task<IEnumerable<Artifact>> GetArtifacts(ArtifactCriteria artifactCriteria)
         {
             var dtos = await Task.Run(() => _artifacts).ConfigureAwait(false);
-            return dtos.Select(_entityFactory.TransformToArtifactEntity);
+            Func<ArtifactDto, bool> criteriafilters = artifact => true;            
+
+            return dtos.Where(
+                criteriafilters
+                .FilterOnIds(artifactCriteria.Ids)
+                .FilterOnTitle(artifactCriteria.Title)
+                .FilterOnType(artifactCriteria.Type))
+                .Select(_entityFactory.TransformToArtifactEntity);
         }
 
         public async Task<Artifact> GetArtifact(int id)

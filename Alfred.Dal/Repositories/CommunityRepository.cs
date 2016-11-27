@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
-using Alfred.Domain.Mappers;
+using Alfred.Dal.Mappers;
 using Alfred.Domain.Repositories;
 using Alfred.Models.Communities;
 

@@ -19,7 +19,9 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
                     Bonus = artifact.Bonus,
                     Reward = artifact.Reward,
                     Status = (int)artifact.Status,
-                    Type = (int)artifact.Type
+                    Type = (int)artifact.Type,
+                    MemberId = artifact.MemberId,
+                    CommunityId = artifact.CommunityId
                 };
             }
             return null;
@@ -37,7 +39,9 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
                 Bonus = artifactDto.Bonus,
                 Reward = artifactDto.Reward,
                 Status = (ArtifactStatus)artifactDto.Status,
-                Type = (ArtifactType)artifactDto.Type
+                Type = (ArtifactType)artifactDto.Type,
+                MemberId = artifactDto.MemberId,
+                CommunityId = artifactDto.CommunityId
             };
         }
 

@@ -1,7 +1,9 @@
-﻿using Alfred.Domain.Entities.Artifact;
+﻿using System.Linq;
+using Alfred.Domain.Entities.Artifact;
 using Alfred.Domain.Entities.Community;
+using Alfred.Domain.Entities.Criteria;
 using Alfred.Domain.Entities.Member;
-using Alfred.Domain.Mappers;
+using Alfred.Models;
 using Alfred.Models.Artifacts;
 using Alfred.Models.Communities;
 using Alfred.Models.Members;
@@ -12,7 +14,7 @@ namespace Alfred.Dal.Mappers
 {
     public class ModelFactory : IModelFactory
     {
-        private ObjectDifferenceManager _objDiffManager;
+        private readonly ObjectDifferenceManager _objDiffManager;
 
         public ModelFactory(ObjectDifferenceManager objDiffManager)
         {
@@ -88,6 +90,19 @@ namespace Alfred.Dal.Mappers
                 CommunityId = updateArtifactModel.CommunityId
             };
             return _objDiffManager.UpdateObject(oldArtifact, newArtifact);
+        }
+
+        public ArtifactCriteria CreateArtifactCrtieria(ArtifactCriteriaModel criteriaModel)
+        {
+            return new ArtifactCriteria
+            {
+                Ids = criteriaModel.Ids?.Select(int.Parse),
+                Title = criteriaModel.Title,
+                Type = criteriaModel.Type,
+                Status = criteriaModel.Status,
+                Page = criteriaModel.Page,
+                PageSize = criteriaModel.PageSize
+            };
         }
 
         public Member CreateMember(UpdateMemberModel updateMemberModel, Member originalMember)

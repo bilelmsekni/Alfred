@@ -48,6 +48,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.Tests", "Alfred.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Domain.Tests", "Alfred.Domain.Tests\Alfred.Domain.Tests.csproj", "{C28CE18D-3F47-4434-A939-237E6E4AEDF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.Implementation.Fake.Tests", "Alfred.Dal.Implementation.Fake.Tests\Alfred.Dal.Implementation.Fake.Tests.csproj", "{37D98F19-6278-4FD1-A34E-A9DB21A9ADBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,10 @@ Global
 		{C28CE18D-3F47-4434-A939-237E6E4AEDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C28CE18D-3F47-4434-A939-237E6E4AEDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C28CE18D-3F47-4434-A939-237E6E4AEDF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D98F19-6278-4FD1-A34E-A9DB21A9ADBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D98F19-6278-4FD1-A34E-A9DB21A9ADBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D98F19-6278-4FD1-A34E-A9DB21A9ADBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D98F19-6278-4FD1-A34E-A9DB21A9ADBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,5 +114,6 @@ Global
 		{2F8230EB-69BD-4024-B672-8947C340D34D} = {BFEF40FA-62E0-4EF6-B19B-F2B2E4449DF3}
 		{5FC4560D-6D35-4098-84DC-29A49362C170} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
 		{C28CE18D-3F47-4434-A939-237E6E4AEDF4} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
+		{37D98F19-6278-4FD1-A34E-A9DB21A9ADBA} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
 	EndGlobalSection
 EndGlobal

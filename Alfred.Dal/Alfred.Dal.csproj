@@ -43,6 +43,7 @@
     <Compile Include="Daos\IArtifactDao.cs" />
     <Compile Include="Daos\ICommunityDao.cs" />
     <Compile Include="Daos\IMemberDao.cs" />
+    <Compile Include="Mappers\IModelFactory.cs" />
     <Compile Include="Mappers\ModelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ArtifactRepository.cs" />

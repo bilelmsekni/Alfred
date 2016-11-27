@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
-using Alfred.Domain.Mappers;
+using Alfred.Dal.Mappers;
 using Alfred.Domain.Repositories;
+using Alfred.Models;
 using Alfred.Models.Artifacts;
 
 namespace Alfred.Dal.Repositories
@@ -19,9 +20,10 @@ namespace Alfred.Dal.Repositories
             _modelFactory = modelFactory;
         }
 
-        public async Task<IEnumerable<ArtifactModel>> GetArtifacts()
+        public async Task<IEnumerable<ArtifactModel>> GetArtifacts(ArtifactCriteriaModel criteriaModel)
         {
-            var artifactEntities = await _artifactDao.GetArtifacts().ConfigureAwait(false);
+            var artifactCriteria = _modelFactory.CreateArtifactCrtieria(criteriaModel);
+            var artifactEntities = await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false);
             return artifactEntities.Select(_modelFactory.CreateArtifactModel);
         }
 

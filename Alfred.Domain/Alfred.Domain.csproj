@@ -40,8 +40,8 @@
     </Compile>
     <Compile Include="Entities\Artifact\Artifact.cs" />
     <Compile Include="Entities\Community\Community.cs" />
+    <Compile Include="Entities\Criteria\ArtifactCriteria.cs" />
     <Compile Include="Entities\Member\Member.cs" />
-    <Compile Include="Mappers\IModelFactory.cs" />
     <Compile Include="Repositories\IArtifactRepository.cs" />
     <Compile Include="Repositories\ICommunityRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
@@ -65,6 +65,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

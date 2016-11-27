@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Alfred.Domain.Entities.Artifact;
 using Alfred.Domain.Repositories;
 using Alfred.Domain.Services;
+using Alfred.Models;
 using Alfred.Models.Artifacts;
 using FluentAssertions;
 using NSubstitute;
@@ -32,9 +33,9 @@ namespace Alfred.Domain.Tests.Services
         {
             var artifacts = _fixture.Build<ArtifactModel>()
                 .CreateMany(5).ToList();
-            _artifactRepo.GetArtifacts().Returns(artifacts);
+            _artifactRepo.GetArtifacts(Arg.Any<ArtifactCriteriaModel>()).Returns(artifacts);
 
-            var results = _artifactService.GetArtifacts().Result.ToList();
+            var results = _artifactService.GetArtifacts(null).Result.ToList();
             results.FirstOrDefault().Should().BeOfType<ArtifactModel>();
             results.Count.Should().Be(artifacts.Count);
         }

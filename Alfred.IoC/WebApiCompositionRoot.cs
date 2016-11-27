@@ -4,7 +4,6 @@ using Alfred.Dal.Implementation.Fake.Dao;
 using Alfred.Dal.Implementation.Fake.Mappers;
 using Alfred.Dal.Mappers;
 using Alfred.Dal.Repositories;
-using Alfred.Domain.Mappers;
 using Alfred.Domain.Repositories;
 using Alfred.Domain.Services;
 using Alfred.Domain.Validators;

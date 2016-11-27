@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alfred.Domain.Repositories;
+using Alfred.Models;
 using Alfred.Models.Artifacts;
 using Alfred.Services;
 
@@ -15,9 +16,9 @@ namespace Alfred.Domain.Services
             _artifactRepo = artifactRepo;
         }
 
-        public async Task<IEnumerable<ArtifactModel>> GetArtifacts()
+        public async Task<IEnumerable<ArtifactModel>> GetArtifacts(ArtifactCriteriaModel criteriaModel)
         {
-            return await _artifactRepo.GetArtifacts().ConfigureAwait(false);
+            return await _artifactRepo.GetArtifacts(criteriaModel).ConfigureAwait(false);
         }
 
         public async Task<ArtifactModel> GetArtifact(int id)

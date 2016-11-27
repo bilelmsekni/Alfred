@@ -38,7 +38,7 @@ namespace Alfred.WebApi.Controllers
         public async Task<IHttpActionResult> GetArtifacts(string ids = null, string title = null, 
             ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null, int page = 1, int pageSize = 20)
         {
-            var artifactQueryCriteriaModel = new ArtifactCriteriaModel
+            var criteriaModel = new ArtifactCriteriaModel
             {
                 Ids = ids?.SafeSplit(),
                 Title = title,
@@ -48,10 +48,10 @@ namespace Alfred.WebApi.Controllers
                 PageSize = pageSize
             };
 
-            var validationResults = _criteriaValidator.Validate(artifactQueryCriteriaModel);
+            var validationResults = _criteriaValidator.Validate(criteriaModel);
             if (validationResults.IsValid)
             {
-                return Ok(await _artifactService.GetArtifacts().ConfigureAwait(false));
+                return Ok(await _artifactService.GetArtifacts(criteriaModel).ConfigureAwait(false));
             }
 
             validationResults.AddToModelState(ModelState, null);

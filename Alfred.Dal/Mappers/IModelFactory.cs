@@ -1,11 +1,13 @@
 using Alfred.Domain.Entities.Artifact;
 using Alfred.Domain.Entities.Community;
+using Alfred.Domain.Entities.Criteria;
 using Alfred.Domain.Entities.Member;
+using Alfred.Models;
 using Alfred.Models.Artifacts;
 using Alfred.Models.Communities;
 using Alfred.Models.Members;
 
-namespace Alfred.Domain.Mappers
+namespace Alfred.Dal.Mappers
 {
     public interface IModelFactory
     {
@@ -18,5 +20,6 @@ namespace Alfred.Domain.Mappers
         ArtifactModel CreateArtifactModel(Artifact artifact);
         Artifact CreateArtifact(CreateArtifactModel createArtifactModel);
         Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel, Artifact oldArtifactModel);
+        ArtifactCriteria CreateArtifactCrtieria(ArtifactCriteriaModel criteriaModel);
     }
 }
