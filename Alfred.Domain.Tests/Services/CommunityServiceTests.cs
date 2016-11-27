@@ -27,11 +27,12 @@ namespace Alfred.Domain.Tests.Services
             var communities = _fixture.Build<CommunityModel>()
                 .CreateMany(5)
                 .ToList();
+            var criteria = new CommunityCriteriaModel();
             var communityRepo = Substitute.For<ICommunityRepository>();
 
-            communityRepo.GetCommunities().Returns(communities);
+            communityRepo.GetCommunities(criteria).Returns(communities);
             var communityService = new CommunityService(communityRepo);
-            var results = communityService.GetCommunities().Result.ToList();
+            var results = communityService.GetCommunities(criteria).Result.ToList();
             results.FirstOrDefault().Should().BeOfType<CommunityModel>();
             results.Count.Should().Be(communities.Count);
         }

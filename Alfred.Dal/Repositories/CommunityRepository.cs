@@ -19,9 +19,10 @@ namespace Alfred.Dal.Repositories
             _modelFactory = modelFactory;
         }
 
-        public async Task<IEnumerable<CommunityModel>> GetCommunities()
+        public async Task<IEnumerable<CommunityModel>> GetCommunities(CommunityCriteriaModel criteriaModel)
         {
-            var communities = await _communityDao.GetCommunities().ConfigureAwait(false);
+            var criteria = _modelFactory.CreateCommunityCriteria(criteriaModel);
+            var communities = await _communityDao.GetCommunities(criteria).ConfigureAwait(false);
             return communities.Select(_modelFactory.CreateCommunityModel);
         }
 

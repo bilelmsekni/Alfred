@@ -4,6 +4,9 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Alfred.Models.Communities;
 using Alfred.Services;
+using Alfred.Shared.Extensions;
+using FluentValidation;
+using FluentValidation.WebApi;
 
 namespace Alfred.WebApi.Controllers
 {
@@ -11,10 +14,13 @@ namespace Alfred.WebApi.Controllers
     public class CommunitiesController : ApiController
     {
         private readonly ICommunityService _communityService;
+        private readonly AbstractValidator<CommunityCriteriaModel> _criteriaValidator;
 
-        public CommunitiesController(ICommunityService communityService)
+
+        public CommunitiesController(ICommunityService communityService, AbstractValidator<CommunityCriteriaModel> criteriaValidator)
         {
             _communityService = communityService;
+            _criteriaValidator = criteriaValidator;
         }
 
         /// <summary>
@@ -27,9 +33,22 @@ namespace Alfred.WebApi.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<CommunityModel>))]
-        public async Task<IHttpActionResult> GetCommunities()
+        public async Task<IHttpActionResult> GetCommunities(string ids = null, string email = null, string name = null)
         {
-            return Ok(await _communityService.GetCommunities().ConfigureAwait(false));
+            var criteria = new CommunityCriteriaModel
+            {
+                Ids = ids.SafeSplit(),
+                Email = email,
+                Name = name
+            };
+
+            var validationResults =_criteriaValidator.Validate(criteria);
+            if (validationResults.IsValid)
+            {
+                return Ok(await _communityService.GetCommunities(criteria).ConfigureAwait(false));
+            }
+            validationResults.AddToModelState(ModelState, null);
+            return BadRequest(ModelState);
         }
 
         /// <summary>

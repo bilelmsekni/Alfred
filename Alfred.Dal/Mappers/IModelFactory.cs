@@ -21,5 +21,6 @@ namespace Alfred.Dal.Mappers
         Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel, Artifact oldArtifactModel);
         ArtifactCriteria CreateArtifactCrtieria(ArtifactCriteriaModel criteriaModel);
         MemberCriteria CreateMemberCriteria(MemberCriteriaModel criteriaModel);
+        CommunityCriteria CreateCommunityCriteria(CommunityCriteriaModel criteriaModel);
     }
 }

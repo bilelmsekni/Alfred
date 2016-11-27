@@ -6,7 +6,7 @@ namespace Alfred.Dal.Daos
 {
     public interface ICommunityDao
     {
-        Task<IEnumerable<Community>> GetCommunities();
+        Task<IEnumerable<Community>> GetCommunities(CommunityCriteria criteria);
         Task<Community> GetCommunity(int id);
         Task<int> SaveCommunity(Community community);
         Task DeleteCommunity(int id);

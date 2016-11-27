@@ -49,6 +49,7 @@
     <Compile Include="Services\CommunityServiceTests.cs" />
     <Compile Include="Services\MemberServiceTests.cs" />
     <Compile Include="Validators\ArtifactCriteriaModelValidatorTests.cs" />
+    <Compile Include="Validators\CommunityCriteriaModelValidatorTests.cs" />
     <Compile Include="Validators\IdsValidator.cs" />
     <Compile Include="Validators\MemberCriteriaModelValidatorTests.cs" />
   </ItemGroup>

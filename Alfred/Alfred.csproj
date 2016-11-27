@@ -53,6 +53,7 @@
     <Compile Include="Models\Artifacts\CreateArtifactModel.cs" />
     <Compile Include="Models\Artifacts\UpdateArtifactModel.cs" />
     <Compile Include="Models\Base\BaseCriteriaModel.cs" />
+    <Compile Include="Models\Communities\CommunityCriteriaModel.cs" />
     <Compile Include="Models\Communities\CommunityModel.cs" />
     <Compile Include="Models\Communities\CreateCommunityModel.cs" />
     <Compile Include="Models\Communities\UpdateCommunityModel.cs" />

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Alfred.Dal.Daos;
 using Alfred.Dal.Implementation.Fake.Database;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
+using Alfred.Dal.Implementation.Fake.Filters;
 using Alfred.Dal.Implementation.Fake.Mappers;
 using Alfred.Domain.Entities.Community;
 
@@ -19,10 +20,17 @@ namespace Alfred.Dal.Implementation.Fake.Dao
         {
             _entityFactory = entityFactory;
         }
-        public async Task<IEnumerable<Community>> GetCommunities()
+        public async Task<IEnumerable<Community>> GetCommunities(CommunityCriteria criteria)
         {
             var dtos = await Task.Run(() => _communities).ConfigureAwait(false);
-            return dtos.Select(_entityFactory.TransformToCommunityEntity);
+            Func<CommunityDto, bool> criteriaFilters = dto => true;
+
+            return dtos.Where(
+                criteriaFilters
+                .FilterOnIds(criteria.Ids)
+                .FilterOnEmail(criteria.Email)
+                .FilterOnName(criteria.Name))
+                .Select(_entityFactory.TransformToCommunityEntity);
         }
 
         public async Task<Community> GetCommunity(int id)

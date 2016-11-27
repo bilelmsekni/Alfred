@@ -4,7 +4,6 @@ using Alfred.Dal.Mappers;
 using Alfred.Domain.Entities.Artifact;
 using Alfred.Domain.Entities.Community;
 using Alfred.Domain.Entities.Member;
-using Alfred.Models;
 using Alfred.Models.Artifacts;
 using Alfred.Models.Communities;
 using Alfred.Models.Members;
@@ -183,6 +182,21 @@ namespace Alfred.Dal.Tests
             result.Name.Should().Be(criteriaModel.Name);
             result.CommunityId.Should().Be(criteriaModel.CommunityId);
             result.Ids.Should().Equal(criteriaModel.Ids.Select(int.Parse));            
+        }
+
+        [Test]
+        public void should_map_communityCriteriaModel_to_communityCriteria()
+        {
+            var criteriaModel = _fixture.Build<CommunityCriteriaModel>()
+                .With(x => x.Ids, new List<string> { "1", "123", "99" })
+                .Create();
+
+            var result = _modelFactory.CreateCommunityCriteria(criteriaModel);
+            result.Email.Should().Be(criteriaModel.Email);
+            result.Page.Should().Be(criteriaModel.Page);
+            result.PageSize.Should().Be(criteriaModel.PageSize);
+            result.Name.Should().Be(criteriaModel.Name);
+            result.Ids.Should().Equal(criteriaModel.Ids.Select(int.Parse));
         }
     }
 }

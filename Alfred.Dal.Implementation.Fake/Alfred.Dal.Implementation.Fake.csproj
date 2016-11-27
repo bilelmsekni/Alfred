@@ -47,6 +47,7 @@
     <Compile Include="EntityDtos\CommunityDto.cs" />
     <Compile Include="EntityDtos\MemberDto.cs" />
     <Compile Include="Filters\ArtifactFilters.cs" />
+    <Compile Include="Filters\CommunityFilters.cs" />
     <Compile Include="Filters\MemberFilters.cs" />
     <Compile Include="Mappers\EntityFactory.cs" />
     <Compile Include="Mappers\IEntityFactory.cs" />

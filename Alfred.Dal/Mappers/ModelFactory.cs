@@ -164,5 +164,17 @@ namespace Alfred.Dal.Mappers
                 PageSize = criteriaModel.PageSize
             };
         }
+
+        public CommunityCriteria CreateCommunityCriteria(CommunityCriteriaModel criteriaModel)
+        {
+            return new CommunityCriteria
+            {
+                Ids = criteriaModel.Ids?.Select(int.Parse),
+                Name = criteriaModel.Name,
+                Email = criteriaModel.Email,
+                Page = criteriaModel.Page,
+                PageSize = criteriaModel.PageSize
+            };
+        }
     }
 }

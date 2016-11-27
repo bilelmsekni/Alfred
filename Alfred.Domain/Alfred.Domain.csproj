@@ -42,6 +42,7 @@
     <Compile Include="Entities\Base\BaseCriteria.cs" />
     <Compile Include="Entities\Community\Community.cs" />
     <Compile Include="Entities\Artifact\ArtifactCriteria.cs" />
+    <Compile Include="Entities\Community\CommunityCriteria.cs" />
     <Compile Include="Entities\Member\Member.cs" />
     <Compile Include="Entities\Member\MemberCriteria.cs" />
     <Compile Include="Repositories\IArtifactRepository.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Services\CommunityService.cs" />
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Validators\ArtifactCriteriaModelValidator.cs" />
+    <Compile Include="Validators\CommunityCriteriaModelValidator.cs" />
     <Compile Include="Validators\IdsValidator.cs" />
     <Compile Include="Validators\MemberCriteriaModelValidator.cs" />
   </ItemGroup>
