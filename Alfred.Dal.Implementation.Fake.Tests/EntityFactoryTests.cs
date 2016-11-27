@@ -32,6 +32,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
             result.LastName.Should().Be(member.LastName);
             result.Role.Should().Be((CommunityRole)member.Role);
             result.Id.Should().Be(member.Id);
+            result.CommunityIds.Should().Equal(member.CommunityIds);
         }
 
         [Test]

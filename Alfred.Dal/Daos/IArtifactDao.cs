@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alfred.Domain.Entities.Artifact;
-using Alfred.Domain.Entities.Criteria;
 
 namespace Alfred.Dal.Daos
 {

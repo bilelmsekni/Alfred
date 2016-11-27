@@ -8,7 +8,6 @@ using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Dal.Implementation.Fake.Filters;
 using Alfred.Dal.Implementation.Fake.Mappers;
 using Alfred.Domain.Entities.Artifact;
-using Alfred.Domain.Entities.Criteria;
 
 namespace Alfred.Dal.Implementation.Fake.Dao
 {

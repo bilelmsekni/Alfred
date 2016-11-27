@@ -27,12 +27,12 @@ namespace Alfred.Domain.Tests.Services
         {
             var members = _fixture.Build<MemberModel>()
                 .CreateMany(5).ToList();
-
+            var fakeCriteria = new MemberCriteriaModel();
             var fakeRepo = Substitute.For<IMemberRepository>();
-            fakeRepo.GetMembers().ReturnsForAnyArgs(members);
+            fakeRepo.GetMembers(fakeCriteria).ReturnsForAnyArgs(members);
 
             var memberService = new MemberService(fakeRepo);
-            var result = memberService.GetMembers().Result.ToList();
+            var result = memberService.GetMembers(fakeCriteria).Result.ToList();
             result.FirstOrDefault().Should().BeOfType<MemberModel>();
             result.Count.Should().Be(members.Count);
         }

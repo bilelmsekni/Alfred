@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
 using Alfred.Dal.Implementation.Fake.Database;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
+using Alfred.Dal.Implementation.Fake.Filters;
 using Alfred.Dal.Implementation.Fake.Mappers;
 using Alfred.Domain.Entities.Member;
 
@@ -19,10 +21,18 @@ namespace Alfred.Dal.Implementation.Fake.Dao
             _entityFactory = entityFactory;
         }
 
-        public async Task<IEnumerable<Member>> GetMembers()
+        public async Task<IEnumerable<Member>> GetMembers(MemberCriteria criteria)
         {
             var dtos = await Task.Run(() => _members).ConfigureAwait(false);
-            return dtos.Select(_entityFactory.TransformToMemberEntity);
+            Func<MemberDto, bool> criteriafilters = dto => true;
+
+            return dtos.Where(criteriafilters
+                .FilterOnIds(criteria.Ids)
+                .FilterOnCommunityId(criteria.CommunityId)
+                .FilterOnEmail(criteria.Email)
+                .FilterOnName(criteria.Name)
+                .FilterOnRole(criteria.Role))
+                .Select(_entityFactory.TransformToMemberEntity);
         }
 
         public async Task<int> SaveMember(Member member)

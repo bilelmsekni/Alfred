@@ -39,9 +39,11 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Entities\Artifact\Artifact.cs" />
+    <Compile Include="Entities\Base\BaseCriteria.cs" />
     <Compile Include="Entities\Community\Community.cs" />
-    <Compile Include="Entities\Criteria\ArtifactCriteria.cs" />
+    <Compile Include="Entities\Artifact\ArtifactCriteria.cs" />
     <Compile Include="Entities\Member\Member.cs" />
+    <Compile Include="Entities\Member\MemberCriteria.cs" />
     <Compile Include="Repositories\IArtifactRepository.cs" />
     <Compile Include="Repositories\ICommunityRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />

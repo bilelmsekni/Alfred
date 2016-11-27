@@ -167,5 +167,22 @@ namespace Alfred.Dal.Tests
             result.CommunityId.Should().Be(criteriaModel.CommunityId);
             result.Ids.Should().Equal(criteriaModel.Ids.Select(int.Parse));
         }
+
+        [Test]
+        public void should_map_memberCriteriaModel_to_memberCriteria()
+        {
+            var criteriaModel = _fixture.Build<MemberCriteriaModel>()
+                .With(x => x.Ids, new List<string> { "1", "123", "99" })
+                .Create();
+
+            var result = _modelFactory.CreateMemberCriteria(criteriaModel);
+            result.Email.Should().Be(criteriaModel.Email);
+            result.Role.Should().Be(criteriaModel.Role);
+            result.Page.Should().Be(criteriaModel.Page);
+            result.PageSize.Should().Be(criteriaModel.PageSize);
+            result.Name.Should().Be(criteriaModel.Name);
+            result.CommunityId.Should().Be(criteriaModel.CommunityId);
+            result.Ids.Should().Equal(criteriaModel.Ids.Select(int.Parse));            
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Alfred.Shared.Enums;
 
 namespace Alfred.Domain.Entities.Member
@@ -9,5 +10,6 @@ namespace Alfred.Domain.Entities.Member
         public string LastName { get; set; }
         public string Email { get; set; }
         public CommunityRole Role { get; set; }
+        public IEnumerable<int> CommunityIds { get; set; }
     }
 }

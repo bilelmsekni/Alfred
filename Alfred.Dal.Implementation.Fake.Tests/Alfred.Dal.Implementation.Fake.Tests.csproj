@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ArtifactDaoTests.cs" />
     <Compile Include="EntityFactoryTests.cs" />
+    <Compile Include="MemberDaoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

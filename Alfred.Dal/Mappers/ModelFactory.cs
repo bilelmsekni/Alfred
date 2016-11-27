@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using Alfred.Domain.Entities.Artifact;
 using Alfred.Domain.Entities.Community;
-using Alfred.Domain.Entities.Criteria;
 using Alfred.Domain.Entities.Member;
-using Alfred.Models;
 using Alfred.Models.Artifacts;
 using Alfred.Models.Communities;
 using Alfred.Models.Members;
@@ -28,7 +26,7 @@ namespace Alfred.Dal.Mappers
                 Email = createMemberModel.Email,
                 FirstName = createMemberModel.FirstName,
                 LastName = createMemberModel.LastName,
-                Role = createMemberModel.Role               
+                Role = createMemberModel.Role
             };
         }
 
@@ -117,6 +115,7 @@ namespace Alfred.Dal.Mappers
                 FirstName = updateMemberModel.FirstName,
                 LastName = updateMemberModel.LastName,
                 Role = updateMemberModel.Role,
+                CommunityIds = originalMember.CommunityIds
             };
             return _objDiffManager.UpdateObject(originalMember, newMember);
         }
@@ -148,8 +147,22 @@ namespace Alfred.Dal.Mappers
                 Name = updateCommunityModel.Name,
                 Email = updateCommunityModel.Email
             };
-            
+
             return _objDiffManager.UpdateObject(originalCommunity, newCommunity);
+        }
+
+        public MemberCriteria CreateMemberCriteria(MemberCriteriaModel criteriaModel)
+        {
+            return new MemberCriteria
+            {
+                Ids = criteriaModel.Ids?.Select(int.Parse),
+                CommunityId = criteriaModel.CommunityId,
+                Email = criteriaModel.Email,
+                Name = criteriaModel.Name,
+                Role = criteriaModel.Role,
+                Page = criteriaModel.Page,
+                PageSize = criteriaModel.PageSize
+            };
         }
     }
 }

@@ -18,9 +18,10 @@ namespace Alfred.Dal.Repositories
             _memberDao = memberDao;
             _modelFactory = modelFactory;
         }
-        public async Task<IEnumerable<MemberModel>> GetMembers()
+        public async Task<IEnumerable<MemberModel>> GetMembers(MemberCriteriaModel criteriaModel)
         {
-            var members = await _memberDao.GetMembers().ConfigureAwait(false);
+            var criteria = _modelFactory.CreateMemberCriteria(criteriaModel);
+            var members = await _memberDao.GetMembers(criteria).ConfigureAwait(false);
             return members.Select(_modelFactory.CreateMemberModel);
         }
 

@@ -49,7 +49,7 @@ namespace Alfred.WebApi.Controllers
             var validationResults = _criteriaValidator.Validate(memberCriteria);
             if (validationResults.IsValid)
             {
-                return Ok(await _memberService.GetMembers().ConfigureAwait(false));
+                return Ok(await _memberService.GetMembers(memberCriteria).ConfigureAwait(false));
             }
 
             validationResults.AddToModelState(ModelState, null);

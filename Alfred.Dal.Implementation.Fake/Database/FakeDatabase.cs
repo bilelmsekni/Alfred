@@ -85,7 +85,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
                     FirstName = "Kick",
                     LastName = "Ass",
                     Role = 0,
-                    CommunityIds = new List<int> { 0}
+                    CommunityIds = new List<int> { 1}
                 },
                 new MemberDto
                 {
@@ -94,7 +94,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
                     FirstName = "Hit",
                     LastName = "Girl",
                     Role = 1,
-                    CommunityIds = new List<int> {1, 0 }
+                    CommunityIds = new List<int> {1, 3 }
                 },
                 new MemberDto
                 {

@@ -1,6 +1,5 @@
 using Alfred.Domain.Entities.Artifact;
 using Alfred.Domain.Entities.Community;
-using Alfred.Domain.Entities.Criteria;
 using Alfred.Domain.Entities.Member;
 using Alfred.Models;
 using Alfred.Models.Artifacts;
@@ -21,5 +20,6 @@ namespace Alfred.Dal.Mappers
         Artifact CreateArtifact(CreateArtifactModel createArtifactModel);
         Artifact CreateArtifact(UpdateArtifactModel updateArtifactModel, Artifact oldArtifactModel);
         ArtifactCriteria CreateArtifactCrtieria(ArtifactCriteriaModel criteriaModel);
+        MemberCriteria CreateMemberCriteria(MemberCriteriaModel criteriaModel);
     }
 }

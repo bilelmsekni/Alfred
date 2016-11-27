@@ -6,7 +6,7 @@ namespace Alfred.Dal.Daos
 {
     public interface IMemberDao
     {
-        Task<IEnumerable<Member>> GetMembers();
+        Task<IEnumerable<Member>> GetMembers(MemberCriteria criteria);
         Task<int> SaveMember(Member member);
         Task<Member> GetMember(string email);
         Task<Member> GetMember(int id);

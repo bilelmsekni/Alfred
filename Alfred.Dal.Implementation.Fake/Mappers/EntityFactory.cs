@@ -83,7 +83,8 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
                     Email = memberDto.Email,
                     FirstName = memberDto.FirstName,
                     LastName = memberDto.LastName,
-                    Role = (CommunityRole)memberDto.Role
+                    Role = (CommunityRole)memberDto.Role,
+                    CommunityIds = memberDto.CommunityIds                    
                 };
             }
             return null;

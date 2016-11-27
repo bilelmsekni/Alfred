@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Alfred.Dal.Implementation.Fake.Dao;
 using Alfred.Dal.Implementation.Fake.Mappers;
-using Alfred.Domain.Entities.Criteria;
+using Alfred.Domain.Entities.Artifact;
 using Alfred.Shared.Enums;
 using FluentAssertions;
 using NUnit.Framework;
