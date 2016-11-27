@@ -11,5 +11,7 @@ namespace Alfred.Domain.Entities.Criteria
         public ArtifactStatus? Status { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
+        public int? CommunityId { get; set; }
+        public int? MemberId { get; set; }
     }
 }

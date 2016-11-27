@@ -163,6 +163,8 @@ namespace Alfred.Dal.Tests
             result.Status.Should().Be(criteriaModel.Status);
             result.Page.Should().Be(criteriaModel.Page);
             result.PageSize.Should().Be(criteriaModel.PageSize);
+            result.MemberId.Should().Be(criteriaModel.MemberId);
+            result.CommunityId.Should().Be(criteriaModel.CommunityId);
             result.Ids.Should().Equal(criteriaModel.Ids.Select(int.Parse));
         }
     }

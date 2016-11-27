@@ -36,7 +36,8 @@ namespace Alfred.WebApi.Controllers
         [Route("")]
         [ResponseType(typeof(IEnumerable<ArtifactModel>))]
         public async Task<IHttpActionResult> GetArtifacts(string ids = null, string title = null, 
-            ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null, int page = 1, int pageSize = 20)
+            ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null, int? memberId = null, 
+            int? communityId = null, int page = 1, int pageSize = 20)
         {
             var criteriaModel = new ArtifactCriteriaModel
             {
@@ -44,8 +45,10 @@ namespace Alfred.WebApi.Controllers
                 Title = title,
                 Type = artifactType,
                 Status = artifactStatus,
+                MemberId = memberId,
+                CommunityId = communityId,
                 Page = page,
-                PageSize = pageSize
+                PageSize = pageSize                
             };
 
             var validationResults = _criteriaValidator.Validate(criteriaModel);

@@ -112,5 +112,49 @@ namespace Alfred.Dal.Implementation.Fake.Tests
             var results = _artifactDao.GetArtifacts(criteria).Result;
             results.Should().OnlyContain(x => x.Status == criteria.Status);
         }
+
+        [Test]
+        public void Should_not_return_artifacts_when_criteria_has_memberId_465()
+        {
+            var criteria = new ArtifactCriteria
+            {
+                MemberId = 465
+            };
+            var results = _artifactDao.GetArtifacts(criteria).Result;
+            results.Should().BeEmpty();
+        }
+
+        [Test]
+        public void Should_return_artifacts_when_criteria_has_memberId_2()
+        {
+            var criteria = new ArtifactCriteria
+            {
+                MemberId = 2
+            };
+            var results = _artifactDao.GetArtifacts(criteria).Result;
+            results.Should().OnlyContain(x => x.MemberId == criteria.MemberId);
+        }
+
+        [Test]
+        public void Should_not_return_artifacts_when_criteria_has_CommunityId_465()
+        {
+            var criteria = new ArtifactCriteria
+            {
+                CommunityId = 465
+            };
+            var results = _artifactDao.GetArtifacts(criteria).Result;
+            results.Should().BeEmpty();
+        }
+
+        [Test]
+        public void Should_return_artifacts_when_criteria_has_communityId_2()
+        {
+            var criteria = new ArtifactCriteria
+            {
+                CommunityId = 2
+            };
+            var results = _artifactDao.GetArtifacts(criteria).Result;
+            results.Should().OnlyContain(x => x.CommunityId == criteria.CommunityId);
+        }
     }
 }

@@ -31,7 +31,9 @@ namespace Alfred.Dal.Implementation.Fake.Dao
                 .FilterOnIds(artifactCriteria.Ids)
                 .FilterOnTitle(artifactCriteria.Title)
                 .FilterOnType(artifactCriteria.Type)
-                .FilterOnStatus(artifactCriteria.Status))
+                .FilterOnStatus(artifactCriteria.Status)
+                .FilterOnMemberId(artifactCriteria.MemberId)
+                .FilterOnCommunityId(artifactCriteria.CommunityId))
                 .Select(_entityFactory.TransformToArtifactEntity);
         }
 

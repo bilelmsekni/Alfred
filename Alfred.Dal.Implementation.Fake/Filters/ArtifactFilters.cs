@@ -35,5 +35,19 @@ namespace Alfred.Dal.Implementation.Fake.Filters
                 filters += dto => (ArtifactStatus)dto.Status == status.Value;
             return filters;
         }
+
+        public static Func<ArtifactDto, bool> FilterOnMemberId(this Func<ArtifactDto, bool> filters, int? memberId)
+        {
+            if (memberId.HasValue)
+                filters += dto => dto.MemberId == memberId.Value;
+            return filters;
+        }
+
+        public static Func<ArtifactDto, bool> FilterOnCommunityId(this Func<ArtifactDto, bool> filters, int? communityId)
+        {
+            if (communityId.HasValue)
+                filters += dto => dto.CommunityId == communityId.Value;
+            return filters;
+        }
     }
 }

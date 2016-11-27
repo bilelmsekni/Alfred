@@ -20,6 +20,7 @@ namespace Alfred.Dal.Mappers
         {
             _objDiffManager = objDiffManager;
         }
+
         public Member CreateMember(CreateMemberModel createMemberModel)
         {
             return new Member
@@ -100,6 +101,8 @@ namespace Alfred.Dal.Mappers
                 Title = criteriaModel.Title,
                 Type = criteriaModel.Type,
                 Status = criteriaModel.Status,
+                CommunityId = criteriaModel.CommunityId,
+                MemberId = criteriaModel.MemberId,
                 Page = criteriaModel.Page,
                 PageSize = criteriaModel.PageSize
             };

@@ -27,7 +27,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
                     Type = 2,
                     Reward = 100,
                     MemberId = 1,
-                    CommunityId = 0
+                    CommunityId = 2
 
                 },
                 new ArtifactDto
@@ -39,7 +39,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
                     Type = 0,
                     Reward = 370,
                     MemberId = -1,
-                    CommunityId = 0
+                    CommunityId = 2
                 },
                 new ArtifactDto
                 {
@@ -50,7 +50,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
                     Type = 1,
                     Reward = 520,
                     MemberId = 2,
-                    CommunityId = 0
+                    CommunityId = 3
                 }
             };
 
