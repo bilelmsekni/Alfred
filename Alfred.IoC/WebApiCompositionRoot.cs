@@ -7,7 +7,8 @@ using Alfred.Dal.Repositories;
 using Alfred.Domain.Repositories;
 using Alfred.Domain.Services;
 using Alfred.Domain.Validators;
-using Alfred.Models;
+using Alfred.Models.Artifacts;
+using Alfred.Models.Members;
 using Alfred.Services;
 using Alfred.Shared.Features;
 using FluentValidation;
@@ -33,6 +34,7 @@ namespace Alfred.IoC
             serviceRegistry.RegisterInstance(AppSettingsProvider.Build());
             serviceRegistry.RegisterInstance<ObjectDifferenceManager>(new ObjectDifferenceManager());
             serviceRegistry.RegisterInstance<AbstractValidator<ArtifactCriteriaModel>>(new ArtifactCriteriaModelValidator(new IdsValidator()));
+            serviceRegistry.RegisterInstance<AbstractValidator<MemberCriteriaModel>>(new MemberCriteriaModelValidator(new IdsValidator()));            
         }
     }
 }

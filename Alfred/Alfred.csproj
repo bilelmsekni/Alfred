@@ -48,14 +48,16 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Models\ArtifactCriteriaModel.cs" />
+    <Compile Include="Models\Artifacts\ArtifactCriteriaModel.cs" />
     <Compile Include="Models\Artifacts\ArtifactModel.cs" />
     <Compile Include="Models\Artifacts\CreateArtifactModel.cs" />
     <Compile Include="Models\Artifacts\UpdateArtifactModel.cs" />
+    <Compile Include="Models\Base\BaseCriteriaModel.cs" />
     <Compile Include="Models\Communities\CommunityModel.cs" />
     <Compile Include="Models\Communities\CreateCommunityModel.cs" />
     <Compile Include="Models\Communities\UpdateCommunityModel.cs" />
     <Compile Include="Models\Members\CreateMemberModel.cs" />
+    <Compile Include="Models\Members\MemberCriteriaModel.cs" />
     <Compile Include="Models\Members\MemberModel.cs" />
     <Compile Include="Models\Members\UpdateMemberModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

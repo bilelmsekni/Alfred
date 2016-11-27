@@ -1,15 +1,15 @@
-﻿using Alfred.Models.Artifacts;
+﻿using Alfred.Models.Members;
 using FluentValidation;
 
 namespace Alfred.Domain.Validators
 {
-    public class ArtifactCriteriaModelValidator : AbstractValidator<ArtifactCriteriaModel>
+    public class MemberCriteriaModelValidator : AbstractValidator<MemberCriteriaModel>
     {
-        public ArtifactCriteriaModelValidator(IdsValidator idsValidator)
+        public MemberCriteriaModelValidator(IdsValidator idsValidator)
         {
             RuleFor(criteria => criteria.Ids).SetCollectionValidator(idsValidator);
-            RuleFor(criteria => criteria.Type).IsInEnum();
-            RuleFor(criteria => criteria.Status).IsInEnum();
+            RuleFor(criteria => criteria.Email).EmailAddress();
+            RuleFor(criteria => criteria.Role).IsInEnum();
             RuleFor(criteria => criteria.PageSize).InclusiveBetween(1, 50);
             RuleFor(criteria => criteria.Page).GreaterThanOrEqualTo(1);
         }

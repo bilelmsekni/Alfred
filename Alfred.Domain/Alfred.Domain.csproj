@@ -51,6 +51,7 @@
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Validators\ArtifactCriteriaModelValidator.cs" />
     <Compile Include="Validators\IdsValidator.cs" />
+    <Compile Include="Validators\MemberCriteriaModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alfred.Shared\Alfred.Shared.csproj">

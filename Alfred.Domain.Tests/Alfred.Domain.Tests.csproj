@@ -50,6 +50,7 @@
     <Compile Include="Services\MemberServiceTests.cs" />
     <Compile Include="Validators\ArtifactCriteriaModelValidatorTests.cs" />
     <Compile Include="Validators\IdsValidator.cs" />
+    <Compile Include="Validators\MemberCriteriaModelValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />

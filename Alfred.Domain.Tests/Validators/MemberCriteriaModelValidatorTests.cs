@@ -1,5 +1,5 @@
 ﻿using Alfred.Domain.Validators;
-using Alfred.Models.Artifacts;
+using Alfred.Models.Members;
 using Alfred.Shared.Enums;
 using FluentValidation.TestHelper;
 using NUnit.Framework;
@@ -7,41 +7,43 @@ using NUnit.Framework;
 namespace Alfred.Domain.Tests.Validators
 {
     [TestFixture]
-    public class ArtifactCriteriaModelValidatorTests
+    public class MemberCriteriaModelValidatorTests
     {
-        private ArtifactCriteriaModelValidator _validator;
+        private MemberCriteriaModelValidator _validator;
 
         [SetUp]
         public void Setup()
         {
-            _validator = new ArtifactCriteriaModelValidator(new IdsValidator());
+            _validator = new MemberCriteriaModelValidator(new IdsValidator());
+        }
+
+        [Test]
+        public void Should_have_Ids_Validator_Child()
+        {
+            _validator.ShouldHaveChildValidator(criteria => criteria.Ids, typeof(IdsValidator));
         }
 
         [Test]
         public void Should_validate_criteria_when_no_filter_was_specified()
         {
-            var criteria = new ArtifactCriteriaModel
+            var criteria = new MemberCriteriaModel
             {
                 Ids = null,
-                Status = null,
-                Title = null,
-                Type = null,
+                CommunityId = null,
+                Email = null,
+                Name = null,
+                Role = null,
                 PageSize = 20,
                 Page = 1
             };
 
             _validator.ShouldNotHaveValidationErrorFor(x => x.Ids, criteria);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Status, criteria);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Title, criteria);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Type, criteria);
+            _validator.ShouldNotHaveValidationErrorFor(x => x.CommunityId, criteria);
+            _validator.ShouldNotHaveValidationErrorFor(x => x.Email, criteria);
+            _validator.ShouldNotHaveValidationErrorFor(x => x.Name, criteria);
+            _validator.ShouldNotHaveValidationErrorFor(x => x.Role, criteria);
             _validator.ShouldNotHaveValidationErrorFor(x => x.PageSize, criteria);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Page, criteria);
-        }
-
-        [Test]
-        public void Should_have_ids_validator_child_when_built()
-        {
-            _validator.ShouldHaveChildValidator(criteria => criteria.Ids, typeof(IdsValidator));
         }
 
         [TestCase(0)]
@@ -72,28 +74,30 @@ namespace Alfred.Domain.Tests.Validators
             _validator.ShouldNotHaveValidationErrorFor(c => c.PageSize, pageSize);
         }
 
-        [Test]
-        public void Should_have_validation_errors_when_type_is_not_enum_valid()
+        [TestCase("blabla")]
+        [TestCase("ca@la")]
+        [TestCase("blabla.com")]
+        public void Should_have_validation_errors_when_email_is_not_emailFormat(string email)
         {
-            _validator.ShouldHaveValidationErrorFor(c => c.Type, (ArtifactType?)15);
+            _validator.ShouldHaveValidationErrorFor(c => c.Email, email);
         }
 
         [Test]
-        public void Should_not_have_validation_errors_when_role_is_null_or_enum_valid()
+        public void Should_not_have_validation_errors_when_email_is_emailFormat()
         {
-            _validator.ShouldNotHaveValidationErrorFor(c => c.Type, (ArtifactType?)0);
+            _validator.ShouldNotHaveValidationErrorFor(c => c.Email, "ca@la.com");
         }
 
         [Test]
-        public void Should_have_validation_errors_when_status_is_not_enum_valid()
+        public void Should_have_validation_errors_when_role_is_not_enum_valid()
         {
-            _validator.ShouldHaveValidationErrorFor(c => c.Status, (ArtifactStatus?)15);
+            _validator.ShouldHaveValidationErrorFor(c => c.Role, (CommunityRole?)15);
         }
 
         [Test]
-        public void Should_not_have_validation_errors_when_status_is_enum_valid()
+        public void Should_not_have_validation_errors_when_role_is_enum_valid()
         {
-            _validator.ShouldNotHaveValidationErrorFor(c => c.Status, (ArtifactStatus?)0);
+            _validator.ShouldNotHaveValidationErrorFor(c => c.Role, (CommunityRole?)0);
         }
     }
 }

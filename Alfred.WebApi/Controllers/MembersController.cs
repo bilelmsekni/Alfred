@@ -4,6 +4,10 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Alfred.Models.Members;
 using Alfred.Services;
+using Alfred.Shared.Enums;
+using Alfred.Shared.Extensions;
+using FluentValidation;
+using FluentValidation.WebApi;
 
 namespace Alfred.WebApi.Controllers
 {
@@ -11,10 +15,12 @@ namespace Alfred.WebApi.Controllers
     public class MembersController : ApiController
     {
         private readonly IMemberService _memberService;
+        private readonly AbstractValidator<MemberCriteriaModel> _criteriaValidator;
 
-        public MembersController(IMemberService memberService)
+        public MembersController(IMemberService memberService, AbstractValidator<MemberCriteriaModel> criteriaValidator)
         {
             _memberService = memberService;
+            _criteriaValidator = criteriaValidator;
         }
 
         /// <summary>
@@ -27,9 +33,27 @@ namespace Alfred.WebApi.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<MemberModel>))]
-        public async Task<IHttpActionResult> GetMembers()
+        public async Task<IHttpActionResult> GetMembers(string ids = null, string email = null, 
+            string name = null, CommunityRole? role = null,int? communityId = null, int page = 1, int pageSize = 20)
         {
-            return Ok(await _memberService.GetMembers().ConfigureAwait(false));            
+            var memberCriteria = new MemberCriteriaModel
+            {
+                Ids = ids?.SafeSplit(),
+                Email = email,
+                Role = role,
+                Name = name,
+                CommunityId = communityId,
+                Page = page,
+                PageSize = pageSize
+            };
+            var validationResults = _criteriaValidator.Validate(memberCriteria);
+            if (validationResults.IsValid)
+            {
+                return Ok(await _memberService.GetMembers().ConfigureAwait(false));
+            }
+
+            validationResults.AddToModelState(ModelState, null);
+            return BadRequest(ModelState);
         }
 
         /// <summary>
