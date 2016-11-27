@@ -25,7 +25,14 @@ namespace Alfred.Dal.Implementation.Fake.Filters
         public static Func<ArtifactDto, bool> FilterOnType(this Func<ArtifactDto, bool> filters, ArtifactType? type)
         {
             if (type.HasValue)
-                filters += dto => dto.Type == (int)type.Value;
+                filters += dto => (ArtifactType)dto.Type == type.Value;
+            return filters;
+        }
+
+        public static Func<ArtifactDto, bool> FilterOnStatus(this Func<ArtifactDto, bool> filters, ArtifactStatus? status)
+        {
+            if (status.HasValue)
+                filters += dto => (ArtifactStatus)dto.Status == status.Value;
             return filters;
         }
     }

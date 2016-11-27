@@ -90,5 +90,27 @@ namespace Alfred.Dal.Implementation.Fake.Tests
             var results = _artifactDao.GetArtifacts(criteria).Result;
             results.Should().OnlyContain(x=>x.Type == criteria.Type);
         }
+
+        [Test]
+        public void Should_not_return_artifacts_when_criteria_has_status_pending()
+        {
+            var criteria = new ArtifactCriteria
+            {
+                Status = ArtifactStatus.Pending
+            };
+            var results = _artifactDao.GetArtifacts(criteria).Result;
+            results.Should().BeEmpty();
+        }
+
+        [Test]
+        public void Should_return_artifacts_when_criteria_has_status_inprogress()
+        {
+            var criteria = new ArtifactCriteria
+            {
+                Status = ArtifactStatus.InProgress
+            };
+            var results = _artifactDao.GetArtifacts(criteria).Result;
+            results.Should().OnlyContain(x => x.Status == criteria.Status);
+        }
     }
 }

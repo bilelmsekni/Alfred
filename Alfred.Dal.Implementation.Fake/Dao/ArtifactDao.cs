@@ -30,7 +30,8 @@ namespace Alfred.Dal.Implementation.Fake.Dao
                 criteriafilters
                 .FilterOnIds(artifactCriteria.Ids)
                 .FilterOnTitle(artifactCriteria.Title)
-                .FilterOnType(artifactCriteria.Type))
+                .FilterOnType(artifactCriteria.Type)
+                .FilterOnStatus(artifactCriteria.Status))
                 .Select(_entityFactory.TransformToArtifactEntity);
         }
 
