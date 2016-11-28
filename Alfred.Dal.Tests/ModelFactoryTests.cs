@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Community;
+using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Mappers;
-using Alfred.Domain.Entities.Artifact;
-using Alfred.Domain.Entities.Community;
-using Alfred.Domain.Entities.Member;
 using Alfred.Models.Artifacts;
 using Alfred.Models.Communities;
 using Alfred.Models.Members;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Implementation.Fake.Dao;
 using Alfred.Dal.Implementation.Fake.Mappers;
-using Alfred.Domain.Entities.Artifact;
 using Alfred.Shared.Enums;
 using FluentAssertions;
 using NUnit.Framework;
@@ -30,7 +30,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 Ids = new List<int> {32,4}
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().OnlyContain(e => criteria.Ids.Contains(e.Id));
+            results.Artifacts.Should().OnlyContain(e => criteria.Ids.Contains(e.Id));
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 Ids = new List<int> { 999 }
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().BeEmpty();
+            results.Artifacts.Should().BeEmpty();
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 Title = "blabla"
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().BeEmpty();
+            results.Artifacts.Should().BeEmpty();
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 Title = "Clean Code"
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().OnlyContain(res=>res.Title.Contains(criteria.Title));
+            results.Artifacts.Should().OnlyContain(res=>res.Title.Contains(criteria.Title));
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 Type = ArtifactType.LongArticle
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().BeEmpty();
+            results.Artifacts.Should().BeEmpty();
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 Type = ArtifactType.BrownBagLaunch
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().OnlyContain(x=>x.Type == criteria.Type);
+            results.Artifacts.Should().OnlyContain(x=>x.Type == criteria.Type);
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 Status = ArtifactStatus.Pending
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().BeEmpty();
+            results.Artifacts.Should().BeEmpty();
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 Status = ArtifactStatus.InProgress
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().OnlyContain(x => x.Status == criteria.Status);
+            results.Artifacts.Should().OnlyContain(x => x.Status == criteria.Status);
         }
 
         [Test]
@@ -118,7 +118,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 MemberId = 465
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().BeEmpty();
+            results.Artifacts.Should().BeEmpty();
         }
 
         [Test]
@@ -129,7 +129,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 MemberId = 2
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().OnlyContain(x => x.MemberId == criteria.MemberId);
+            results.Artifacts.Should().OnlyContain(x => x.MemberId == criteria.MemberId);
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 CommunityId = 465
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().BeEmpty();
+            results.Artifacts.Should().BeEmpty();
         }
 
         [Test]
@@ -151,7 +151,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
                 CommunityId = 2
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
-            results.Should().OnlyContain(x => x.CommunityId == criteria.CommunityId);
+            results.Artifacts.Should().OnlyContain(x => x.CommunityId == criteria.CommunityId);
         }
     }
 }

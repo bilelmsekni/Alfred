@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Implementation.Fake.Dao;
 using Alfred.Dal.Implementation.Fake.Mappers;
-using Alfred.Domain.Entities.Community;
 using FluentAssertions;
 using NUnit.Framework;
 

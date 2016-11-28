@@ -43,6 +43,15 @@
     <Compile Include="Daos\IArtifactDao.cs" />
     <Compile Include="Daos\ICommunityDao.cs" />
     <Compile Include="Daos\IMemberDao.cs" />
+    <Compile Include="Entities\Artifact\Artifact.cs" />
+    <Compile Include="Entities\Artifact\ArtifactCriteria.cs" />
+    <Compile Include="Entities\Artifact\ArtifactResponse.cs" />
+    <Compile Include="Entities\Base\BaseCriteria.cs" />
+    <Compile Include="Entities\Base\Link.cs" />
+    <Compile Include="Entities\Community\Community.cs" />
+    <Compile Include="Entities\Community\CommunityCriteria.cs" />
+    <Compile Include="Entities\Member\Member.cs" />
+    <Compile Include="Entities\Member\MemberCriteria.cs" />
     <Compile Include="Mappers\IModelFactory.cs" />
     <Compile Include="Mappers\ModelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

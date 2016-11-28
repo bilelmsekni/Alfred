@@ -39,6 +39,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ArtifactResponseLinks.cs" />
     <Compile Include="Dao\ArtifactDao.cs" />
     <Compile Include="Dao\CommunityDao.cs" />
     <Compile Include="Dao\MemberDao.cs" />

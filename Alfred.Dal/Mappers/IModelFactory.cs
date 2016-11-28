@@ -1,8 +1,9 @@
-using Alfred.Domain.Entities.Artifact;
-using Alfred.Domain.Entities.Community;
-using Alfred.Domain.Entities.Member;
-using Alfred.Models;
+using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Base;
+using Alfred.Dal.Entities.Community;
+using Alfred.Dal.Entities.Member;
 using Alfred.Models.Artifacts;
+using Alfred.Models.Base;
 using Alfred.Models.Communities;
 using Alfred.Models.Members;
 
@@ -22,5 +23,7 @@ namespace Alfred.Dal.Mappers
         ArtifactCriteria CreateArtifactCrtieria(ArtifactCriteriaModel criteriaModel);
         MemberCriteria CreateMemberCriteria(MemberCriteriaModel criteriaModel);
         CommunityCriteria CreateCommunityCriteria(CommunityCriteriaModel criteriaModel);
+        ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse);
+        LinkModel CreateLinkModel(Link link);
     }
 }

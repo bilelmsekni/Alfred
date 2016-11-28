@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alfred.Domain.Entities.Artifact;
+using Alfred.Dal.Entities.Artifact;
 
 namespace Alfred.Dal.Daos
 {
     public interface IArtifactDao
     {
-        Task<IEnumerable<Artifact>> GetArtifacts(ArtifactCriteria artifactCriteria);
-        Task<Artifact> GetArtifact(int id);
+        Task<ArtifactResponse> GetArtifacts(ArtifactCriteria artifactCriteria);
+        Task<ArtifactResponse> GetArtifact(int id);
         Task<int> SaveArtifact(Artifact artifact);
         Task DeleteArtifact(int id);
         Task UpdateArtifact(Artifact artifact);

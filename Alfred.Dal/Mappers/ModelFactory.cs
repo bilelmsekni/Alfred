@@ -1,8 +1,10 @@
 ﻿using System.Linq;
-using Alfred.Domain.Entities.Artifact;
-using Alfred.Domain.Entities.Community;
-using Alfred.Domain.Entities.Member;
+using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Base;
+using Alfred.Dal.Entities.Community;
+using Alfred.Dal.Entities.Member;
 using Alfred.Models.Artifacts;
+using Alfred.Models.Base;
 using Alfred.Models.Communities;
 using Alfred.Models.Members;
 using Alfred.Shared.Enums;
@@ -175,6 +177,20 @@ namespace Alfred.Dal.Mappers
                 Page = criteriaModel.Page,
                 PageSize = criteriaModel.PageSize
             };
+        }
+
+        public ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse)
+        {
+            return new ArtifactResponseModel
+            {
+                Artifacts = artifactResponse.Artifacts?.Select(CreateArtifactModel),
+                Links = artifactResponse.Links?.Select(CreateLinkModel)
+            };
+        }
+
+        public LinkModel CreateLinkModel(Link link)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

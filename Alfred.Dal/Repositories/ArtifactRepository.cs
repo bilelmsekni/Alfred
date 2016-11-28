@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Alfred.Dal.Daos;
 using Alfred.Dal.Mappers;
 using Alfred.Domain.Repositories;
-using Alfred.Models;
 using Alfred.Models.Artifacts;
 
 namespace Alfred.Dal.Repositories
@@ -20,18 +19,18 @@ namespace Alfred.Dal.Repositories
             _modelFactory = modelFactory;
         }
 
-        public async Task<IEnumerable<ArtifactModel>> GetArtifacts(ArtifactCriteriaModel criteriaModel)
+        public async Task<ArtifactResponseModel> GetArtifacts(ArtifactCriteriaModel criteriaModel)
         {
             var artifactCriteria = _modelFactory.CreateArtifactCrtieria(criteriaModel);
-            var artifactEntities = await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false);
-            return artifactEntities.Select(_modelFactory.CreateArtifactModel);
+            var artifactResponse = await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false);
+            return _modelFactory.CreateArtifactResponseModel(artifactResponse);
         }
 
 
-        public async Task<ArtifactModel> GetArtifact(int id)
+        public async Task<ArtifactResponseModel> GetArtifact(int id)
         {
-            var artifact =  await _artifactDao.GetArtifact(id).ConfigureAwait(false);
-            return _modelFactory.CreateArtifactModel(artifact);
+            var artifact = await _artifactDao.GetArtifact(id).ConfigureAwait(false);
+            return _modelFactory.CreateArtifactResponseModel(artifact);
         }
 
         public async Task<int> SaveArtifact(CreateArtifactModel artifactModel)
@@ -48,9 +47,9 @@ namespace Alfred.Dal.Repositories
         public async Task<ArtifactModel> UpdateArtifact(UpdateArtifactModel artifactUpdates)
         {
             var oldArtifact = await _artifactDao.GetArtifact(artifactUpdates.Id).ConfigureAwait(false);
-            if (oldArtifact != null)
+            if (oldArtifact.Artifacts.Any())
             {
-                var newArtifact = _modelFactory.CreateArtifact(artifactUpdates, oldArtifact);
+                var newArtifact = _modelFactory.CreateArtifact(artifactUpdates, oldArtifact.Artifacts.FirstOrDefault());
                 if (newArtifact != null)
                 {
                     await _artifactDao.UpdateArtifact(newArtifact).ConfigureAwait(false);

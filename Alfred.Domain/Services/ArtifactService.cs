@@ -16,12 +16,12 @@ namespace Alfred.Domain.Services
             _artifactRepo = artifactRepo;
         }
 
-        public async Task<IEnumerable<ArtifactModel>> GetArtifacts(ArtifactCriteriaModel criteriaModel)
+        public async Task<ArtifactResponseModel> GetArtifacts(ArtifactCriteriaModel criteriaModel)
         {
             return await _artifactRepo.GetArtifacts(criteriaModel).ConfigureAwait(false);
         }
 
-        public async Task<ArtifactModel> GetArtifact(int id)
+        public async Task<ArtifactResponseModel> GetArtifact(int id)
         {
             return await _artifactRepo.GetArtifact(id).ConfigureAwait(false);
         }

@@ -1,7 +1,7 @@
-﻿using Alfred.Dal.Implementation.Fake.EntityDtos;
-using Alfred.Domain.Entities.Artifact;
-using Alfred.Domain.Entities.Community;
-using Alfred.Domain.Entities.Member;
+﻿using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Community;
+using Alfred.Dal.Entities.Member;
+using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Shared.Enums;
 
 namespace Alfred.Dal.Implementation.Fake.Mappers

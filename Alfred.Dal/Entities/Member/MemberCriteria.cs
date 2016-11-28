@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Alfred.Domain.Entities.Base;
+using Alfred.Dal.Entities.Base;
 using Alfred.Shared.Enums;
 
-namespace Alfred.Domain.Entities.Member
+namespace Alfred.Dal.Entities.Member
 {
     public class MemberCriteria : BaseCriteria
     {

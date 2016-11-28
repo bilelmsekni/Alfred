@@ -1,4 +1,4 @@
-﻿namespace Alfred.Domain.Entities.Base
+﻿namespace Alfred.Dal.Entities.Base
 {
     public class BaseCriteria
     {

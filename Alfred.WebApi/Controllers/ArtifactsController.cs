@@ -33,7 +33,7 @@ namespace Alfred.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IEnumerable<ArtifactModel>))]
+        [ResponseType(typeof(ArtifactResponseModel))]
         public async Task<IHttpActionResult> GetArtifacts(string ids = null, string title = null, 
             ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null, int? memberId = null, 
             int? communityId = null, int page = 1, int pageSize = 20)

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
+using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Implementation.Fake.Database;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Dal.Implementation.Fake.Filters;
 using Alfred.Dal.Implementation.Fake.Mappers;
-using Alfred.Domain.Entities.Community;
 
 namespace Alfred.Dal.Implementation.Fake.Dao
 {

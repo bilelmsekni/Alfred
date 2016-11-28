@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Implementation.Fake.Dao;
 using Alfred.Dal.Implementation.Fake.Mappers;
-using Alfred.Domain.Entities.Member;
 using Alfred.Shared.Enums;
 using FluentAssertions;
 using NUnit.Framework;

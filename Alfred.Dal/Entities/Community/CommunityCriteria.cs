@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Alfred.Domain.Entities.Base;
+using Alfred.Dal.Entities.Base;
 
-namespace Alfred.Domain.Entities.Community
+namespace Alfred.Dal.Entities.Community
 {
     public class CommunityCriteria : BaseCriteria
     {

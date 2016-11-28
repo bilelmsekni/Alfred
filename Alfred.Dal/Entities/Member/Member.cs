@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Alfred.Shared.Enums;
 
-namespace Alfred.Domain.Entities.Member
+namespace Alfred.Dal.Entities.Member
 {
     public class Member
     {
