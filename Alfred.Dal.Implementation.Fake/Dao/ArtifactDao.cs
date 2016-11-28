@@ -21,45 +21,31 @@ namespace Alfred.Dal.Implementation.Fake.Dao
         {
             _entityFactory = entityFactory;
         }
-        public async Task<ArtifactResponse> GetArtifacts(ArtifactCriteria artifactCriteria)
+
+        public async Task<int> GetArtifactCount(ArtifactCriteria artifactCriteria)
         {
-            var dtosCount = (await GetArtifacts()).Count();
-            var response = new ArtifactResponse();
-
-
-            if (dtosCount > 0)
-            {
-                response.Links
-                    .AddFirstPage(dtosCount)
-                    .AddLastPage(dtosCount, artifactCriteria.PageSize)
-                    .AddNextPage(dtosCount, artifactCriteria.PageSize, artifactCriteria.Page)
-                    .AddPreviousPage(artifactCriteria.Page);
-
-                var dtos = await GetArtifacts();
-                Func<ArtifactDto, bool> criteriafilters = artifact => true;
-
-                response.Artifacts = dtos.Where(
-                    criteriafilters
-                    .FilterOnIds(artifactCriteria.Ids)
-                    .FilterOnTitle(artifactCriteria.Title)
-                    .FilterOnType(artifactCriteria.Type)
-                    .FilterOnStatus(artifactCriteria.Status)
-                    .FilterOnMemberId(artifactCriteria.MemberId)
-                    .FilterOnCommunityId(artifactCriteria.CommunityId))
-                    .Select(_entityFactory.TransformToArtifactEntity);
-            }
-            return response;
+            return (await GetArtifacts(artifactCriteria)).Count();
         }
 
-        public async Task<ArtifactResponse> GetArtifact(int id)
+        public async Task<IEnumerable<Artifact>> GetArtifacts(ArtifactCriteria artifactCriteria)
+        {
+            var dtos = await GetArtifacts();
+            Func<ArtifactDto, bool> criteriafilters = artifact => true;
+
+            return dtos.Where(criteriafilters
+                .FilterOnIds(artifactCriteria.Ids)
+                .FilterOnTitle(artifactCriteria.Title)
+                .FilterOnType(artifactCriteria.Type)
+                .FilterOnStatus(artifactCriteria.Status)
+                .FilterOnMemberId(artifactCriteria.MemberId)
+                .FilterOnCommunityId(artifactCriteria.CommunityId))
+                .Select(_entityFactory.TransformToArtifactEntity);
+        }
+
+        public async Task<Artifact> GetArtifact(int id)
         {
             var artifact = await Task.Run(() => _artifacts.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false);
-
-            return new ArtifactResponse
-            {
-                Artifacts = new List<Artifact> {_entityFactory.TransformToArtifactEntity(artifact)},
-                Links = new List<Link>()
-            };
+            return _entityFactory.TransformToArtifactEntity(artifact);            
         }
 
         public async Task<int> SaveArtifact(Artifact artifact)

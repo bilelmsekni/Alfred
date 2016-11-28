@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtifactResponseLinks.cs" />
     <Compile Include="Daos\IArtifactDao.cs" />
     <Compile Include="Daos\ICommunityDao.cs" />
     <Compile Include="Daos\IMemberDao.cs" />

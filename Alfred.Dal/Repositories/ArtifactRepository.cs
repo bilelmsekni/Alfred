@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
+using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Base;
 using Alfred.Dal.Mappers;
 using Alfred.Domain.Repositories;
 using Alfred.Models.Artifacts;
@@ -22,15 +24,41 @@ namespace Alfred.Dal.Repositories
         public async Task<ArtifactResponseModel> GetArtifacts(ArtifactCriteriaModel criteriaModel)
         {
             var artifactCriteria = _modelFactory.CreateArtifactCrtieria(criteriaModel);
-            var artifactResponse = await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false);
-            return _modelFactory.CreateArtifactResponseModel(artifactResponse);
+            var resultCount = await _artifactDao.GetArtifactCount(artifactCriteria).ConfigureAwait(false);
+
+            if (resultCount > 0 && IsPageInRange(resultCount, artifactCriteria.Page, artifactCriteria.PageSize))
+            {
+                var artifactResponse = new ArtifactResponse
+                {
+                    Links = new List<Link>()
+                    .AddFirstPage(resultCount)
+                    .AddLastPage(resultCount, artifactCriteria.PageSize)
+                    .AddNextPage(resultCount, artifactCriteria.PageSize, artifactCriteria.Page)
+                    .AddPreviousPage(resultCount, artifactCriteria.Page),
+                    Artifacts = await PaginateArtifacts(artifactCriteria)
+                };
+
+                return _modelFactory.CreateArtifactResponseModel(artifactResponse);
+            }
+            return new ArtifactResponseModel();
         }
 
+        private async Task<IEnumerable<Artifact>> PaginateArtifacts(ArtifactCriteria artifactCriteria)
+        {
+            return (await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false))
+                .Skip((artifactCriteria.Page - 1)*artifactCriteria.PageSize)
+                .Take(artifactCriteria.PageSize);
+        }
 
-        public async Task<ArtifactResponseModel> GetArtifact(int id)
+        private bool IsPageInRange(int dtosCount, int page, int pageSize)
+        {
+            return page <= (dtosCount + pageSize - 1) / pageSize;
+        }
+
+        public async Task<ArtifactModel> GetArtifact(int id)
         {
             var artifact = await _artifactDao.GetArtifact(id).ConfigureAwait(false);
-            return _modelFactory.CreateArtifactResponseModel(artifact);
+            return _modelFactory.CreateArtifactModel(artifact);
         }
 
         public async Task<int> SaveArtifact(CreateArtifactModel artifactModel)
@@ -47,9 +75,9 @@ namespace Alfred.Dal.Repositories
         public async Task<ArtifactModel> UpdateArtifact(UpdateArtifactModel artifactUpdates)
         {
             var oldArtifact = await _artifactDao.GetArtifact(artifactUpdates.Id).ConfigureAwait(false);
-            if (oldArtifact.Artifacts.Any())
+            if (oldArtifact != null)
             {
-                var newArtifact = _modelFactory.CreateArtifact(artifactUpdates, oldArtifact.Artifacts.FirstOrDefault());
+                var newArtifact = _modelFactory.CreateArtifact(artifactUpdates, oldArtifact);
                 if (newArtifact != null)
                 {
                     await _artifactDao.UpdateArtifact(newArtifact).ConfigureAwait(false);

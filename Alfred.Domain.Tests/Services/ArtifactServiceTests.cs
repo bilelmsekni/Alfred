@@ -5,6 +5,7 @@ using Alfred.Dal.Entities.Artifact;
 using Alfred.Domain.Repositories;
 using Alfred.Domain.Services;
 using Alfred.Models.Artifacts;
+using Alfred.Models.Base;
 using FluentAssertions;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
@@ -31,41 +32,48 @@ namespace Alfred.Domain.Tests.Services
         [Test]
         public void Should_return_5_artifacts_when_repo_has_5_artifacts()
         {
-            var artifacts = _fixture.Build<ArtifactModel>()
-                .CreateMany(5);
-
             var response = _fixture.Build<ArtifactResponseModel>()
-                .With(r => r.Artifacts, artifacts)
+                .With(x => x.Artifacts, _fixture.CreateMany<ArtifactModel>(5))
+                .With(x => x.Links, _fixture.CreateMany<LinkModel>(2))
                 .Create();
+
             _artifactRepo.GetArtifacts(Arg.Any<ArtifactCriteriaModel>()).Returns(response);
 
             var results = _artifactService.GetArtifacts(null).Result;
             results.Artifacts.FirstOrDefault().Should().BeOfType<ArtifactModel>();
-            results.Artifacts.Count().Should().Be(artifacts.Count());
+            results.Links.FirstOrDefault().Should().BeOfType<LinkModel>();
+            results.Artifacts.Count().Should().Be(5);
+            results.Links.Count().Should().Be(2);
         }
 
         [Test]
-        public void Should_return_artifact_with_id_2_when_get_artifact_with_id_2()
+        public void Should_return_null_when_repo_returns_null()
         {
-            var artifactWithIdTwo = _fixture.Build<ArtifactModel>()
-                .With(x => x.Id, 2)
-                .Create();
-            var response = _fixture.Build<ArtifactResponseModel>()
-                .With(r => r.Artifacts, new List<ArtifactModel> { artifactWithIdTwo })
-                .Create();
-            _artifactRepo.GetArtifact(Arg.Is(2)).Returns(response);
+            _artifactRepo.GetArtifacts(Arg.Any<ArtifactCriteriaModel>()).Returns(Task.FromResult<ArtifactResponseModel>(null));
 
-            var result = _artifactService.GetArtifact(2).Result;
-            result.Should().BeOfType<ArtifactModel>();
-            result.Artifacts.First().Title.Should().Be(artifactWithIdTwo.Title);
+            var result = _artifactService.GetArtifacts(new ArtifactCriteriaModel());
+            result.Result.Should().BeNull();
         }
 
         [Test]
-        public void Should_return_null_when_no_artifact_with_id_2_exists()
+        public void Should_return_1_artifact_when_get_artifact_return_artifact()
         {
-            _artifactRepo.GetArtifact(Arg.Is(2)).Returns(Task.FromResult<ArtifactResponseModel>(null));
+            var response = _fixture.Build<ArtifactModel>()
+                .Create();
 
-            var result = _artifactService.GetArtifact(2);
+            _artifactRepo.GetArtifact(Arg.Any<int>()).Returns(response);
+
+            var results = _artifactService.GetArtifact(9).Result;
+            results.Should().BeOfType<ArtifactModel>();
+            results.Should().NotBeNull();
+        }
+
+        [Test]
+        public void Should_return_null_when_get_artifact_returns_null()
+        {
+            _artifactRepo.GetArtifact(Arg.Any<int>()).Returns(Task.FromResult<ArtifactModel>(null));
+
+            var result = _artifactService.GetArtifact(9);
             result.Result.Should().BeNull();
         }
 
@@ -97,7 +105,7 @@ namespace Alfred.Domain.Tests.Services
         {
             var updateArtifactModel = _fixture.Build<UpdateArtifactModel>()
                 .Create();
-            var oldArtifact = _fixture.Create<ArtifactResponseModel>();
+            var oldArtifact = _fixture.Create<ArtifactModel>();
             _artifactRepo.GetArtifact(Arg.Is(updateArtifactModel.Id)).Returns(oldArtifact);
 
 
@@ -121,9 +129,8 @@ namespace Alfred.Domain.Tests.Services
             var artifact = _fixture.Build<ArtifactModel>()
                 .With(x => x.Id, 2)
                 .Create();
-            var response = _fixture.Build<ArtifactResponseModel>()
-    .With(r => r.Artifacts, new List<ArtifactModel> { artifact })
-    .Create();
+            var response = _fixture.Build<ArtifactModel>()
+                .Create();
             _artifactRepo.GetArtifact(Arg.Is(2)).Returns(response);
 
             _artifactService.DeleteArtifact(2).ConfigureAwait(false);

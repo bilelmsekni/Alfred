@@ -6,7 +6,7 @@ namespace Alfred.Services
     public interface IArtifactService
     {
         Task<ArtifactResponseModel> GetArtifacts(ArtifactCriteriaModel criteriaModel);
-        Task<ArtifactResponseModel> GetArtifact(int id);
+        Task<ArtifactModel> GetArtifact(int id);
         Task<int> CreateArtifact(CreateArtifactModel createArtifactModel);
         Task<ArtifactModel> UpdateArtifact(UpdateArtifactModel updateArtifactModel);
         Task<bool> DeleteArtifact(int id);

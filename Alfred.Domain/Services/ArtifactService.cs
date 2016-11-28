@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alfred.Domain.Repositories;
-using Alfred.Models;
 using Alfred.Models.Artifacts;
 using Alfred.Services;
 
@@ -21,7 +19,7 @@ namespace Alfred.Domain.Services
             return await _artifactRepo.GetArtifacts(criteriaModel).ConfigureAwait(false);
         }
 
-        public async Task<ArtifactResponseModel> GetArtifact(int id)
+        public async Task<ArtifactModel> GetArtifact(int id)
         {
             return await _artifactRepo.GetArtifact(id).ConfigureAwait(false);
         }
