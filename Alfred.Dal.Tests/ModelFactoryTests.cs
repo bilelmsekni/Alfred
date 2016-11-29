@@ -150,7 +150,7 @@ namespace Alfred.Dal.Tests
         }
 
         [Test]
-        public void should_map_artifactCriteriaModel_to_artifactCriteria()
+        public void Should_map_artifactCriteriaModel_to_artifactCriteria()
         {
             var criteriaModel = _fixture.Build<ArtifactCriteriaModel>()
                 .With(x=>x.Ids, new List<string> {"1","123","99"})
@@ -168,7 +168,7 @@ namespace Alfred.Dal.Tests
         }
 
         [Test]
-        public void should_map_memberCriteriaModel_to_memberCriteria()
+        public void Should_map_memberCriteriaModel_to_memberCriteria()
         {
             var criteriaModel = _fixture.Build<MemberCriteriaModel>()
                 .With(x => x.Ids, new List<string> { "1", "123", "99" })
@@ -185,7 +185,7 @@ namespace Alfred.Dal.Tests
         }
 
         [Test]
-        public void should_map_communityCriteriaModel_to_communityCriteria()
+        public void Should_map_communityCriteriaModel_to_communityCriteria()
         {
             var criteriaModel = _fixture.Build<CommunityCriteriaModel>()
                 .With(x => x.Ids, new List<string> { "1", "123", "99" })
@@ -197,6 +197,12 @@ namespace Alfred.Dal.Tests
             result.PageSize.Should().Be(criteriaModel.PageSize);
             result.Name.Should().Be(criteriaModel.Name);
             result.Ids.Should().Equal(criteriaModel.Ids.Select(int.Parse));
+        }
+
+        [Test]
+        public void Should_map_linkEntity_to_linkModel()
+        {
+            
         }
     }
 }

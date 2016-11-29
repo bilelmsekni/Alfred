@@ -44,7 +44,10 @@
     <Compile Include="Enums\ArtifactType.cs" />
     <Compile Include="Enums\CommunityRole.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Features\ObjectDiffPatch.cs" />
+    <Compile Include="Features\ObjectDiffPatch.cs" >
+      <!-- Exclude the file from analysis -->
+      <SonarQubeExclude>true</SonarQubeExclude>
+      </Compile>
     <Compile Include="Features\ObjectDifferenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
