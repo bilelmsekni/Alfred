@@ -3,3 +3,4 @@ NUnit
 NSubstitute
 AutoFixture
 Microsoft.AspNet.WebApi.Client
+Newtonsoft.Json redirects: on
