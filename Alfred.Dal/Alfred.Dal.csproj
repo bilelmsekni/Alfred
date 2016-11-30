@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Base\BaseResponse.cs" />
+    <Compile Include="Entities\Community\CommunityResponse.cs" />
     <Compile Include="PaginationLogic.cs" />
     <Compile Include="Daos\IArtifactDao.cs" />
     <Compile Include="Daos\ICommunityDao.cs" />

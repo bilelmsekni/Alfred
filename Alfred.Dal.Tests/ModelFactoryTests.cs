@@ -253,7 +253,7 @@ namespace Alfred.Dal.Tests
                 .With(x => x.Links, _fixture.CreateMany<Link>(3).ToList())
                 .Create();
 
-            var model = _modelFactory.CreateArtifactResponseModel(entity, new ArtifactCriteriaModel());
+            var model = _modelFactory.CreateArtifactResponseModel(entity);
             model.Results.Count().Should().Be(entity.Results.Count());
             model.Links.Count().Should().Be(entity.Links.Count());
 

@@ -6,7 +6,7 @@ namespace Alfred.Domain.Repositories
 {
     public interface ICommunityRepository
     {
-        Task<IEnumerable<CommunityModel>> GetCommunities(CommunityCriteriaModel criteriaModel);
+        Task<CommunityResponseModel> GetCommunities(CommunityCriteriaModel criteriaModel);
         Task<CommunityModel> GetCommunity(int id);
         Task<int> SaveCommunity(CreateCommunityModel community);
         Task DeleteCommunity(int id);

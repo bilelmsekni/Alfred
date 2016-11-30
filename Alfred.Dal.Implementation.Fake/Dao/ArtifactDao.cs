@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
 using Alfred.Dal.Entities.Artifact;
-using Alfred.Dal.Entities.Base;
 using Alfred.Dal.Implementation.Fake.Database;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Dal.Implementation.Fake.Filters;
@@ -22,7 +21,7 @@ namespace Alfred.Dal.Implementation.Fake.Dao
             _entityFactory = entityFactory;
         }
 
-        public async Task<int> GetArtifactCount(ArtifactCriteria artifactCriteria)
+        public async Task<int> CountArtifact(ArtifactCriteria artifactCriteria)
         {
             return (await GetArtifacts(artifactCriteria)).Count();
         }

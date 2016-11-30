@@ -6,7 +6,7 @@ namespace Alfred.Dal.Daos
 {
     public interface IArtifactDao
     {
-        Task<int> GetArtifactCount(ArtifactCriteria artifactCriteria);
+        Task<int> CountArtifact(ArtifactCriteria artifactCriteria);
         Task<IEnumerable<Artifact>> GetArtifacts(ArtifactCriteria artifactCriteria);
         Task<Artifact> GetArtifact(int id);
         Task<int> SaveArtifact(Artifact artifact);

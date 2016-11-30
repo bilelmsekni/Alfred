@@ -24,7 +24,7 @@ namespace Alfred.Dal.Repositories
         public async Task<ArtifactResponseModel> GetArtifacts(ArtifactCriteriaModel criteriaModel)
         {
             var artifactCriteria = _modelFactory.CreateArtifactCrtieria(criteriaModel);
-            var resultCount = await _artifactDao.GetArtifactCount(artifactCriteria).ConfigureAwait(false);
+            var resultCount = await _artifactDao.CountArtifact(artifactCriteria).ConfigureAwait(false);
 
             var artifactResponse = new ArtifactResponse
             {
@@ -35,7 +35,7 @@ namespace Alfred.Dal.Repositories
                     .AddPreviousPage(resultCount, artifactCriteria.Page)
             };
 
-            if (resultCount > 0 && IsPageInRange(resultCount, artifactCriteria.Page, artifactCriteria.PageSize))
+            if (resultCount > 0 && artifactCriteria.Page.IsPageInRange(resultCount, artifactCriteria.PageSize))
             {
                 artifactResponse.Results = (await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false))
                     .Paginate(artifactCriteria.Page, artifactCriteria.PageSize);
@@ -44,13 +44,8 @@ namespace Alfred.Dal.Repositories
             {
                 artifactResponse.Results = new List<Artifact>();
             }
-            return _modelFactory.CreateArtifactResponseModel(artifactResponse, criteriaModel);
-        }
-
-        private bool IsPageInRange(int dtosCount, int page, int pageSize)
-        {
-            return page <= (dtosCount + pageSize - 1) / pageSize;
-        }
+            return _modelFactory.CreateArtifactResponseModel(artifactResponse);
+        }        
 
         public async Task<ArtifactModel> GetArtifact(int id)
         {

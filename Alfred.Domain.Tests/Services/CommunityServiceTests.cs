@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Alfred.Dal.Entities.Community;
 using Alfred.Domain.Repositories;
 using Alfred.Domain.Services;
 using Alfred.Models.Communities;
@@ -24,17 +25,19 @@ namespace Alfred.Domain.Tests.Services
         [Test]
         public void Should_return_5_communities_when_get_all_Communities()
         {
-            var communities = _fixture.Build<CommunityModel>()
-                .CreateMany(5)
-                .ToList();
+            var response = _fixture.Build<CommunityResponseModel>()
+                .With(x => x.Results, _fixture.Build<CommunityModel>()
+                .CreateMany(5).ToList())
+                .Create();
+
             var criteria = new CommunityCriteriaModel();
             var communityRepo = Substitute.For<ICommunityRepository>();
 
-            communityRepo.GetCommunities(criteria).Returns(communities);
+            communityRepo.GetCommunities(criteria).Returns(response);
             var communityService = new CommunityService(communityRepo);
-            var results = communityService.GetCommunities(criteria).Result.ToList();
-            results.FirstOrDefault().Should().BeOfType<CommunityModel>();
-            results.Count.Should().Be(communities.Count);
+            var responseModel = communityService.GetCommunities(criteria).Result;
+            responseModel.Results.FirstOrDefault().Should().BeOfType<CommunityModel>();
+            responseModel.Results.Count().Should().Be(5);
         }
 
         [Test]
@@ -99,7 +102,7 @@ namespace Alfred.Domain.Tests.Services
         public void Should_not_update_community_when_community_is_null()
         {
             var fakeRepo = Substitute.For<ICommunityRepository>();
-            
+
             var communityService = new CommunityService(fakeRepo);
 
             var res = communityService.UpdateCommunity(null).Result;

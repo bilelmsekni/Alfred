@@ -186,14 +186,14 @@ namespace Alfred.Dal.Mappers
             };
         }
 
-        public ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse, ArtifactCriteriaModel criteriaModel)
+        public ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse)
         {
-            var queryParams = ExtractQueryParams(_urlHelper.Request);
-            return new ArtifactResponseModel
-            {
-                Results = artifactResponse.Results?.Select(CreateArtifactModel),
-                Links = artifactResponse.Links?.Select(l => CreateLinkModel(l, queryParams))
-            };
+            return (ArtifactResponseModel)CreateResponseModel(artifactResponse, CreateArtifactModel);
+        }
+
+        public CommunityResponseModel CreateCommunityResponseModel(CommunityResponse communityResponse)
+        {
+            return (CommunityResponseModel)CreateResponseModel(communityResponse, CreateCommunityModel);
         }
 
         private Dictionary<string, object> ExtractQueryParams(HttpRequestMessage request)
@@ -214,6 +214,17 @@ namespace Alfred.Dal.Mappers
             {
                 Href = _urlHelper.Link(AlfredRoutes.GetArtifacts, queryParams),
                 Rel = link.Rel
+            };
+        }
+
+        private BaseResponseModel<TModel> CreateResponseModel<TEntity, TModel>(BaseResponse<TEntity> baseResponse,
+            Func<TEntity, TModel> createModel)
+        {
+            var queryParams = ExtractQueryParams(_urlHelper.Request);
+            return new BaseResponseModel<TModel>
+            {
+                Results = baseResponse.Results?.Select(createModel),
+                Links = baseResponse.Links?.Select(l => CreateLinkModel(l, queryParams))
             };
         }
     }

@@ -12,5 +12,6 @@ namespace Alfred.Dal.Daos
         Task DeleteCommunity(int id);
         Task<Community> GetCommunity(string email);
         Task UpdateCommunity(Community communityDto);
+        Task<int> CountCommunities(CommunityCriteria criteria);
     }
 }

@@ -15,7 +15,7 @@ namespace Alfred.Domain.Services
             _communityRepo = communityRepo;
         }
 
-        public async Task<IEnumerable<CommunityModel>> GetCommunities(CommunityCriteriaModel criteriaModel)
+        public async Task<CommunityResponseModel> GetCommunities(CommunityCriteriaModel criteriaModel)
         {
             return await _communityRepo.GetCommunities(criteriaModel).ConfigureAwait(false);
         }

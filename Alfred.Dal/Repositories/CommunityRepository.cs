@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
+using Alfred.Dal.Entities.Base;
+using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Mappers;
 using Alfred.Domain.Repositories;
 using Alfred.Models.Communities;
@@ -19,11 +21,32 @@ namespace Alfred.Dal.Repositories
             _modelFactory = modelFactory;
         }
 
-        public async Task<IEnumerable<CommunityModel>> GetCommunities(CommunityCriteriaModel criteriaModel)
+        public async Task<CommunityResponseModel> GetCommunities(CommunityCriteriaModel criteriaModel)
         {
             var criteria = _modelFactory.CreateCommunityCriteria(criteriaModel);
-            var communities = await _communityDao.GetCommunities(criteria).ConfigureAwait(false);
-            return communities.Select(_modelFactory.CreateCommunityModel);
+            var communitiesCount = await _communityDao.CountCommunities(criteria).ConfigureAwait(false);
+
+            var communityResponse = new CommunityResponse
+            {
+                Links = new List<Link>()
+                    .AddFirstPage(communitiesCount)
+                    .AddLastPage(communitiesCount, criteria.PageSize)
+                    .AddNextPage(communitiesCount, criteria.PageSize, criteria.Page)
+                    .AddPreviousPage(communitiesCount, criteria.Page)
+            };
+
+            if (communitiesCount > 0 && criteria.Page.IsPageInRange(communitiesCount, criteria.PageSize))
+            {
+                communityResponse.Results = (await _communityDao.GetCommunities(criteria).ConfigureAwait(false))
+                    .Paginate(criteria.Page, criteria.PageSize);
+            }
+            else
+            {
+                communityResponse.Results = new List<Community>();
+            }
+            
+
+            return _modelFactory.CreateCommunityResponseModel(communityResponse);
         }
 
         public async Task<CommunityModel> GetCommunity(int id)
@@ -37,7 +60,7 @@ namespace Alfred.Dal.Repositories
             var community = _modelFactory.CreateCommunity(createCommunityModel);
             return await _communityDao.SaveCommunity(community).ConfigureAwait(false);
         }
-       
+
         public async Task DeleteCommunity(int id)
         {
             await _communityDao.DeleteCommunity(id).ConfigureAwait(false);

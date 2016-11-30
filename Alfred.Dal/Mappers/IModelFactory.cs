@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Base;
@@ -24,7 +25,8 @@ namespace Alfred.Dal.Mappers
         ArtifactCriteria CreateArtifactCrtieria(ArtifactCriteriaModel criteriaModel);
         MemberCriteria CreateMemberCriteria(MemberCriteriaModel criteriaModel);
         CommunityCriteria CreateCommunityCriteria(CommunityCriteriaModel criteriaModel);
-        ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse, ArtifactCriteriaModel criteriaModel);
+        ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse);
+        CommunityResponseModel CreateCommunityResponseModel(CommunityResponse communityResponse);
         LinkModel CreateLinkModel(Link link, Dictionary<string, object> queryParams);
     }
 }

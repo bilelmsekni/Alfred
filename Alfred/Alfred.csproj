@@ -59,6 +59,7 @@
     <Compile Include="Models\Base\LinkModel.cs" />
     <Compile Include="Models\Communities\CommunityCriteriaModel.cs" />
     <Compile Include="Models\Communities\CommunityModel.cs" />
+    <Compile Include="Models\Communities\CommunityResponseModel.cs" />
     <Compile Include="Models\Communities\CreateCommunityModel.cs" />
     <Compile Include="Models\Communities\UpdateCommunityModel.cs" />
     <Compile Include="Models\Members\CreateMemberModel.cs" />

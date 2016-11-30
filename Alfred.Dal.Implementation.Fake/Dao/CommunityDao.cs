@@ -66,5 +66,10 @@ namespace Alfred.Dal.Implementation.Fake.Dao
                 _communities.Add(_entityFactory.TransformToCommunityDto(community));
             }).ConfigureAwait(false);
         }
+
+        public async Task<int> CountCommunities(CommunityCriteria criteria)
+        {
+            return (await GetCommunities(criteria)).Count();
+        }
     }
 }
