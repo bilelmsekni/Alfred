@@ -26,28 +26,25 @@ namespace Alfred.Dal.Repositories
             var artifactCriteria = _modelFactory.CreateArtifactCrtieria(criteriaModel);
             var resultCount = await _artifactDao.GetArtifactCount(artifactCriteria).ConfigureAwait(false);
 
-            if (resultCount > 0 && IsPageInRange(resultCount, artifactCriteria.Page, artifactCriteria.PageSize))
+            var artifactResponse = new ArtifactResponse
             {
-                var artifactResponse = new ArtifactResponse
-                {
-                    Links = new List<Link>()
+                Links = new List<Link>()
                     .AddFirstPage(resultCount)
                     .AddLastPage(resultCount, artifactCriteria.PageSize)
                     .AddNextPage(resultCount, artifactCriteria.PageSize, artifactCriteria.Page)
-                    .AddPreviousPage(resultCount, artifactCriteria.Page),
-                    Artifacts = await PaginateArtifacts(artifactCriteria)
-                };
+                    .AddPreviousPage(resultCount, artifactCriteria.Page)
+            };
 
-                return _modelFactory.CreateArtifactResponseModel(artifactResponse, criteriaModel);
+            if (resultCount > 0 && IsPageInRange(resultCount, artifactCriteria.Page, artifactCriteria.PageSize))
+            {
+                artifactResponse.Results = (await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false))
+                    .Paginate(artifactCriteria.Page, artifactCriteria.PageSize);
             }
-            return new ArtifactResponseModel();
-        }
-
-        private async Task<IEnumerable<Artifact>> PaginateArtifacts(ArtifactCriteria artifactCriteria)
-        {
-            return (await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false))
-                .Skip((artifactCriteria.Page - 1)*artifactCriteria.PageSize)
-                .Take(artifactCriteria.PageSize);
+            else
+            {
+                artifactResponse.Results = new List<Artifact>();
+            }
+            return _modelFactory.CreateArtifactResponseModel(artifactResponse, criteriaModel);
         }
 
         private bool IsPageInRange(int dtosCount, int page, int pageSize)

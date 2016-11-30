@@ -191,7 +191,7 @@ namespace Alfred.Dal.Mappers
             var queryParams = ExtractQueryParams(_urlHelper.Request);
             return new ArtifactResponseModel
             {
-                Artifacts = artifactResponse.Artifacts?.Select(CreateArtifactModel),
+                Results = artifactResponse.Results?.Select(CreateArtifactModel),
                 Links = artifactResponse.Links?.Select(l => CreateLinkModel(l, queryParams))
             };
         }

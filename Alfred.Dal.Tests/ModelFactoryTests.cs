@@ -249,12 +249,12 @@ namespace Alfred.Dal.Tests
         public void Should_map_responseEntity_to_reponseModel()
         {
             var entity = _fixture.Build<ArtifactResponse>()
-                .With(x => x.Artifacts, _fixture.CreateMany<Artifact>(5))
+                .With(x => x.Results, _fixture.CreateMany<Artifact>(5))
                 .With(x => x.Links, _fixture.CreateMany<Link>(3).ToList())
                 .Create();
 
             var model = _modelFactory.CreateArtifactResponseModel(entity, new ArtifactCriteriaModel());
-            model.Artifacts.Count().Should().Be(entity.Artifacts.Count());
+            model.Results.Count().Should().Be(entity.Results.Count());
             model.Links.Count().Should().Be(entity.Links.Count());
 
         }

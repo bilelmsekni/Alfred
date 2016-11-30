@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Alfred.Dal.Entities.Base;
 
 namespace Alfred.Dal
 {
-    public static class ArtifactResponseLinks
+    public static class PaginationLogic
     {
         public static IList<Link> AddFirstPage(this IList<Link> links, int artifactCount)
         {
@@ -63,6 +64,13 @@ namespace Alfred.Dal
                     );
             }
             return links;
+        }
+
+        public static IEnumerable<T> Paginate<T>(this IEnumerable<T>results, int page, int pageSize)
+        {
+            return results
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
         }
     }
 }

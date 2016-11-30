@@ -33,16 +33,16 @@ namespace Alfred.Domain.Tests.Services
         public void Should_return_5_artifacts_when_repo_has_5_artifacts()
         {
             var response = _fixture.Build<ArtifactResponseModel>()
-                .With(x => x.Artifacts, _fixture.CreateMany<ArtifactModel>(5))
+                .With(x => x.Results, _fixture.CreateMany<ArtifactModel>(5))
                 .With(x => x.Links, _fixture.CreateMany<LinkModel>(2))
                 .Create();
 
             _artifactRepo.GetArtifacts(Arg.Any<ArtifactCriteriaModel>()).Returns(response);
 
             var results = _artifactService.GetArtifacts(null).Result;
-            results.Artifacts.FirstOrDefault().Should().BeOfType<ArtifactModel>();
+            results.Results.FirstOrDefault().Should().BeOfType<ArtifactModel>();
             results.Links.FirstOrDefault().Should().BeOfType<LinkModel>();
-            results.Artifacts.Count().Should().Be(5);
+            results.Results.Count().Should().Be(5);
             results.Links.Count().Should().Be(2);
         }
 
