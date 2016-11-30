@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
+using Alfred.Dal.Entities.Base;
+using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Mappers;
 using Alfred.Domain.Repositories;
 using Alfred.Models.Members;
@@ -18,11 +20,32 @@ namespace Alfred.Dal.Repositories
             _memberDao = memberDao;
             _modelFactory = modelFactory;
         }
-        public async Task<IEnumerable<MemberModel>> GetMembers(MemberCriteriaModel criteriaModel)
+        public async Task<MemberResponseModel> GetMembers(MemberCriteriaModel criteriaModel)
         {
             var criteria = _modelFactory.CreateMemberCriteria(criteriaModel);
-            var members = await _memberDao.GetMembers(criteria).ConfigureAwait(false);
-            return members.Select(_modelFactory.CreateMemberModel);
+            var membersCount = await _memberDao.CountMembers(criteria).ConfigureAwait(false);
+
+            var memberResponse = new MemberResponse
+            {
+                Links = new List<Link>()
+                    .AddFirstPage(membersCount)
+                    .AddLastPage(membersCount, criteria.PageSize)
+                    .AddNextPage(membersCount, criteria.PageSize, criteria.Page)
+                    .AddPreviousPage(membersCount, criteria.Page)
+            };
+
+            if (membersCount > 0 && criteria.Page.IsPageInRange(criteria.PageSize, membersCount))
+            {
+                memberResponse.Results =
+                    (await _memberDao.GetMembers(criteria).ConfigureAwait(false)).Paginate(criteria.Page,
+                        criteria.PageSize);
+            }
+            else
+            {
+                memberResponse.Results = new List<Member>();
+            }
+            
+            return _modelFactory.CreateMemberResponseModel(memberResponse);
         }
 
         public async Task<MemberModel> GetMember(int id)

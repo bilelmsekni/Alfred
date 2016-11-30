@@ -6,7 +6,7 @@ namespace Alfred.Domain.Repositories
 {
     public interface IMemberRepository
     {
-        Task<IEnumerable<MemberModel>> GetMembers(MemberCriteriaModel criteriaModel);
+        Task<MemberResponseModel> GetMembers(MemberCriteriaModel criteriaModel);
         Task<MemberModel> GetMember(int id);
         Task<int> SaveMember(CreateMemberModel member);
         Task DeleteMember(int id);

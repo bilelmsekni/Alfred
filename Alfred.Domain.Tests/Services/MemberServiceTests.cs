@@ -25,16 +25,19 @@ namespace Alfred.Domain.Tests.Services
         [Test]
         public void Should_return_5_members_when_service_get_all_members()
         {
-            var members = _fixture.Build<MemberModel>()
-                .CreateMany(5).ToList();
+            var response = _fixture.Build<MemberResponseModel>()
+                .With(x=>x.Results, _fixture.Build<MemberModel>()
+                .CreateMany(5).ToList())
+                .Create();
+
             var fakeCriteria = new MemberCriteriaModel();
             var fakeRepo = Substitute.For<IMemberRepository>();
-            fakeRepo.GetMembers(fakeCriteria).ReturnsForAnyArgs(members);
+            fakeRepo.GetMembers(fakeCriteria).ReturnsForAnyArgs(response);
 
             var memberService = new MemberService(fakeRepo);
-            var result = memberService.GetMembers(fakeCriteria).Result.ToList();
-            result.FirstOrDefault().Should().BeOfType<MemberModel>();
-            result.Count.Should().Be(members.Count);
+            var result = memberService.GetMembers(fakeCriteria).Result;
+            result.Results.FirstOrDefault().Should().BeOfType<MemberModel>();
+            result.Results.Count().Should().Be(5);
         }
 
         [Test]

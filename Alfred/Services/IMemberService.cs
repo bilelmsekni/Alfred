@@ -6,7 +6,7 @@ namespace Alfred.Services
 {
     public interface IMemberService
     {
-        Task<IEnumerable<MemberModel>> GetMembers(MemberCriteriaModel criteriaModel);
+        Task<MemberResponseModel> GetMembers(MemberCriteriaModel criteriaModel);
         Task<MemberModel> GetMember(int id);
         Task<int> CreateMember(CreateMemberModel createMemberModel);
         Task<bool> DeleteMember(int id);

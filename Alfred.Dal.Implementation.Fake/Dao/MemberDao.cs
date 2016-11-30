@@ -75,5 +75,10 @@ namespace Alfred.Dal.Implementation.Fake.Dao
             var dtos = await Task.Run(() => _members.Where(x => x.CommunityIds.Contains(id))).ConfigureAwait(false);
             return dtos.Select(_entityFactory.TransformToMemberEntity);
         }
+
+        public async Task<int> CountMembers(MemberCriteria criteria)
+        {
+            return (await GetMembers(criteria)).Count();
+        }
     }
 }

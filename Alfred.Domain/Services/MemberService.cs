@@ -14,7 +14,7 @@ namespace Alfred.Domain.Services
         {
             _memberRepository = memberRepository;
         }
-        public async Task<IEnumerable<MemberModel>> GetMembers(MemberCriteriaModel criteriaModel)
+        public async Task<MemberResponseModel> GetMembers(MemberCriteriaModel criteriaModel)
         {
             return await _memberRepository.GetMembers(criteriaModel).ConfigureAwait(false);
         }

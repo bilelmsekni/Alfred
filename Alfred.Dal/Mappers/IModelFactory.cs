@@ -28,5 +28,6 @@ namespace Alfred.Dal.Mappers
         ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse);
         CommunityResponseModel CreateCommunityResponseModel(CommunityResponse communityResponse);
         LinkModel CreateLinkModel(Link link, Dictionary<string, object> queryParams);
+        MemberResponseModel CreateMemberResponseModel(MemberResponse memberResponse);
     }
 }

@@ -73,9 +73,9 @@ namespace Alfred.Dal
                 .Take(pageSize);
         }
 
-        public static bool IsPageInRange(this int page, int pageSize, int dtosCount)
+        public static bool IsPageInRange(this int page, int pageSize, int resultsCount)
         {
-            return page <= (dtosCount + pageSize - 1) / pageSize;
+            return page <= (resultsCount + pageSize - 1) / pageSize;
         }
     }
 }

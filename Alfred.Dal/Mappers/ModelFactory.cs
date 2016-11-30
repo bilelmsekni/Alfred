@@ -188,12 +188,12 @@ namespace Alfred.Dal.Mappers
 
         public ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse)
         {
-            return (ArtifactResponseModel)CreateResponseModel(artifactResponse, CreateArtifactModel);
+            return CreateResponseModel<Artifact, ArtifactModel, ArtifactResponseModel> (artifactResponse, CreateArtifactModel);
         }
 
         public CommunityResponseModel CreateCommunityResponseModel(CommunityResponse communityResponse)
         {
-            return (CommunityResponseModel)CreateResponseModel(communityResponse, CreateCommunityModel);
+            return CreateResponseModel<Community, CommunityModel, CommunityResponseModel>(communityResponse, CreateCommunityModel);
         }
 
         private Dictionary<string, object> ExtractQueryParams(HttpRequestMessage request)
@@ -217,11 +217,16 @@ namespace Alfred.Dal.Mappers
             };
         }
 
-        private BaseResponseModel<TModel> CreateResponseModel<TEntity, TModel>(BaseResponse<TEntity> baseResponse,
-            Func<TEntity, TModel> createModel)
+        public MemberResponseModel CreateMemberResponseModel(MemberResponse memberResponse)
         {
+            return CreateResponseModel<Member, MemberModel, MemberResponseModel>(memberResponse, CreateMemberModel);
+        }
+
+        private TResult CreateResponseModel<TEntity, TModel,TResult>(BaseResponse<TEntity> baseResponse,
+            Func<TEntity, TModel> createModel) where TResult : BaseResponseModel<TModel>, new()
+            {
             var queryParams = ExtractQueryParams(_urlHelper.Request);
-            return new BaseResponseModel<TModel>
+            return new TResult
             {
                 Results = baseResponse.Results?.Select(createModel),
                 Links = baseResponse.Links?.Select(l => CreateLinkModel(l, queryParams))
