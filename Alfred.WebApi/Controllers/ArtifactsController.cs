@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Alfred.Constants;
 using Alfred.Models.Artifacts;
 using Alfred.Services;
 using Alfred.Shared.Enums;
@@ -32,7 +33,7 @@ namespace Alfred.WebApi.Controllers
         /// </remarks>
         /// <returns></returns>
         [HttpGet]
-        [Route("")]
+        [Route("", Name = AlfredRoutes.GetArtifacts)]
         [ResponseType(typeof(ArtifactResponseModel))]
         public async Task<IHttpActionResult> GetArtifacts(string ids = null, string title = null, 
             ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null, int? memberId = null, 

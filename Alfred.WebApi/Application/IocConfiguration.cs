@@ -8,8 +8,7 @@ namespace Alfred.WebApi.Application
     {
         public static HttpConfiguration ConfigIoC(this HttpConfiguration config)
         {
-            var container = new ServiceContainer();            
-            container.RegisterFrom<WebApiCompositionRoot>();
+            var container = Bootstrap.CreateContainer(config);                        
             container.RegisterApiControllers();
             container.EnableWebApi(config);
             return config;

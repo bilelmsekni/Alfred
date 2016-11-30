@@ -38,7 +38,7 @@ namespace Alfred.Dal.Repositories
                     Artifacts = await PaginateArtifacts(artifactCriteria)
                 };
 
-                return _modelFactory.CreateArtifactResponseModel(artifactResponse);
+                return _modelFactory.CreateArtifactResponseModel(artifactResponse, criteriaModel);
             }
             return new ArtifactResponseModel();
         }

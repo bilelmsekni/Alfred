@@ -1,6 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Hosting;
+using System.Web.Http.Routing;
+using Alfred.Constants;
 using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Base;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Mappers;
@@ -24,7 +31,21 @@ namespace Alfred.Dal.Tests
         [SetUp]
         public void SetUp()
         {
-            _modelFactory = new ModelFactory(new ObjectDifferenceManager());
+            var httpRequestMessage = new HttpRequestMessage
+            {
+                RequestUri = new Uri("http://localhost:3000"),
+                Properties =
+                {
+                    { HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration
+                    { Routes =
+                    {
+                        { AlfredRoutes.GetArtifacts, new HttpRoute() }
+                    }
+                    }
+                    }
+                }
+            };
+            _modelFactory = new ModelFactory(new ObjectDifferenceManager(), () => httpRequestMessage);
             _fixture = new Fixture();
         }
 
@@ -153,7 +174,7 @@ namespace Alfred.Dal.Tests
         public void Should_map_artifactCriteriaModel_to_artifactCriteria()
         {
             var criteriaModel = _fixture.Build<ArtifactCriteriaModel>()
-                .With(x=>x.Ids, new List<string> {"1","123","99"})
+                .With(x => x.Ids, new List<string> { "1", "123", "99" })
                 .Create();
 
             var result = _modelFactory.CreateArtifactCrtieria(criteriaModel);
@@ -181,7 +202,7 @@ namespace Alfred.Dal.Tests
             result.PageSize.Should().Be(criteriaModel.PageSize);
             result.Name.Should().Be(criteriaModel.Name);
             result.CommunityId.Should().Be(criteriaModel.CommunityId);
-            result.Ids.Should().Equal(criteriaModel.Ids.Select(int.Parse));            
+            result.Ids.Should().Equal(criteriaModel.Ids.Select(int.Parse));
         }
 
         [Test]
@@ -200,9 +221,43 @@ namespace Alfred.Dal.Tests
         }
 
         [Test]
-        public void Should_map_linkEntity_to_linkModel()
+        public void Should_map_linkEntity_to_linkModel_when_queryParamsEmpty()
         {
-            
+            var link = _fixture.Create<Link>();
+            var queryParams = new Dictionary<string, object>();
+            var linkModel = _modelFactory.CreateLinkModel(link, queryParams);
+
+            linkModel.Href.Should().Contain($"page={link.Href}");
         }
+
+        [Test]
+        public void Should_map_linkEntity_to_linkModel_when_queryParams_has_page()
+        {
+            var link = _fixture.Create<Link>();
+            var queryParams = new Dictionary<string, object>
+            {
+                {"page", 55 },
+                {"kawka", 525 }
+            };
+            var linkModel = _modelFactory.CreateLinkModel(link, queryParams);
+
+            linkModel.Href.Should().Contain($"page={link.Href}");
+            linkModel.Href.Should().Contain("kawka=525");
+        }
+
+        [Test]
+        public void Should_map_responseEntity_to_reponseModel()
+        {
+            var entity = _fixture.Build<ArtifactResponse>()
+                .With(x => x.Artifacts, _fixture.CreateMany<Artifact>(5))
+                .With(x => x.Links, _fixture.CreateMany<Link>(3).ToList())
+                .Create();
+
+            var model = _modelFactory.CreateArtifactResponseModel(entity, new ArtifactCriteriaModel());
+            model.Artifacts.Count().Should().Be(entity.Artifacts.Count());
+            model.Links.Count().Should().Be(entity.Links.Count());
+
+        }
+
     }
 }

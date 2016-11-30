@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Web.Http.Routing;
+using Alfred.Constants;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Base;
 using Alfred.Dal.Entities.Community;
@@ -15,10 +20,12 @@ namespace Alfred.Dal.Mappers
     public class ModelFactory : IModelFactory
     {
         private readonly ObjectDifferenceManager _objDiffManager;
+        private readonly UrlHelper _urlHelper;
 
-        public ModelFactory(ObjectDifferenceManager objDiffManager)
+        public ModelFactory(ObjectDifferenceManager objDiffManager, Func<HttpRequestMessage> getHttpRequestMessage)
         {
             _objDiffManager = objDiffManager;
+            _urlHelper = new UrlHelper(getHttpRequestMessage());
         }
 
         public Member CreateMember(CreateMemberModel createMemberModel)
@@ -179,18 +186,35 @@ namespace Alfred.Dal.Mappers
             };
         }
 
-        public ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse)
+        public ArtifactResponseModel CreateArtifactResponseModel(ArtifactResponse artifactResponse, ArtifactCriteriaModel criteriaModel)
         {
+            var queryParams = ExtractQueryParams(_urlHelper.Request);
             return new ArtifactResponseModel
             {
                 Artifacts = artifactResponse.Artifacts?.Select(CreateArtifactModel),
-                Links = artifactResponse.Links?.Select(CreateLinkModel)
+                Links = artifactResponse.Links?.Select(l => CreateLinkModel(l, queryParams))
             };
         }
 
-        public LinkModel CreateLinkModel(Link link)
+        private Dictionary<string, object> ExtractQueryParams(HttpRequestMessage request)
         {
-            throw new System.NotImplementedException();
+            var result = new Dictionary<string, object>();
+            var queryParams = request.RequestUri.ParseQueryString();
+            foreach (var key in queryParams.AllKeys)
+            {
+                result[key] = queryParams[key];
+            }
+            return result;
+        }
+
+        public LinkModel CreateLinkModel(Link link, Dictionary<string, object> queryParams)
+        {
+            queryParams["page"] = link.Href;
+            return new LinkModel
+            {
+                Href = _urlHelper.Link(AlfredRoutes.GetArtifacts, queryParams),
+                Rel = link.Rel
+            };
         }
     }
 }

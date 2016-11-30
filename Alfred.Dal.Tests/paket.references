@@ -2,3 +2,4 @@
 NUnit
 NSubstitute
 AutoFixture
+Microsoft.AspNet.WebApi.Client
