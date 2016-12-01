@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtifactRepositoryTests.cs" />
     <Compile Include="ModelFactoryTests.cs" />
     <Compile Include="PaginationLogicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\Alfred.Domain\Alfred.Domain.csproj">
       <Project>{ADBCCD95-4768-49C5-929F-9562AA586293}</Project>
       <Name>Alfred.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred.Shared.Tests\Alfred.Shared.Tests.csproj">
+      <Project>{7404C762-F0A7-40AA-8124-D262003F9290}</Project>
+      <Name>Alfred.Shared.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alfred.Shared\Alfred.Shared.csproj">
       <Project>{45FA6BD5-2EDD-4291-A85F-4077C49E03B2}</Project>

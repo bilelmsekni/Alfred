@@ -126,9 +126,6 @@ namespace Alfred.Domain.Tests.Services
         [Test]
         public void Should_delete_artifact_when_artifact_to_delete_is_found()
         {
-            var artifact = _fixture.Build<ArtifactModel>()
-                .With(x => x.Id, 2)
-                .Create();
             var response = _fixture.Build<ArtifactModel>()
                 .Create();
             _artifactRepo.GetArtifact(Arg.Is(2)).Returns(response);

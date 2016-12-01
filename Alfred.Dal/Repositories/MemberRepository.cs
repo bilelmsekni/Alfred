@@ -27,25 +27,30 @@ namespace Alfred.Dal.Repositories
 
             var memberResponse = new MemberResponse
             {
-                Links = new List<Link>()
-                    .AddFirstPage(membersCount)
-                    .AddLastPage(membersCount, criteria.PageSize)
-                    .AddNextPage(membersCount, criteria.PageSize, criteria.Page)
-                    .AddPreviousPage(membersCount, criteria.Page)
+                Links = CreateLinks(criteria.Page, criteria.PageSize, membersCount),
+                Results = await CreateMembers(criteria, membersCount).ConfigureAwait(false)
             };
+                        
+            return _modelFactory.CreateMemberResponseModel(memberResponse);
+        }
 
+        private async Task<IEnumerable<Member>> CreateMembers(MemberCriteria criteria, int membersCount)
+        {
             if (membersCount > 0 && criteria.Page.IsPageInRange(criteria.PageSize, membersCount))
             {
-                memberResponse.Results =
-                    (await _memberDao.GetMembers(criteria).ConfigureAwait(false)).Paginate(criteria.Page,
-                        criteria.PageSize);
+                return (await _memberDao.GetMembers(criteria).ConfigureAwait(false))
+                    .Paginate(criteria.Page, criteria.PageSize);
             }
-            else
-            {
-                memberResponse.Results = new List<Member>();
-            }
-            
-            return _modelFactory.CreateMemberResponseModel(memberResponse);
+            return new List<Member>();
+        }
+
+        private IList<Link> CreateLinks(int page, int pageSize, int membersCount)
+        {
+            return new List<Link>()
+                .AddFirstPage(membersCount)
+                .AddLastPage(membersCount, pageSize)
+                .AddNextPage(membersCount, pageSize, page)
+                .AddPreviousPage(membersCount, page);
         }
 
         public async Task<MemberModel> GetMember(int id)

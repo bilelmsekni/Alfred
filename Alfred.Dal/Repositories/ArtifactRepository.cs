@@ -28,24 +28,31 @@ namespace Alfred.Dal.Repositories
 
             var artifactResponse = new ArtifactResponse
             {
-                Links = new List<Link>()
-                    .AddFirstPage(resultCount)
-                    .AddLastPage(resultCount, artifactCriteria.PageSize)
-                    .AddNextPage(resultCount, artifactCriteria.PageSize, artifactCriteria.Page)
-                    .AddPreviousPage(resultCount, artifactCriteria.Page)
+                Links = CreateLinks(artifactCriteria.Page, artifactCriteria.PageSize, resultCount),
+                Results = await CreateResults(artifactCriteria, resultCount).ConfigureAwait(false)
             };
 
-            if (resultCount > 0 && artifactCriteria.Page.IsPageInRange(resultCount, artifactCriteria.PageSize))
-            {
-                artifactResponse.Results = (await _artifactDao.GetArtifacts(artifactCriteria).ConfigureAwait(false))
-                    .Paginate(artifactCriteria.Page, artifactCriteria.PageSize);
-            }
-            else
-            {
-                artifactResponse.Results = new List<Artifact>();
-            }
             return _modelFactory.CreateArtifactResponseModel(artifactResponse);
-        }        
+        }
+
+        private async Task<IEnumerable<Artifact>> CreateResults(ArtifactCriteria criteria, int resultCount)
+        {
+            if (resultCount > 0 && criteria.Page.IsPageInRange(resultCount, criteria.PageSize))
+            {
+                return (await _artifactDao.GetArtifacts(criteria).ConfigureAwait(false))
+                    .Paginate(criteria.Page, criteria.PageSize);
+            }
+            return new List<Artifact>();
+        }
+
+        private IList<Link> CreateLinks(int page, int pageSize, int resultCount)
+        {
+            return new List<Link>()
+                .AddFirstPage(resultCount)
+                .AddLastPage(resultCount, pageSize)
+                .AddNextPage(resultCount, pageSize, page)
+                .AddPreviousPage(resultCount, page);
+        }
 
         public async Task<ArtifactModel> GetArtifact(int id)
         {

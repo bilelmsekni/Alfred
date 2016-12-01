@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Hosting;
-using System.Web.Http.Routing;
-using Alfred.Constants;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Base;
 using Alfred.Dal.Entities.Community;
@@ -16,6 +10,7 @@ using Alfred.Models.Communities;
 using Alfred.Models.Members;
 using Alfred.Shared.Enums;
 using Alfred.Shared.Features;
+using Alfred.Shared.Tests;
 using FluentAssertions;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
@@ -31,21 +26,7 @@ namespace Alfred.Dal.Tests
         [SetUp]
         public void SetUp()
         {
-            var httpRequestMessage = new HttpRequestMessage
-            {
-                RequestUri = new Uri("http://localhost:3000"),
-                Properties =
-                {
-                    { HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration
-                    { Routes =
-                    {
-                        { AlfredRoutes.GetArtifacts, new HttpRoute() }
-                    }
-                    }
-                    }
-                }
-            };
-            _modelFactory = new ModelFactory(new ObjectDifferenceManager(), () => httpRequestMessage);
+            _modelFactory = new ModelFactory(new ObjectDifferenceManager(), () => FakeHttpMessageBuilder.CreateFakeHttpMessage());
             _fixture = new Fixture();
         }
 
