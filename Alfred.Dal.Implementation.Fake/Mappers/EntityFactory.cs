@@ -10,21 +10,19 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
     {
         public ArtifactDto TransformToArtifactDto(Artifact artifact)
         {
-            if (artifact != null)
+            if (artifact == null) return null;
+            
+            return new ArtifactDto
             {
-                return new ArtifactDto
-                {
-                    Id = artifact.Id,
-                    Title = artifact.Title,
-                    Bonus = artifact.Bonus,
-                    Reward = artifact.Reward,
-                    Status = (int)artifact.Status,
-                    Type = (int)artifact.Type,
-                    MemberId = artifact.MemberId,
-                    CommunityId = artifact.CommunityId
-                };
-            }
-            return null;
+                Id = artifact.Id,
+                Title = artifact.Title,
+                Bonus = artifact.Bonus,
+                Reward = artifact.Reward,
+                Status = (int)artifact.Status,
+                Type = (int)artifact.Type,
+                MemberId = artifact.MemberId,
+                CommunityId = artifact.CommunityId
+            };            
         }
 
 
@@ -47,51 +45,44 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
 
         public Community TransformToCommunityEntity(CommunityDto communityDto)
         {
-            if (communityDto != null)
+            if (communityDto == null) return null;
+            return new Community
             {
-                return new Community
-                {
-                    Id = communityDto.Id,
-                    Email = communityDto.Email,
-                    Name = communityDto.Name
-                };
-            }
-            return null;
+                Id = communityDto.Id,
+                Email = communityDto.Email,
+                Name = communityDto.Name
+            };
         }
 
         public CommunityDto TransformToCommunityDto(Community community)
         {
-            if (community != null)
+            if (community == null) return null;
+            return new CommunityDto
             {
-                return new CommunityDto
-                {
-                    Id = community.Id,
-                    Email = community.Email,
-                    Name = community.Name
-                };
-            }
-            return null;
+                Id = community.Id,
+                Email = community.Email,
+                Name = community.Name
+            };
         }
 
         public Member TransformToMemberEntity(MemberDto memberDto)
         {
-            if (memberDto != null)
+            if (memberDto == null) return null;
+            return new Member
             {
-                return new Member
-                {
-                    Id = memberDto.Id,
-                    Email = memberDto.Email,
-                    FirstName = memberDto.FirstName,
-                    LastName = memberDto.LastName,
-                    Role = (CommunityRole)memberDto.Role,
-                    CommunityIds = memberDto.CommunityIds                    
-                };
-            }
-            return null;
+                Id = memberDto.Id,
+                Email = memberDto.Email,
+                FirstName = memberDto.FirstName,
+                LastName = memberDto.LastName,
+                Role = (CommunityRole)memberDto.Role,
+                CommunityIds = memberDto.CommunityIds
+            };
         }
 
         public MemberDto TransformToMemberDto(Member member)
         {
+            if (member == null) return null;
+
             return new MemberDto
             {
                 Id = member.Id,

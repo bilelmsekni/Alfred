@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtifactRepositoryTests.cs" />
+    <Compile Include="CommunityRepositoryTests.cs" />
+    <Compile Include="MemberRepositoryTests.cs" />
     <Compile Include="ModelFactoryTests.cs" />
     <Compile Include="PaginationLogicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
