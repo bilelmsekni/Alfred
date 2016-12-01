@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelFactoryTests.cs" />
+    <Compile Include="PaginationLogicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LinkTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -3,10 +3,10 @@ using Alfred.Dal.Entities.Base;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Alfred.Dal.Implementation.Fake.Tests
+namespace Alfred.Dal.Tests
 {
     [TestFixture]
-    public class ResponseLinkTests
+    public class LinkTests
     {
         private IList<Link> _response;
 
