@@ -9,6 +9,6 @@ namespace Alfred.Dal.Implementation.Fake.EntityDtos
         public string LastName { get; set; }
         public string Email { get; set; }
         public int Role { get; set; }
-        public IEnumerable<int> CommunityIds { get; set; }
+        public int CommunityId { get; set; }
     }
 }

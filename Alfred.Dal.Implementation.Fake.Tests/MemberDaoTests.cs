@@ -34,11 +34,11 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         }
 
         [Test]
-        public void Should_not_return_members_when_ids_are_5()
+        public void Should_not_return_members_when_ids_are_555()
         {
             var criteria = new MemberCriteria
             {
-                Ids = new List<int> { 5 }
+                Ids = new List<int> { 555 }
             };
 
             var results = _memberDao.GetMembers(criteria).Result;
@@ -75,7 +75,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         {
             var criteria = new MemberCriteria
             {
-                Email = "KickAss@SuperHeros.com"
+                Email = "Alfred.Reacher@Alfred.com"
             };
 
             var results = _memberDao.GetMembers(criteria).Result;
@@ -100,12 +100,12 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         {
             var criteria = new MemberCriteria
             {
-                Name = "Hit"
+                Name = "Pennyworth"
             };
 
             var results = _memberDao.GetMembers(criteria).Result;
             results.Should().NotBeEmpty();
-            results.Should().OnlyContain(r => r.FirstName.Contains(criteria.Name));
+            results.Should().OnlyContain(r => r.LastName.Contains(criteria.Name));
         }
 
         [Test]
@@ -134,11 +134,11 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         }
 
         [Test]
-        public void Should_not_return_members_when_Role_is_Admin()
+        public void Should_not_return_members_when_Role_is_Unkonwn()
         {
             var criteria = new MemberCriteria
             {
-                Role = CommunityRole.Admin
+                Role = (CommunityRole)25
             };
 
             var results = _memberDao.GetMembers(criteria).Result;

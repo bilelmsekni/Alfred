@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
@@ -13,5 +14,6 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
         CommunityDto TransformToCommunityDto(Community community);
         Member TransformToMemberEntity(MemberDto memberDto);
         MemberDto TransformToMemberDto(Member member);
+        IEnumerable<Member> TransformToMemberEntities(IEnumerable<MemberDto> memberDtos);
     }
 }

@@ -86,16 +86,5 @@ namespace Alfred.Dal.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<ArtifactModel>> GetMemberArtifacts(int id)
-        {
-            var artifactDtos = await _artifactDao.GetMemberArtifacts(id).ConfigureAwait(false);
-            return artifactDtos.Select(_modelFactory.CreateArtifactModel);
-        }
-
-        public async Task<IEnumerable<ArtifactModel>> GetCommunityArtifacts(int id)
-        {
-            var communityArtifacts = await _artifactDao.GetCommunityArtifacts(id).ConfigureAwait(false);
-            return communityArtifacts.Select(_modelFactory.CreateArtifactModel).ToArray();
-        }
     }
 }

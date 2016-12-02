@@ -1,4 +1,6 @@
-﻿using Alfred.Dal.Implementation.Fake.EntityDtos;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Dal.Implementation.Fake.Mappers;
 using Alfred.Shared.Enums;
 using FluentAssertions;
@@ -32,7 +34,35 @@ namespace Alfred.Dal.Implementation.Fake.Tests
             result.LastName.Should().Be(member.LastName);
             result.Role.Should().Be((CommunityRole)member.Role);
             result.Id.Should().Be(member.Id);
-            result.CommunityIds.Should().Equal(member.CommunityIds);
+            result.CommunityIds.Should().Contain(member.CommunityId);
+        }
+
+        [Test]
+        public void Should_map_MemberDtos_to_MemberEntities()
+        {
+
+            var memberAtCommunity3 = _fixture.Build<MemberDto>()
+                .With(x => x.CommunityId, 3)
+                .Create();
+            var memberAtCommunity4 = _fixture.Build<MemberDto>()
+                .With(x => x.Id, memberAtCommunity3.Id)
+                .With(x => x.CommunityId, 4)
+                .With(x => x.Email, memberAtCommunity3.Email)
+                .With(x => x.FirstName, memberAtCommunity3.FirstName)
+                .With(x => x.LastName, memberAtCommunity3.LastName)
+                .With(x => x.Role, memberAtCommunity3.Role)
+                .Create();
+
+            var members = new List<MemberDto> { memberAtCommunity3, memberAtCommunity4 };
+            var result = _entityFactory.TransformToMemberEntities(members);
+            result.Count().Should().Be(1);
+            result.First().Email.Should().Be(memberAtCommunity3.Email);
+            result.First().FirstName.Should().Be(memberAtCommunity3.FirstName);
+            result.First().LastName.Should().Be(memberAtCommunity3.LastName);
+            result.First().Role.Should().Be((CommunityRole)memberAtCommunity3.Role);
+            result.First().Id.Should().Be(memberAtCommunity3.Id);
+            result.First().CommunityIds.Should().Contain(memberAtCommunity3.CommunityId);
+            result.First().CommunityIds.Should().Contain(memberAtCommunity4.CommunityId);
         }
 
         [Test]

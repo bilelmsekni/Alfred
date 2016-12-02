@@ -13,7 +13,7 @@ namespace Alfred.Dal.Implementation.Fake.Dao
 {
     public class MemberDao : IMemberDao
     {
-        private readonly List<MemberDto> _members = FakeDatabase.Members;
+        private readonly List<MemberDto> _members = FakeMembersDb.GetMembers();
         private readonly IEntityFactory _entityFactory;
 
         public MemberDao(IEntityFactory entityFactory)
@@ -26,13 +26,12 @@ namespace Alfred.Dal.Implementation.Fake.Dao
             var dtos = await Task.Run(() => _members).ConfigureAwait(false);
             Func<MemberDto, bool> criteriafilters = dto => true;
 
-            return dtos.Where(criteriafilters
+            return _entityFactory.TransformToMemberEntities(dtos.Where(criteriafilters
                 .FilterOnIds(criteria.Ids)
                 .FilterOnCommunityId(criteria.CommunityId)
                 .FilterOnEmail(criteria.Email)
                 .FilterOnName(criteria.Name)
-                .FilterOnRole(criteria.Role))
-                .Select(_entityFactory.TransformToMemberEntity);
+                .FilterOnRole(criteria.Role)));                
         }
 
         public async Task<int> SaveMember(Member member)
@@ -68,12 +67,6 @@ namespace Alfred.Dal.Implementation.Fake.Dao
         public async Task DeleteMember(int id)
         {
             await Task.Run(() => _members.RemoveAt(_members.FindIndex(x => x.Id == id))).ConfigureAwait(false);
-        }
-
-        public async Task<IEnumerable<Member>> GetCommunityMembers(int id)
-        {
-            var dtos = await Task.Run(() => _members.Where(x => x.CommunityIds.Contains(id))).ConfigureAwait(false);
-            return dtos.Select(_entityFactory.TransformToMemberEntity);
         }
 
         public async Task<int> CountMembers(MemberCriteria criteria)

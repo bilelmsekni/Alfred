@@ -7,4 +7,3 @@ Microsoft.Owin redirects: on
 Microsoft.Owin.Cors
 Microsoft.Extensions.Configuration
 FluentValidation.WebAPI
-Hyprlinkr

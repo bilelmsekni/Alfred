@@ -2,13 +2,13 @@ FRAMEWORK: NET45, NET461
 NUGET
   remote: https://www.nuget.org/api/v2
     AutoFixture (3.49)
+    Bogus (8.0.1)
+      Newtonsoft.Json (>= 9.0.1)
     FluentAssertions (4.11)
     FluentValidation (6.2.1)
     FluentValidation.WebAPI (6.2.1)
       FluentValidation (>= 6.2.1)
       Microsoft.AspNet.WebApi.Core (>= 5.1 < 5.3)
-    Hyprlinkr (2.0.1)
-      Microsoft.AspNet.WebApi.Core (>= 5.0)
     LightInject (4.0.11)
     LightInject.WebApi (1.0.0.4)
       LightInject (>= 3.0.2.7)

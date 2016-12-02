@@ -17,7 +17,7 @@ namespace Alfred.Dal.Implementation.Fake.Filters
 
         public static Func<MemberDto, bool> FilterOnCommunityId(this Func<MemberDto, bool> criteriaFilters, int? communityId)
         {
-            if (communityId.HasValue) criteriaFilters += dto => dto.CommunityIds.Contains(communityId.Value);
+            if (communityId.HasValue) criteriaFilters += dto => dto.CommunityId == communityId.Value;
 
             return criteriaFilters;
         }

@@ -71,11 +71,11 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         }
 
         [Test]
-        public void Should_not_return_artifacts_when_criteria_has_type_LongArticle()
+        public void Should_not_return_artifacts_when_criteria_has_type_unknown()
         {
             var criteria = new ArtifactCriteria
             {
-                Type = ArtifactType.LongArticle,
+                Type = (ArtifactType)10,
                 PageSize = 20
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;
@@ -95,11 +95,11 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         }
 
         [Test]
-        public void Should_not_return_artifacts_when_criteria_has_status_pending()
+        public void Should_not_return_artifacts_when_criteria_has_status_unknown()
         {
             var criteria = new ArtifactCriteria
             {
-                Status = ArtifactStatus.Pending,
+                Status = (ArtifactStatus)10,
                 PageSize = 20
             };
             var results = _artifactDao.GetArtifacts(criteria).Result;

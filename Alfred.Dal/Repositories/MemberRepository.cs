@@ -88,11 +88,5 @@ namespace Alfred.Dal.Repositories
             }
             return null;
         }
-
-        public async Task<IEnumerable<MemberModel>> GetCommunityMembers(int id)
-        {
-            var communityMembers = await _memberDao.GetCommunityMembers(id).ConfigureAwait(false);
-            return communityMembers.Select(_modelFactory.CreateMemberModel);
-        }
     }
 }

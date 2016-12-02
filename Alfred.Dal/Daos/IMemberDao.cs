@@ -12,7 +12,6 @@ namespace Alfred.Dal.Daos
         Task<Member> GetMember(int id);
         Task UpdateMember(Member member);
         Task DeleteMember(int id);
-        Task<IEnumerable<Member>> GetCommunityMembers(int id);
         Task<int> CountMembers(MemberCriteria criteria);
     }
 }

@@ -13,7 +13,7 @@ namespace Alfred.Dal.Implementation.Fake.Dao
 {
     public class ArtifactDao : IArtifactDao
     {
-        private readonly List<ArtifactDto> _artifacts = FakeDatabase.ArtifactData;
+        private readonly List<ArtifactDto> _artifacts = FakeArtifactsDb.GetArtifacts().ToList();
         private readonly IEntityFactory _entityFactory;
 
         public ArtifactDao(IEntityFactory entityFactory)
@@ -69,18 +69,6 @@ namespace Alfred.Dal.Implementation.Fake.Dao
                 _artifacts.RemoveAt(_artifacts.FindIndex(x => x.Id == artifact.Id));
                 _artifacts.Add(_entityFactory.TransformToArtifactDto(artifact));
             }).ConfigureAwait(false);
-        }
-
-        public async Task<IEnumerable<Artifact>> GetMemberArtifacts(int id)
-        {
-            var dtos = await Task.Run(() => _artifacts.Where(x => x.MemberId == id)).ConfigureAwait(false);
-            return dtos.Select(_entityFactory.TransformToArtifactEntity);
-        }
-
-        public async Task<IEnumerable<Artifact>> GetCommunityArtifacts(int id)
-        {
-            var dtos = await Task.Run(() => _artifacts.Where(x => x.CommunityId == id)).ConfigureAwait(false);
-            return dtos.Select(_entityFactory.TransformToArtifactEntity);
         }
 
         private async Task<IEnumerable<ArtifactDto>> GetArtifacts()

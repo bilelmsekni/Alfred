@@ -10,6 +10,6 @@ namespace Alfred.Dal.Entities.Member
         public string LastName { get; set; }
         public string Email { get; set; }
         public CommunityRole Role { get; set; }
-        public IEnumerable<int> CommunityIds { get; set; }
+        public IList<int> CommunityIds { get; set; }
     }
 }

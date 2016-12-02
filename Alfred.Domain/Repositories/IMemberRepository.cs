@@ -12,6 +12,5 @@ namespace Alfred.Domain.Repositories
         Task DeleteMember(int id);
         Task<MemberModel> GetMember(string email);
         Task<MemberModel> UpdateMember(UpdateMemberModel member);
-        Task<IEnumerable<MemberModel>> GetCommunityMembers(int id);
     }
 }

@@ -1,4 +1,6 @@
-﻿using Alfred.Dal.Entities.Artifact;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Alfred.Dal.Entities.Artifact;
 using Alfred.Dal.Entities.Community;
 using Alfred.Dal.Entities.Member;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
@@ -65,6 +67,23 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
             };
         }
 
+        public IEnumerable<Member> TransformToMemberEntities(IEnumerable<MemberDto> memberDtos)
+        {
+            var members = new Dictionary<int, Member>();
+            foreach (var dto in memberDtos)
+            {
+                if (members.ContainsKey(dto.Id))
+                {
+                    members[dto.Id].CommunityIds.Add(dto.CommunityId);
+                }
+                else
+                {
+                    members.Add(dto.Id, TransformToMemberEntity(dto));
+                }
+            }
+            return members.Values.ToList();
+        }
+
         public Member TransformToMemberEntity(MemberDto memberDto)
         {
             if (memberDto == null) return null;
@@ -75,7 +94,7 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
                 FirstName = memberDto.FirstName,
                 LastName = memberDto.LastName,
                 Role = (CommunityRole)memberDto.Role,
-                CommunityIds = memberDto.CommunityIds
+                CommunityIds = new List<int> { memberDto.CommunityId}
             };
         }
 

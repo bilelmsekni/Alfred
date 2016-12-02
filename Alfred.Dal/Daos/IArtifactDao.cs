@@ -12,7 +12,5 @@ namespace Alfred.Dal.Daos
         Task<int> SaveArtifact(Artifact artifact);
         Task DeleteArtifact(int id);
         Task UpdateArtifact(Artifact artifact);
-        Task<IEnumerable<Artifact>> GetMemberArtifacts(int id);
-        Task<IEnumerable<Artifact>> GetCommunityArtifacts(int id);
     }
 }

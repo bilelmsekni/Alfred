@@ -13,13 +13,14 @@ namespace Alfred.Dal.Implementation.Fake.Dao
 {
     public class CommunityDao : ICommunityDao
     {
-        private readonly List<CommunityDto> _communities = FakeDatabase.Communities;
+        private readonly List<CommunityDto> _communities = FakeCommunitiesDb.GetCommunities();
         private readonly IEntityFactory _entityFactory;
 
         public CommunityDao(IEntityFactory entityFactory)
         {
             _entityFactory = entityFactory;
         }
+
         public async Task<IEnumerable<Community>> GetCommunities(CommunityCriteria criteria)
         {
             var dtos = await Task.Run(() => _communities).ConfigureAwait(false);
