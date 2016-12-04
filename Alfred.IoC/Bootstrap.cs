@@ -11,6 +11,7 @@ using Alfred.Domain.Services;
 using Alfred.Domain.Validators;
 using Alfred.IoC.Handlers;
 using Alfred.Models.Artifacts;
+using Alfred.Models.Communities;
 using Alfred.Models.Members;
 using Alfred.Services;
 using Alfred.Shared.Features;
@@ -52,6 +53,7 @@ namespace Alfred.IoC
             container.Register<IModelFactory, ModelFactory>();
             container.RegisterInstance(AppSettingsProvider.Build());
             container.RegisterInstance<AbstractValidator<ArtifactCriteriaModel>>(new ArtifactCriteriaModelValidator(new IdsValidator()));
+            container.RegisterInstance<AbstractValidator<CommunityCriteriaModel>>(new CommunityCriteriaModelValidator(new IdsValidator()));
             container.RegisterInstance<AbstractValidator<MemberCriteriaModel>>(new MemberCriteriaModelValidator(new IdsValidator()));
             return container;
         }

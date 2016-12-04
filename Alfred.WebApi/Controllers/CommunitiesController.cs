@@ -33,13 +33,15 @@ namespace Alfred.WebApi.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<CommunityModel>))]
-        public async Task<IHttpActionResult> GetCommunities(string ids = null, string email = null, string name = null)
+        public async Task<IHttpActionResult> GetCommunities(string ids = null, string email = null, string name = null, int page = 1, int pageSize = 50)
         {
             var criteria = new CommunityCriteriaModel
             {
-                Ids = ids.SafeSplit(),
+                Ids = ids?.SafeSplit(),
                 Email = email,
-                Name = name
+                Name = name,
+                Page = page,
+                PageSize = pageSize
             };
 
             var validationResults =_criteriaValidator.Validate(criteria);
