@@ -74,7 +74,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         {
             var criteria = new CommunityCriteria
             {
-                Name = "AgileCommunity"
+                Name = "Agile Community"
             };
 
             var results = _communityDao.GetCommunities(criteria).Result;
