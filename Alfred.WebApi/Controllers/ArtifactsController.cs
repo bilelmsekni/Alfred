@@ -35,15 +35,15 @@ namespace Alfred.WebApi.Controllers
         [Route("", Name = AlfredRoutes.GetArtifacts)]
         [ResponseType(typeof(ArtifactResponseModel))]
         public async Task<IHttpActionResult> GetArtifacts(string ids = null, string title = null, 
-            ArtifactType? artifactType = null, ArtifactStatus? artifactStatus= null, int? memberId = null, 
+            ArtifactType? type = null, ArtifactStatus? status= null, int? memberId = null, 
             int? communityId = null, int page = 1, int pageSize = 20)
         {
             var criteriaModel = new ArtifactCriteriaModel
             {
                 Ids = ids?.SafeSplit(),
                 Title = title,
-                Type = artifactType,
-                Status = artifactStatus,
+                Type = type,
+                Status = status,
                 MemberId = memberId,
                 CommunityId = communityId,
                 Page = page,
@@ -62,10 +62,10 @@ namespace Alfred.WebApi.Controllers
         }
 
         /// <summary>
-        /// Get an artifacts
+        /// Get an artifact
         /// </summary>
         /// <remarks>
-        /// Get an artifacts
+        /// Get an artifact
         /// </remarks>
         /// <param name="id">id of an artifact</param>
         /// <returns></returns>

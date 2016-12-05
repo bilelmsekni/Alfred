@@ -14,19 +14,19 @@ namespace Alfred.Dal.Implementation.Fake.Database
                 {
                     Id = 1,
                     Email = "DotNetCommunity@superheros.com",
-                    Name = "DotNetCommunity"
+                    Name = "DotNet Community"
                 },
                 new CommunityDto
                 {
                     Id = 2,
                     Email = "JavaCommunity@superheros.com",
-                    Name = "JavaCommunity"
+                    Name = "Java Community"
                 },
                 new CommunityDto
                 {
                     Id = 3,
                     Email = "AgileCommunity@superheros.com",
-                    Name = "AgileCommunity"
+                    Name = "Agile Community"
                 }
             };
         }
