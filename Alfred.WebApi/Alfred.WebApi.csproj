@@ -75,6 +75,9 @@
     </Compile>
     <Compile Include="Application\CorsConfiguration.cs" />
     <Compile Include="Application\DependencyResolverConfiguration.cs" />
+    <Compile Include="Application\Extensions\ActionContextExtensions.cs" />
+    <Compile Include="Application\Extensions\HttpMessageResponseExtensions.cs" />
+    <Compile Include="Application\Filters\LoggingActionFilter.cs" />
     <Compile Include="Application\IocConfiguration.cs" />
     <Compile Include="Application\SwaggerConfiguration.cs" />
     <Compile Include="Application\WebApiConfiguration.cs" />
@@ -88,6 +91,10 @@
     <ProjectReference Include="..\Alfred.IoC\Alfred.IoC.csproj">
       <Project>{E2F7B035-DB0D-4FD0-8246-7B0B7ABBB99A}</Project>
       <Name>Alfred.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alfred.Logging\Alfred.Logging.csproj">
+      <Project>{B9B331E1-74AC-4BD2-8FEA-6CBC52BB99E5}</Project>
+      <Name>Alfred.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alfred.Shared\Alfred.Shared.csproj">
       <Project>{45FA6BD5-2EDD-4291-A85F-4077C49E03B2}</Project>

@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Alfred.Logging;
 using Alfred.WebApi;
 using Alfred.WebApi.Application;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,7 @@ namespace Alfred.WebApi
                 .ConfigWebApi();
 
             appBuilder
+                .ConfigureLogging()
                 .UseCors(config.DependencyResolver.Resolve<IConfiguration>())
                 .UseWebApi(config);
         }

@@ -15,3 +15,5 @@ nuget Microsoft.Extensions.Configuration.Json
 nuget Microsoft.Extensions.Primitives
 nuget FluentValidation.WebAPI
 nuget Bogus
+nuget Serilog.Sinks.Async
+nuget Serilog.Sinks.RollingFile
