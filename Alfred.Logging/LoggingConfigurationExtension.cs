@@ -1,6 +1,4 @@
 ﻿using System.IO;
-using System.Net.Mime;
-using System.Reflection;
 using System.Web;
 using Owin;
 using Serilog;

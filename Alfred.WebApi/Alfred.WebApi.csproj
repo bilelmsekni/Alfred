@@ -79,6 +79,7 @@
     <Compile Include="Application\Extensions\HttpMessageResponseExtensions.cs" />
     <Compile Include="Application\Filters\LoggingActionFilter.cs" />
     <Compile Include="Application\IocConfiguration.cs" />
+    <Compile Include="Application\Services\AdvancedExceptionLogger.cs" />
     <Compile Include="Application\SwaggerConfiguration.cs" />
     <Compile Include="Application\WebApiConfiguration.cs" />
     <Compile Include="Controllers\ArtifactsController.cs" />

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -49,7 +50,6 @@ namespace Alfred.WebApi.Controllers
                 Page = page,
                 PageSize = pageSize                
             };
-
             var validationResults = _criteriaValidator.Validate(criteriaModel);
             if (validationResults.IsValid)
             {

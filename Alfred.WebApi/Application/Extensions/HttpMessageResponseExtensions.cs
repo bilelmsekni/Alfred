@@ -6,7 +6,7 @@ namespace Alfred.WebApi.Application.Extensions
     {
         public static int GetStatusCode(this HttpResponseMessage response)
         {
-            return (int)response.StatusCode;
+            return response != null ? (int)response.StatusCode : 0;
         }
     }
 }

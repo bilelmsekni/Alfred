@@ -6,7 +6,7 @@ namespace Alfred.WebApi.Application.Extensions
     {
         public static string GetFeatureName(this HttpActionContext actionContext)
         {
-            return $"{actionContext.ActionDescriptor.ControllerDescriptor.ControllerName}.{actionContext.ActionDescriptor.ActionName}";
+            return $"{actionContext?.ActionDescriptor?.ControllerDescriptor?.ControllerName}.{actionContext?.ActionDescriptor?.ActionName}";
         }
     }
 }

@@ -9,5 +9,7 @@ namespace Alfred.Logging.Events
     public class TechnicalEvent : BaseEvent
     {
         public Exception EventException { get; set; }
+        public Dictionary<string, object> ActionArguments { get; set; }
+        public Uri RequestUrl { get; set; }
     }
 }
