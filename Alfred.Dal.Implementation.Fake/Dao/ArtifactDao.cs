@@ -12,8 +12,7 @@ using Alfred.Dal.Implementation.Fake.Mappers;
 namespace Alfred.Dal.Implementation.Fake.Dao
 {
     public class ArtifactDao : IArtifactDao
-    {
-        private readonly List<ArtifactDto> _artifacts = FakeArtifactsDb.GetArtifacts().ToList();
+    {        
         private readonly IEntityFactory _entityFactory;
 
         public ArtifactDao(IEntityFactory entityFactory)
@@ -43,7 +42,7 @@ namespace Alfred.Dal.Implementation.Fake.Dao
 
         public async Task<Artifact> GetArtifact(int id)
         {
-            var artifact = await Task.Run(() => _artifacts.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false);
+            var artifact = await Task.Run(() => FakeArtifactsDb.Artifacts.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false);
             return _entityFactory.TransformToArtifactEntity(artifact);            
         }
 
@@ -51,29 +50,29 @@ namespace Alfred.Dal.Implementation.Fake.Dao
         {
             return await Task.Run(() =>
             {
-                artifact.Id = _artifacts.Count + 1;
-                _artifacts.Add(_entityFactory.TransformToArtifactDto(artifact));
+                artifact.Id = FakeArtifactsDb.Artifacts.Count + 1;
+                FakeArtifactsDb.Artifacts.Add(_entityFactory.TransformToArtifactDto(artifact));
                 return artifact.Id;
             }).ConfigureAwait(false);
         }
 
         public async Task DeleteArtifact(int id)
         {
-            await Task.Run(() => _artifacts.RemoveAt(_artifacts.FindIndex(x => x.Id == id))).ConfigureAwait(false);
+            await Task.Run(() => FakeArtifactsDb.Artifacts.RemoveAt(FakeArtifactsDb.Artifacts.FindIndex(x => x.Id == id))).ConfigureAwait(false);
         }
 
         public async Task UpdateArtifact(Artifact artifact)
         {
             await Task.Run(() =>
             {
-                _artifacts.RemoveAt(_artifacts.FindIndex(x => x.Id == artifact.Id));
-                _artifacts.Add(_entityFactory.TransformToArtifactDto(artifact));
+                FakeArtifactsDb.Artifacts.RemoveAt(FakeArtifactsDb.Artifacts.FindIndex(x => x.Id == artifact.Id));
+                FakeArtifactsDb.Artifacts.Add(_entityFactory.TransformToArtifactDto(artifact));
             }).ConfigureAwait(false);
         }
 
         private async Task<IEnumerable<ArtifactDto>> GetArtifacts()
         {
-            return await Task.Run(() => _artifacts).ConfigureAwait(false);
+            return await Task.Run(() => FakeArtifactsDb.Artifacts).ConfigureAwait(false);
         }
     }
 }

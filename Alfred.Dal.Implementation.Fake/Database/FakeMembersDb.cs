@@ -8,7 +8,10 @@ namespace Alfred.Dal.Implementation.Fake.Database
 {
     public class FakeMembersDb
     {
-        public static List<MemberDto> GetMembers()
+        public static List<MemberDto> Members { get; } = GetMembers();
+
+
+        private static List<MemberDto> GetMembers()
         {
             var memberId = 2;
             var memberRules = new Faker<MemberDto>()

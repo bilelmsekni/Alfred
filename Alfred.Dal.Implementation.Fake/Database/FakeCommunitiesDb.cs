@@ -5,8 +5,9 @@ namespace Alfred.Dal.Implementation.Fake.Database
 {
     public class FakeCommunitiesDb
     {
-       
-        public static List<CommunityDto> GetCommunities()
+        public static List<CommunityDto> Communities { get; } = GetCommunities();
+
+        private static List<CommunityDto> GetCommunities()
         {
             return new List<CommunityDto>
             {

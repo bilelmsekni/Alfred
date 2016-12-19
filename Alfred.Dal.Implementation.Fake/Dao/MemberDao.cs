@@ -12,8 +12,7 @@ using Alfred.Dal.Implementation.Fake.Mappers;
 namespace Alfred.Dal.Implementation.Fake.Dao
 {
     public class MemberDao : IMemberDao
-    {
-        private readonly List<MemberDto> _members = FakeMembersDb.GetMembers();
+    {        
         private readonly IEntityFactory _entityFactory;
 
         public MemberDao(IEntityFactory entityFactory)
@@ -23,7 +22,7 @@ namespace Alfred.Dal.Implementation.Fake.Dao
 
         public async Task<IEnumerable<Member>> GetMembers(MemberCriteria criteria)
         {
-            var dtos = await Task.Run(() => _members).ConfigureAwait(false);
+            var dtos = await Task.Run(() => FakeMembersDb.Members).ConfigureAwait(false);
             Func<MemberDto, bool> criteriafilters = dto => true;
 
             return _entityFactory.TransformToMemberEntities(dtos.Where(criteriafilters
@@ -38,35 +37,35 @@ namespace Alfred.Dal.Implementation.Fake.Dao
         {
             return await Task.Run(() =>
             {
-                member.Id = _members.Count + 1;
-                _members.Add(_entityFactory.TransformToMemberDto(member));
+                member.Id = FakeMembersDb.Members.Count + 1;
+                FakeMembersDb.Members.Add(_entityFactory.TransformToMemberDto(member));
                 return member.Id;
             }).ConfigureAwait(false);
         }
 
         public async Task<Member> GetMember(string email)
         {
-            return _entityFactory.TransformToMemberEntity(await Task.Run(() => _members.FirstOrDefault(x => x.Email.ToLowerInvariant() == email.ToLowerInvariant())).ConfigureAwait(false));
+            return _entityFactory.TransformToMemberEntity(await Task.Run(() => FakeMembersDb.Members.FirstOrDefault(x => x.Email.ToLowerInvariant() == email.ToLowerInvariant())).ConfigureAwait(false));
         }
 
         public async Task<Member> GetMember(int id)
         {
-            return _entityFactory.TransformToMemberEntity(await Task.Run(() => _members.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false));
+            return _entityFactory.TransformToMemberEntity(await Task.Run(() => FakeMembersDb.Members.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false));
         }
 
         public async Task UpdateMember(Member member)
         {
             await Task.Run(() =>
             {
-                _members.RemoveAt(_members.FindIndex(x => x.Id == member.Id));
-                _members.Add(_entityFactory.TransformToMemberDto(member));
+                FakeMembersDb.Members.RemoveAt(FakeMembersDb.Members.FindIndex(x => x.Id == member.Id));
+                FakeMembersDb.Members.Add(_entityFactory.TransformToMemberDto(member));
 
             }).ConfigureAwait(false);
         }
 
         public async Task DeleteMember(int id)
         {
-            await Task.Run(() => _members.RemoveAt(_members.FindIndex(x => x.Id == id))).ConfigureAwait(false);
+            await Task.Run(() => FakeMembersDb.Members.RemoveAt(FakeMembersDb.Members.FindIndex(x => x.Id == id))).ConfigureAwait(false);
         }
 
         public async Task<int> CountMembers(MemberCriteria criteria)

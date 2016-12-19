@@ -8,10 +8,14 @@ namespace Alfred.Dal.Implementation.Fake.Database
 {
     public class FakeArtifactsDb
     {
-        public static List<ArtifactDto> GetArtifacts()
+        public static List<ArtifactDto> Artifacts { get; } = GetArtifacts();
+
+        private static List<ArtifactDto> GetArtifacts()
         {
             var artifactId = 1;
-            var titles = new[] { "Clean Code Article", "ElasticSearch presentation", "BDD Coaching", "Agile Coaching" };
+            var titles = new[] { "Clean Code Article", "ElasticSearch presentation",
+                "BDD Coaching", "Agile Coaching", "SOA presentation", "TDD Kata",
+            "Team Building"};
 
             var artifactRules = new Faker<ArtifactDto>()
                 .RuleFor(a => a.Id, f => artifactId++)
@@ -24,7 +28,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
                 .RuleFor(a => a.Type, f => (int)f.PickRandom<ArtifactType>());
 
 
-            return artifactRules.Generate(30).ToList();            
+            return artifactRules.Generate(50).ToList();            
         }
     }
 }
