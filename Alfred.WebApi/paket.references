@@ -2,7 +2,6 @@ Microsoft.Owin.Host.SystemWeb
 Microsoft.AspNet.WebApi.Owin
 Microsoft.Owin redirects: on
 Microsoft.Owin.Cors
-Microsoft.Extensions.Configuration.Abstractions
 FluentValidation.WebAPI
 LightInject.WebApi
 Swashbuckle.Core

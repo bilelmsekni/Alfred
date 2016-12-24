@@ -4,7 +4,7 @@ using LightInject;
 
 namespace Alfred.WebApi.Application
 {
-    public static class IocConfiguration
+    public static class IocConfig
     {
         public static HttpConfiguration ConfigIoC(this HttpConfiguration config)
         {

@@ -50,8 +50,7 @@ namespace Alfred.IoC
             container.Register<ICommunityDao, CommunityDao>();
             container.RegisterInstance<ObjectDifferenceManager>(new ObjectDifferenceManager());            
             container.Register<IEntityFactory, EntityFactory>();
-            container.Register<IModelFactory, ModelFactory>();
-            container.RegisterInstance(AppSettingsProvider.Build());
+            container.Register<IModelFactory, ModelFactory>();            
             container.RegisterInstance<AbstractValidator<ArtifactCriteriaModel>>(new ArtifactCriteriaModelValidator(new IdsValidator()));
             container.RegisterInstance<AbstractValidator<CommunityCriteriaModel>>(new CommunityCriteriaModelValidator(new IdsValidator()));
             container.RegisterInstance<AbstractValidator<MemberCriteriaModel>>(new MemberCriteriaModelValidator(new IdsValidator()));

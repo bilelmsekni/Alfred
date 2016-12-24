@@ -8,7 +8,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Alfred.WebApi.Application
 {
-    public static class WebApiConfiguration
+    public static class WebApiConfig
     {
         public static HttpConfiguration ConfigWebApi(this HttpConfiguration config)
         {

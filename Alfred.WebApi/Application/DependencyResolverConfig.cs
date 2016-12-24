@@ -2,7 +2,7 @@
 
 namespace Alfred.WebApi.Application
 {
-    public static class DependencyResolverConfiguration
+    public static class DependencyResolverConfig
     {
         public static T Resolve<T>(this IDependencyResolver resolver)
         {

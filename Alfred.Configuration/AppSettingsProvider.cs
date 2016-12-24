@@ -13,7 +13,7 @@ namespace Alfred.Configuration
             return baseConfig.GetSection(typeof(T).Name).Get<T>();            
         }
 
-        public static IConfiguration Build()
+        private static IConfiguration Build()
         {
             var environment = ConfigurationManager.AppSettings["Environment"] ?? "Debug";
             return Build(environment);

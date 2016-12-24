@@ -3,7 +3,6 @@ using Alfred.Configuration;
 using Alfred.Logging;
 using Alfred.WebApi;
 using Alfred.WebApi.Application;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Owin;
 using Owin;
 
@@ -22,7 +21,7 @@ namespace Alfred.WebApi
 
             appBuilder
                 .ConfigureLogging(AppSettingsProvider.Build<LoggingConfiguration>())
-                .UseCors(config.DependencyResolver.Resolve<IConfiguration>())
+                .UseCors(AppSettingsProvider.Build<CorsConfiguration>())
                 .UseWebApi(config);
         }
     }

@@ -1,33 +1,29 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Cors;
-using Microsoft.Extensions.Configuration;
+using Alfred.Configuration;
 using Microsoft.Owin.Cors;
 using Owin;
 
 namespace Alfred.WebApi.Application
 {
-    public static class CorsConfiguration
+    public static class CorsConfig
     {
-        public static IAppBuilder UseCors(this IAppBuilder app, IConfiguration appSettings)
+        public static IAppBuilder UseCors(this IAppBuilder app, CorsConfiguration appSettings)
         {
             var corsPolicy = new CorsPolicy
             {
                 SupportsCredentials = true
             };
 
-            var headers = appSettings["Alfred:AppSettings:Cors:Headers"];
-            var methods = appSettings["Alfred:AppSettings:Cors:Methods"];
-            var origins = appSettings["Alfred:AppSettings:Cors:Origins"];
-
             var corsOptions = new CorsOptions
             {
                 PolicyProvider = new CorsPolicyProvider
                 {
                     PolicyResolver = context => Task.FromResult(
-                        corsPolicy.AddHeaders(headers)
-                        .AddMethods(methods)
-                        .AddOrigins(origins))
+                        corsPolicy.AddHeaders(appSettings.Headers)
+                        .AddMethods(appSettings.Methods)
+                        .AddOrigins(appSettings.Origins))
                 }
             };
 

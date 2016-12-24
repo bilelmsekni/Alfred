@@ -10,8 +10,6 @@ namespace Alfred.Logging
     {
         public static IAppBuilder ConfigureLogging(this IAppBuilder app, LoggingConfiguration loggingConfig)
         {
-            //const string defaultOutputTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} ({RequestId}) {Message}{NewLine}{Exception}";
-
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .Enrich.FromLogContext()

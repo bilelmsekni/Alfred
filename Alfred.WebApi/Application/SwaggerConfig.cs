@@ -5,7 +5,7 @@ using Swashbuckle.Application;
 
 namespace Alfred.WebApi.Application
 {
-    public static class SwaggerConfiguration
+    public static class SwaggerConfig
     {
         public static HttpConfiguration ConfigSwagger(this HttpConfiguration config)
         {
