@@ -1,24 +1,32 @@
 source https://nuget.org/api/v2
 framework: net45, net461
-nuget Microsoft.Owin.Host.SystemWeb
-nuget Microsoft.AspNet.WebApi.Owin
-nuget Microsoft.Owin.Cors
-nuget AutoFixture
-nuget LightInject.WebApi
-nuget SimpleHelpers.ObjectDiffPatch
-nuget Swashbuckle.Core
-nuget NUnit
-nuget NSubstitute
-nuget FluentAssertions
-nuget Microsoft.Extensions.Configuration.Abstractions 1.0.0
-nuget Microsoft.Extensions.Primitives 1.0.0
-nuget Microsoft.Extensions.Configuration 1.0.0
+
+# WebApi
+nuget Microsoft.Owin.Cors 3.0.1
+nuget Microsoft.Owin.Host.SystemWeb 3.0.1
+nuget Microsoft.AspNet.WebApi.Owin 5.2.3
+#nuget Microsoft.Extensions.Configuration.Abstractions 1.0.0
+#nuget Microsoft.Extensions.Primitives 1.0.0
+#nuget Microsoft.Extensions.Configuration 1.0.0
 nuget Microsoft.Extensions.Configuration.Json 1.0.0
-nuget Microsoft.Extensions.Configuration.FileExtensions 1.0.0
-nuget Microsoft.Extensions.FileProviders.Physical 1.0.0
-nuget Microsoft.Extensions.FileProviders.Abstractions 1.0.0
-nuget Microsoft.Extensions.FileSystemGlobbing 1.0.0
-nuget FluentValidation.WebAPI
-nuget Bogus
-nuget Serilog.Sinks.Async
-nuget Serilog.Sinks.RollingFile
+#nuget Microsoft.Extensions.Configuration.FileExtensions 1.0.0
+#nuget Microsoft.Extensions.FileProviders.Physical 1.0.0
+#nuget Microsoft.Extensions.FileProviders.Abstractions 1.0.0
+#nuget Microsoft.Extensions.FileSystemGlobbing 1.0.0
+
+# Vendors
+nuget FluentValidation.WebAPI 6.2.1
+nuget Swashbuckle.Core 5.5.3
+nuget LightInject.WebApi 1.1
+nuget SimpleHelpers.ObjectDiffPatch 1.4
+
+# Testing
+nuget NUnit 3.5
+nuget NSubstitute 1.10
+nuget FluentAssertions 4.18
+nuget AutoFixture 3.50.2
+nuget Bogus 8.0.3
+
+# Logging
+nuget Serilog.Sinks.Async 1.0.1
+nuget Serilog.Sinks.RollingFile 3.2
