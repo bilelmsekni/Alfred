@@ -10,9 +10,14 @@ nuget Swashbuckle.Core
 nuget NUnit
 nuget NSubstitute
 nuget FluentAssertions
-nuget Microsoft.Extensions.Configuration.Json
-nuget Microsoft.Extensions.Primitives
-nuget Microsoft.Extensions.Configuration.Binder
+nuget Microsoft.Extensions.Configuration.Abstractions 1.0.0
+nuget Microsoft.Extensions.Primitives 1.0.0
+nuget Microsoft.Extensions.Configuration 1.0.0
+nuget Microsoft.Extensions.Configuration.Json 1.0.0
+nuget Microsoft.Extensions.Configuration.FileExtensions 1.0.0
+nuget Microsoft.Extensions.FileProviders.Physical 1.0.0
+nuget Microsoft.Extensions.FileProviders.Abstractions 1.0.0
+nuget Microsoft.Extensions.FileSystemGlobbing 1.0.0
 nuget FluentValidation.WebAPI
 nuget Bogus
 nuget Serilog.Sinks.Async

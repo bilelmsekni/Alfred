@@ -59,6 +59,12 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alfred.Configuration\Alfred.Configuration.csproj">
+      <Project>{72A89197-AB57-4966-A23D-27575BBC5D13}</Project>
+      <Name>Alfred.Configuration</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

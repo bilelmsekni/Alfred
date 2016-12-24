@@ -10,9 +10,7 @@ namespace Alfred.Configuration
         public static T Build<T>() where T : new()
         {
             var baseConfig = Build();
-            var result = new T();
-            baseConfig.GetSection(typeof(T).Name).Bind(result);
-            return result;
+            return baseConfig.GetSection(typeof(T).Name).Get<T>();            
         }
 
         public static IConfiguration Build()
