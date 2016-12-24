@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Shared.Tests", "Alfr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Logging", "Alfred.Logging\Alfred.Logging.csproj", "{B9B331E1-74AC-4BD2-8FEA-6CBC52BB99E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Configuration.Tests", "Alfred.Configuration.Tests\Alfred.Configuration.Tests.csproj", "{B6BB7A8D-AF26-439B-AC23-EBE81341F754}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +110,10 @@ Global
 		{B9B331E1-74AC-4BD2-8FEA-6CBC52BB99E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9B331E1-74AC-4BD2-8FEA-6CBC52BB99E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9B331E1-74AC-4BD2-8FEA-6CBC52BB99E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6BB7A8D-AF26-439B-AC23-EBE81341F754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6BB7A8D-AF26-439B-AC23-EBE81341F754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6BB7A8D-AF26-439B-AC23-EBE81341F754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6BB7A8D-AF26-439B-AC23-EBE81341F754}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,5 +125,6 @@ Global
 		{37D98F19-6278-4FD1-A34E-A9DB21A9ADBA} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
 		{7404C762-F0A7-40AA-8124-D262003F9290} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
 		{B9B331E1-74AC-4BD2-8FEA-6CBC52BB99E5} = {F99603C6-DED9-466C-873A-613780D92DA3}
+		{B6BB7A8D-AF26-439B-AC23-EBE81341F754} = {E32EDA1A-507E-47E5-9637-10B1815F4F73}
 	EndGlobalSection
 EndGlobal

@@ -21,16 +21,14 @@ NUGET
       Microsoft.AspNet.WebApi.Core (>= 5.2.3 < 5.3)
       Microsoft.Owin (>= 2.0.2)
       Owin (>= 1.0)
-    Microsoft.Extensions.Configuration (1.0)
-      Microsoft.Extensions.Configuration.Abstractions (>= 1.0)
-      System.Collections (>= 4.0.11)
-      System.Diagnostics.Debug (>= 4.0.11)
-      System.IO (>= 4.1)
-      System.Resources.ResourceManager (>= 4.0.1)
-      System.Runtime.Extensions (>= 4.1)
-      System.Runtime.InteropServices (>= 4.1)
-      System.Threading (>= 4.0.11)
-    Microsoft.Extensions.Configuration.Abstractions (1.0)
+    Microsoft.Extensions.Configuration (1.1)
+      Microsoft.Extensions.Configuration.Abstractions (>= 1.1)
+      NETStandard.Library (>= 1.6.1)
+    Microsoft.Extensions.Configuration.Abstractions (1.1)
+    Microsoft.Extensions.Configuration.Binder (1.1)
+      Microsoft.Extensions.Configuration (>= 1.1)
+      NETStandard.Library (>= 1.6.1)
+      System.ComponentModel.TypeConverter (>= 4.3)
     Microsoft.Extensions.Configuration.FileExtensions (1.0) - framework: net461
       Microsoft.Extensions.Configuration (>= 1.0) - framework: net461
       Microsoft.Extensions.FileProviders.Physical (>= 1.0) - framework: net461
@@ -53,6 +51,29 @@ NUGET
     Microsoft.Owin.Host.SystemWeb (3.0.1)
       Microsoft.Owin (>= 3.0.1)
       Owin (>= 1.0)
+    Microsoft.Win32.Primitives (4.3) - framework: net461
+    NETStandard.Library (1.6.1)
+      Microsoft.Win32.Primitives (>= 4.3) - framework: net461
+      System.AppContext (>= 4.3) - framework: net461
+      System.Collections.Concurrent (>= 4.3)
+      System.Console (>= 4.3) - framework: net461
+      System.Diagnostics.Tracing (>= 4.3)
+      System.Globalization.Calendars (>= 4.3) - framework: net461
+      System.IO.Compression (>= 4.3)
+      System.IO.Compression.ZipFile (>= 4.3) - framework: net461
+      System.IO.FileSystem (>= 4.3) - framework: net461
+      System.IO.FileSystem.Primitives (>= 4.3) - framework: net461
+      System.Net.Http (>= 4.3)
+      System.Net.Sockets (>= 4.3) - framework: net461
+      System.Runtime.Handles (>= 4.3) - framework: net461
+      System.Runtime.InteropServices (>= 4.3)
+      System.Runtime.InteropServices.RuntimeInformation (>= 4.3)
+      System.Runtime.Numerics (>= 4.3)
+      System.Security.Cryptography.Algorithms (>= 4.3) - framework: net461
+      System.Security.Cryptography.Encoding (>= 4.3) - framework: net461
+      System.Security.Cryptography.Primitives (>= 4.3) - framework: net461
+      System.Security.Cryptography.X509Certificates (>= 4.3) - framework: net461
+      System.Threading.Timer (>= 4.3) - framework: net461
     Newtonsoft.Json (9.0.1)
     NSubstitute (1.10)
     NUnit (3.4.1)
@@ -68,10 +89,33 @@ NUGET
       Newtonsoft.Json (>= 6.0.1)
     Swashbuckle.Core (5.3.2)
       Microsoft.AspNet.WebApi.Core (>= 4.0.20710)
-    System.Collections (4.0.11)
-    System.Diagnostics.Debug (4.0.11)
-    System.IO (4.1)
-    System.Resources.ResourceManager (4.0.1)
-    System.Runtime.Extensions (4.1)
-    System.Runtime.InteropServices (4.1)
-    System.Threading (4.0.11)
+    System.AppContext (4.3) - framework: net461
+    System.Collections.Concurrent (4.3)
+    System.ComponentModel.Primitives (4.3) - framework: net45
+    System.ComponentModel.TypeConverter (4.3)
+      System.ComponentModel.Primitives (>= 4.3) - framework: net45
+    System.Console (4.3) - framework: net461
+    System.Diagnostics.DiagnosticSource (4.3) - framework: net461
+    System.Diagnostics.Tracing (4.3)
+    System.Globalization.Calendars (4.3) - framework: net461
+    System.IO.Compression (4.3)
+    System.IO.Compression.ZipFile (4.3) - framework: net461
+    System.IO.FileSystem (4.3) - framework: net461
+      System.IO.FileSystem.Primitives (>= 4.3) - framework: net461
+    System.IO.FileSystem.Primitives (4.3)
+    System.Net.Http (4.3)
+      System.Diagnostics.DiagnosticSource (>= 4.3) - framework: net461
+      System.Security.Cryptography.X509Certificates (>= 4.3) - framework: net461
+    System.Net.Sockets (4.3) - framework: net461
+    System.Runtime.Handles (4.3) - framework: net461
+    System.Runtime.InteropServices (4.3)
+    System.Runtime.InteropServices.RuntimeInformation (4.3)
+    System.Runtime.Numerics (4.3)
+    System.Security.Cryptography.Algorithms (4.3) - framework: net461
+      System.Security.Cryptography.Primitives (>= 4.3) - framework: net461
+    System.Security.Cryptography.Encoding (4.3) - framework: net461
+    System.Security.Cryptography.Primitives (4.3)
+    System.Security.Cryptography.X509Certificates (4.3)
+      System.Security.Cryptography.Algorithms (>= 4.3) - framework: net461
+      System.Security.Cryptography.Encoding (>= 4.3) - framework: net461
+    System.Threading.Timer (4.3) - framework: net461

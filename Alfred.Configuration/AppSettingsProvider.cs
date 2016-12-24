@@ -7,9 +7,17 @@ namespace Alfred.Configuration
 {
     public static class AppSettingsProvider
     {
+        public static T Build<T>() where T : new()
+        {
+            var baseConfig = Build();
+            var result = new T();
+            baseConfig.GetSection(typeof(T).Name).Bind(result);
+            return result;
+        }
+
         public static IConfiguration Build()
         {
-            var environment = ConfigurationManager.AppSettings["Environment"];
+            var environment = ConfigurationManager.AppSettings["Environment"] ?? "Debug";
             return Build(environment);
         }
 
@@ -22,6 +30,6 @@ namespace Alfred.Configuration
                 .AddJsonFile(path)
                 .AddJsonFile($"AppSettings.{environment}.json")
                 .Build();
-        }        
+        }
     }
 }
