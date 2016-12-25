@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
 using Alfred.Dal.Entities.Base;
-using Alfred.Dal.Entities.Member;
+using Alfred.Dal.Entities.Members;
 using Alfred.Dal.Mappers;
 using Alfred.Domain.Repositories;
 using Alfred.Models.Members;
@@ -30,7 +30,7 @@ namespace Alfred.Dal.Repositories
                 Links = CreateLinks(criteria.Page, criteria.PageSize, membersCount),
                 Results = await CreateMembers(criteria, membersCount).ConfigureAwait(false)
             };
-                        
+
             return _modelFactory.CreateMemberResponseModel(memberResponse);
         }
 

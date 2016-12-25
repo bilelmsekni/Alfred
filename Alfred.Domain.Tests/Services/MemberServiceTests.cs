@@ -87,7 +87,7 @@ namespace Alfred.Domain.Tests.Services
         public void Should_not_create_member_when_member_is_null()
         {
             var fakeRepo = Substitute.For<IMemberRepository>();
-            
+
             var memberService = new MemberService(fakeRepo);
 
             var result = memberService.CreateMember(null).Result;

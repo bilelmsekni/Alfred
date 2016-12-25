@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Artifacts;
 using Alfred.Dal.Entities.Base;
-using Alfred.Dal.Entities.Community;
-using Alfred.Dal.Entities.Member;
+using Alfred.Dal.Entities.Communities;
+using Alfred.Dal.Entities.Members;
 using Alfred.Models.Artifacts;
 using Alfred.Models.Base;
 using Alfred.Models.Communities;

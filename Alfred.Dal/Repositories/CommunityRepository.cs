@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
 using Alfred.Dal.Entities.Base;
-using Alfred.Dal.Entities.Community;
+using Alfred.Dal.Entities.Communities;
 using Alfred.Dal.Mappers;
 using Alfred.Domain.Repositories;
 using Alfred.Models.Communities;

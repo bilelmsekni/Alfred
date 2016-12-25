@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Alfred.Dal.Entities.Community;
 using Alfred.Domain.Repositories;
 using Alfred.Domain.Services;
 using Alfred.Models.Communities;

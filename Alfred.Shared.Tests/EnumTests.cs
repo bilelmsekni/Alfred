@@ -35,7 +35,7 @@ namespace Alfred.Shared.Tests
         [Test]
         public void Should_communityRole_have_no_regerssion()
         {
-            ((int)CommunityRole.Member).Should().Be(0);
+            ((int)CommunityRole.Contributor).Should().Be(0);
             ((int)CommunityRole.Leader).Should().Be(1);
             ((int)CommunityRole.Manager).Should().Be(2);    
             ((int)CommunityRole.Admin).Should().Be(3);

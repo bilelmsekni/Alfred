@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Alfred.Dal.Entities.Communities;
 using Alfred.Shared.Enums;
 
-namespace Alfred.Dal.Entities.Member
+namespace Alfred.Dal.Entities.Members
 {
     public class Member
     {
@@ -11,7 +12,7 @@ namespace Alfred.Dal.Entities.Member
         public string LastName { get; set; }
         public string Email { get; set; }
         public CommunityRole Role { get; set; }
-        public IList<int> CommunityIds { get; set; }
+        public IList<Community> Communities { get; set; }
         public DateTime CreationDate { get; set; }
         public string Job { get; set; }
         public string ImageUrl { get; set; }

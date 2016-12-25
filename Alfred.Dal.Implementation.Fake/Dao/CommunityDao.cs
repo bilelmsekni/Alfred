@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
-using Alfred.Dal.Entities.Community;
+using Alfred.Dal.Entities.Communities;
 using Alfred.Dal.Implementation.Fake.Database;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Dal.Implementation.Fake.Filters;

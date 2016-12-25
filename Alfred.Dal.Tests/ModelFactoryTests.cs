@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Artifacts;
 using Alfred.Dal.Entities.Base;
-using Alfred.Dal.Entities.Community;
-using Alfred.Dal.Entities.Member;
+using Alfred.Dal.Entities.Communities;
+using Alfred.Dal.Entities.Members;
 using Alfred.Dal.Mappers;
 using Alfred.Models.Artifacts;
 using Alfred.Models.Communities;
@@ -60,6 +60,7 @@ namespace Alfred.Dal.Tests
         public void Should_map_MemberEntity_to_MemberModel()
         {
             var member = _fixture.Build<Member>()
+                .With(m => m.Communities, _fixture.CreateMany<Community>(5).ToList())
                 .Create();
             var result = _modelFactory.CreateMemberModel(member);
             result.Email.Should().Be(member.Email);
@@ -71,6 +72,7 @@ namespace Alfred.Dal.Tests
             result.CreationDate.Should().Be(member.CreationDate);
             result.Gender.Should().Be(member.Gender);
             result.ImageUrl.Should().Be(member.ImageUrl);
+            result.Communities.Count().Should().Be(member.Communities.Count);
         }
 
         [Test]

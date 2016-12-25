@@ -2,7 +2,7 @@ namespace Alfred.Shared.Enums
 {
     public enum CommunityRole
     {        
-        Member,
+        Contributor,
         Leader,
         Manager,
         Admin

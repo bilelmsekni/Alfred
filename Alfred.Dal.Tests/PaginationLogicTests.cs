@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Artifacts;
 using FluentAssertions;
 using NUnit.Framework;
 using Ploeh.AutoFixture;

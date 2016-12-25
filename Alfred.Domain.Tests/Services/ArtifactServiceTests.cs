@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Artifacts;
 using Alfred.Domain.Repositories;
 using Alfred.Domain.Services;
 using Alfred.Models.Artifacts;

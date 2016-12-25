@@ -1,5 +1,5 @@
 
-namespace Alfred.Dal.Entities.Community
+namespace Alfred.Dal.Entities.Communities
 {
     public class Community
     {

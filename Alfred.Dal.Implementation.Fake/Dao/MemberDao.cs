@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alfred.Dal.Daos;
-using Alfred.Dal.Entities.Member;
+using Alfred.Dal.Entities.Members;
 using Alfred.Dal.Implementation.Fake.Database;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Dal.Implementation.Fake.Filters;
@@ -12,7 +12,7 @@ using Alfred.Dal.Implementation.Fake.Mappers;
 namespace Alfred.Dal.Implementation.Fake.Dao
 {
     public class MemberDao : IMemberDao
-    {        
+    {
         private readonly IEntityFactory _entityFactory;
 
         public MemberDao(IEntityFactory entityFactory)
@@ -22,15 +22,60 @@ namespace Alfred.Dal.Implementation.Fake.Dao
 
         public async Task<IEnumerable<Member>> GetMembers(MemberCriteria criteria)
         {
-            var dtos = await Task.Run(() => FakeMembersDb.Members).ConfigureAwait(false);
-            Func<MemberDto, bool> criteriafilters = dto => true;
+            var dtos = await Task.FromResult(FakeMembersDb.Members).ConfigureAwait(false);
 
-            return _entityFactory.TransformToMemberEntities(dtos.Where(criteriafilters
+            Func<MemberDto, bool> criteriafilters = dto => true;
+            var filteredDtos = dtos.Where(criteriafilters
                 .FilterOnIds(criteria.Ids)
                 .FilterOnCommunityId(criteria.CommunityId)
                 .FilterOnEmail(criteria.Email)
                 .FilterOnName(criteria.Name)
-                .FilterOnRole(criteria.Role)));                
+                .FilterOnRole(criteria.Role));
+
+            return await ConvertDtos(filteredDtos).ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<Member>> ConvertDtos(IEnumerable<MemberDto> filteredDtos)
+        {
+            var members = GroupMembers(filteredDtos);
+            var memberCommunities = await GroupMemberCommunities(filteredDtos).ConfigureAwait(false);
+
+            var results = new List<Member>();
+            foreach (var memberId in members.Keys)
+            {
+                results.Add(_entityFactory.TransformToMemberEntity(members[memberId], memberCommunities[memberId]));
+            }
+            return results;
+        }
+
+        private async Task<Dictionary<int, List<CommunityDto>>> GroupMemberCommunities(IEnumerable<MemberDto> members)
+        {
+            var communities = await Task.FromResult(FakeCommunitiesDb.Communities).ConfigureAwait(false);
+
+            var result = new Dictionary<int, List<CommunityDto>>();
+
+            foreach (var member in members)
+            {
+                if (result.ContainsKey(member.Id))
+                {
+                    result[member.Id].AddRange(communities.Where(c => c.Id == member.CommunityId));
+                }
+                else
+                {
+                    result[member.Id] = communities.Where(c => c.Id == member.CommunityId).ToList();
+                }
+            }
+            return result;
+        }
+
+        private Dictionary<int, MemberDto> GroupMembers(IEnumerable<MemberDto> members)
+        {
+            var result = new Dictionary<int, MemberDto>();
+            foreach (var member in members)
+            {
+                if (!result.ContainsKey(member.Id)) result[member.Id] = member;
+            }
+            return result;
         }
 
         public async Task<int> SaveMember(Member member)
@@ -43,14 +88,18 @@ namespace Alfred.Dal.Implementation.Fake.Dao
             }).ConfigureAwait(false);
         }
 
-        public async Task<Member> GetMember(string email)
-        {
-            return _entityFactory.TransformToMemberEntity(await Task.Run(() => FakeMembersDb.Members.FirstOrDefault(x => x.Email.ToLowerInvariant() == email.ToLowerInvariant())).ConfigureAwait(false));
-        }
-
         public async Task<Member> GetMember(int id)
         {
-            return _entityFactory.TransformToMemberEntity(await Task.Run(() => FakeMembersDb.Members.FirstOrDefault(x => x.Id == id)).ConfigureAwait(false));
+            var dtos = await Task.FromResult(FakeMembersDb.Members.Where(x => x.Id == id)).ConfigureAwait(false);
+
+            return (await ConvertDtos(dtos).ConfigureAwait(false)).FirstOrDefault();
+        }
+
+        public async Task<Member> GetMember(string email)
+        {
+            var dtos = await Task.FromResult(FakeMembersDb.Members.Where(x => x.Email == email)).ConfigureAwait(false);
+
+            return (await ConvertDtos(dtos).ConfigureAwait(false)).FirstOrDefault();
         }
 
         public async Task UpdateMember(Member member)

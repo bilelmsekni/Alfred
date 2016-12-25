@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using Alfred.Dal.Daos;
-using Alfred.Dal.Entities.Community;
+using Alfred.Dal.Entities.Communities;
 using Alfred.Dal.Mappers;
 using Alfred.Dal.Repositories;
 using Alfred.Models.Communities;

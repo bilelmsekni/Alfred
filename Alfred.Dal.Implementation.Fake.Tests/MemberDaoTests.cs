@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alfred.Dal.Entities.Member;
+using Alfred.Dal.Entities.Members;
 using Alfred.Dal.Implementation.Fake.Dao;
+using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Dal.Implementation.Fake.Mappers;
 using Alfred.Shared.Enums;
 using FluentAssertions;
 using NUnit.Framework;
+using Ploeh.AutoFixture;
 
 namespace Alfred.Dal.Implementation.Fake.Tests
 {
@@ -13,10 +15,12 @@ namespace Alfred.Dal.Implementation.Fake.Tests
     public class MemberDaoTests
     {
         private MemberDao _memberDao;
+        private Fixture _fixture;
 
         [SetUp]
         public void Setup()
         {
+            _fixture = new Fixture();
             _memberDao = new MemberDao(new EntityFactory());
         }
 
@@ -55,7 +59,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
 
             var results = _memberDao.GetMembers(criteria).Result;
             results.Should().NotBeEmpty();
-            results.Should().OnlyContain(r => r.CommunityIds.Contains(criteria.CommunityId.Value));
+            results.Should().OnlyContain(r => r.Communities.All(c => c.Id == criteria.CommunityId.Value));
         }
 
         [Test]
@@ -125,7 +129,7 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         {
             var criteria = new MemberCriteria
             {
-                Role = CommunityRole.Member
+                Role = CommunityRole.Contributor
             };
 
             var results = _memberDao.GetMembers(criteria).Result;
@@ -143,6 +147,34 @@ namespace Alfred.Dal.Implementation.Fake.Tests
 
             var results = _memberDao.GetMembers(criteria).Result;
             results.Should().BeEmpty();
+        }
+
+        [Test]
+        public void Should_map_MemberDtos_to_MemberEntities()
+        {
+
+            var memberAtCommunity3 = _fixture.Build<MemberDto>()
+                .With(x => x.CommunityId, 3)
+                .Create();
+            var memberAtCommunity2 = _fixture.Build<MemberDto>()
+                .With(x => x.Id, memberAtCommunity3.Id)
+                .With(x => x.CommunityId, 2)
+                .With(x => x.Email, memberAtCommunity3.Email)
+                .With(x => x.FirstName, memberAtCommunity3.FirstName)
+                .With(x => x.LastName, memberAtCommunity3.LastName)
+                .With(x => x.Role, memberAtCommunity3.Role)
+                .Create();
+
+            var members = new List<MemberDto> { memberAtCommunity3, memberAtCommunity2 };
+            var result = _memberDao.ConvertDtos(members).Result;
+            result.Count().Should().Be(1);
+            result.First().Email.Should().Be(memberAtCommunity3.Email);
+            result.First().FirstName.Should().Be(memberAtCommunity3.FirstName);
+            result.First().LastName.Should().Be(memberAtCommunity3.LastName);
+            result.First().Role.Should().Be((CommunityRole)memberAtCommunity3.Role);
+            result.First().Id.Should().Be(memberAtCommunity3.Id);
+            result.First().Communities.Should().Contain(c => c.Id == memberAtCommunity3.CommunityId);
+            result.First().Communities.Should().Contain(c => c.Id == memberAtCommunity2.CommunityId);
         }
     }
 }

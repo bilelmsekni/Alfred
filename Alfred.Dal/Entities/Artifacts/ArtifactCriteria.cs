@@ -2,7 +2,7 @@
 using Alfred.Dal.Entities.Base;
 using Alfred.Shared.Enums;
 
-namespace Alfred.Dal.Entities.Artifact
+namespace Alfred.Dal.Entities.Artifacts
 {
     public class ArtifactCriteria : BaseCriteria
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Web.Http.Routing;
 using Alfred.Constants;
-using Alfred.Dal.Entities.Artifact;
+using Alfred.Dal.Entities.Artifacts;
 using Alfred.Dal.Entities.Base;
-using Alfred.Dal.Entities.Community;
-using Alfred.Dal.Entities.Member;
+using Alfred.Dal.Entities.Communities;
+using Alfred.Dal.Entities.Members;
 using Alfred.Models.Artifacts;
 using Alfred.Models.Base;
 using Alfred.Models.Communities;
@@ -53,7 +53,8 @@ namespace Alfred.Dal.Mappers
                     CreationDate = member.CreationDate,
                     Job = member.Job,
                     Gender = member.Gender,
-                    ImageUrl = member.ImageUrl
+                    ImageUrl = member.ImageUrl,
+                    Communities = member.Communities.Select(CreateCommunityModel)
                 };
             }
             return null;
@@ -128,7 +129,7 @@ namespace Alfred.Dal.Mappers
                 FirstName = updateMemberModel.FirstName,
                 LastName = updateMemberModel.LastName,
                 Role = updateMemberModel.Role,
-                CommunityIds = originalMember.CommunityIds                
+                Communities = originalMember.Communities                
             };
             return _objDiffManager.UpdateObject(originalMember, newMember);
         }

@@ -1,6 +1,6 @@
 using Alfred.Shared.Enums;
 
-namespace Alfred.Dal.Entities.Artifact
+namespace Alfred.Dal.Entities.Artifacts
 {
     public class Artifact
     {

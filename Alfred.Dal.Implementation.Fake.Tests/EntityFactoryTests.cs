@@ -28,45 +28,18 @@ namespace Alfred.Dal.Implementation.Fake.Tests
         {
             var member = _fixture.Build<MemberDto>()
                 .Create();
-            var result = _entityFactory.TransformToMemberEntity(member);
+            var communities = _fixture.CreateMany<CommunityDto>(3);
+            var result = _entityFactory.TransformToMemberEntity(member, communities);
             result.Email.Should().Be(member.Email);
             result.FirstName.Should().Be(member.FirstName);
             result.LastName.Should().Be(member.LastName);
             result.Role.Should().Be((CommunityRole)member.Role);
             result.Id.Should().Be(member.Id);
-            result.CommunityIds.Should().Contain(member.CommunityId);
+            result.Communities.Count.Should().Be(communities.Count());
             result.Job.Should().Be(member.Job);
             result.CreationDate.Should().Be(member.CreationDate);
             result.Gender.Should().Be(member.Gender);
             result.ImageUrl.Should().Be(member.ImageUrl);
-        }
-
-        [Test]
-        public void Should_map_MemberDtos_to_MemberEntities()
-        {
-
-            var memberAtCommunity3 = _fixture.Build<MemberDto>()
-                .With(x => x.CommunityId, 3)
-                .Create();
-            var memberAtCommunity4 = _fixture.Build<MemberDto>()
-                .With(x => x.Id, memberAtCommunity3.Id)
-                .With(x => x.CommunityId, 4)
-                .With(x => x.Email, memberAtCommunity3.Email)
-                .With(x => x.FirstName, memberAtCommunity3.FirstName)
-                .With(x => x.LastName, memberAtCommunity3.LastName)
-                .With(x => x.Role, memberAtCommunity3.Role)
-                .Create();
-
-            var members = new List<MemberDto> { memberAtCommunity3, memberAtCommunity4 };
-            var result = _entityFactory.TransformToMemberEntities(members);
-            result.Count().Should().Be(1);
-            result.First().Email.Should().Be(memberAtCommunity3.Email);
-            result.First().FirstName.Should().Be(memberAtCommunity3.FirstName);
-            result.First().LastName.Should().Be(memberAtCommunity3.LastName);
-            result.First().Role.Should().Be((CommunityRole)memberAtCommunity3.Role);
-            result.First().Id.Should().Be(memberAtCommunity3.Id);
-            result.First().CommunityIds.Should().Contain(memberAtCommunity3.CommunityId);
-            result.First().CommunityIds.Should().Contain(memberAtCommunity4.CommunityId);
         }
 
         [Test]

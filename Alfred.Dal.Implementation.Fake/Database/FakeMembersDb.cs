@@ -12,8 +12,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
     {
         private static readonly List<string> Jobs = new List<string>
         {
-            "Developer",
-            "Manager",
+            "Developer",            
             "Designer",
             "Lead Developer",
             "Business Analyst",
@@ -22,11 +21,12 @@ namespace Alfred.Dal.Implementation.Fake.Database
             "Agile Coach"
         };
 
-        private static readonly List<string> imgs = new List<string>
+        private static readonly List<string> Imgs = new List<string>
         {
             "assets/img/user1-128x128.jpg",
             "assets/img/user2-128x128.jpg",
             "assets/img/user3-128x128.jpg",
+
             "assets/img/user4-128x128.jpg",
             "assets/img/user5-128x128.jpg",
             "assets/img/user6-128x128.jpg",
@@ -50,7 +50,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
                 .RuleFor(m => m.Email, (f, u) => u.FirstName + "." + u.LastName + "@Alfred.com")
                 .RuleFor(m => m.Job, f => f.PickRandom(Jobs))
                 .RuleFor(m => m.CreationDate, f => f.Date.Recent(90))
-                .RuleFor(m => m.ImageUrl, (f, u) => f.PickRandom(imgs));
+                .RuleFor(m => m.ImageUrl, (f, u) => f.PickRandom(Imgs));
 
 
             var alfred = new MemberDto
@@ -63,7 +63,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
                 Email = "Alfred.Reacher@Alfred.com",
                 Gender = 0,
                 CreationDate = DateTime.Now,
-                ImageUrl = imgs.First(),
+                ImageUrl = Imgs.First(),
                 Job = Jobs.First()
             };
 

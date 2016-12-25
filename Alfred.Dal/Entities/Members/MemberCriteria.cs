@@ -2,7 +2,7 @@
 using Alfred.Dal.Entities.Base;
 using Alfred.Shared.Enums;
 
-namespace Alfred.Dal.Entities.Member
+namespace Alfred.Dal.Entities.Members
 {
     public class MemberCriteria : BaseCriteria
     {

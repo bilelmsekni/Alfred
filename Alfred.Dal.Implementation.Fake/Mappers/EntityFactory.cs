@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alfred.Dal.Entities.Artifact;
-using Alfred.Dal.Entities.Community;
-using Alfred.Dal.Entities.Member;
+using Alfred.Dal.Entities.Artifacts;
+using Alfred.Dal.Entities.Communities;
+using Alfred.Dal.Entities.Members;
 using Alfred.Dal.Implementation.Fake.EntityDtos;
 using Alfred.Shared.Enums;
 
 namespace Alfred.Dal.Implementation.Fake.Mappers
-{    
+{
     public class EntityFactory : IEntityFactory
     {
         public ArtifactDto TransformToArtifactDto(Artifact artifact)
         {
             if (artifact == null) return null;
-            
+
             return new ArtifactDto
             {
                 Id = artifact.Id,
@@ -24,7 +24,7 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
                 Type = (int)artifact.Type,
                 MemberId = artifact.MemberId,
                 CommunityId = artifact.CommunityId
-            };            
+            };
         }
 
 
@@ -67,24 +67,7 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
             };
         }
 
-        public IEnumerable<Member> TransformToMemberEntities(IEnumerable<MemberDto> memberDtos)
-        {
-            var members = new Dictionary<int, Member>();
-            foreach (var dto in memberDtos)
-            {
-                if (members.ContainsKey(dto.Id))
-                {
-                    members[dto.Id].CommunityIds.Add(dto.CommunityId);
-                }
-                else
-                {
-                    members.Add(dto.Id, TransformToMemberEntity(dto));
-                }
-            }
-            return members.Values.ToList();
-        }
-
-        public Member TransformToMemberEntity(MemberDto memberDto)
+        public Member TransformToMemberEntity(MemberDto memberDto, IEnumerable<CommunityDto> memberCommunities)
         {
             if (memberDto == null) return null;
             return new Member
@@ -94,7 +77,7 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
                 FirstName = memberDto.FirstName,
                 LastName = memberDto.LastName,
                 Role = (CommunityRole)memberDto.Role,
-                CommunityIds = new List<int> { memberDto.CommunityId},
+                Communities = memberCommunities.Select(TransformToCommunityEntity).ToList(),
                 CreationDate = memberDto.CreationDate,
                 Job = memberDto.Job,
                 Gender = memberDto.Gender,
