@@ -33,8 +33,8 @@ namespace Alfred.WebApi.Controllers
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IEnumerable<MemberModel>))]
-        public async Task<IHttpActionResult> GetMembers(string ids = null, string email = null, 
-            string name = null, CommunityRole? role = null,int? communityId = null, int page = 1, int pageSize = 20)
+        public async Task<IHttpActionResult> GetMembers(string ids = null, string email = null,
+            string name = null, CommunityRole? role = null, int? communityId = null, int page = 1, int pageSize = 20)
         {
             var memberCriteria = new MemberCriteriaModel
             {

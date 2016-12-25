@@ -67,6 +67,10 @@ namespace Alfred.Dal.Tests
             result.LastName.Should().Be(member.LastName);
             result.Role.Should().Be(member.Role);
             result.Id.Should().Be(member.Id);
+            result.Job.Should().Be(member.Job);
+            result.CreationDate.Should().Be(member.CreationDate);
+            result.Gender.Should().Be(member.Gender);
+            result.ImageUrl.Should().Be(member.ImageUrl);
         }
 
         [Test]

@@ -35,6 +35,10 @@ namespace Alfred.Dal.Implementation.Fake.Tests
             result.Role.Should().Be((CommunityRole)member.Role);
             result.Id.Should().Be(member.Id);
             result.CommunityIds.Should().Contain(member.CommunityId);
+            result.Job.Should().Be(member.Job);
+            result.CreationDate.Should().Be(member.CreationDate);
+            result.Gender.Should().Be(member.Gender);
+            result.ImageUrl.Should().Be(member.ImageUrl);
         }
 
         [Test]

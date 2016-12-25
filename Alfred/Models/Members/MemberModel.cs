@@ -1,3 +1,4 @@
+using System;
 using Alfred.Shared.Enums;
 using Microsoft.Build.Framework;
 
@@ -15,5 +16,10 @@ namespace Alfred.Models.Members
         public string LastName { get; set; }
         [Required]
         public CommunityRole Role { get; set; }
+
+        public DateTime CreationDate { get; set; }
+        public string Job { get; set; }
+        public string ImageUrl { get; set; }
+        public int Gender { get; set; }
     }
 }

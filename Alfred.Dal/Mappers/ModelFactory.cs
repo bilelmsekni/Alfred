@@ -49,7 +49,11 @@ namespace Alfred.Dal.Mappers
                     Email = member.Email,
                     FirstName = member.FirstName,
                     LastName = member.LastName,
-                    Role = member.Role
+                    Role = member.Role,
+                    CreationDate = member.CreationDate,
+                    Job = member.Job,
+                    Gender = member.Gender,
+                    ImageUrl = member.ImageUrl
                 };
             }
             return null;
@@ -124,7 +128,7 @@ namespace Alfred.Dal.Mappers
                 FirstName = updateMemberModel.FirstName,
                 LastName = updateMemberModel.LastName,
                 Role = updateMemberModel.Role,
-                CommunityIds = originalMember.CommunityIds
+                CommunityIds = originalMember.CommunityIds                
             };
             return _objDiffManager.UpdateObject(originalMember, newMember);
         }

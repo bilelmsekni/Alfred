@@ -94,7 +94,11 @@ namespace Alfred.Dal.Implementation.Fake.Mappers
                 FirstName = memberDto.FirstName,
                 LastName = memberDto.LastName,
                 Role = (CommunityRole)memberDto.Role,
-                CommunityIds = new List<int> { memberDto.CommunityId}
+                CommunityIds = new List<int> { memberDto.CommunityId},
+                CreationDate = memberDto.CreationDate,
+                Job = memberDto.Job,
+                Gender = memberDto.Gender,
+                ImageUrl = memberDto.ImageUrl
             };
         }
 
