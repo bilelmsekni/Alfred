@@ -12,7 +12,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
     {
         private static readonly List<string> Jobs = new List<string>
         {
-            "Developer",            
+            "Developer",
             "Designer",
             "Lead Developer",
             "Business Analyst",
@@ -26,7 +26,6 @@ namespace Alfred.Dal.Implementation.Fake.Database
             "assets/img/user1-128x128.jpg",
             "assets/img/user2-128x128.jpg",
             "assets/img/user3-128x128.jpg",
-
             "assets/img/user4-128x128.jpg",
             "assets/img/user5-128x128.jpg",
             "assets/img/user6-128x128.jpg",
@@ -38,7 +37,7 @@ namespace Alfred.Dal.Implementation.Fake.Database
 
         private static List<MemberDto> GetMembers(int nb)
         {
-            var memberId = 2;
+            var memberId = 1;
 
             var memberRules = new Faker<MemberDto>()
                 .RuleFor(m => m.Id, f => memberId++)
