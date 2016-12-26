@@ -1,4 +1,5 @@
-FRAMEWORK: NET45, NET461
+STRATEGY: MIN
+FRAMEWORK: NET461
 NUGET
   remote: https://www.nuget.org/api/v2
     AutoFixture (3.50.2)
@@ -9,7 +10,7 @@ NUGET
     FluentValidation.WebAPI (6.2.1)
       FluentValidation (>= 6.2.1)
       Microsoft.AspNet.WebApi.Core (>= 5.1 < 5.3)
-    LightInject (4.1.5)
+    LightInject (4.1)
     LightInject.WebApi (1.1)
       LightInject (>= 4.1)
     Microsoft.AspNet.Cors (5.2.3)
@@ -32,16 +33,16 @@ NUGET
       System.Threading (>= 4.0.11)
     Microsoft.Extensions.Configuration.Abstractions (1.0)
     Microsoft.Extensions.Configuration.FileExtensions (1.0)
-      Microsoft.Extensions.Configuration (>= 1.0) - framework: net461
-      Microsoft.Extensions.FileProviders.Physical (>= 1.0) - framework: net461
+      Microsoft.Extensions.Configuration (>= 1.0)
+      Microsoft.Extensions.FileProviders.Physical (>= 1.0)
     Microsoft.Extensions.Configuration.Json (1.0)
-      Microsoft.Extensions.Configuration (>= 1.0) - framework: net461
-      Microsoft.Extensions.Configuration.FileExtensions (>= 1.0) - framework: net461
-      Newtonsoft.Json (>= 9.0.1) - framework: net461
+      Microsoft.Extensions.Configuration (>= 1.0)
+      Microsoft.Extensions.Configuration.FileExtensions (>= 1.0)
+      Newtonsoft.Json (>= 9.0.1)
     Microsoft.Extensions.FileProviders.Abstractions (1.0)
     Microsoft.Extensions.FileProviders.Physical (1.0)
-      Microsoft.Extensions.FileProviders.Abstractions (>= 1.0) - framework: net461
-      Microsoft.Extensions.FileSystemGlobbing (>= 1.0) - framework: net461
+      Microsoft.Extensions.FileProviders.Abstractions (>= 1.0)
+      Microsoft.Extensions.FileSystemGlobbing (>= 1.0)
     Microsoft.Extensions.FileSystemGlobbing (1.0)
     Microsoft.Extensions.Primitives (1.0)
     Microsoft.Owin (3.0.1)
@@ -60,7 +61,7 @@ NUGET
     Serilog (2.3)
     Serilog.Sinks.Async (1.0.1)
       Serilog (>= 2.1)
-    Serilog.Sinks.File (3.1.1)
+    Serilog.Sinks.File (3.1)
       Serilog (>= 2.3)
     Serilog.Sinks.RollingFile (3.2)
       Serilog.Sinks.File (>= 3.1)
@@ -68,10 +69,10 @@ NUGET
       Newtonsoft.Json (>= 6.0.1)
     Swashbuckle.Core (5.5.3)
       Microsoft.AspNet.WebApi.Core (>= 4.0.20710)
-    System.Collections (4.3)
-    System.Diagnostics.Debug (4.3)
-    System.IO (4.3)
-    System.Resources.ResourceManager (4.3)
-    System.Runtime.Extensions (4.3)
-    System.Runtime.InteropServices (4.3)
-    System.Threading (4.3)
+    System.Collections (4.0.11)
+    System.Diagnostics.Debug (4.0.11)
+    System.IO (4.1)
+    System.Resources.ResourceManager (4.0.1)
+    System.Runtime.Extensions (4.1)
+    System.Runtime.InteropServices (4.1)
+    System.Threading (4.0.11)

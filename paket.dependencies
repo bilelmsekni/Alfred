@@ -1,18 +1,15 @@
+strategy: min
 source https://nuget.org/api/v2
-framework: net45, net461
+framework: net461
 
 # WebApi
 nuget Microsoft.Owin.Cors 3.0.1
 nuget Microsoft.Owin.Host.SystemWeb 3.0.1
 nuget Microsoft.AspNet.WebApi.Owin 5.2.3
+nuget Microsoft.AspNet.Cors 5.2.3
 nuget Microsoft.Extensions.Configuration.Json 1.0.0
 nuget Microsoft.Extensions.Configuration.FileExtensions 1.0.0
-nuget Microsoft.Extensions.Configuration.Abstractions 1.0.0
 nuget Microsoft.Extensions.Primitives 1.0.0
-nuget Microsoft.Extensions.Configuration 1.0.0
-nuget Microsoft.Extensions.FileProviders.Physical 1.0.0
-nuget Microsoft.Extensions.FileProviders.Abstractions 1.0.0
-nuget Microsoft.Extensions.FileSystemGlobbing 1.0.0
 
 # Vendors
 nuget FluentValidation.WebAPI 6.2.1
