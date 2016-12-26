@@ -6,9 +6,7 @@ framework: net461
 nuget Microsoft.Owin.Cors 3.0.1
 nuget Microsoft.Owin.Host.SystemWeb 3.0.1
 nuget Microsoft.AspNet.WebApi.Owin 5.2.3
-nuget Microsoft.AspNet.Cors 5.2.3
 nuget Microsoft.Extensions.Configuration.Json 1.0.0
-nuget Microsoft.Extensions.Configuration.FileExtensions 1.0.0
 nuget Microsoft.Extensions.Primitives 1.0.0
 
 # Vendors
