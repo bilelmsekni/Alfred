@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Http;
-using Alfred.Configuration;
 using Alfred.Dal.Daos;
 using Alfred.Dal.Implementation.Fake.Dao;
 using Alfred.Dal.Implementation.Fake.Mappers;
@@ -48,9 +47,9 @@ namespace Alfred.IoC
             container.Register<IArtifactDao, ArtifactDao>();
             container.Register<IMemberDao, MemberDao>();
             container.Register<ICommunityDao, CommunityDao>();
-            container.RegisterInstance<ObjectDifferenceManager>(new ObjectDifferenceManager());            
+            container.RegisterInstance<ObjectDifferenceManager>(new ObjectDifferenceManager());
             container.Register<IEntityFactory, EntityFactory>();
-            container.Register<IModelFactory, ModelFactory>();            
+            container.Register<IModelFactory, ModelFactory>();
             container.RegisterInstance<AbstractValidator<ArtifactCriteriaModel>>(new ArtifactCriteriaModelValidator(new IdsValidator()));
             container.RegisterInstance<AbstractValidator<CommunityCriteriaModel>>(new CommunityCriteriaModelValidator(new IdsValidator()));
             container.RegisterInstance<AbstractValidator<MemberCriteriaModel>>(new MemberCriteriaModelValidator(new IdsValidator()));
