@@ -27,3 +27,9 @@ git clone https://github.com/mseknibilel/Alfred.GUI.git
 
 # Build solution (this will take a while as it needs to download dependencies)
 Build > Build Solution
+```
+
+### Solution Structure
+I used Domain Driven Design in my project. It seperates code to different layers and prevents it from leaking. On the other hand, it is time consuming because it needs writing a lot of code compared to other approaches. Here's how it looks:
+
+![ScreenShot](http://i.imgur.com/CrLpzsm.png)
