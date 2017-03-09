@@ -33,3 +33,22 @@ Build > Build Solution
 I used Domain Driven Design in my project. It seperates code to different layers and prevents it from leaking. On the other hand, it is time consuming because it needs writing a lot of code compared to other approaches. Here's how it looks:
 
 ![ScreenShot](http://i.imgur.com/CrLpzsm.png)
+
+  1. **Alfred.WebApi**: WebApi project to expose Alfred services using REST
+  2. **Alfred.IoC**: IoC configuration has its own project for the sake of clarity and Dll referencing optimization
+  3. **Alfred.Dal.Implementation.Fake**: An implementation of Data Access Layer using in memory data provided by Bogus
+  4. **Alfred.Dal**: The required abstraction of the Data Access Layer by the domain layer
+  5. **Alfred.Domain**: The concrete implementation of Alfred's domain layer
+  6. **Alfred**: The abstraction of Alfred's domain layer
+  7. **Alfred.Shared**: Because no matter what, we always have common extension methods, enums, ... but NO LOGIC !
+  
+  - **Alfred.Logging**: Provides logging features
+  - **Alfred.Configuration**: Provides configuration features
+  
+  Next steps
+-----------------
+
+  1. Add more features to support score
+  2. Develop a proper DAL implementation
+  3. .Net core migration
+
