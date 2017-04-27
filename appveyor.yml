@@ -11,7 +11,7 @@ assembly_info:
   assembly_informational_version: '{version}'
 environment:
   COVERALLS_REPO_TOKEN:
-    secure: 8FT9CQo21ngsgKlN3/RrjV4tvCRhFaYnBcz2pZkc9zmGcc1Cmq9QyXEHisxkOD0g
+    secure: cBbjHgg5rQjFgwAjjQGUFwhESw5oEljRFzESN+/xmH8vKXg3AzfVlexOpi0EBaKN
   SonarQube_Token:
     secure: 4SAyRqYsx6khVu6ERCwz3arpWEuZ82ZEDGRdTbZSfKCk5vtx4zxLc3QWcquAsC0x
 install:
