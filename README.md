@@ -19,7 +19,7 @@ Solution Details
 ![ScreenShot](http://i.imgur.com/HdCIVdb.png)
 
 ### Quick start
-**Make sure you installed visual studio and added paket for Visual studio extension
+**Make sure you installed visual studio and added paket for Visual studio extension**
 
 ```bash
 # clone the repo
