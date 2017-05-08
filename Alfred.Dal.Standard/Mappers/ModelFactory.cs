@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using Alfred.Dal.Standard.Entities.Artifacts;
 using Alfred.Dal.Standard.Entities.Base;
 using Alfred.Dal.Standard.Entities.Communities;
 using Alfred.Dal.Standard.Entities.Members;
+using Alfred.Shared.Standard.Constants;
 using Alfred.Shared.Standard.Enums;
+using Alfred.Shared.Standard.Features;
 using Alfred.Standard.Models.Artifacts;
 using Alfred.Standard.Models.Base;
 using Alfred.Standard.Models.Communities;
 using Alfred.Standard.Models.Members;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Alfred.Dal.Standard.Mappers
 {
@@ -19,7 +23,7 @@ namespace Alfred.Dal.Standard.Mappers
         private readonly ObjectDifferenceManager _objDiffManager;
         private readonly UrlHelper _urlHelper;
 
-        public ModelFactory(ObjectDifferenceManager objDiffManager, Func<HttpRequestMessage> getHttpRequestMessage)
+        public ModelFactory(ObjectDifferenceManager objDiffManager, Func<ActionContext> getHttpRequestMessage)
         {
             _objDiffManager = objDiffManager;
             _urlHelper = new UrlHelper(getHttpRequestMessage());
@@ -198,13 +202,12 @@ namespace Alfred.Dal.Standard.Mappers
             return CreateResponseModel<Community, CommunityModel, CommunityResponseModel>(communityResponse, CreateCommunityModel);
         }
 
-        private Dictionary<string, object> ExtractQueryParams(HttpRequestMessage request)
+        private Dictionary<string, object> ExtractQueryParams(HttpRequest request)
         {
             var result = new Dictionary<string, object>();
-            var queryParams = request.RequestUri.ParseQueryString();
-            foreach (var key in queryParams.AllKeys)
+            foreach (var kvp in request.Query)
             {
-                result[key] = queryParams[key];
+                result[kvp.Key] = kvp.Value;
             }
             return result;
         }
@@ -227,7 +230,7 @@ namespace Alfred.Dal.Standard.Mappers
         private TResult CreateResponseModel<TEntity, TModel,TResult>(BaseResponse<TEntity> baseResponse,
             Func<TEntity, TModel> createModel) where TResult : BaseResponseModel<TModel>, new()
             {
-            var queryParams = ExtractQueryParams(_urlHelper.Request);
+            var queryParams = ExtractQueryParams(_urlHelper.ActionContext.HttpContext.Request);
             return new TResult
             {
                 Results = baseResponse.Results?.Select(createModel),

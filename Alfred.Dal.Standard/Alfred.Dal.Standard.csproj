@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="1.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Alfred.Domain.Standard\Alfred.Domain.Standard.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
+      <HintPath>C:\Users\SkiBLE\.nuget\packages\microsoft.aspnetcore.mvc.core\1.1.2\lib\netstandard1.6\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

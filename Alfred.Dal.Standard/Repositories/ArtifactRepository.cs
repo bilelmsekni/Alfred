@@ -5,6 +5,7 @@ using Alfred.Dal.Standard.Entities.Artifacts;
 using Alfred.Dal.Standard.Entities.Base;
 using Alfred.Dal.Standard.Mappers;
 using Alfred.Standard.Models.Artifacts;
+using Alfred.Domain.Standard.Repositories;
 
 namespace Alfred.Dal.Standard.Repositories
 {
