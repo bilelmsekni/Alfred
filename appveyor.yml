@@ -15,10 +15,7 @@ environment:
     secure: 4SAyRqYsx6khVu6ERCwz3arpWEuZ82ZEDGRdTbZSfKCk5vtx4zxLc3QWcquAsC0x
 install:
 - cmd: >-
-    set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
-
     .paket\paket.bootstrapper.exe
-
     .paket\paket.exe restore
 build:
   verbosity: minimal
