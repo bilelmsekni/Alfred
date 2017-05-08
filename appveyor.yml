@@ -18,6 +18,8 @@ install:
     .paket\paket.bootstrapper.exe
 
     .paket\paket.exe restore
+before_build:
+  - nuget restore
 build:
   verbosity: minimal
 after_build:
