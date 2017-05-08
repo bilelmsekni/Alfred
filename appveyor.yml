@@ -15,7 +15,9 @@ environment:
     secure: 4SAyRqYsx6khVu6ERCwz3arpWEuZ82ZEDGRdTbZSfKCk5vtx4zxLc3QWcquAsC0x
 install:
 - cmd: >-
+
     .paket\paket.bootstrapper.exe
+
     .paket\paket.exe restore
 build:
   verbosity: minimal
