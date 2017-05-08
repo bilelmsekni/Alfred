@@ -60,6 +60,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Standard", "Alfred.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Shared.Standard", "Alfred.Shared.Standard\Alfred.Shared.Standard.csproj", "{F4B7345B-AB71-4CC1-AEBF-0396EB1B690A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.Standard", "Alfred.Dal.Standard\Alfred.Dal.Standard.csproj", "{5E5A8C57-EEF5-4ED6-8512-A935D0BEB05A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{F4B7345B-AB71-4CC1-AEBF-0396EB1B690A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4B7345B-AB71-4CC1-AEBF-0396EB1B690A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4B7345B-AB71-4CC1-AEBF-0396EB1B690A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E5A8C57-EEF5-4ED6-8512-A935D0BEB05A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E5A8C57-EEF5-4ED6-8512-A935D0BEB05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E5A8C57-EEF5-4ED6-8512-A935D0BEB05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E5A8C57-EEF5-4ED6-8512-A935D0BEB05A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
