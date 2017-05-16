@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.Standard", "Alfr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.Dal.Implementation.Fake.Standard", "Alfred.Dal.Implementation.Fake.Standard\Alfred.Dal.Implementation.Fake.Standard.csproj", "{9B430C19-DA2E-4277-8A8A-FF6C486B4F50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfred.IoC.Standard", "Alfred.IoC.Standard\Alfred.IoC.Standard.csproj", "{54BE71E6-FC2F-478F-8E5E-D7310776FC91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +152,10 @@ Global
 		{9B430C19-DA2E-4277-8A8A-FF6C486B4F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B430C19-DA2E-4277-8A8A-FF6C486B4F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B430C19-DA2E-4277-8A8A-FF6C486B4F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54BE71E6-FC2F-478F-8E5E-D7310776FC91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54BE71E6-FC2F-478F-8E5E-D7310776FC91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54BE71E6-FC2F-478F-8E5E-D7310776FC91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54BE71E6-FC2F-478F-8E5E-D7310776FC91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

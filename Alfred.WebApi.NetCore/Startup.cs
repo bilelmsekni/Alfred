@@ -1,4 +1,5 @@
-﻿using Alfred.WebApi.NetCore.Extensions;
+﻿using Alfred.IoC.Standard;
+using Alfred.WebApi.NetCore.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,9 +32,9 @@ namespace Alfred.WebApi.NetCore
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-            });
-
+            });            
             services.ConfigSwagger();
+            services.RegisterDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

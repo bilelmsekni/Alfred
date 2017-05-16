@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="6.4.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alfred.Dal.Implementation.Fake.Standard\Alfred.Dal.Implementation.Fake.Standard.csproj" />
+    <ProjectReference Include="..\Alfred.Dal.Standard\Alfred.Dal.Standard.csproj" />
+    <ProjectReference Include="..\Alfred.Domain.Standard\Alfred.Domain.Standard.csproj" />
+    <ProjectReference Include="..\Alfred.Standard\Alfred.Standard.csproj" />
+  </ItemGroup>
+
+</Project>
