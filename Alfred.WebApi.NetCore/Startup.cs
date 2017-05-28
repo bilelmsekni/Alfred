@@ -32,7 +32,7 @@ namespace Alfred.WebApi.NetCore
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-            });            
+            });
             services.ConfigSwagger();
             services.RegisterDependencies();
         }
@@ -42,8 +42,8 @@ namespace Alfred.WebApi.NetCore
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.ConfigSwagger()
-                .UseMvc();
+            app.UseMvcWithDefaultRoute()
+                .ConfigSwagger();
         }
     }
 }
