@@ -5,6 +5,7 @@ using Alfred.Shared.Standard.Extensions;
 using Alfred.Standard.Models.Members;
 using Alfred.Standard.Services;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,7 +51,7 @@ namespace Alfred.WebApi.NetCore.Controllers
                 return Ok(await _memberService.GetMembers(memberCriteria).ConfigureAwait(false));
             }
 
-            // validationResults.AddToModelState(ModelState, null);
+            validationResults.AddToModelState(ModelState, null);
             return BadRequest(ModelState);
         }
 

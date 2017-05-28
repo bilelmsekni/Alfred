@@ -4,6 +4,7 @@ using Alfred.Shared.Standard.Extensions;
 using Alfred.Standard.Models.Communities;
 using Alfred.Standard.Services;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,7 +48,7 @@ namespace Alfred.WebApi.NetCore.Controllers
             {
                 return Ok(await _communityService.GetCommunities(criteria).ConfigureAwait(false));
             }
-            // validationResults.AddToModelState(ModelState, null);
+            validationResults.AddToModelState(ModelState, null);
             return BadRequest(ModelState);
         }
 

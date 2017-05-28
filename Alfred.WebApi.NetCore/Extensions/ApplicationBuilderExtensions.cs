@@ -12,7 +12,10 @@ namespace Alfred.WebApi.NetCore.Extensions
         public static IApplicationBuilder ConfigSwagger(this IApplicationBuilder app)
         {
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Alfred Api v1"); });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Alfred Api v1");
+            });
             return app;
         }
     }

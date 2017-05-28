@@ -16,11 +16,6 @@ namespace Alfred.WebApi.NetCore.Extensions
             return services;
         }
 
-        //private static string GetAssemblyVersion()
-        //{
-        //    return Assembly.GetAssembly(typeof(Startup)).GetName().Version.ToString();
-        //}
-
         private static string GetXmlCommentsPath()
         {
             return $@"{ PlatformServices.Default.Application.ApplicationBasePath}\Alfred.WebApi.NetCore.xml";

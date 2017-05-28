@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using Alfred.Shared.Standard.Constants;
 using Alfred.Shared.Standard.Enums;
 using Alfred.Shared.Standard.Extensions;
 using Alfred.Standard.Models.Artifacts;
 using Alfred.Standard.Services;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +31,6 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <returns></returns>
         [HttpGet]
-        // [Route("", Name = AlfredRoutes.GetArtifacts)]
         [ProducesResponseType(typeof(ArtifactResponseModel), 200)]
         [ProducesResponseType(typeof(ArtifactResponseModel), 500)]
         public async Task<IActionResult> GetArtifacts(string ids = null, string title = null,
@@ -55,7 +54,7 @@ namespace Alfred.WebApi.NetCore.Controllers
                 return Ok(await _artifactService.GetArtifacts(criteriaModel).ConfigureAwait(false));
             }
 
-            // validationResults.AddToModelState(ModelState, null);
+            validationResults.AddToModelState(ModelState, null);
 
             return BadRequest(ModelState);
         }
