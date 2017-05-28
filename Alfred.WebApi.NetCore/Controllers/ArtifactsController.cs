@@ -31,7 +31,7 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <returns></returns>
         [HttpGet]
-        [Route("", Name = AlfredRoutes.GetArtifacts)]
+        // [Route("", Name = AlfredRoutes.GetArtifacts)]
         [ProducesResponseType(typeof(ArtifactResponseModel), 200)]
         [ProducesResponseType(typeof(ArtifactResponseModel), 500)]
         public async Task<IActionResult> GetArtifacts(string ids = null, string title = null,
@@ -68,8 +68,7 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <param name="id">id of an artifact</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("{id:int?}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(ArtifactModel), 200)]
         [ProducesResponseType(typeof(ArtifactModel), 401)]
         public async Task<IActionResult> GetArtifact(int id)
@@ -91,7 +90,6 @@ namespace Alfred.WebApi.NetCore.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ArtifactModel), 200)]
         [ProducesResponseType(typeof(ArtifactModel), 500)]
-        [Route("")]
         public async Task<IActionResult> CreateArtifact([FromBody]CreateArtifactModel createArtifactModel)
         {
             if (ModelState.IsValid)
@@ -117,10 +115,9 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// <param name="id">artifact id</param>
         /// <param name="updateArtifactModel">artifact data</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(ArtifactModel), 200)]
         [ProducesResponseType(typeof(ArtifactModel), 500)]
-        [Route("{id:int?}")]
         public async Task<IActionResult> UpdateArtifact(int id, [FromBody]UpdateArtifactModel updateArtifactModel)
         {
             if (ModelState.IsValid)
@@ -141,10 +138,9 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <param name="id">artifact id</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ArtifactModel), 200)]
         [ProducesResponseType(typeof(ArtifactModel), 401)]
-        [Route("{id:int?}")]
         public async Task<IActionResult> DeleteArtifact(int id)
         {
             if (await _artifactService.DeleteArtifact(id).ConfigureAwait(false))

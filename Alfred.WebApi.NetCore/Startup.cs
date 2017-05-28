@@ -42,7 +42,7 @@ namespace Alfred.WebApi.NetCore
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.UseMvcWithDefaultRoute()
+            app.UseMvc()
                 .ConfigSwagger();
         }
     }

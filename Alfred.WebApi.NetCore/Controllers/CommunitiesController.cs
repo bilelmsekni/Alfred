@@ -30,7 +30,6 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <returns></returns>
         [HttpGet]
-        [Route("")]
         [ProducesResponseType(typeof(IEnumerable<CommunityModel>), 200)]
         public async Task<IActionResult> GetCommunities(string ids = null, string email = null, string name = null, int page = 1, int pageSize = 50)
         {
@@ -60,8 +59,7 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <param name="id">community id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("{id:int?}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(CommunityModel), 200)]
         public async Task<IActionResult> GetCommunity(int id)
         {
@@ -81,7 +79,6 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(CommunityModel), 200)]
-        [Route("")]
         public async Task<IActionResult> CreateCommunity([FromBody]CreateCommunityModel createCommunityModel)
         {
             if (ModelState.IsValid)
@@ -99,11 +96,11 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// <remarks>
         /// Update community
         /// </remarks>
-        /// <param name="updateCommunityModel">id</param>
+        /// <param name="id"></param>
+        /// <param name="updateCommunityModel">data</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(CommunityModel), 200)]
-        [Route("{id:int?}")]
         public async Task<IActionResult> UpdateCommunity(int id, [FromBody]UpdateCommunityModel updateCommunityModel)
         {
             if (ModelState.IsValid)
@@ -124,10 +121,9 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <param name="id">community data</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(typeof(CommunityModel), 200)]
         [ProducesResponseType(typeof(CommunityModel), 401)]
-        [Route("{id:int?}")]
         public async Task<IActionResult> DeleteCommunity(int id)
         {
             if (await _communityService.DeleteCommunity(id).ConfigureAwait(false)) return Ok();

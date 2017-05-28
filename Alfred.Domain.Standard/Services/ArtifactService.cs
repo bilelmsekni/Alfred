@@ -37,7 +37,7 @@ namespace Alfred.Domain.Standard.Services
         {
             if (updateArtifactModel != null)
             {
-                await _artifactRepo.UpdateArtifact(updateArtifactModel).ConfigureAwait(false);
+                return  await _artifactRepo.UpdateArtifact(updateArtifactModel).ConfigureAwait(false);
             }
             return null;
         }

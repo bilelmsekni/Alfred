@@ -13,7 +13,7 @@ using Alfred.Standard.Models.Base;
 using Alfred.Standard.Models.Communities;
 using Alfred.Standard.Models.Members;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Alfred.Dal.Standard.Mappers
@@ -23,10 +23,10 @@ namespace Alfred.Dal.Standard.Mappers
         private readonly ObjectDifferenceManager _objDiffManager;
         private readonly UrlHelper _urlHelper;
 
-        public ModelFactory(ObjectDifferenceManager objDiffManager, Func<ActionContext> getHttpRequestMessage)
+        public ModelFactory(ObjectDifferenceManager objDiffManager, IActionContextAccessor actionContextAccessor)
         {
             _objDiffManager = objDiffManager;
-            _urlHelper = new UrlHelper(getHttpRequestMessage());
+            _urlHelper = new UrlHelper(actionContextAccessor.ActionContext);
         }
 
         public Member CreateMember(CreateMemberModel createMemberModel)
@@ -130,7 +130,7 @@ namespace Alfred.Dal.Standard.Mappers
                 FirstName = updateMemberModel.FirstName,
                 LastName = updateMemberModel.LastName,
                 Role = updateMemberModel.Role,
-                Communities = originalMember.Communities                
+                Communities = originalMember.Communities
             };
             return _objDiffManager.UpdateObject(originalMember, newMember);
         }

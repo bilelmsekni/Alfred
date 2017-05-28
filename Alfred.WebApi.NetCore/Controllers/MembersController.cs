@@ -30,7 +30,6 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <returns></returns>
         [HttpGet]
-        [Route("")]
         [ProducesResponseType(typeof(IEnumerable<MemberModel>), 200)]
         public async Task<IActionResult> GetMembers(string ids = null, string email = null,
             string name = null, CommunityRole? role = null, int? communityId = null, int page = 1, int pageSize = 20)
@@ -63,8 +62,7 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <param name="id">member id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("{id:int?}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(MemberModel), 200)]
         public async Task<IActionResult> GetMember(int id)
         {
@@ -84,7 +82,6 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(MemberModel), 200)]
-        [Route("")]
         public async Task<IActionResult> CreateMember([FromBody]CreateMemberModel createMemberModel)
         {
             if (ModelState.IsValid)
@@ -102,11 +99,11 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// <remarks>
         /// Update member
         /// </remarks>
-        /// <param name="id">update member data</param>
+        /// <param name="id">id</param>
+        /// <param name="updateMemberModel">update member data</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(MemberModel), 200)]
-        [Route("{id:int?}")]
         public async Task<IActionResult> UpdateMember(int id, [FromBody]UpdateMemberModel updateMemberModel)
         {
             if (ModelState.IsValid)
@@ -127,8 +124,7 @@ namespace Alfred.WebApi.NetCore.Controllers
         /// </remarks>
         /// <param name="id">member id</param>
         /// <returns></returns>
-        [HttpDelete]
-        [Route("{id:int?}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMember(int id)
         {
             if (await _memberService.DeleteMember(id).ConfigureAwait(false)) return Ok();

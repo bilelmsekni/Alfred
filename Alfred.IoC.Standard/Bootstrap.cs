@@ -13,6 +13,7 @@ using Alfred.Standard.Models.Communities;
 using Alfred.Standard.Models.Members;
 using Alfred.Standard.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Alfred.IoC.Standard
@@ -31,9 +32,9 @@ namespace Alfred.IoC.Standard
             serviceCollection.AddTransient<IMemberDao, MemberDao>();
             serviceCollection.AddTransient<ICommunityDao, CommunityDao>();
             serviceCollection.AddSingleton<ObjectDifferenceManager>(new ObjectDifferenceManager());
-
             serviceCollection.AddTransient<IEntityFactory, EntityFactory>();
             serviceCollection.AddTransient<IModelFactory, ModelFactory>();
+            serviceCollection.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             serviceCollection.AddSingleton<AbstractValidator<ArtifactCriteriaModel>>(new ArtifactCriteriaModelValidator(new IdsValidator()));
             serviceCollection.AddSingleton<AbstractValidator<CommunityCriteriaModel>>(new CommunityCriteriaModelValidator(new IdsValidator()));
             serviceCollection.AddSingleton<AbstractValidator<MemberCriteriaModel>>(new MemberCriteriaModelValidator(new IdsValidator()));
