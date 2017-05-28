@@ -4,6 +4,5 @@ namespace Alfred.Standard.Models.Communities
 {
     public class CommunityResponseModel : BaseResponseModel<CommunityModel>
     {
-        
     }
 }

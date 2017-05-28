@@ -1,4 +1,4 @@
-using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
 namespace Alfred.Standard.Models.Communities

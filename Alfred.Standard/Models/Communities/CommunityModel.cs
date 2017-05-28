@@ -1,4 +1,4 @@
-using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alfred.Standard.Models.Communities
 {

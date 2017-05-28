@@ -4,6 +4,5 @@ namespace Alfred.Standard.Models.Members
 {
     public class MemberResponseModel : BaseResponseModel<MemberModel>
     {
-        
     }
 }

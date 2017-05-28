@@ -5,9 +5,9 @@ namespace Alfred.Standard.Models.Artifacts
 {
     public class UpdateArtifactModel
     {
-        [JsonIgnore]        
+        [JsonIgnore]
         public int Id { get; set; }
-        public string Title { get; set; }        
+        public string Title { get; set; }
         public int Bonus { get; set; }
         public int Reward { get; set; }
         public ArtifactStatus Status { get; set; }

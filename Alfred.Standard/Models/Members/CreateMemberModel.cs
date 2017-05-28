@@ -1,5 +1,5 @@
+using System.ComponentModel.DataAnnotations;
 using Alfred.Shared.Standard.Enums;
-using Microsoft.Build.Framework;
 
 namespace Alfred.Standard.Models.Members
 {
