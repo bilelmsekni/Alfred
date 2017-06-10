@@ -4,6 +4,14 @@
 [![Source Browser](https://img.shields.io/badge/Browse-Source-green.svg)](http://sourcebrowser.io/Browse/mseknibilel/Alfred)
 [![SonarQube Tech Debt](https://img.shields.io/sonar/http/sonar.qatools.ru/ru.yandex.qatools.allure:allure-core/tech_debt.svg)](https://sonarqube.com/dashboard/index/1191532)
 
+Notice
+-----------------
+
+Alfred is currently being migrated to Asp.Net Core with .Net Core as a target. Deployment on docker linux containers is soon.
+I'll keep you posted with the latest changes.
+
+![ScreenShot](http://i.imgur.com/JT35not.jpg)
+
 Presentation
 -----------------
 
